@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Globals-->
+    <sys:String x:Key="Glb_ItaliaPizza">Italia Pizza</sys:String>
+    <sys:String x:Key="Glb_Version">v1.0</sys:String>
+    <sys:String x:Key="Glb_SignOut">Cerrar Sesión</sys:String>
+    <sys:String x:Key="Glb_Settings">Ajustes</sys:String>
+    <sys:String x:Key="Glb_Principal">Principal</sys:String>
+    <sys:String x:Key="Glb_Personal">Personal</sys:String>
+    <sys:String x:Key="Glb_Orders">Comandas</sys:String>
+    <sys:String x:Key="Glb_Supplies">Insumos</sys:String>
+    <sys:String x:Key="Glb_Products">Productos</sys:String>
+    <sys:String x:Key="Glb_Recipes">Recetas</sys:String>
+    <sys:String x:Key="Glb_CashRegister">Caja Registradora</sys:String>
+    <sys:String x:Key="Glb_Clients">Clientes</sys:String>
+    <sys:String x:Key="Glb_Stock">Inventario</sys:String>
+    <sys:String x:Key="Glb_Suppliers">Proveedores</sys:String>
+    <sys:String x:Key="Glb_SupplyOrders">Ordenes de Compra</sys:String>
+    <sys:String x:Key="Glb_Reports">Reportes</sys:String>
+
+    <!--Supplies-->
+    <sys:String x:Key="Supplies_Header">Insumos</sys:String>
+    <sys:String x:Key="Supplies_Desc">Visualiza, registra, modifica y elimina insumos utilizados por Italia Pizza.</sys:String>
+    <sys:String x:Key="Supplies_BtnNewSupply">Nuevo Insumo</sys:String>
+    <sys:String x:Key="Supplies_TitleTable">Lista de Insumos</sys:String>
+    <sys:String x:Key="Supplies_BtnDeleteSupply">Eliminar insumo</sys:String>
+    <sys:String x:Key="Supplies_BtnEditSupply">Editar insumo</sys:String>
+
+    <!--Register Supply-->
+    <sys:String x:Key="RegSupply_Header">Registrar Insumo</sys:String>
+    <sys:String x:Key="RegSupply_Desc">Ingresa los datos del insumo que se desea registrar.</sys:String>
+</ResourceDictionary>
