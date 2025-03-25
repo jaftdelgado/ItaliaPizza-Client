@@ -59,7 +59,6 @@ namespace ItaliaPizzaClient.Utilities
         }
     }
 
-
     public class SideMenuManager
     {
         public static string CurrentUserRole;
@@ -195,26 +194,18 @@ namespace ItaliaPizzaClient.Utilities
                 button.SetBinding(MenuButton.IconPathProperty, new Binding("IconPath"));
                 button.SetBinding(MenuButton.HoverIconPathProperty, new Binding("HoverIconPath"));
 
-                // Inicialmente, establecer IsSelected como falso
                 SideMenuButtonHelper.SetIsSelected(button, false);
 
                 button.Click += (sender, e) =>
                 {
                     if (IsCurrentModule(buttonInfo)) return;
 
-                    // Deseleccionar el botón previamente seleccionado
                     if (lastSelectedButton != null)
-                    {
-                        SideMenuButtonHelper.SetIsSelected(lastSelectedButton, false); // Deselecciona el botón anterior
-                    }
+                        SideMenuButtonHelper.SetIsSelected(lastSelectedButton, false);
 
-                    // Seleccionar el botón actual
                     SideMenuButtonHelper.SetIsSelected(button, true);
-
-                    // Actualizar el último botón seleccionado
                     lastSelectedButton = button;
 
-                    // Deshabilitar temporalmente el botón para evitar clics repetidos durante la navegación
                     button.IsEnabled = false;
                     navigationManager.ClearNavigationStack();
                     NavigateToPage(buttonInfo);

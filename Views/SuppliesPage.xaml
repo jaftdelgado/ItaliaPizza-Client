@@ -49,10 +49,16 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0,0,0,0.5">
-                    <StackPanel Orientation="Horizontal" Margin="20,0">
-                        <TextBox Style="{StaticResource SecondarySearchBoxStyle}"
+                    <Grid Margin="20,0" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
+                                 Style="{DynamicResource SecondarySearchBoxStyle}"
                                  Width="180"/>
-                    </StackPanel>
+                    </Grid>
                 </Border>
 
                 <Grid Grid.Row="1">

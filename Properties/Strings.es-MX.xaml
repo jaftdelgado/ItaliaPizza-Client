@@ -18,6 +18,9 @@
     <sys:String x:Key="Glb_Suppliers">Proveedores</sys:String>
     <sys:String x:Key="Glb_SupplyOrders">Ordenes de Compra</sys:String>
     <sys:String x:Key="Glb_Reports">Reportes</sys:String>
+    <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
+    <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
+    <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
 
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
@@ -30,4 +33,7 @@
     <!--Register Supply-->
     <sys:String x:Key="RegSupply_Header">Registrar Insumo</sys:String>
     <sys:String x:Key="RegSupply_Desc">Ingresa los datos del insumo que se desea registrar.</sys:String>
+    <sys:String x:Key="RegSupply_SupplyInfo">Información del Insumo</sys:String>
+    <sys:String x:Key="RegSupply_TbSupplyName">Nombre del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
 </ResourceDictionary>

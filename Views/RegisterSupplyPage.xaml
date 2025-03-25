@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="480" d:DesignWidth="800"
       Title="RegisterSupplyPage">
 
     <Grid Background="{StaticResource BackgroundBrush}">
@@ -33,5 +33,82 @@
                 </StackPanel>
             </Grid>
         </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0.5,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
+                            Margin="0,24" Width="200">
+                    <Border BorderBrush="#D3D1DB" BorderThickness="1" CornerRadius="8" Width="200" Height="200">
+                        <Image Name="UserImage" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,8">
+                        <Image Width="12" Height="12" Margin="0,0,4,0"
+                               RenderOptions.BitmapScalingMode="HighQuality" 
+                               Stretch="Uniform" ToolTip="{DynamicResource Glb_ValidImageFormat}"
+                               Source="/Resources/Icons/info-icon.png"/>
+                        <TextBlock Style="{DynamicResource DescriptionLabelStyle}"
+                                   TextWrapping="Wrap"
+                                   Text="{DynamicResource Glb_ValidImageFormat}"/>
+                    </StackPanel>
+                    
+                    <Button Content="{DynamicResource Glb_BtnSelectImage}"
+                            Style="{DynamicResource PrimaryButtonStyle}"
+                            Margin="0,12,0,6">
+                        <Button.Tag>/Resources/Icons/gallery-icon.png</Button.Tag>
+                    </Button>
+
+                    <Button Content="{DynamicResource Glb_BtnDeleteImage}"
+                            Style="{DynamicResource SecondaryButtonStyle}" Foreground="#FF1654">
+                        <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                    </Button>
+                </StackPanel>
+            </Border>
+            
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
+                    <TextBlock Text="{DynamicResource RegSupply_SupplyInfo}"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
+                </StackPanel>
+
+                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0,0.5">
+                    <StackPanel Orientation="Vertical" Margin="20,0,16,0"
+                                HorizontalAlignment="Left">
+                        <TextBox Style="{StaticResource TextBoxStyle}" 
+                                 Tag="{DynamicResource RegSupply_TbSupplyName}"
+                                 Width="280"/>
+                        <CheckBox Content="El insumo no contiene marca."
+                                  Style="{DynamicResource CheckBoxStyle}"/>
+                        <ComboBox Style="{DynamicResource ComboBoxStyle}" 
+                                  Tag="{DynamicResource Glb_Personal}">
+                            <ComboBoxItem Content="Opción 1"/>
+                            <ComboBoxItem Content="Opción 2"/>
+                            <ComboBoxItem Content="Opción 3"/>
+                            <ComboBoxItem Content="Opción 4"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
+                    <Button x:Name="BtnNewSupply" Style="{DynamicResource PrimaryButtonStyle}"
+                            Content="{DynamicResource RegSupply_BtnRegisterSupply}">
+                        <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+            
+        </Grid>
     </Grid>
 </Page>

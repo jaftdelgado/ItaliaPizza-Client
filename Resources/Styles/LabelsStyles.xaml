@@ -16,7 +16,7 @@
 
     <Style x:Key="RegularLabelStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="SF Pro Display"/>
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
     </Style>
     
