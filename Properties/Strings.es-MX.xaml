@@ -35,5 +35,11 @@
     <sys:String x:Key="RegSupply_Desc">Ingresa los datos del insumo que se desea registrar.</sys:String>
     <sys:String x:Key="RegSupply_SupplyInfo">Información del Insumo</sys:String>
     <sys:String x:Key="RegSupply_TbSupplyName">Nombre del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_TbSupplyBrand">Marca del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_CheckBSupplyBrand">El insumo es genérico.</sys:String>
+    <sys:String x:Key="RegSupply_CbCategory">Categoría:</sys:String>
+    <sys:String x:Key="RegSupply_CbSupplier">Proveedor del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
+    <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
 </ResourceDictionary>

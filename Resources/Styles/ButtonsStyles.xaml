@@ -5,7 +5,7 @@
 
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}"/>
-        <Setter Property="FontFamily" Value="SF Pro Display"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Height" Value="34"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
