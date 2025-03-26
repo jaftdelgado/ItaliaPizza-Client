@@ -92,8 +92,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\OrderSuppliersPage.xaml.cs">
+      <DependentUpon>OrderSuppliersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PrincipalPage.xaml.cs">
       <DependentUpon>PrincipalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterOrderSupplierPage.xaml.cs">
+      <DependentUpon>RegisterOrderSupplierPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterSupplyPage.xaml.cs">
       <DependentUpon>RegisterSupplyPage.xaml</DependentUpon>
@@ -137,7 +143,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OrderSuppliersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PrincipalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterOrderSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

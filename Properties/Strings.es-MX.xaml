@@ -16,6 +16,8 @@
     <sys:String x:Key="Glb_Clients">Clientes</sys:String>
     <sys:String x:Key="Glb_Stock">Inventario</sys:String>
     <sys:String x:Key="Glb_Suppliers">Proveedores</sys:String>
+    <sys:String x:Key="Glb_SuppliersCategory">Categorias de Proveedor</sys:String>
+    <sys:String x:Key="Glb_Quantity">Cantidad</sys:String>
     <sys:String x:Key="Glb_SupplyOrders">Ordenes de Compra</sys:String>
     <sys:String x:Key="Glb_Reports">Reportes</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
@@ -42,4 +44,17 @@
     <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
+
+    <!--OrderSuppliers-->
+    <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>
+    <sys:String x:Key="Suppliers_Desc">Visualiza y registra pedidos a proveedor realizados por Italia Pizza.</sys:String>
+    <sys:String x:Key="Suppliers_BtnNewOrderSupplier">Nuevo pedido</sys:String>
+    <sys:String x:Key="Suppliers_TitleTable">Lista de Pedidos</sys:String>
+    <sys:String x:Key="Suppliers_BtnDeleteOrder">Eliminar pedido</sys:String>
+    <sys:String x:Key="Suppliers_BtnDeliveredOrder">Marcar como entrado</sys:String>
+
+    <!--Register Order Suppliers-->
+    <sys:String x:Key="RegOrderSupplier_Header">Registrar orden a proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Info">Informacion de la Orden.</sys:String>
 </ResourceDictionary>

@@ -161,7 +161,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 11,
                     AllowedRoles = new List<string> { "Admin", "Manager", "Cashier" },
                     IconPath = "/Resources/Icons/supplyorders-icon.png",
-                    HoverIconPath = "/Resources/Icons/supplyorders-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/supplyorders-hover-icon.png",
+                    PageInstance = new OrderSuppliersPage()
                 },
                 new MenuButton
                 {
