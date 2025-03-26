@@ -5,6 +5,7 @@
 
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="Height" Value="48"/>
         <Setter Property="FontFamily" Value="SF Pro Display"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Padding" Value="6,4"/>
@@ -51,6 +52,7 @@
 
     <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="Height" Value="48"/>
         <Setter Property="FontFamily" Value="SF Pro Display"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Padding" Value="6,4"/>
