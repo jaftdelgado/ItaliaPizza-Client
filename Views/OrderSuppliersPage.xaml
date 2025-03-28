@@ -130,7 +130,7 @@
                             <StackPanel Grid.Row="2" Margin="28,0">
                                 <Button x:Name="BtnDeleteOrder" Style="{DynamicResource SecondaryButtonStyle}"
                                     Content="{DynamicResource Suppliers_BtnDeleteOrder}">
-                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                    <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
                                 </Button>
                                 <Button x:Name="BtnDeliveredOrder" Style="{DynamicResource PrimaryButtonStyle}"
                                     Content="{DynamicResource Suppliers_BtnDeliveredOrder}">

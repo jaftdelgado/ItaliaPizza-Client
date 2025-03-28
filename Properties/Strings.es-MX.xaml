@@ -24,6 +24,13 @@
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
 
+    <!--Order-->
+    <sys:String x:Key="Order_Header">Comandas</sys:String>
+    <sys:String x:Key="Order_Desc">Visualiza, registra, modifica las Comandas de Italia Pizza.</sys:String>
+    <sys:String x:Key="Order_BtnNewOrder">Nueva comanda</sys:String>
+    <sys:String x:Key="Order_TitleTable">Lista de Comandas</sys:String>
+    <sys:String x:Key="Order_BtnPayOrder">Pagar comanda</sys:String>
+    
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
     <sys:String x:Key="Supplies_Desc">Visualiza, registra, modifica y elimina insumos utilizados por Italia Pizza.</sys:String>
@@ -57,4 +64,6 @@
     <sys:String x:Key="RegOrderSupplier_Header">Registrar orden a proveedor</sys:String>
     <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
     <sys:String x:Key="RegOrderSupplier_Info">Informacion de la Orden.</sys:String>
+    <sys:String x:Key="OrderSupplier_BtnNewOrden">Tramitar Orden</sys:String>
+    <sys:String x:Key="OrderSupplier_BtnCancelar">Cancelar Orden</sys:String>
 </ResourceDictionary>

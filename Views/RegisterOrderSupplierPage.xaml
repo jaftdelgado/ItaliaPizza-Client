@@ -42,27 +42,27 @@
 
             <Border Grid.Column="1" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0.5,0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Margin="0,24" Width="200">
+                        Margin="0,24" Width="300">
                     <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
-          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-          CellStyle="{DynamicResource DataGridCellStyle1}" 
-          x:Name="suppliesDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                         ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                         CellStyle="{DynamicResource DataGridCellStyle1}" 
+                         x:Name="OrdersuppliersDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <!-- Nombre de Insumo -->
-                            <DataGridTextColumn Header="Nombre de Insumo" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
-
+                            <!--Insumo -->
+                            <DataGridTextColumn Header="Insumos" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Cantidad" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="{DynamicResource Glb_BtnSelectImage}"
+                    <Button Content="{DynamicResource OrderSupplier_BtnNewOrden}" Width="200"
                         Style="{DynamicResource PrimaryButtonStyle}"
                         Margin="0,12,0,6">
-                        <Button.Tag>/Resources/Icons/gallery-icon.png</Button.Tag>
+                        <Button.Tag>/Resources/Icons/suppliers-icon.png</Button.Tag>
                     </Button>
 
-                    <Button Content="{DynamicResource Glb_BtnDeleteImage}"
+                    <Button Content="{DynamicResource OrderSupplier_BtnCancelar}" Width="200"
                         Style="{DynamicResource SecondaryButtonStyle}" Foreground="#FF1654">
-                        <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                        <Button.Tag>/Resources/Icons/leftarrow-icon.png</Button.Tag>
                     </Button>
                 </StackPanel>
             </Border>
