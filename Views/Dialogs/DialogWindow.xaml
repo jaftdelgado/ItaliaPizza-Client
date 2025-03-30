@@ -1,0 +1,26 @@
+﻿<Window x:Class="ItaliaPizzaClient.Views.Dialogs.DialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ItaliaPizzaClient.Views.Dialogs"
+        mc:Ignorable="d"
+        Title="DialogWindow" Height="240" Width="340">
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7.5*"/>
+                <RowDefinition Height="2.5*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" Background="{DynamicResource SecondaryButtonBrush}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,24,0">
+                    <Button Content="Cancelar" Margin="12,0"
+                            Style="{DynamicResource SecondaryButtonNoIconStyle}"/>
+                    <Button Content="Aceptar"
+                            Style="{DynamicResource PrimaryButtonStyle}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

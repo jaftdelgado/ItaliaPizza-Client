@@ -5,10 +5,10 @@
 
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
-        <Setter Property="Height" Value="48"/>
+        <Setter Property="Height" Value="46"/>
         <Setter Property="FontFamily" Value="SF Pro Display"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="Padding" Value="6,3"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="#D3D1DB"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
@@ -31,13 +31,75 @@
 
                             <ScrollViewer x:Name="PART_ContentHost"
                                       VerticalAlignment="Bottom"
-                                      Margin="0,14,0,0"/>
+                                      Margin="0,12,0,0"/>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="TextBoxBorder" Property="BorderBrush" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TextBoxBorder" Property="Opacity" Value="0.5"/>
+                            <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#808080"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextAreaStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="FontFamily" Value="SF Pro Display"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="#D3D1DB"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="TextAreaBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="12"
+                        Padding="5">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Tag}" 
+                                   Foreground="{StaticResource SecondaryBrush}"
+                                   FontSize="10"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Top"
+                                   Margin="8,2,5,0"/>
+
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                      VerticalAlignment="Top"
+                                Margin="0,14,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="TextAreaBorder" Property="BorderBrush" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TextAreaBorder" Property="Opacity" Value="0.5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -52,10 +114,10 @@
 
     <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
-        <Setter Property="Height" Value="48"/>
+        <Setter Property="Height" Value="46"/>
         <Setter Property="FontFamily" Value="SF Pro Display"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="Padding" Value="6,3"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="#D3D1DB"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
@@ -70,7 +132,6 @@
                             CornerRadius="12"
                             Padding="5">
                             <Grid>
-                                <!-- Etiqueta tipo Placeholder -->
                                 <TextBlock Text="{TemplateBinding Tag}" 
                                        Foreground="{StaticResource SecondaryBrush}"
                                        FontSize="10"
@@ -78,7 +139,6 @@
                                        VerticalAlignment="Top"
                                        Margin="8,2,5,0"/>
 
-                                <!-- Contenido del ComboBox -->
                                 <Grid Margin="0,14,0,0">
                                     <ToggleButton x:Name="ToggleButton"
                                               Focusable="False"
@@ -106,21 +166,18 @@
 
                                     <ContentPresenter x:Name="ContentPresenter"
                                                   Content="{TemplateBinding SelectionBoxItem}"
-                                                  Margin="5,0,30,0"
+                                                  Margin="8,0,30,0"
                                                   VerticalAlignment="Center"/>
                                 </Grid>
                             </Grid>
                         </Border>
 
-                        <!-- Estilo para la lista desplegable -->
                         <Popup x:Name="Popup"
                            Placement="Bottom"
                            IsOpen="{TemplateBinding IsDropDownOpen}"
-                           AllowsTransparency="True"
-                           Focusable="False">
-                            <Border Background="White"
-                                BorderBrush="#D3D1DB"
-                                BorderThickness="1"
+                           AllowsTransparency="True" Focusable="False">
+                            <Border Background="{StaticResource SecondaryButtonBrush}"
+                                BorderBrush="#D3D1DB" BorderThickness="1"
                                 CornerRadius="8">
                                 <ScrollViewer>
                                     <StackPanel>
@@ -133,52 +190,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-
-    <Style x:Key="TextBoxStyle1" TargetType="TextBox">
-        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
-        <Setter Property="FontFamily" Value="SF Pro Display"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Padding" Value="8,4"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#D3D1DB"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <StackPanel Orientation="Vertical">
-                        <!-- Título del TextBox -->
-                        <TextBlock Text="{TemplateBinding Tag}" 
-                               Foreground="#666"
-                               FontSize="10"
-                               FontWeight="Bold"
-                               Margin="3,0,3,2"/>
-
-                        <!-- Entrada de texto con borde -->
-                        <Border x:Name="TextBoxBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="10"
-                            Padding="5">
-                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
-                        </Border>
-                    </StackPanel>
-
-                    <!-- Triggers para cambiar el borde cuando se selecciona -->
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="TextBoxBorder" Property="BorderBrush" Value="Orange"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="#808080"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="PrimarySearchBoxStyle" TargetType="TextBox">
