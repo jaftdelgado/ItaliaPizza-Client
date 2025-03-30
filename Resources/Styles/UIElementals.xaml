@@ -11,17 +11,21 @@
     <Color x:Key="BackgroundColor">#F4F4FA</Color>
     <Color x:Key="PrimaryColor">#2D2C32</Color>
     <Color x:Key="SecondaryColor">#7E7B8D</Color>
+    <Color x:Key="BorderColor">#D3D1DB</Color>
     <Color x:Key="PrimaryButtonColor">#E23A10</Color>
     <Color x:Key="PrimaryButtonHoverColor">#E54E28</Color>
     <Color x:Key="SecondaryButtonColor">#EFEDF7</Color>
     <Color x:Key="SecondaryButtonHoverColor">#F0EDFC</Color>
+    <Color x:Key="DangerButtonColor">#FF312E</Color>
     
     <!-- Brochas basadas en los colores -->
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
     <SolidColorBrush x:Key="PrimaryButtonBrush" Color="{StaticResource PrimaryButtonColor}"/>
     <SolidColorBrush x:Key="PrimaryButtonHoverBrush" Color="{StaticResource PrimaryButtonHoverColor}"/>
     <SolidColorBrush x:Key="SecondaryButtonBrush" Color="{StaticResource SecondaryButtonColor}"/>
     <SolidColorBrush x:Key="SecondaryButtonHoverBrush" Color="{StaticResource SecondaryButtonHoverColor}"/>
+    <SolidColorBrush x:Key="DangerButtonBrush" Color="{StaticResource DangerButtonColor}"/>
 </ResourceDictionary>

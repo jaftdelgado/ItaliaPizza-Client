@@ -6,6 +6,7 @@
     <sys:String x:Key="Glb_Version">v1.0</sys:String>
     <sys:String x:Key="Glb_SignOut">Cerrar Sesión</sys:String>
     <sys:String x:Key="Glb_Settings">Ajustes</sys:String>
+    <sys:String x:Key="Glb_Cancel">Cancelar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
     <sys:String x:Key="Glb_Orders">Comandas</sys:String>
@@ -24,6 +25,19 @@
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
 
+    <!--Supply Categories-->
+    <sys:String x:Key="Supply_Dairy">Lácteos</sys:String>
+    <sys:String x:Key="Supply_Meats">Carnes</sys:String>
+    <sys:String x:Key="Supply_FruitsAndVegetables">Frutas y Verduras</sys:String>
+    <sys:String x:Key="Supply_FloursAndDough">Harinas y Masa</sys:String>
+    <sys:String x:Key="Supply_SaucesAndDressings">Salsas y Aderezos</sys:String>
+    <sys:String x:Key="Supply_OilsAndVinegars">Aceites y Vinagres</sys:String>
+    <sys:String x:Key="Supply_SeasoningsAndSpices">Condimentos y Especias</sys:String>
+    <sys:String x:Key="Supply_NutsAndSeeds">Frutos Secos y Semillas</sys:String>
+    <sys:String x:Key="Supply_Beverages">Bebidas</sys:String>
+    <sys:String x:Key="Supply_DessertsAndSweets">Postres y Dulces</sys:String>
+    <sys:String x:Key="Supply_BakeryProducts">Productos de Panadería</sys:String>
+
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
     <sys:String x:Key="Supplies_Desc">Visualiza, registra, modifica y elimina insumos utilizados por Italia Pizza.</sys:String>
@@ -38,12 +52,16 @@
     <sys:String x:Key="RegSupply_SupplyInfo">Información del Insumo</sys:String>
     <sys:String x:Key="RegSupply_TbSupplyName">Nombre del insumo:</sys:String>
     <sys:String x:Key="RegSupply_TbSupplyBrand">Marca del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_TbUnitPrice">Precio unitario:</sys:String>
     <sys:String x:Key="RegSupply_CheckBSupplyBrand">El insumo es genérico.</sys:String>
     <sys:String x:Key="RegSupply_CbCategory">Categoría:</sys:String>
     <sys:String x:Key="RegSupply_CbSupplier">Proveedor del insumo:</sys:String>
     <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
+
+    <!--Register Supplier-->
+    <sys:String x:Key="RegSupplier_Header">Registrar Proveedor</sys:String>
 
     <!--OrderSuppliers-->
     <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>

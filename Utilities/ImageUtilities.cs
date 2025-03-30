@@ -7,17 +7,18 @@ namespace ItaliaPizzaClient.Utilities
 {
     public class ImageUtilities
     {
-        public static void SetProfilePic(Image imgProfile, byte[] profilePicture)
+        public static void SetImageSource(Image imageControl, byte[] imageBytes, string defaultImagePath)
         {
-            BitmapImage profileImage;
+            BitmapImage imageSource;
 
-            if (profilePicture != null && profilePicture.Length > 0)
-                profileImage = ConvertToImageSource(profilePicture);
+            if (imageBytes != null && imageBytes.Length > 0)
+                imageSource = ConvertToImageSource(imageBytes);
             else
-                profileImage = new BitmapImage(new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Relative));
+                imageSource = new BitmapImage(new Uri(defaultImagePath, UriKind.Relative));
 
-            imgProfile.Source = profileImage;
+            imageControl.Source = imageSource;
         }
+
 
         public static BitmapImage ConvertToImageSource(byte[] imageBytes)
         {
