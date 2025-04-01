@@ -6,6 +6,7 @@
     <sys:String x:Key="Glb_Version">v1.0</sys:String>
     <sys:String x:Key="Glb_SignOut">Cerrar Sesión</sys:String>
     <sys:String x:Key="Glb_Settings">Ajustes</sys:String>
+    <sys:String x:Key="Glb_Cancel">Cancelar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
     <sys:String x:Key="Glb_Orders">Comandas</sys:String>
@@ -16,6 +17,8 @@
     <sys:String x:Key="Glb_Clients">Clientes</sys:String>
     <sys:String x:Key="Glb_Stock">Inventario</sys:String>
     <sys:String x:Key="Glb_Suppliers">Proveedores</sys:String>
+    <sys:String x:Key="Glb_SuppliersCategory">Categorias de Proveedor</sys:String>
+    <sys:String x:Key="Glb_Quantity">Cantidad</sys:String>
     <sys:String x:Key="Glb_SupplyOrders">Ordenes de Compra</sys:String>
     <sys:String x:Key="Glb_Reports">Reportes</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
@@ -23,6 +26,20 @@
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
     <sys:String x:Key="Glb_BtnCancel"> Cancelar </sys:String>
     <sys:String x:Key="Glb_BtnSave"> Guardar </sys:String>
+    <sys:String x:Key="Glb_CbxCategories">Categorias</sys:String>
+
+    <!--Supply Categories-->
+    <sys:String x:Key="Supply_Dairy">Lácteos</sys:String>
+    <sys:String x:Key="Supply_Meats">Carnes</sys:String>
+    <sys:String x:Key="Supply_FruitsAndVegetables">Frutas y Verduras</sys:String>
+    <sys:String x:Key="Supply_FloursAndDough">Harinas y Masa</sys:String>
+    <sys:String x:Key="Supply_SaucesAndDressings">Salsas y Aderezos</sys:String>
+    <sys:String x:Key="Supply_OilsAndVinegars">Aceites y Vinagres</sys:String>
+    <sys:String x:Key="Supply_SeasoningsAndSpices">Condimentos y Especias</sys:String>
+    <sys:String x:Key="Supply_NutsAndSeeds">Frutos Secos y Semillas</sys:String>
+    <sys:String x:Key="Supply_Beverages">Bebidas</sys:String>
+    <sys:String x:Key="Supply_DessertsAndSweets">Postres y Dulces</sys:String>
+    <sys:String x:Key="Supply_BakeryProducts">Productos de Panadería</sys:String>
 
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
@@ -37,6 +54,13 @@
     <sys:String x:Key="RegSupply_Desc">Ingresa los datos del insumo que se desea registrar.</sys:String>
     <sys:String x:Key="RegSupply_SupplyInfo">Información del Insumo</sys:String>
     <sys:String x:Key="RegSupply_TbSupplyName">Nombre del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_TbSupplyBrand">Marca del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_TbUnitPrice">Precio unitario:</sys:String>
+    <sys:String x:Key="RegSupply_CheckBSupplyBrand">El insumo es genérico.</sys:String>
+    <sys:String x:Key="RegSupply_CbCategory">Categoría:</sys:String>
+    <sys:String x:Key="RegSupply_CbSupplier">Proveedor del insumo:</sys:String>
+    <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
+    <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
     
     <!--Register customer-->
@@ -55,4 +79,28 @@
     <sys:String x:Key="RegSupplier_RegProduct">¿Registrar productos?</sys:String>
     <sys:String x:Key="RegSupplier_RegProductDesc"> Esta opcion puede realizarse despues</sys:String>
     <sys:String x:Key="RegSupplier_BtnRegSupply">Registrar productos</sys:String>
+
+    <!--Register Product-->
+    <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>
+    <sys:String x:Key="RegProduct_Desc">Ingresa los datos del producto que se desea registrar.</sys:String>
+    <sys:String x:Key="RegProduct_ProductInfo">Información del Producto</sys:String>
+    <sys:String x:Key="RegProduct_TbProductName">Nombre del producto</sys:String>
+    <sys:String x:Key="RegProduct_Price">Precio</sys:String>
+    <sys:String x:Key="RegProduct_Quantity">Cantidad</sys:String>
+    <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
+    <sys:String x:Key="RegProduct_Code">Código</sys:String>
+
+
+    <!--OrderSuppliers-->
+    <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>
+    <sys:String x:Key="Suppliers_Desc">Visualiza y registra pedidos a proveedor realizados por Italia Pizza.</sys:String>
+    <sys:String x:Key="Suppliers_BtnNewOrderSupplier">Nuevo pedido</sys:String>
+    <sys:String x:Key="Suppliers_TitleTable">Lista de Pedidos</sys:String>
+    <sys:String x:Key="Suppliers_BtnDeleteOrder">Eliminar pedido</sys:String>
+    <sys:String x:Key="Suppliers_BtnDeliveredOrder">Marcar como entrado</sys:String>
+
+    <!--Register Order Suppliers-->
+    <sys:String x:Key="RegOrderSupplier_Header">Registrar orden a proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Info">Informacion de la Orden.</sys:String>
 </ResourceDictionary>

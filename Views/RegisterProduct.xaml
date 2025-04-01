@@ -1,0 +1,127 @@
+﻿<Page x:Class="ItaliaPizzaClient.Views.RegisterProduct"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegisterProduct">
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68"/>
+            <!--Cabecera-->
+            <RowDefinition Height="*"/>
+            <!--Contenido Principal-->
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderThickness="0,0,0,0.5" BorderBrush="{StaticResource SecondaryBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                               Text="{DynamicResource RegProduct_Header}"/>
+                    <TextBlock Style="{StaticResource DescriptionLabelStyle}"
+                               Text="{DynamicResource RegProduct_Desc}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0.5,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
+             Margin="0,24" Width="200">
+                    <Border BorderBrush="#D3D1DB" BorderThickness="1" CornerRadius="8" Width="200" Height="200">
+                        <Image Name="ProductImage" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,8">
+                        <Image Width="12" Height="12" Margin="0,0,4,0"
+                               RenderOptions.BitmapScalingMode="HighQuality" 
+                               Stretch="Uniform" ToolTip="{DynamicResource Glb_ValidImageFormat}"
+                               Source="/Resources/Icons/info-icon.png"/>
+                        <TextBlock Style="{DynamicResource DescriptionLabelStyle}"
+                                   TextWrapping="Wrap"
+                                   Text="{DynamicResource Glb_ValidImageFormat}"/>
+                    </StackPanel>
+                    <Button Content="{DynamicResource Glb_BtnSelectImage}"
+                            Style="{DynamicResource PrimaryButtonStyle}"
+                            Margin="0,12,0,6">
+                        <Button.Tag>/Resources/Icons/gallery-icon.png</Button.Tag>
+                    </Button>
+                    
+                </StackPanel>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
+                    <TextBlock Text="{DynamicResource RegProduct_ProductInfo}"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
+                </StackPanel>
+                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0,0.5">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Width="Auto" Margin="7" Style="{StaticResource TextBoxStyle}" 
+                                 Tag="{DynamicResource RegProduct_TbProductName}"/>
+                            <ComboBox Grid.Column="1"  Width="Auto" Margin="7" Style="{DynamicResource ComboBoxStyle}" 
+                                  Tag="{DynamicResource Glb_CbxCategories}">
+                                <ComboBoxItem Content="Opción 1"/>
+                                <ComboBoxItem Content="Opción 2"/>
+                                <ComboBoxItem Content="Opción 3"/>
+                                <ComboBoxItem Content="Opción 4"/>
+                            </ComboBox >
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Style="{StaticResource TextBoxStyle}" 
+                                 Tag="{DynamicResource RegProduct_Price}"
+                                 Margin="7"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource TextBoxStyle}" 
+                                 Tag="{DynamicResource RegProduct_Quantity}"
+                                 Margin="7"/>
+                        </Grid>
+                        <CheckBox Grid.Row="2" Content="Es un producto preparado."
+                                  Style="{DynamicResource CheckBoxStyle}"/>
+                        <Grid Grid.Row="3" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0"  Margin="7"  Style="{StaticResource TextBoxStyle}" 
+                                 Tag="{DynamicResource RegProduct_Description}"
+                                 />
+
+                            <TextBox Grid.Column="1" MaxHeight="60" Style="{StaticResource TextBoxStyle}" 
+                                 Tag="{DynamicResource RegProduct_Code}"
+                            />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
