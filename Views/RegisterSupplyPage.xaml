@@ -36,16 +36,24 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0.5,0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
                             Margin="0,24" Width="200">
-                    <Border BorderBrush="#D3D1DB" BorderThickness="1" CornerRadius="8" Width="200" Height="200">
-                        <Image Name="UserImage" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill"/>
-                    </Border>
+
+                    <Image Name="SupplyImage"
+                               Source="/Resources/Images/default-supply-pic.png"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               Stretch="UniformToFill" 
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                        <Image.Clip>
+                            <RectangleGeometry Rect="0,0,200,200" RadiusX="12" RadiusY="12"/>
+                        </Image.Clip>
+                    </Image>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,8">
                         <Image Width="12" Height="12" Margin="0,0,4,0"
@@ -57,14 +65,15 @@
                                    Text="{DynamicResource Glb_ValidImageFormat}"/>
                     </StackPanel>
                     
-                    <Button Content="{DynamicResource Glb_BtnSelectImage}"
+                    <Button x:Name="BtnSelectImage"
+                            Content="{DynamicResource Glb_BtnSelectImage}"
                             Style="{DynamicResource PrimaryButtonStyle}"
-                            Margin="0,12,0,6">
+                            Margin="0,12,0,6" Click="Click_BtnSelectImage">
                         <Button.Tag>/Resources/Icons/gallery-icon.png</Button.Tag>
                     </Button>
 
                     <Button Content="{DynamicResource Glb_BtnDeleteImage}"
-                            Style="{DynamicResource SecondaryButtonStyle}" Foreground="#FF1654">
+                            Style="{DynamicResource DangerButtonStyle}">
                         <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
                     </Button>
                 </StackPanel>
@@ -82,30 +91,110 @@
                                Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
-                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0,0.5">
-                    <StackPanel Orientation="Vertical" Margin="20,0,16,0"
-                                HorizontalAlignment="Left">
-                        <TextBox Style="{StaticResource TextBoxStyle}" 
-                                 Tag="{DynamicResource RegSupply_TbSupplyName}"
-                                 Width="280"/>
-                        <CheckBox Content="El insumo no contiene marca."
-                                  Style="{DynamicResource CheckBoxStyle}"/>
-                        <ComboBox Style="{DynamicResource ComboBoxStyle}" 
-                                  Tag="{DynamicResource Glb_Personal}">
-                            <ComboBoxItem Content="Opción 1"/>
-                            <ComboBoxItem Content="Opción 2"/>
-                            <ComboBoxItem Content="Opción 3"/>
-                            <ComboBoxItem Content="Opción 4"/>
-                        </ComboBox>
-                    </StackPanel>
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12*" MaxWidth="720"/>
+                            <ColumnDefinition Width="*" MinWidth="0"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" HorizontalAlignment="Stretch" Margin="20,0,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBox Grid.Row="0" Grid.Column="0"
+                                         Tag="{DynamicResource RegSupply_TbSupplyName}" 
+                                         Style="{DynamicResource TextBoxStyle}"
+                                         HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                         Margin="0,0,10,8"/>
+                                <StackPanel Grid.Row="0" Grid.Column="1"
+                                            Orientation="Vertical" VerticalAlignment="Top"
+                                            Margin="10,0,0,8">
+                                    <TextBox x:Name="TbSupplyBrand"
+                                             Tag="{DynamicResource RegSupply_TbSupplyBrand}" 
+                                             Style="{DynamicResource TextBoxStyle}"/>
+                                    <CheckBox Content="{DynamicResource RegSupply_CheckBSupplyBrand}"
+                                              Style="{DynamicResource CheckBoxStyle}" Margin="5,4,0,0"
+                                              Checked="CheckbBrand_Checked" Unchecked="CheckbBrand_Unchecked"/>
+                                </StackPanel>
+
+                                <ComboBox x:Name="CbCategories"
+                                          Grid.Row="1" Grid.Column="0"
+                                          Tag="{DynamicResource RegSupply_CbCategory}"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          Margin="0,8,10,8"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Name"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1"
+                                          Tag="{DynamicResource RegSupply_CbSupplyMeasure}"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          Margin="10,8,0,8"/>
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,12,0,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2.5*" />
+                                        <ColumnDefinition Width="7.5*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox Grid.Column="0"
+                                             Tag="{DynamicResource RegSupply_TbUnitPrice}"
+                                             Style="{DynamicResource TextBoxStyle}"
+                                             Margin="0,0,10,0"
+                                             PreviewTextInput="PreviewTextInput_TbUnitPrice"
+                                             LostFocus="LostFocus_TbUnitPrice"/>
+
+                                    <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <ComboBox Grid.Column="0" Tag="{DynamicResource RegSupply_CbSupplier}"
+                                                  Style="{DynamicResource ComboBoxStyle}"
+                                                  HorizontalAlignment="Stretch"
+                                                  Margin="10,10,5,10"/>
+                                        <Button Grid.Column="1" Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource RegSupply_BtnRegisterSupplier}"
+                                                HorizontalAlignment="Stretch"
+                                                Margin="5,0,0,0"
+                                                Click="Click_BtnRegisterSupplier">
+                                            <Button.Tag>/Resources/Icons/redirect-icon.png</Button.Tag>
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+
+                                <TextBox Grid.ColumnSpan="2" Grid.Row="3"
+                                         Style="{DynamicResource TextAreaStyle}"
+                                         Tag="Descripción:"/>
+                            </Grid>
+                        </Grid>
+
+                    </Grid>
                 </Border>
 
-                <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
-                    <Button x:Name="BtnNewSupply" Style="{DynamicResource PrimaryButtonStyle}"
-                            Content="{DynamicResource RegSupply_BtnRegisterSupply}">
-                        <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
-                    </Button>
-                </StackPanel>
+                <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
+                        BorderThickness="0,0.5,0,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
+                        <Button x:Name="BtnNewSupply" Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                                Content="{DynamicResource Glb_Cancel}"
+                                Margin="0,0,10,0">
+                            <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                        </Button>
+                        
+                        <Button x:Name="BtnCancel" Style="{DynamicResource PrimaryButtonStyle}"
+                                Content="{DynamicResource RegSupply_BtnRegisterSupply}">
+                            <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                        </Button>
+                    </StackPanel>
+                </Border>
 
             </Grid>
             

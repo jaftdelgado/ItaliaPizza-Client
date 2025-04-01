@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="720" Width="1080">
+        Title="MainWindow" 
+        Height="720" 
+        Width="1080" MinWidth="920">
     <Border Background="{StaticResource BackgroundBrush}" CornerRadius="12">
         <Grid>
             <Grid.ColumnDefinitions>

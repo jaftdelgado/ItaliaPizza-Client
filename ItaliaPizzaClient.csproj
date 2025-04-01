@@ -73,8 +73,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Model\SupplyCategory.cs" />
+    <Compile Include="Model\UnitMeasure.cs" />
+    <Compile Include="Utilities\Animations.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\ImageUtilities.cs" />
+    <Compile Include="Utilities\InputUtilities.cs" />
     <Compile Include="Utilities\NavigationManager.cs" />
     <Compile Include="Utilities\PlaceholderManager.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -83,6 +87,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Utilities\SideMenuManager.cs" />
+    <Compile Include="Views\Dialogs\DialogWindow.xaml.cs">
+      <DependentUpon>DialogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -90,11 +97,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\OrderSuppliersPage.xaml.cs">
+      <DependentUpon>OrderSuppliersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PrincipalPage.xaml.cs">
       <DependentUpon>PrincipalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterProduct.xaml.cs">
       <DependentUpon>RegisterProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterOrderSupplierPage.xaml.cs">
+      <DependentUpon>RegisterOrderSupplierPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterSupplierPage.xaml.cs">
+      <DependentUpon>RegisterSupplierPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterSupplyPage.xaml.cs">
       <DependentUpon>RegisterSupplyPage.xaml</DependentUpon>
@@ -110,11 +126,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Styles\Animations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\ButtonsStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Styles\ColorPalettes.xaml">
+    <Page Include="Resources\Styles\UIElementals.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -134,7 +154,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Dialogs\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderSuppliersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,6 +171,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterOrderSupplierPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,6 +221,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-BLACK.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-BOLD.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-HEAVY.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-LIGHT.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-MEDIUM.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-REGULAR.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-SEMIBOLD.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-THIN.OTF" />
+    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-ULTRALIGHT.OTF" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -258,6 +303,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\info-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\default-supply-pic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\redirect-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
