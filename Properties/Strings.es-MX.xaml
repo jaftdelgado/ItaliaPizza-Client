@@ -21,6 +21,7 @@
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
+    <sys:String x:Key="Glb_CbxCategories">Categorias</sys:String>
 
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
@@ -36,4 +37,16 @@
     <sys:String x:Key="RegSupply_SupplyInfo">Información del Insumo</sys:String>
     <sys:String x:Key="RegSupply_TbSupplyName">Nombre del insumo:</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
+
+    <!--Register Product-->
+    <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>
+    <sys:String x:Key="RegProduct_Desc">Ingresa los datos del producto que se desea registrar.</sys:String>
+    <sys:String x:Key="RegProduct_ProductInfo">Información del Producto</sys:String>
+    <sys:String x:Key="RegProduct_TbProductName">Nombre del producto</sys:String>
+    <sys:String x:Key="RegProduct_Price">Precio</sys:String>
+    <sys:String x:Key="RegProduct_Quantity">Cantidad</sys:String>
+    <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
+    <sys:String x:Key="RegProduct_Code">Código</sys:String>
+
+
 </ResourceDictionary>

@@ -2,7 +2,7 @@
 
 namespace ItaliaPizzaClient.Utilities
 {
-    public static class SideMenuButtonHelper
+    public class SideMenuButtonHelper
     {
         public static readonly DependencyProperty IsSelectedProperty =
             DependencyProperty.RegisterAttached("IsSelected", typeof(bool), typeof(SideMenuButtonHelper), new PropertyMetadata(false));
