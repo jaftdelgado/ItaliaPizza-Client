@@ -16,31 +16,21 @@ using System.Windows.Shapes;
 namespace ItaliaPizzaClient.Views
 {
     /// <summary>
-    /// Lógica de interacción para RegisterSupplierPage.xaml
+    /// Lógica de interacción para RegisterCustomerPage.xaml
     /// </summary>
-    public partial class RegisterSupplierPage : Page
+    public partial class RegisterCustomerPage : Page
     {
-        public RegisterSupplierPage()
+        public RegisterCustomerPage()
         {
             InitializeComponent();
         }
 
-        private void EnableSupplyBtn(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void SaveSupplierBtn(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RegSupplyBtn(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BtnCancelRegister(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSaveCustomer(object sender, RoutedEventArgs e)
         {
 
         }

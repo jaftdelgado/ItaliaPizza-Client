@@ -24,6 +24,8 @@
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
+    <sys:String x:Key="Glb_BtnCancel"> Cancelar </sys:String>
+    <sys:String x:Key="Glb_BtnSave"> Guardar </sys:String>
     <sys:String x:Key="Glb_CbxCategories">Categorias</sys:String>
 
     <!--Supply Categories-->
@@ -60,6 +62,23 @@
     <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
+    
+    <!--Register customer-->
+    <sys:String x:Key="RegCustomer_Header"> Registrar cliente </sys:String>
+    <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente a registrar </sys:String>
+    <sys:String x:Key="RegCustomer_Name"> Nombre(s) </sys:String>
+    <sys:String x:Key="RegCustomer_LastName"> Apellido(s)</sys:String>
+    <sys:String x:Key="RegCustomer_PhoneNumber"> Telefono</sys:String>
+    <sys:String x:Key="RegCustomer_Address"> Direccion </sys:String>
+    
+    <!-- Register supplier-->
+    <sys:String x:Key="RegSupplier_Header">Registrar proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_Name">Nombre del proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_ContactName">Nombre de contacto</sys:String>
+    <sys:String x:Key="RegSupplier_PhoneNumber">Telefono</sys:String>
+    <sys:String x:Key="RegSupplier_RegProduct">¿Registrar productos?</sys:String>
+    <sys:String x:Key="RegSupplier_RegProductDesc"> Esta opcion puede realizarse despues</sys:String>
+    <sys:String x:Key="RegSupplier_BtnRegSupply">Registrar productos</sys:String>
 
     <!--Register Product-->
     <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>
@@ -71,9 +90,6 @@
     <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
     <sys:String x:Key="RegProduct_Code">Código</sys:String>
 
-
-    <!--Register Supplier-->
-    <sys:String x:Key="RegSupplier_Header">Registrar Proveedor</sys:String>
 
     <!--OrderSuppliers-->
     <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>
