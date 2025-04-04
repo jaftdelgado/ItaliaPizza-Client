@@ -104,7 +104,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 3,
                     AllowedRoles = new List<string> { "Admin", "Cashier", "Waiter", "Cook" },
                     IconPath = "/Resources/Icons/products-icon.png",
-                    HoverIconPath = "/Resources/Icons/products-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/products-hover-icon.png",
+                    PageInstance = new ProductsPage()
                 },
                 new MenuButton
                 {

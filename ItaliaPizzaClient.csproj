@@ -68,6 +68,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\ItaliaPizzaServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\SupplyServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,9 +108,12 @@
     <Compile Include="Views\PrincipalPage.xaml.cs">
       <DependentUpon>PrincipalPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterCustomerPage.xaml.cs">
       <DependentUpon>RegisterCustomerPage.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Views\RegisterProduct.xaml.cs">
       <DependentUpon>RegisterProduct.xaml</DependentUpon>
     </Compile>
@@ -173,8 +181,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegisterCustomerPage.xaml">
-          <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterProduct.xaml">
@@ -216,10 +228,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\MainService.wsdl" />
+    <None Include="Connected Services\ItaliaPizzaServices\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\SupplyServiceReference\Service.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SupplyServiceReference\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SupplyServiceReference\SupplyService.wsdl" />
@@ -285,6 +310,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ItaliaPizzaServices\" />
     <WCFMetadataStorage Include="Connected Services\SupplyServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +342,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\redirect-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\Service.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
