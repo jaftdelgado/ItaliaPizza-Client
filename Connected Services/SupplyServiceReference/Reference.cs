@@ -12,40 +12,40 @@ namespace ItaliaPizzaClient.SupplyServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SupplyServiceReference.ISupplyManager")]
-    public interface ISupplyManager {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SupplyServiceReference.IMainManager")]
+    public interface IMainManager {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/Ping", ReplyAction="http://tempuri.org/ISupplyManager/PingResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainManager/Ping", ReplyAction="http://tempuri.org/IMainManager/PingResponse")]
         bool Ping();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/Ping", ReplyAction="http://tempuri.org/ISupplyManager/PingResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainManager/Ping", ReplyAction="http://tempuri.org/IMainManager/PingResponse")]
         System.Threading.Tasks.Task<bool> PingAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISupplyManagerChannel : ItaliaPizzaClient.SupplyServiceReference.ISupplyManager, System.ServiceModel.IClientChannel {
+    public interface IMainManagerChannel : ItaliaPizzaClient.SupplyServiceReference.IMainManager, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SupplyManagerClient : System.ServiceModel.ClientBase<ItaliaPizzaClient.SupplyServiceReference.ISupplyManager>, ItaliaPizzaClient.SupplyServiceReference.ISupplyManager {
+    public partial class MainManagerClient : System.ServiceModel.ClientBase<ItaliaPizzaClient.SupplyServiceReference.IMainManager>, ItaliaPizzaClient.SupplyServiceReference.IMainManager {
         
-        public SupplyManagerClient() {
+        public MainManagerClient() {
         }
         
-        public SupplyManagerClient(string endpointConfigurationName) : 
+        public MainManagerClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public SupplyManagerClient(string endpointConfigurationName, string remoteAddress) : 
+        public MainManagerClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SupplyManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MainManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SupplyManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MainManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
