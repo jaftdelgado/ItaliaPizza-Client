@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ItaliaPizzaClient.SupplyServiceReference {
+namespace ItaliaPizzaClient.ItaliaPizzaServices {
     using System.Runtime.Serialization;
     using System;
     
@@ -203,14 +203,14 @@ namespace ItaliaPizzaClient.SupplyServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SupplyServiceReference.IMainManager")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ItaliaPizzaServices.IMainManager")]
     public interface IMainManager {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/AddProduct", ReplyAction="http://tempuri.org/IProductManager/AddProductResponse")]
-        int AddProduct(ItaliaPizzaClient.SupplyServiceReference.ProductDTO productDTO);
+        int AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/AddProduct", ReplyAction="http://tempuri.org/IProductManager/AddProductResponse")]
-        System.Threading.Tasks.Task<int> AddProductAsync(ItaliaPizzaClient.SupplyServiceReference.ProductDTO productDTO);
+        System.Threading.Tasks.Task<int> AddProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainManager/Ping", ReplyAction="http://tempuri.org/IMainManager/PingResponse")]
         bool Ping();
@@ -220,12 +220,12 @@ namespace ItaliaPizzaClient.SupplyServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMainManagerChannel : ItaliaPizzaClient.SupplyServiceReference.IMainManager, System.ServiceModel.IClientChannel {
+    public interface IMainManagerChannel : ItaliaPizzaClient.ItaliaPizzaServices.IMainManager, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MainManagerClient : System.ServiceModel.ClientBase<ItaliaPizzaClient.SupplyServiceReference.IMainManager>, ItaliaPizzaClient.SupplyServiceReference.IMainManager {
+    public partial class MainManagerClient : System.ServiceModel.ClientBase<ItaliaPizzaClient.ItaliaPizzaServices.IMainManager>, ItaliaPizzaClient.ItaliaPizzaServices.IMainManager {
         
         public MainManagerClient() {
         }
@@ -246,11 +246,11 @@ namespace ItaliaPizzaClient.SupplyServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public int AddProduct(ItaliaPizzaClient.SupplyServiceReference.ProductDTO productDTO) {
+        public int AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
             return base.Channel.AddProduct(productDTO);
         }
         
-        public System.Threading.Tasks.Task<int> AddProductAsync(ItaliaPizzaClient.SupplyServiceReference.ProductDTO productDTO) {
+        public System.Threading.Tasks.Task<int> AddProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
             return base.Channel.AddProductAsync(productDTO);
         }
         
