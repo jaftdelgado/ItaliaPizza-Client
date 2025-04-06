@@ -38,7 +38,6 @@
     <sys:String x:Key="GlbDialogT_UnkownImageError">Error desconocido</sys:String>
     <sys:String x:Key="GlbDialogD_UnkownImageError">Ocurrió un error inesperado al procesar la imagen seleccionada. Por favor, verifica el archivo y vuelve a intentarlo.</sys:String>
 
-    
     <!--Supply Categories-->
     <sys:String x:Key="Supply_Dairy">Lácteos</sys:String>
     <sys:String x:Key="Supply_Meats">Carnes</sys:String>
