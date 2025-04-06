@@ -8,7 +8,78 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterSupplierPage">
 
-    <Grid>
-        
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <!--Cabecera-->
+            <RowDefinition Height="*"/>
+            <!--Contenido Principal-->
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderThickness="0, 0, 0, 0.5" BorderBrush="{StaticResource SecondaryBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom" Margin="20, 0, 0, 20">
+                    <TextBlock Style="{StaticResource HeaderLabelStyle}" Text="{DynamicResource RegSupplier_Header}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 20, 10, 0">
+                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegSupplier_Name}"
+             Width="280" Margin="0, 0, 0, 10"/>
+                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegSupplier_ContactName}" Margin="0, 0, 0, 10"/>
+
+                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegSupplier_PhoneNumber}" Margin="0, 0, 0, 10"/>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 20, 10, 0">
+                    <TextBlock Style="{StaticResource SubtitleLabelStyle}" Text="{DynamicResource RegSupplier_RegProduct}"/>
+                    <TextBlock Style="{StaticResource DescriptionLabelStyle}" Text="{DynamicResource RegSupplier_RegProductDesc}" Margin="0, 5, 0, 20"/>
+
+                    <Button x:Name="BtnRegSupply" IsEnabled="False" Style="{DynamicResource SecondaryButtonStyle}" Content="{DynamicResource RegSupplier_BtnRegSupply}"
+                            Click="RegSupplyBtn"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 20, 0, 0">
+                    <Viewbox Height="30">
+                        <RadioButton x:Name="RBtnSupply" IsChecked="False" Click="EnableSupplyBtn" />
+                    </Viewbox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0, 0, 15, 0">
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonStyle}" Content="{DynamicResource Glb_BtnCancel}"
+                        Width="120" Click="BtnCancelRegister" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2">
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="BtnSaveSupplier" Style="{DynamicResource PrimaryButtonStyle}" Content="{DynamicResource Glb_BtnSave}"
+                        Width="100"  Click="SaveSupplierBtn"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
     </Grid>
 </Page>

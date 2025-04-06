@@ -1,0 +1,131 @@
+﻿<Page x:Class="ItaliaPizzaClient.Views.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrderPage">
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderThickness="0,0,0,0.5"
+        BorderBrush="{StaticResource SecondaryBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                       Text="{DynamicResource Order_Header}"/>
+                    <TextBlock Style="{StaticResource DescriptionLabelStyle}"
+                       Text="{DynamicResource Order_Desc}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,0,20,10"  
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button x:Name="BtnNewOrderSupplier" Style="{DynamicResource PrimaryButtonStyle}"
+                    Content="{DynamicResource Order_BtnNewOrder}"
+                    >
+                        <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0,0,0,0.5">
+                    <Grid Margin="20,0" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
+                         Style="{DynamicResource SecondarySearchBoxStyle}"
+                         Width="180"/>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="360"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
+                            <TextBlock Text="{DynamicResource Order_TitleTable}"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
+                        </StackPanel>
+
+                        <!-- Tabla de Comandas -->
+                        <Border Grid.Row="1" Padding="8">
+                            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              x:Name="ordersDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <!-- Numero -->
+                                    <DataGridTextColumn Header="#Número" Binding="{Binding Number}" IsReadOnly="True" Width="*"/>
+
+                                    <!-- Mesa -->
+                                    <DataGridTextColumn Header="Numero de mesa" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+
+                                    <!-- Total -->
+                                    <DataGridTextColumn Header="Total" Binding="{Binding Brand}" IsReadOnly="True" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </Grid>
+
+                    <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
+                            Margin="0,24" Width="300">
+                        <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                            CellStyle="{DynamicResource DataGridCellStyle1}" 
+                            x:Name="OrdersDetailsDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <!--Insumo -->
+                                <DataGridTextColumn Header="Productos" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                                <DataGridTextColumn Header="Cantidad" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Content="{DynamicResource Order_BtnPayOrder}" Width="200"
+                                Style="{DynamicResource PrimaryButtonStyle}"
+                                Margin="0,12,0,6" Click="Btn_OrderPay">
+                                <Button.Tag>/Resources/Icons/orders-icon.png</Button.Tag>
+                            </Button>
+
+                            <Button Content="{DynamicResource OrderSupplier_BtnCancelar}" Width="200"
+                                Style="{DynamicResource SecondaryButtonStyle}" Foreground="#FF1654">
+                                <Button.Tag>/Resources/Icons/leftarrow-icon.png</Button.Tag>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

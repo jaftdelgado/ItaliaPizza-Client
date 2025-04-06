@@ -16,31 +16,24 @@ using System.Windows.Shapes;
 namespace ItaliaPizzaClient.Views
 {
     /// <summary>
-    /// Lógica de interacción para RegisterSupplierPage.xaml
+    /// Interaction logic for ProductsPage.xaml
     /// </summary>
-    public partial class RegisterSupplierPage : Page
+    public partial class ProductsPage : Page
     {
-        public RegisterSupplierPage()
+        public ProductsPage()
         {
             InitializeComponent();
         }
 
-        private void EnableSupplyBtn(object sender, RoutedEventArgs e)
+        private void Clic_BtnNewProduct(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
+            if (mainWindow != null)
+                mainWindow.NavigateToPage("RegProduct_Header", new RegisterProduct());
         }
 
-        private void SaveSupplierBtn(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RegSupplyBtn(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnCancelRegister(object sender, RoutedEventArgs e)
+        private void suppliesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

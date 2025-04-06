@@ -35,8 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>packages\MahApps.Metro.IconPacks.Core.5.1.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
@@ -47,6 +50,7 @@
     <Reference Include="PresentationFramework.Aero2, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\PresentationFramework.Aero2.1.0.1\lib\PresentationFramework.Aero2.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -74,6 +78,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\ItaliaPizzaServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SupplyServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\UnitMeasure.cs" />
@@ -101,6 +115,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OrderSuppliersPage.xaml.cs">
       <DependentUpon>OrderSuppliersPage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +126,15 @@
     </Compile>
     <Compile Include="Views\PrincipalPage.xaml.cs">
       <DependentUpon>PrincipalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterCustomerPage.xaml.cs">
+      <DependentUpon>RegisterCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterProduct.xaml.cs">
+      <DependentUpon>RegisterProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonalModule\RegisterEmployeePage.xaml.cs">
       <DependentUpon>RegisterEmployeePage.xaml</DependentUpon>
@@ -124,6 +150,9 @@
     </Compile>
     <Compile Include="Views\SuppliesModule\SuppliesPage.xaml.cs">
       <DependentUpon>SuppliesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TicketPage.xaml.cs">
+      <DependentUpon>TicketPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Properties\MergedResources.xaml">
       <SubType>Designer</SubType>
@@ -169,6 +198,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\OrderSuppliersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,6 +211,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PrincipalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,6 +246,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TicketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -220,6 +269,26 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\MainService.wsdl" />
+    <None Include="Connected Services\ItaliaPizzaServices\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\SupplyService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -282,6 +351,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ItaliaPizzaServices\" />
+    <WCFMetadataStorage Include="Connected Services\SupplyServiceReference\" />
     <Resource Include="Resources\Icons\gallery-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +375,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\warning-alert-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\Service.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItaliaPizzaServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

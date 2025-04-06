@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="58b61c7a-7888-45da-8cac-76169f0e1b0b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8082/Service" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="bc5c9542-45a3-4109-9585-fc0e9e27c097" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd2" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="2e257604-6279-4fc4-a5a5-30dc00c70621" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd1" />
+    <MetadataFile FileName="MainService.wsdl" MetadataType="Wsdl" ID="de287e7a-4d09-4246-83b4-d6aa6d58e6a9" SourceId="1" SourceUrl="http://localhost:8082/Service?wsdl" />
+    <MetadataFile FileName="Service.disco" MetadataType="Disco" ID="0132fae8-eeba-47a0-89c4-b6060f8db0c4" SourceId="1" SourceUrl="http://localhost:8082/Service?disco" />
+    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="10dfed42-3c34-4612-9bdc-fb6c8c3d8a01" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

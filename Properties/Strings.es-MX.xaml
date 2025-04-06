@@ -105,9 +105,44 @@
     <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
+    
+    <!--Register customer-->
+    <sys:String x:Key="RegCustomer_Header"> Registrar cliente </sys:String>
+    <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente a registrar </sys:String>
+    <sys:String x:Key="RegCustomer_Name"> Nombre(s) </sys:String>
+    <sys:String x:Key="RegCustomer_LastName"> Apellido(s)</sys:String>
+    <sys:String x:Key="RegCustomer_PhoneNumber"> Telefono</sys:String>
+    <sys:String x:Key="RegCustomer_Address"> Direccion </sys:String>
+    
+    <!-- Register supplier-->
+    <sys:String x:Key="RegSupplier_Header">Registrar proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_Name">Nombre del proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_ContactName">Nombre de contacto</sys:String>
+    <sys:String x:Key="RegSupplier_PhoneNumber">Telefono</sys:String>
+    <sys:String x:Key="RegSupplier_RegProduct">¿Registrar productos?</sys:String>
+    <sys:String x:Key="RegSupplier_RegProductDesc"> Esta opcion puede realizarse despues</sys:String>
+    <sys:String x:Key="RegSupplier_BtnRegSupply">Registrar productos</sys:String>
+    
+    <!--Products-->
+    <sys:String x:Key="Products_Header">Productos</sys:String>
+    <sys:String x:Key="Products_Desc">Visualiza, registra, modifica y elimina productos utilizados por Italia Pizza.</sys:String>
+    <sys:String x:Key="Products_BtnNewProduct">Nuevo Producto</sys:String>
+    <sys:String x:Key="Products_TitleTable">Lista de Productos</sys:String>
+    <sys:String x:Key="Products_BtnDeleteProduct">Eliminar producto</sys:String>
+    <sys:String x:Key="Products_BtnEditProduct">Editar producto</sys:String>
+    
 
-    <!--Register Supplier-->
-    <sys:String x:Key="RegSupplier_Header">Registrar Proveedor</sys:String>
+    <!--Register Product-->
+    <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>
+    <sys:String x:Key="RegProduct_Desc">Ingresa los datos del producto que se desea registrar.</sys:String>
+    <sys:String x:Key="RegProduct_ProductInfo">Información del Producto</sys:String>
+    <sys:String x:Key="RegProduct_TbProductName">Nombre del producto</sys:String>
+    <sys:String x:Key="RegProduct_Price">Precio</sys:String>
+    <sys:String x:Key="RegProduct_Quantity">Cantidad</sys:String>
+    <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
+    <sys:String x:Key="RegProduct_Code">Código</sys:String>
+    <sys:String x:Key="RegProduct_BtnRegisterProdcut">Registrar Producto</sys:String>
+
 
     <!--OrderSuppliers-->
     <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>
@@ -121,4 +156,6 @@
     <sys:String x:Key="RegOrderSupplier_Header">Registrar orden a proveedor</sys:String>
     <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
     <sys:String x:Key="RegOrderSupplier_Info">Informacion de la Orden.</sys:String>
+    <sys:String x:Key="OrderSupplier_BtnNewOrden">Tramitar Orden</sys:String>
+    <sys:String x:Key="OrderSupplier_BtnCancelar">Cancelar Orden</sys:String>
 </ResourceDictionary>
