@@ -6,6 +6,9 @@
     <sys:String x:Key="Glb_Version">v1.0</sys:String>
     <sys:String x:Key="Glb_SignOut">Cerrar Sesión</sys:String>
     <sys:String x:Key="Glb_Settings">Ajustes</sys:String>
+    <sys:String x:Key="Glb_Accept">Aceptar</sys:String>
+    <sys:String x:Key="Glb_TryAgain">Reintentar</sys:String>
+    <sys:String x:Key="Glb_Close">Cerrar</sys:String>
     <sys:String x:Key="Glb_Cancel">Cancelar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
@@ -24,10 +27,18 @@
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
-    <sys:String x:Key="Glb_BtnCancel"> Cancelar </sys:String>
-    <sys:String x:Key="Glb_BtnSave"> Guardar </sys:String>
-    <sys:String x:Key="Glb_CbxCategories">Categorias</sys:String>
+    <sys:String x:Key="Glb_ShowPassword">Mostrar contraseña</sys:String>
+    <sys:String x:Key="GlbDialogT_NoConnection">Sin conexión al servidor</sys:String>
+    <sys:String x:Key="GlbDialogD_NoConnection">No se pudo establecer conexión con el servidor. Verifica tu conexión a Internet o inténtalo de nuevo más tarde.</sys:String>
+    <sys:String x:Key="GlbDialogT_TimeOut">Tiempo de espera excedido</sys:String>
+    <sys:String x:Key="GlbDialogD_TimeOut">Se ha excedido el tiempo de espera. Por favor, verifica tu conexión a Internet y vuelve a intentarlo más tarde.</sys:String>
+    <sys:String x:Key="Glb_MaxImageSizeMB">5</sys:String>
+    <sys:String x:Key="GlbDialogT_InvalidImageSize">Peso excedido</sys:String>
+    <sys:String x:Key="GlbDialogD_InvalidImageSize">El archivo de imagen supera el tamaño permitido (máx. {0} MB). Selecciona una imagen más ligera e inténtalo de nuevo.</sys:String>
+    <sys:String x:Key="GlbDialogT_UnkownImageError">Error desconocido</sys:String>
+    <sys:String x:Key="GlbDialogD_UnkownImageError">Ocurrió un error inesperado al procesar la imagen seleccionada. Por favor, verifica el archivo y vuelve a intentarlo.</sys:String>
 
+    
     <!--Supply Categories-->
     <sys:String x:Key="Supply_Dairy">Lácteos</sys:String>
     <sys:String x:Key="Supply_Meats">Carnes</sys:String>
@@ -40,14 +51,38 @@
     <sys:String x:Key="Supply_Beverages">Bebidas</sys:String>
     <sys:String x:Key="Supply_DessertsAndSweets">Postres y Dulces</sys:String>
     <sys:String x:Key="Supply_BakeryProducts">Productos de Panadería</sys:String>
-
-    <!--Order-->
-    <sys:String x:Key="Order_Header">Comandas</sys:String>
-    <sys:String x:Key="Order_Desc">Visualiza, registra, modifica las Comandas de Italia Pizza.</sys:String>
-    <sys:String x:Key="Order_BtnNewOrder">Nueva comanda</sys:String>
-    <sys:String x:Key="Order_TitleTable">Lista de Comandas</sys:String>
-    <sys:String x:Key="Order_BtnPayOrder">Pagar comanda</sys:String>
     
+    <!--EmployeeRoles-->
+    <sys:String x:Key="EmployeeRole_Admin">Administrador</sys:String>
+    <sys:String x:Key="EmployeeRole_Manager">Gerente</sys:String>
+    <sys:String x:Key="EmployeeRole_Cashier">Cajero(a)</sys:String>
+    <sys:String x:Key="EmployeeRole_Waiter">Mesero(a)</sys:String>
+    <sys:String x:Key="EmployeeRole_Cook">Cocinero(a)</sys:String>
+    <sys:String x:Key="EmployeeRole_DeliveryDriver">Repartidor(a)</sys:String>
+    
+    <!--Personal-->
+    <sys:String x:Key="Personal_Header">Personal</sys:String>
+    <sys:String x:Key="Personal_Desc">Visualiza, registra, modifica y elimina la plantilla de empleados de Italia Pizza.</sys:String>
+    <sys:String x:Key="Personal_BtnNewEmployee">Nuevo Empleado</sys:String>
+    <sys:String x:Key="Personal_TitleTable">Lista de Personal</sys:String>
+    
+    <!--Register Employee-->
+    <sys:String x:Key="RegEmployee_Header">Registrar Empleado</sys:String>
+    <sys:String x:Key="RegEmployee_Desc">Ingresa los datos del empleado que se desea registrar.</sys:String>
+    <sys:String x:Key="RegEmployee_EmployeeInfo">Información del Empleado</sys:String>
+    <sys:String x:Key="RegEmployee_TbEmployeeName">Nombre(s) del empleado:</sys:String>
+    <sys:String x:Key="RegEmployee_TbFatherName">Apellido Paterno:</sys:String>
+    <sys:String x:Key="RegEmployee_TbMotherName">Apellido Materno:</sys:String>
+    <sys:String x:Key="RegEmployee_TbRfc">RFC:</sys:String>
+    <sys:String x:Key="RegEmployee_CbEmployeeRole">Puesto del empleado:</sys:String>
+    <sys:String x:Key="RegEmployee_TbUsername">Nombre de usuario:</sys:String>
+    <sys:String x:Key="RegEmployee_PbPassword">Contraseña:</sys:String>
+    <sys:String x:Key="RegEmployee_InfoAccounts">Todos los puestos, excepto repartidor, requieren una cuenta de acceso al sistema para gestionar las funciones asignadas.</sys:String>
+    <sys:String x:Key="RegEmployee_BtnRegisterEmployee">Registrar Empleado</sys:String>
+    <sys:String x:Key="RegEmployee_DialogTSuccess">Empleado registrado</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDSuccess">La información del empleado ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil</sys:String>
+
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
     <sys:String x:Key="Supplies_Desc">Visualiza, registra, modifica y elimina insumos utilizados por Italia Pizza.</sys:String>

@@ -57,6 +57,9 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -85,13 +88,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\UnitMeasure.cs" />
     <Compile Include="Utilities\Animations.cs" />
+    <Compile Include="Utilities\ConnectionUtilities.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\ImageUtilities.cs" />
     <Compile Include="Utilities\InputUtilities.cs" />
     <Compile Include="Utilities\NavigationManager.cs" />
+    <Compile Include="Utilities\PasswordUtilities.cs" />
     <Compile Include="Utilities\PlaceholderManager.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -99,8 +105,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Utilities\SideMenuManager.cs" />
-    <Compile Include="Views\Dialogs\DialogWindow.xaml.cs">
-      <DependentUpon>DialogWindow.xaml</DependentUpon>
+    <Compile Include="Views\Dialogs\MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -115,6 +121,9 @@
     <Compile Include="Views\OrderSuppliersPage.xaml.cs">
       <DependentUpon>OrderSuppliersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PersonalModule\PersonalPage.xaml.cs">
+      <DependentUpon>PersonalPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PrincipalPage.xaml.cs">
       <DependentUpon>PrincipalPage.xaml</DependentUpon>
     </Compile>
@@ -127,16 +136,19 @@
     <Compile Include="Views\RegisterProduct.xaml.cs">
       <DependentUpon>RegisterProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PersonalModule\RegisterEmployeePage.xaml.cs">
+      <DependentUpon>RegisterEmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterOrderSupplierPage.xaml.cs">
       <DependentUpon>RegisterOrderSupplierPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterSupplierPage.xaml.cs">
       <DependentUpon>RegisterSupplierPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegisterSupplyPage.xaml.cs">
+    <Compile Include="Views\SuppliesModule\RegisterSupplyPage.xaml.cs">
       <DependentUpon>RegisterSupplyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SuppliesPage.xaml.cs">
+    <Compile Include="Views\SuppliesModule\SuppliesPage.xaml.cs">
       <DependentUpon>SuppliesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TicketPage.xaml.cs">
@@ -178,7 +190,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Dialogs\DialogWindow.xaml">
+    <Page Include="Views\Dialogs\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderSuppliersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonalModule\PersonalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,6 +226,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PersonalModule\RegisterEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegisterOrderSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,11 +238,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RegisterSupplyPage.xaml">
+    <Page Include="Views\SuppliesModule\RegisterSupplyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SuppliesPage.xaml">
+    <Page Include="Views\SuppliesModule\SuppliesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -333,23 +353,6 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ItaliaPizzaServices\" />
     <WCFMetadataStorage Include="Connected Services\SupplyServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\Service.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\gallery-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -363,6 +366,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\redirect-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\error-alert-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\success-alert-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\warning-alert-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ItaliaPizzaServices\Service.disco" />
