@@ -9,4 +9,21 @@
             <EasingDoubleKeyFrame KeyTime="0:0:0.48" Value="0"/>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
+
+    <Storyboard x:Key="ShowAccountBorderAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0" To="1" Duration="0:0:0.3"/>
+        <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                    From="0,-20,0,0" To="0,0,0,0"
+                    Duration="0:0:0.3" DecelerationRatio="0.6"/>
+    </Storyboard>
+
+    <Storyboard x:Key="HideAccountBorderAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                     From="1" To="0" Duration="0:0:0.25"/>
+        <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                        From="0,0,0,0" To="0,-20,0,0"
+                        Duration="0:0:0.3" AccelerationRatio="0.4"/>
+    </Storyboard>
+
 </ResourceDictionary>

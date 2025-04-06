@@ -8,7 +8,7 @@ namespace ItaliaPizzaClient.Views
     public partial class MainWindow : Window
     {
         private NavigationManager navigationManager;
-        private SideMenuManager sideMenuManager; // Nueva instancia de SideMenuManager
+        private SideMenuManager sideMenuManager;
 
         public MainWindow()
         {
@@ -23,7 +23,7 @@ namespace ItaliaPizzaClient.Views
             // Luego, pasarla al constructor de SideMenuManager
             sideMenuManager = new SideMenuManager(navigationManager);
 
-            sideMenuManager.LoadButtons(MenuStackPanel); // Ahora usamos la instancia
+            sideMenuManager.LoadButtons(MenuStackPanel);
 
             BtnProfile.Content = "Jafeth Delgado";
 

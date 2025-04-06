@@ -2,7 +2,7 @@
 
 namespace ItaliaPizzaClient.Utilities
 {
-    public static class SideMenuButtonHelper
+    public class SideMenuButtonHelper
     {
         public static readonly DependencyProperty IsSelectedProperty =
             DependencyProperty.RegisterAttached("IsSelected", typeof(bool), typeof(SideMenuButtonHelper), new PropertyMetadata(false));
@@ -12,7 +12,6 @@ namespace ItaliaPizzaClient.Utilities
             element.SetValue(IsSelectedProperty, value);
         }
 
-        // Obtiene el valor de la propiedad adjunta IsSelected
         public static bool GetIsSelected(UIElement element)
         {
             return (bool)element.GetValue(IsSelectedProperty);
