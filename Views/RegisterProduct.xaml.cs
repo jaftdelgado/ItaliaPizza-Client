@@ -36,7 +36,9 @@ namespace ItaliaPizzaClient.Views
                 Name = txt_name.Text,
                 Description = txt_description.Text,
                 Price = decimal.Parse(txt_price.Text),
-                Category = CbCategories.SelectedItem.ToString(),
+                Category = CbCategories.Text.ToString(),
+                IsPrepared = (bool)CbPrepared.IsChecked,
+                Code = txt_code.Text,
                 Photo = _selectedImageBytes
             };
             var serviceClient = new ItaliaPizzaServices.MainManagerClient();
@@ -51,6 +53,21 @@ namespace ItaliaPizzaClient.Views
                 MessageBox.Show("Error al crear el producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        //Validar entradas campos vacios
+         private bool correctInputs()
+        {
+            if (_selectedImageBytes == null || _selectedImageBytes.Length == 0 || string.IsNullOrEmpty(txt_name.Text) || string.IsNullOrEmpty(txt_description.Text) || string.IsNullOrEmpty(txt_price.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }else 
+                return true;
+
+        }
+
+        //Agregar el boton de registrar receta si es un producto preparado
+        //Generar codigo 
+        
 
 
 
@@ -80,16 +97,17 @@ namespace ItaliaPizzaClient.Views
 
         private void BtnNewProduct_Click(object sender, RoutedEventArgs e)
         {
-            //llamar al metodo de crear producto
-            if (string.IsNullOrEmpty(txt_name.Text) || string.IsNullOrEmpty(txt_description.Text) || string.IsNullOrEmpty(txt_price.Text))
-            {
-                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            else
-            {
+            if (correctInputs())
                 CreateProduct();
-            }
+        }
+        private void PreviewTextInput_TbUnitPrice(object sender, TextCompositionEventArgs e)
+        {
+            InputUtilities.ValidateMonetaryInput(sender, e);
+        }
+
+        private void LostFocus_TbUnitPrice(object sender, RoutedEventArgs e)
+        {
+            InputUtilities.FormatMonetaryValue(sender, e);
         }
     }
 }

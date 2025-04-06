@@ -95,10 +95,11 @@
                                  Tag="{DynamicResource RegProduct_TbProductName}" />
                             <ComboBox x:Name="CbCategories" Grid.Column="1"  Width="Auto" Margin="7" Style="{DynamicResource ComboBoxStyle}" 
                                   Tag="{DynamicResource Glb_CbxCategories}">
-                                <ComboBoxItem Content="Opción 1"/>
-                                <ComboBoxItem Content="Opción 2"/>
-                                <ComboBoxItem Content="Opción 3"/>
-                                <ComboBoxItem Content="Opción 4"/>
+                                <ComboBoxItem Content="Pizzas"/>
+                                <ComboBoxItem Content="Bebidas"/>
+                                <ComboBoxItem Content="Entradas"/>
+                                <ComboBoxItem Content="Postres"/>
+                                <ComboBoxItem Content="Complementos"/>
                             </ComboBox >
                         </Grid>
                         <Grid Grid.Row="1">
@@ -108,13 +109,20 @@
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="txt_price" Grid.Column="0" Style="{StaticResource TextBoxStyle}" 
                                  Tag="{DynamicResource RegProduct_Price}"
-                                 Margin="7"/>
+                                 Margin="7"
+                                 PreviewTextInput="PreviewTextInput_TbUnitPrice"
+                                 LostFocus="LostFocus_TbUnitPrice" />
                             <TextBox Grid.Column="1" Style="{StaticResource TextBoxStyle}" 
                                  Tag="{DynamicResource RegProduct_Quantity}"
-                                 Margin="7"/>
+                                 Margin="7"
+                                 PreviewTextInput="PreviewTextInput_TbUnitPrice"
+                                 LostFocus="LostFocus_TbUnitPrice"
+                            />
                         </Grid>
                         <CheckBox Grid.Row="2" Content="Es un producto preparado."
-                                  Style="{DynamicResource CheckBoxStyle}"/>
+                                  Style="{DynamicResource CheckBoxStyle}"
+                                  Name="CbPrepared"
+                                  />
                         <Grid Grid.Row="3" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
@@ -124,7 +132,7 @@
                                  Tag="{DynamicResource RegProduct_Description}"
                                  />
 
-                            <TextBox Grid.Column="1" MaxHeight="60" Style="{StaticResource TextBoxStyle}" 
+                            <TextBox x:Name="txt_code" Grid.Column="1" MaxHeight="60" Style="{StaticResource TextBoxStyle}" 
                                  Tag="{DynamicResource RegProduct_Code}"
                             />
                         </Grid>
