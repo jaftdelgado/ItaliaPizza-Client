@@ -66,6 +66,7 @@
     <sys:String x:Key="Personal_BtnNewEmployee">Nuevo Empleado</sys:String>
     <sys:String x:Key="Personal_TitleTable">Lista de Personal</sys:String>
     
+    
     <!--Register Employee-->
     <sys:String x:Key="RegEmployee_Header">Registrar Empleado</sys:String>
     <sys:String x:Key="RegEmployee_Desc">Ingresa los datos del empleado que se desea registrar.</sys:String>
