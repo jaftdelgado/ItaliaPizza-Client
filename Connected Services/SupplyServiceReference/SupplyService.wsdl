@@ -42,6 +42,30 @@
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplyCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSupplyCategories" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplyCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSupplyCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesBySupplier_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplier" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesBySupplier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplierResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
   </wsdl:message>
@@ -53,6 +77,22 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RegisterOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrder" message="tns:IMainManager_RegisterOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrderResponse" message="tns:IMainManager_RegisterOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplyCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplyCategories" message="tns:IMainManager_GetAllSupplyCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplyCategoriesResponse" message="tns:IMainManager_GetAllSupplyCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesBySupplier">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetSuppliesBySupplierResponse" message="tns:IMainManager_GetSuppliesBySupplier_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainManager/PingResponse" message="tns:IMainManager_Ping_OutputMessage" />
@@ -63,6 +103,42 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="AddProduct">
       <soap12:operation soapAction="http://tempuri.org/IProductManager/AddProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/RegisterOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplyCategories">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/GetAllSupplyCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/GetSuppliersByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesBySupplier">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/GetSuppliesBySupplier" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -86,7 +162,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>CEBAGO\Cesar</Upn>
+          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

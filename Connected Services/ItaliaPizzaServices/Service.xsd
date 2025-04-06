@@ -15,4 +15,61 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductDTO" nillable="true" type="tns:ProductDTO" />
+  <xs:complexType name="SupplierOrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplyID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplierOrderDTO" nillable="true" type="tns:SupplierOrderDTO" />
+  <xs:complexType name="ArrayOfSupplyCategoryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplyCategoryDTO" nillable="true" type="tns:SupplyCategoryDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplyCategoryDTO" nillable="true" type="tns:ArrayOfSupplyCategoryDTO" />
+  <xs:complexType name="SupplyCategoryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SupplyCategoryID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplyCategoryDTO" nillable="true" type="tns:SupplyCategoryDTO" />
+  <xs:complexType name="ArrayOfSupplierDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplierDTO" nillable="true" type="tns:SupplierDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplierDTO" nillable="true" type="tns:ArrayOfSupplierDTO" />
+  <xs:complexType name="SupplierDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategorySupply" type="xs:int" />
+      <xs:element minOccurs="0" name="ContactName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplierDTO" nillable="true" type="tns:SupplierDTO" />
+  <xs:complexType name="ArrayOfSupplyDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplyDTO" nillable="true" type="tns:SupplyDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplyDTO" nillable="true" type="tns:ArrayOfSupplyDTO" />
+  <xs:complexType name="SupplyDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Brand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MeasureUnit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Stock" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplyCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplyID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplyName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplyDTO" nillable="true" type="tns:SupplyDTO" />
 </xs:schema>

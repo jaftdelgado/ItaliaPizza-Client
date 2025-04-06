@@ -85,6 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Model\OrderSupplyItem.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\UnitMeasure.cs" />
     <Compile Include="Utilities\Animations.cs" />
@@ -249,6 +250,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\MainService.wsdl" />
     <None Include="Connected Services\ItaliaPizzaServices\Service.xsd">
       <SubType>Designer</SubType>
@@ -258,6 +268,15 @@
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\Service2.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\ItaliaPizzaClient.SupplyServiceReference.SupplierDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\ItaliaPizzaClient.SupplyServiceReference.SupplyCategoryDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\ItaliaPizzaClient.SupplyServiceReference.SupplyDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SupplyServiceReference\Service.xsd">
       <SubType>Designer</SubType>
