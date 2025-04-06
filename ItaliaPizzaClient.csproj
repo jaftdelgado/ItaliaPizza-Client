@@ -108,6 +108,9 @@
     <Compile Include="Views\PrincipalPage.xaml.cs">
       <DependentUpon>PrincipalPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterCustomerPage.xaml.cs">
       <DependentUpon>RegisterCustomerPage.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegisterCustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +242,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SupplyServiceReference\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SupplyServiceReference\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SupplyServiceReference\SupplyService.wsdl" />

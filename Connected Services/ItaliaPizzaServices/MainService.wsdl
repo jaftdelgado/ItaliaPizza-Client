@@ -36,15 +36,12 @@
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
     </xsd:schema>
   </wsdl:types>
-<<<<<<< HEAD
-=======
   <wsdl:message name="IMainManager_AddProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:AddProduct" />
   </wsdl:message>
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
->>>>>>> 863fed61625a4bedb7cafc37b9df4ff2f0527246
   <wsdl:message name="IMainManager_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
   </wsdl:message>
@@ -52,13 +49,10 @@
     <wsdl:part name="parameters" element="tns:PingResponse" />
   </wsdl:message>
   <wsdl:portType name="IMainManager">
-<<<<<<< HEAD
-=======
     <wsdl:operation name="AddProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
     </wsdl:operation>
->>>>>>> 863fed61625a4bedb7cafc37b9df4ff2f0527246
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainManager/PingResponse" message="tns:IMainManager_Ping_OutputMessage" />
@@ -92,11 +86,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-<<<<<<< HEAD
-          <Upn>_3776_\abrah</Upn>
-=======
           <Upn>CEBAGO\Cesar</Upn>
->>>>>>> 863fed61625a4bedb7cafc37b9df4ff2f0527246
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

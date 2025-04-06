@@ -79,6 +79,15 @@
     <sys:String x:Key="RegSupplier_RegProduct">¿Registrar productos?</sys:String>
     <sys:String x:Key="RegSupplier_RegProductDesc"> Esta opcion puede realizarse despues</sys:String>
     <sys:String x:Key="RegSupplier_BtnRegSupply">Registrar productos</sys:String>
+    
+    <!--Products-->
+    <sys:String x:Key="Products_Header">Productos</sys:String>
+    <sys:String x:Key="Products_Desc">Visualiza, registra, modifica y elimina productos utilizados por Italia Pizza.</sys:String>
+    <sys:String x:Key="Products_BtnNewProduct">Nuevo Producto</sys:String>
+    <sys:String x:Key="Products_TitleTable">Lista de Productos</sys:String>
+    <sys:String x:Key="Products_BtnDeleteProduct">Eliminar producto</sys:String>
+    <sys:String x:Key="Products_BtnEditProduct">Editar producto</sys:String>
+    
 
     <!--Register Product-->
     <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>
@@ -89,6 +98,7 @@
     <sys:String x:Key="RegProduct_Quantity">Cantidad</sys:String>
     <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
     <sys:String x:Key="RegProduct_Code">Código</sys:String>
+    <sys:String x:Key="RegProduct_BtnRegisterProdcut">Registrar Producto</sys:String>
 
 
     <!--OrderSuppliers-->
