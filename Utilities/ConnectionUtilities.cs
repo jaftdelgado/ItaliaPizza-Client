@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using ItaliaPizzaClient.Views.Dialogs;
-
-using ItaliaPizzaClient.ServiceReference;
+using ItaliaPizzaClient.ItaliaPizzaServices;
 
 namespace ItaliaPizzaClient.Utilities
 {

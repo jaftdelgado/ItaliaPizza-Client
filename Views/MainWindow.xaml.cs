@@ -42,7 +42,7 @@ namespace ItaliaPizzaClient.Views
 
         private string GetCurrentUserRole()
         {
-            return "Waiter";
+            return "Admin";
         }
 
         private void LoadProfileImage()
