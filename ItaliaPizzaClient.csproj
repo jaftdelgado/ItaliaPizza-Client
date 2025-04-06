@@ -83,11 +83,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\SupplyServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\UnitMeasure.cs" />
@@ -115,10 +110,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\OrderPage.xaml.cs">
+    <Compile Include="Views\OrdersModule\OrderPage.xaml.cs">
       <DependentUpon>OrderPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrderSuppliersPage.xaml.cs">
+    <Compile Include="Views\SupplierOrdersModule\OrderSuppliersPage.xaml.cs">
       <DependentUpon>OrderSuppliersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonalModule\PersonalPage.xaml.cs">
@@ -127,22 +122,22 @@
     <Compile Include="Views\PrincipalPage.xaml.cs">
       <DependentUpon>PrincipalPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductsPage.xaml.cs">
+    <Compile Include="Views\ProductsModule\ProductsPage.xaml.cs">
       <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegisterCustomerPage.xaml.cs">
+    <Compile Include="Views\CustomersModule\RegisterCustomerPage.xaml.cs">
       <DependentUpon>RegisterCustomerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegisterProduct.xaml.cs">
+    <Compile Include="Views\ProductsModule\RegisterProduct.xaml.cs">
       <DependentUpon>RegisterProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonalModule\RegisterEmployeePage.xaml.cs">
       <DependentUpon>RegisterEmployeePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegisterOrderSupplierPage.xaml.cs">
+    <Compile Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage.xaml.cs">
       <DependentUpon>RegisterOrderSupplierPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RegisterSupplierPage.xaml.cs">
+    <Compile Include="Views\SuppliersModule\RegisterSupplierPage.xaml.cs">
       <DependentUpon>RegisterSupplierPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SuppliesModule\RegisterSupplyPage.xaml.cs">
@@ -151,7 +146,7 @@
     <Compile Include="Views\SuppliesModule\SuppliesPage.xaml.cs">
       <DependentUpon>SuppliesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TicketPage.xaml.cs">
+    <Compile Include="Views\SupplierOrdersModule\TicketPage.xaml.cs">
       <DependentUpon>TicketPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Properties\MergedResources.xaml">
@@ -198,11 +193,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OrderPage.xaml">
+    <Page Include="Views\OrdersModule\OrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OrderSuppliersPage.xaml">
+    <Page Include="Views\SupplierOrdersModule\OrderSuppliersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,15 +209,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductsPage.xaml">
+    <Page Include="Views\ProductsModule\ProductsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RegisterCustomerPage.xaml">
+    <Page Include="Views\CustomersModule\RegisterCustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RegisterProduct.xaml">
+    <Page Include="Views\ProductsModule\RegisterProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,11 +225,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RegisterOrderSupplierPage.xaml">
+    <Page Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RegisterSupplierPage.xaml">
+    <Page Include="Views\SuppliersModule\RegisterSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,7 +241,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TicketPage.xaml">
+    <Page Include="Views\SupplierOrdersModule\TicketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,16 +274,6 @@
     <None Include="Connected Services\ItaliaPizzaServices\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SupplyServiceReference\Service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SupplyServiceReference\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SupplyServiceReference\Service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SupplyServiceReference\SupplyService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -352,7 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ItaliaPizzaServices\" />
-    <WCFMetadataStorage Include="Connected Services\SupplyServiceReference\" />
     <Resource Include="Resources\Icons\gallery-icon.png" />
   </ItemGroup>
   <ItemGroup>
