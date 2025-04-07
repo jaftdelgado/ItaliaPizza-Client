@@ -1,11 +1,15 @@
-﻿using ItaliaPizzaClient.Model;
+﻿using ItaliaPizzaClient.ItaliaPizzaServices;
+using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace ItaliaPizzaClient.Views
 {
@@ -70,7 +74,7 @@ namespace ItaliaPizzaClient.Views
                     targetImageControl.Source = resizedImage;
                     BtnDeleteImage.IsEnabled = true;
                 }
-                catch (IOException e)
+                catch (IOException)
                 {
                     MessageDialog.Show("GlbDialogT_InvalidImageSize", "GlbDialogD_InvalidImageSize", AlertType.WARNING);
                 }
@@ -120,10 +124,78 @@ namespace ItaliaPizzaClient.Views
                 AccountBorder.Visibility = Visibility.Collapsed;
         }
 
+        public void RegisterEmployee()
+        {
+            var client = ConnectionUtilities.IsServerConnected();
+            if (client == null) return;
+
+            var personalDto = new PersonalDTO
+            {
+                FirstName = TbEmployeeName.Text.Trim(),
+                FatherName = TbFatherName.Text.Trim(),
+                MotherName = TbMotherName.Text.Trim(),
+                RFC = TbRFC.Text.Trim(),
+                Username = string.IsNullOrWhiteSpace(TbUsername.Text) ? null : TbUsername.Text.Trim(),
+                Password = (_selectedRoleId != 6 && !string.IsNullOrWhiteSpace(PbPassword.Password))
+                    ? PasswordUtilities.HashPassword(PbPassword.Password)
+                    : null,
+                ProfilePic = ImageUtilities.ImageToByteArray((BitmapImage)EmployeeProfilePic.Source),
+                RoleID = _selectedRoleId
+            };
+
+            if (_selectedRoleId != 6 && IsUsernameTaken(personalDto.Username))
+            {
+                MessageDialog.Show("RegEmployee_DialogTUserDuplicate", "RegEmployee_DialogDUserDuplicate", AlertType.WARNING);
+                return;
+            }
+
+            if (ValidateRFC(personalDto.RFC))
+            {
+                MessageDialog.Show("RegEmployee_DialogTRfcDuplicate", "RegEmployee_DialogDRfcDuplicate", AlertType.WARNING);
+                return;
+            }
+
+            ConnectionUtilities.ExecuteDatabaseSafeAction(() =>
+            {
+                int result = client.AddPersonal(personalDto);
+                if (result > 0)
+                {
+                    MessageDialog.Show("RegEmployee_DialogTSuccess", "RegEmployee_DialogDSuccess", AlertType.SUCCESS);
+                }
+            });
+
+            ConnectionUtilities.CloseClient();
+        }
+
+        private bool IsUsernameTaken(string username)
+        {
+            return ConnectionUtilities.ExecuteDatabaseSafeFunction(() =>
+            {
+                var service = ConnectionUtilities.IsServerConnected();
+                if (service == null) return false;
+                return service.IsUsernameAvailable(username);
+            }, false);
+        }
+
+        private bool ValidateRFC(string rfc)
+        {
+            return ConnectionUtilities.ExecuteDatabaseSafeFunction(() =>
+            {
+                var service = ConnectionUtilities.IsServerConnected();
+                if (service == null) return false;
+                return service.IsRfcUnique(rfc);
+            }, false);
+        }
+
         #region EventHandlers
         private void Click_BtnRegisterEmployee(object sender, RoutedEventArgs e)
         {
-            MessageDialog.Show("RegEmployee_DialogTSuccess", "RegEmployee_DialogDSuccess", AlertType.SUCCESS);
+            if (_selectedRoleId == 6 || PasswordUtilities.IsPasswordSecure(PbPassword.Password))
+            {
+                RegisterEmployee();
+            }
+            else
+                MessageDialog.Show("RegEmployee_DialogTInvalidPassword", "RegEmployee_DialogDInvalidPassword", AlertType.WARNING);
         }
 
         private void Click_BtnSelectImage(object sender, RoutedEventArgs e)

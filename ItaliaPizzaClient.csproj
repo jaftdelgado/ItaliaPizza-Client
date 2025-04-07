@@ -336,7 +336,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ItaliaPizzaServices\" />
     <Resource Include="Resources\Icons\gallery-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -359,6 +358,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\warning-alert-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ItaliaPizzaServices\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ItaliaPizzaServices\Service.disco" />

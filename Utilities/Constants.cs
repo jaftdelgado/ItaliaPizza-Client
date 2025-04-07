@@ -15,6 +15,7 @@
         #region STRING-PATTERNS
         public static readonly string ALPHANUMERIC_PATTERN = @"[^a-zA-Z0-9]";
         public static readonly string NAMES_PATTERN = @"[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]";
+        public static readonly string SAFE_PASSWORD_PATTERN = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$";
         #endregion
     }
 }
