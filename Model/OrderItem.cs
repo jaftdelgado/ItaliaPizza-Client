@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ItaliaPizzaClient.Model
 {
-    internal class OrderItem
+    public class OrderItem
     {
+        public string SupplyName { get; set; }
+        public decimal Quantity { get; set; }
+        public string MeasureUnit { get; set; }
+
+        public string QuantityWithUnit => $"{Quantity} {MeasureUnit}";
     }
+
 }
