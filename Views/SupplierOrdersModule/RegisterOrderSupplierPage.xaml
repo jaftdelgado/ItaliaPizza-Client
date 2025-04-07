@@ -50,18 +50,20 @@
                         <DataGrid.Columns>
                             <!--Insumo -->
                             <DataGridTextColumn Header="Insumos" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
-                            <DataGridTextColumn Header="Cantidad" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Cantidad" Binding="{Binding QuantityWithUnit}" IsReadOnly="True" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <Button Content="{DynamicResource OrderSupplier_BtnNewOrden}" Width="200"
                         Style="{DynamicResource PrimaryButtonStyle}"
-                        Margin="0,12,0,6">
+                        Margin="0,12,0,6"
+                            Click="SubmitOrder_Click">
                         <Button.Tag>/Resources/Icons/suppliers-icon.png</Button.Tag>
                     </Button>
 
-                    <Button Content="{DynamicResource OrderSupplier_BtnCancelar}" Width="200"
-                        Style="{DynamicResource SecondaryButtonStyle}" Foreground="#FF1654">
+                    <Button Content="{DynamicResource OrderSupplier_BtnDeleteSupply}" Width="200"
+                            Style="{DynamicResource SecondaryButtonStyle}" Foreground="#FF1654"
+                            Click="DeleteSelectedSupply_Click">
                         <Button.Tag>/Resources/Icons/leftarrow-icon.png</Button.Tag>
                     </Button>
                 </StackPanel>
@@ -82,30 +84,27 @@
                 <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0,0.5">
                     <StackPanel Orientation="Vertical" Margin="20,16,0,0"
                             HorizontalAlignment="Left">
-                        <ComboBox Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
-                              Tag="{DynamicResource Glb_SuppliersCategory}">
-                            <ComboBoxItem Content="Opción 1"/>
-                            <ComboBoxItem Content="Opción 2"/>
-                            <ComboBoxItem Content="Opción 3"/>
-                            <ComboBoxItem Content="Opción 4"/>
+                        <ComboBox x:Name="cbSuppliersCategories" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
+                                  Tag="{DynamicResource Glb_SuppliersCategory}"
+                                  SelectionChanged="cbCategories_SelectionChanged">
                         </ComboBox>
-                        <ComboBox Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
-                              Tag="{DynamicResource Glb_Suppliers}">
-                            <ComboBoxItem Content="Opción 1"/>
-                            <ComboBoxItem Content="Opción 2"/>
-                            <ComboBoxItem Content="Opción 3"/>
-                            <ComboBoxItem Content="Opción 4"/>
+                        <ComboBox x:Name="cbSuppliersName" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
+                                  Tag="{DynamicResource Glb_Suppliers}"
+                                  SelectionChanged="cbSuppliers_SelectionChanged">
                         </ComboBox>
-                        <ComboBox Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
-                              Tag="{DynamicResource Glb_Supplies}">
-                            <ComboBoxItem Content="Opción 1"/>
-                            <ComboBoxItem Content="Opción 2"/>
-                            <ComboBoxItem Content="Opción 3"/>
-                            <ComboBoxItem Content="Opción 4"/>
+                        <ComboBox x:Name="cbSuppliesName" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
+                                  Tag="{DynamicResource Glb_Supplies}"
+                                  >
                         </ComboBox>
-                        <TextBox Style="{StaticResource TextBoxStyle}" 
+                        <TextBox x:Name="txtQuantity" Style="{StaticResource TextBoxStyle}" 
                             Tag="{DynamicResource Glb_Quantity}"
                             Width="340"/>
+                        <Button Content="{DynamicResource OrderSupplier_BtnAddSupply}" Width="200"
+                                Style="{DynamicResource PrimaryButtonStyle}"
+                                Margin="0,12,0,6"
+                                Click="AddSupplyButton_Click">
+                            <Button.Tag>/Resources/Icons/suppliers-icon.png</Button.Tag>
+                        </Button>
                     </StackPanel>
                 </Border>
             </Grid>
