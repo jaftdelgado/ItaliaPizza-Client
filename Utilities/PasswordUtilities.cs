@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -28,12 +30,27 @@ namespace ItaliaPizzaClient.Utilities
             PbPassword.Focus();
         }
 
-        public static void AttachPasswordChangedHandler(PasswordBox PbPassword, Action updateStateCallback)
+        public static string HashPassword(string password)
         {
-            PbPassword.PasswordChanged += (sender, e) =>
+            if (string.IsNullOrWhiteSpace(password))
+                return null;
+
+            using (SHA256 sha256 = SHA256.Create())
             {
-                updateStateCallback?.Invoke();
-            };
+                byte[] bytes = Encoding.UTF8.GetBytes(password);
+                byte[] hash = sha256.ComputeHash(bytes);
+
+                StringBuilder result = new StringBuilder(64);
+                foreach (byte b in hash)
+                    result.Append(b.ToString("x2"));
+
+                return result.ToString();
+            }
+        }
+
+        public static bool IsPasswordSecure(string password)
+        {
+            return Regex.IsMatch(password, Constants.SAFE_PASSWORD_PATTERN);
         }
     }
 }

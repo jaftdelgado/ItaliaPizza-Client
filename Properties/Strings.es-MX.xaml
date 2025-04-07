@@ -29,16 +29,17 @@
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
     <sys:String x:Key="Glb_ShowPassword">Mostrar contraseña</sys:String>
     <sys:String x:Key="GlbDialogT_NoConnection">Sin conexión al servidor</sys:String>
-    <sys:String x:Key="GlbDialogD_NoConnection">No se pudo establecer conexión con el servidor. Verifica tu conexión a Internet o inténtalo de nuevo más tarde.</sys:String>
+    <sys:String x:Key="GlbDialogD_NoConnection">No se pudo establecer conexión con el servidor. Verifica la conexión a Internet o inténtalo de nuevo más tarde.</sys:String>
     <sys:String x:Key="GlbDialogT_TimeOut">Tiempo de espera excedido</sys:String>
     <sys:String x:Key="GlbDialogD_TimeOut">Se ha excedido el tiempo de espera. Por favor, verifica tu conexión a Internet y vuelve a intentarlo más tarde.</sys:String>
+    <sys:String x:Key="GlbDialogT_DBNoConnection">Sin conexión a la base de datos</sys:String>
+    <sys:String x:Key="GlbDialogD_DBNoConnection">No se pudo establecer conexión con la base de datos. Verifica la conexión a Internet o inténtalo de nuevo más tarde.</sys:String>
     <sys:String x:Key="Glb_MaxImageSizeMB">5</sys:String>
     <sys:String x:Key="GlbDialogT_InvalidImageSize">Peso excedido</sys:String>
     <sys:String x:Key="GlbDialogD_InvalidImageSize">El archivo de imagen supera el tamaño permitido (máx. {0} MB). Selecciona una imagen más ligera e inténtalo de nuevo.</sys:String>
     <sys:String x:Key="GlbDialogT_UnkownImageError">Error desconocido</sys:String>
     <sys:String x:Key="GlbDialogD_UnkownImageError">Ocurrió un error inesperado al procesar la imagen seleccionada. Por favor, verifica el archivo y vuelve a intentarlo.</sys:String>
 
-    
     <!--Supply Categories-->
     <sys:String x:Key="Supply_Dairy">Lácteos</sys:String>
     <sys:String x:Key="Supply_Meats">Carnes</sys:String>
@@ -81,6 +82,12 @@
     <sys:String x:Key="RegEmployee_BtnRegisterEmployee">Registrar Empleado</sys:String>
     <sys:String x:Key="RegEmployee_DialogTSuccess">Empleado registrado</sys:String>
     <sys:String x:Key="RegEmployee_DialogDSuccess">La información del empleado ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogTInvalidPassword">Contraseña insegura</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDInvalidPassword">La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número. Inténtalo nuevamente.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogTRfcDuplicate">RFC duplicado</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDRfcDuplicate">El RFC del empleado ya está se encuentrado registrado en el sistema. Verifica los datos e inténtalo nuevamente.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogTUserDuplicate">Usuario no disponible</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDUserDuplicate">El nombre de usuario ingresado ya se encuentra en uso. Por favor, selecciona uno diferente e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil</sys:String>
 
     <!--Supplies-->
@@ -141,7 +148,6 @@
     <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
     <sys:String x:Key="RegProduct_Code">Código</sys:String>
     <sys:String x:Key="RegProduct_BtnRegisterProdcut">Registrar Producto</sys:String>
-
 
     <!--OrderSuppliers-->
     <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>

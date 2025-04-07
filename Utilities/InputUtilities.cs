@@ -26,22 +26,6 @@ namespace ItaliaPizzaClient.Utilities
             };
         }
         
-        public static void ValidateInput2(TextBox textBox, string pattern, int maxLength)
-        {
-            string input = textBox.Text;
-            string cleaned = Regex.Replace(input, pattern, "");
-
-            if (cleaned.Length > maxLength)
-                cleaned = cleaned.Substring(0, maxLength);
-
-            if (input != cleaned)
-            {
-                textBox.Text = cleaned;
-                textBox.SelectionStart = cleaned.Length;
-                Animations.ShakeTextBox(textBox);
-            }
-        }
-
         public static void ValidatePasswordInput(PasswordBox passwordBox, string pattern, int maxLength)
         {
             passwordBox.PasswordChanged += (s, e) =>

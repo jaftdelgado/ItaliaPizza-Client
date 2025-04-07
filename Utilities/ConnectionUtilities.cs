@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using ItaliaPizzaClient.Views.Dialogs;
 using ItaliaPizzaClient.ItaliaPizzaServices;
+using System.Data.SqlClient;
 
 namespace ItaliaPizzaClient.Utilities
 {
@@ -10,6 +11,7 @@ namespace ItaliaPizzaClient.Utilities
         private static ChannelFactory<IMainManager> _channelFactory;
         private static IMainManager _service;
 
+        // Manejo de la conexión con el servidor
         public static IMainManager IsServerConnected()
         {
             try
@@ -71,6 +73,75 @@ namespace ItaliaPizzaClient.Utilities
             }
 
             _service = null;
+        }
+
+        // Manejo de excepciones de base de datos
+        public static void ExecuteDatabaseSafeAction(Action action)
+        {
+            try
+            {
+                action();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"Error de base de datos SQL: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Error de operación: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine($"Error en la comunicación del servicio: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inesperado: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+            }
+        }
+
+        public static T ExecuteDatabaseSafeFunction<T>(Func<T> func, T defaultValue = default)
+        {
+            try
+            {
+                return func();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"Error de base de datos SQL: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                return defaultValue;
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Error de operación: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                return defaultValue;
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine($"Error en la comunicación del servicio: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                return defaultValue;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inesperado: {ex.Message}");
+                Console.WriteLine($"Detalles: {ex.StackTrace}");
+                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                return defaultValue;
+            }
         }
     }
 }
