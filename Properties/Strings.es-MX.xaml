@@ -115,11 +115,15 @@
     <!--Register customer-->
     <sys:String x:Key="RegCustomer_Header"> Registrar cliente </sys:String>
     <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente a registrar </sys:String>
+    <sys:String x:Key="RegCustomer_PersonalData">Datos personales:</sys:String>
     <sys:String x:Key="RegCustomer_Name"> Nombre(s) </sys:String>
     <sys:String x:Key="RegCustomer_LastName"> Apellido(s)</sys:String>
     <sys:String x:Key="RegCustomer_PhoneNumber"> Telefono</sys:String>
-    <sys:String x:Key="RegCustomer_Address"> Direccion </sys:String>
-    
+    <sys:String x:Key="RegCustomer_AddressData">Datos de la direccion:</sys:String>
+    <sys:String x:Key="RegCustomer_AddressName"> Calle </sys:String>
+    <sys:String x:Key="RegCustomer_AddressZipCode"> Codigo postal </sys:String>
+    <sys:String x:Key="RegCustomer_AddressDistrict"> Colonia </sys:String>
+
     <!-- Register supplier-->
     <sys:String x:Key="RegSupplier_Header">Registrar proveedor</sys:String>
     <sys:String x:Key="RegSupplier_Name">Nombre del proveedor</sys:String>
