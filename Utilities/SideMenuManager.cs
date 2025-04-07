@@ -88,7 +88,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 2,
                     AllowedRoles = new List<string> { "Admin" },
                     IconPath = "/Resources/Icons/personal-icon.png",
-                    HoverIconPath = "/Resources/Icons/personal-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/personal-hover-icon.png",
+                    PageInstance = new PersonalPage()
                 },
                 new MenuButton
                 {
@@ -96,7 +97,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 2,
                     AllowedRoles = new List<string> { "Cashier", "Waiter", "Cook" },
                     IconPath = "/Resources/Icons/orders-icon.png",
-                    HoverIconPath = "/Resources/Icons/orders-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/orders-hover-icon.png",
+                    PageInstance = new OrderPage()
                 },
                 new MenuButton
                 {

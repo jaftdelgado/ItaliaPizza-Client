@@ -10,21 +10,60 @@
         <Setter Property="Height" Value="34"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Opacity" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             Padding="14,0"
-                            CornerRadius="12">
+                            CornerRadius="12"
+                            Opacity="{TemplateBinding Opacity}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   Width="10" Height="10" Margin="0,0,8,0"/>
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Width="10" Height="10" Margin="0,0,8,0"/>
                             <TextBlock Text="{TemplateBinding Content}" 
-                                       Foreground="{StaticResource BackgroundBrush}" 
-                                       VerticalAlignment="Center"/>
+                                   Foreground="{StaticResource BackgroundBrush}" 
+                                   VerticalAlignment="Center"/>
                         </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource PrimaryButtonHoverBrush}"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="Cursor" Value="Arrow"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="PrimaryButtonNoIconStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Height" Value="34"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="14,0"
+                    CornerRadius="12">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                           Foreground="{StaticResource BackgroundBrush}" 
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -49,10 +88,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
-                    BorderBrush="{TemplateBinding BorderBrush}" 
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="8,0,14,0"
-                    CornerRadius="12">
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="8,0,14,0"
+                            CornerRadius="12">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
                             Width="20" Height="20" Margin="0,0,6,0"/>
@@ -88,7 +127,8 @@
                         CornerRadius="12">
                         <TextBlock Text="{TemplateBinding Content}" 
                                Foreground="{StaticResource PrimaryBrush}" 
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -113,10 +153,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
-                BorderBrush="{TemplateBinding BorderBrush}" 
-                BorderThickness="{TemplateBinding BorderThickness}"
-                Padding="8,0,14,0"
-                CornerRadius="12">
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="8,0,14,0"
+                            CornerRadius="12"
+                            Opacity="{TemplateBinding Opacity}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
                         Width="20" Height="20" Margin="0,0,6,0"/>
@@ -131,6 +172,11 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource SecondaryButtonHoverBrush}"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="Cursor" Value="Arrow"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -277,6 +323,7 @@
         <Setter Property="FontFamily" Value="SF Pro Display"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
         <Setter Property="Cursor" Value="Hand"/>
 
@@ -337,5 +384,31 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PasswordBoxButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="Transparent">
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

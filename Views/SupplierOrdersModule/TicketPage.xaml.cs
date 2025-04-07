@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ItaliaPizzaClient.Views.Dialogs
+namespace ItaliaPizzaClient.Views
 {
     /// <summary>
-    /// Lógica de interacción para DialogWindow.xaml
+    /// Lógica de interacción para TicketPage.xaml
     /// </summary>
-    public partial class DialogWindow : Window
+    public partial class TicketPage : Page
     {
-        public DialogWindow()
+        public TicketPage()
         {
             InitializeComponent();
         }
-
     }
 }

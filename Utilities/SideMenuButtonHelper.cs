@@ -12,7 +12,6 @@ namespace ItaliaPizzaClient.Utilities
             element.SetValue(IsSelectedProperty, value);
         }
 
-        // Obtiene el valor de la propiedad adjunta IsSelected
         public static bool GetIsSelected(UIElement element)
         {
             return (bool)element.GetValue(IsSelectedProperty);

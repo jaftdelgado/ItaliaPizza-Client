@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace ItaliaPizzaClient.Utilities
@@ -21,6 +23,39 @@ namespace ItaliaPizzaClient.Utilities
                 if (targetElement is FrameworkElement frameworkElement)
                     clonedAnimation.Begin(frameworkElement);
             }
+        }
+
+        public static void ShakeTextBox(TextBox textBox)
+        {
+            if (textBox == null) return;
+
+            var mainGrid = (Grid)textBox.Template.FindName("MainGrid", textBox);
+
+            if (mainGrid != null)
+            {
+                var storyboard = Application.Current.Resources["ShakeAnimation"] as Storyboard;
+                if (storyboard != null)
+                {
+                    storyboard.Begin(mainGrid, true);
+                    return;
+                }
+            }
+
+            if (textBox.RenderTransform == null || !(textBox.RenderTransform is TranslateTransform))
+                textBox.RenderTransform = new TranslateTransform();
+
+            BeginAnimation(textBox, "ShakeAnimation");
+        }
+
+
+        public static void ShakePasswordBox(PasswordBox passwordBox)
+        {
+            if (passwordBox == null) return;
+
+            if (passwordBox.RenderTransform == null || !(passwordBox.RenderTransform is TranslateTransform))
+                passwordBox.RenderTransform = new TranslateTransform();
+
+            BeginAnimation(passwordBox, "ShakeAnimation");
         }
     }
 }
