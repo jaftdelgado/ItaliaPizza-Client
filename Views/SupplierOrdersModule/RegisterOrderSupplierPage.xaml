@@ -94,9 +94,9 @@
                         </ComboBox>
                         <ComboBox x:Name="cbSuppliesName" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
                                   Tag="{DynamicResource Glb_Supplies}"
-                                  >
+                                  SelectionChanged="cbSuppliesName_SelectionChanged">
                         </ComboBox>
-                        <TextBox x:Name="txtQuantity" Style="{StaticResource TextBoxStyle}" 
+                        <TextBox x:Name="txtQuantity" IsEnabled="False" Style="{StaticResource TextBoxStyle}" 
                             Tag="{DynamicResource Glb_Quantity}"
                             Width="340"/>
                         <Button Content="{DynamicResource OrderSupplier_BtnAddSupply}" Width="200"

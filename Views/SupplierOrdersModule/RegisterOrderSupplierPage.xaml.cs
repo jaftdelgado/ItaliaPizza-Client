@@ -1,11 +1,12 @@
 ﻿using System.Windows.Controls;
+using ItaliaPizzaClient.Views.Dialogs;
 using System.Windows;
 using ItaliaPizzaClient.ItaliaPizzaServices;
 using ItaliaPizzaClient.Model;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using ItaliaPizzaClient.ItaliasPizzaServices;
+using ItaliaPizzaClient.Utilities;
 
 
 namespace ItaliaPizzaClient.Views
@@ -20,6 +21,7 @@ namespace ItaliaPizzaClient.Views
         {
             InitializeComponent();
             LoadCategories();
+            InputUtilities.ValidateDecimalInput(txtQuantity);
         }
 
         private void LoadCategories()
@@ -82,7 +84,18 @@ namespace ItaliaPizzaClient.Views
                     });
                 }
             }
+            txtQuantity.IsEnabled = false;
         }
+        private void cbSuppliesName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbSuppliesName.SelectedItem is ComboBoxItem selectedItem &&
+                selectedItem.Tag is SupplyDTO selectedSupply)
+            {
+                txtQuantity.IsEnabled = true;
+                txtQuantity.Focus();
+            }
+        }
+
 
         private void AddSupplyButton_Click(object sender, RoutedEventArgs e)
         {
@@ -105,7 +118,7 @@ namespace ItaliaPizzaClient.Views
             }
             else
             {
-                MessageBox.Show("Selecciona un insumo y escribe una cantidad válida.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageDialog.Show("Error", "Selecciona un insumo y escribe una cantidad válida.", AlertType.WARNING);
             }
         }
 
@@ -119,7 +132,7 @@ namespace ItaliaPizzaClient.Views
             }
             else
             {
-                MessageBox.Show("Selecciona un insumo de la lista para eliminar.", "Eliminar Insumo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageDialog.Show("Eliminar Insumo", "Selecciona un insumo de la lista para eliminar.", AlertType.WARNING);
             }
         }
         private void ClearOrderIfNeeded()
@@ -148,7 +161,7 @@ namespace ItaliaPizzaClient.Views
 
                 decimal total = 0;
 
-                // ✅ Aquí va la lista temporal
+                //Aquí va la lista temporal
                 var items = new List<SupplierOrderDTO.OrderItemDTO>();
 
                 foreach (var item in orderItems)
@@ -169,13 +182,13 @@ namespace ItaliaPizzaClient.Views
                 }
 
                 dto.Total = total;
-                dto.Items = items.ToArray(); // ✅ Se asigna como arreglo
+                dto.Items = items.ToArray(); //Se asigna como arreglo
 
                 int result = client.RegisterOrder(dto);
 
                 if (result == 1)
                 {
-                    MessageBox.Show("Orden registrada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageDialog.Show("Éxito", "Orden registrada exitosamente.", AlertType.SUCCESS);
                     orderItems.Clear();
                     OrdersuppliersDataGrid.ItemsSource = null;
                     txtQuantity.Clear();
@@ -183,12 +196,12 @@ namespace ItaliaPizzaClient.Views
                 }
                 else
                 {
-                    MessageBox.Show("Ocurrió un error al registrar la orden.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageDialog.Show("Error", "Ocurrió un error al registrar la orden.", AlertType.ERROR);
                 }
             }
             else
             {
-                MessageBox.Show("Debes seleccionar un proveedor y añadir al menos un insumo.", "Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageDialog.Show("Validación", "Debes seleccionar un proveedor y añadir al menos un insumo.", AlertType.WARNING);
             }
         }
     }
