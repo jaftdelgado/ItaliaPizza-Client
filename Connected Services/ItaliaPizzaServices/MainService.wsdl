@@ -35,6 +35,7 @@
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IMainManager_AddPersonal_InputMessage">
@@ -55,6 +56,12 @@
   <wsdl:message name="IMainManager_IsRfcUnique_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsRfcUniqueResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_IsEmailAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsEmailAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailAvailableResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCategories" />
   </wsdl:message>
@@ -72,6 +79,12 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetSuppliesBySupplier_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSuppliesBySupplierResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSupplies" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSuppliesResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_AddProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:AddProduct" />
@@ -108,6 +121,11 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetDeliveredOrders_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDeliveredOrdersResponse" />
+  <wsdl:message name="IMainManager_RegisterRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRecipeResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
@@ -128,6 +146,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsRfcUnique" message="tns:IMainManager_IsRfcUnique_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsRfcUniqueResponse" message="tns:IMainManager_IsRfcUnique_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsEmailAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailable" message="tns:IMainManager_IsEmailAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse" message="tns:IMainManager_IsEmailAvailable_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse" message="tns:IMainManager_GetAllCategories_OutputMessage" />
@@ -139,6 +161,10 @@
     <wsdl:operation name="GetSuppliesBySupplier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse" message="tns:IMainManager_GetSuppliesBySupplier_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplies">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSupplies" message="tns:IMainManager_GetAllSupplies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSuppliesResponse" message="tns:IMainManager_GetAllSupplies_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
@@ -163,6 +189,9 @@
     <wsdl:operation name="GetDeliveredOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse" message="tns:IMainManager_GetDeliveredOrders_OutputMessage" />
+    <wsdl:operation name="RegisterRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipe" message="tns:IMainManager_RegisterRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipeResponse" message="tns:IMainManager_RegisterRecipe_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
@@ -199,6 +228,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsEmailAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsEmailAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllCategories" style="document" />
       <wsdl:input>
@@ -219,6 +257,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetSuppliesBySupplier">
       <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplies">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllSupplies" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -273,6 +320,8 @@
     </wsdl:operation>
     <wsdl:operation name="GetDeliveredOrders">
       <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
+    <wsdl:operation name="RegisterRecipe">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/RegisterRecipe" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -296,7 +345,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
+          <Upn>CEBAGO\Cesar</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

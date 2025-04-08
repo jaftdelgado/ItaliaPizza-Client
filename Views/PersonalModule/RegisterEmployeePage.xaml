@@ -41,7 +41,7 @@
 
             <Border Grid.Column="0" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0.5,0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Margin="0,24" Width="200">
+                        Margin="0,38" Width="200">
 
                     <Image Name="EmployeeProfilePic"
                            HorizontalAlignment="Center" 
@@ -83,7 +83,7 @@
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="38"/>
+                    <RowDefinition Height="36"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
@@ -93,109 +93,166 @@
                            Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
-                <Border Grid.Row="1">
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20,12,0,0">
+                    <TextBlock Text="{DynamicResource RegEmployee_PersonalInfo}"
+                               Style="{DynamicResource DescriptionLabelStyle}"
+                               Margin="0,0,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="6*" MaxWidth="640"/>
+                            <ColumnDefinition Width="7*" MaxWidth="640"/>
                             <ColumnDefinition Width="*" MinWidth="0"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" HorizontalAlignment="Stretch" Margin="20,0,0,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
+                        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <TextBox x:Name="TbEmployeeName" 
-                                     Grid.Row="0" Grid.ColumnSpan="2"
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox x:Name="TbEmployeeName" 
+                                     Grid.Column="0" Grid.Row="0"
                                      Tag="{DynamicResource RegEmployee_TbEmployeeName}" 
                                      Style="{DynamicResource TextBoxStyle}"
                                      HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                     Margin="0,16,0,12"/>
-                                <TextBox x:Name="TbFatherName"
-                                      Grid.Row="1" Grid.Column="0"
-                                      Tag="{DynamicResource RegEmployee_TbFatherName}"
-                                      Style="{DynamicResource TextBoxStyle}"
-                                      Margin="0,0,10,0"/>
-                                <TextBox x:Name="TbMotherName" 
-                                      Grid.Row="1" Grid.Column="1"
-                                      Tag="{DynamicResource RegEmployee_TbMotherName}"
-                                      Style="{DynamicResource TextBoxStyle}"
-                                      Margin="10,0,0,0"/>
-                                <TextBox x:Name="TbRFC"
-                                         Grid.Row="2" Grid.Column="0"
-                                         Tag="{DynamicResource RegEmployee_TbRfc}"
-                                         Style="{DynamicResource TextBoxStyle}"
-                                         Margin="0,20,10,24"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1"
-                                          x:Name="CbEmployeeRoles"
-                                          Tag="{DynamicResource RegEmployee_CbEmployeeRole}"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          Margin="10,20,0,24"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="Name"
-                                          SelectionChanged="CbEmployeeRoles_SelectionChanged"/>
-                                <Border x:Name="AccountBorder"
-                                        Grid.Row="3" Grid.ColumnSpan="2"
-                                        BorderBrush="{DynamicResource SecondaryBrush}"
-                                        BorderThickness="0,0.5,0,0"
-                                        Visibility="Collapsed">
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel Orientation="Horizontal" Margin="0,20,0,12">
-                                            <Image Width="12" Height="12" Margin="0,0,4,0" Stretch="Uniform"
-                                                   RenderOptions.BitmapScalingMode="HighQuality" 
-                                                   VerticalAlignment="Center"
-                                                   Source="/Resources/Icons/info-icon.png"/>
-                                            <TextBlock Style="{DynamicResource DescriptionLabelStyle}"
-                                                       TextWrapping="Wrap" VerticalAlignment="Top"
-                                                       Text="{DynamicResource RegEmployee_InfoAccounts}"/>
-                                        </StackPanel>
-                                        
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <TextBox x:Name="TbUsername" Grid.Column="0"
-                                                     VerticalAlignment="Top"
-                                                     Tag="{DynamicResource RegEmployee_TbUsername}"
-                                                     Style="{DynamicResource TextBoxStyle}" Margin="0,0,10,0"/>
-                                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                                                <PasswordBox x:Name="PbPassword"
-                                                             Tag="{DynamicResource RegEmployee_PbPassword}"
-                                                             Style="{DynamicResource PasswordBoxStyle}" 
-                                                             Visibility="Visible"
-                                                             PasswordChanged="Password_TextChanged"/>
-                                                <TextBox x:Name="TbPassword"
-                                                         Visibility="Collapsed"
-                                                         Tag="{DynamicResource RegEmployee_PbPassword}"
-                                                         Style="{DynamicResource TextBoxStyle}"
-                                                         TextChanged="Password_TextChanged"/>
-                                                <CheckBox x:Name="ShowPasswordCheckBox"
-                                                          Style="{DynamicResource CheckBoxStyle}"
-                                                          Content="{DynamicResource Glb_ShowPassword}"
-                                                          Margin="5,4,0,0"
-                                                          IsChecked="False"
-                                                          Checked="ShowPasswordCheckBox_Checked"
-                                                          Unchecked="ShowPasswordCheckBox_Unchecked"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
+                                     Margin="0,0,10,10"/>
+                            <TextBox x:Name="TbLastName" 
+                                     Grid.Column="1" Grid.Row="0"
+                                     Tag="{DynamicResource RegEmployee_TbLastName}" 
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                     Margin="10,0,0,10"/>
+                            <TextBox x:Name="TbPhoneNumber"
+                                     Grid.Column="0" Grid.Row="1"
+                                     Tag="{DynamicResource Glb_PhoneNumber}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     Margin="0,0,10,0"/>
+                            <TextBox x:Name="TbEmailAddress" 
+                                     Grid.Column="1" Grid.Row="1"
+                                     Tag="{DynamicResource Glb_EmailAddress}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     Margin="10,0,0,0"/>
                         </Grid>
-
                     </Grid>
-                </Border>
+
+                    <TextBlock Text="{DynamicResource RegEmployee_AddressPersonal}"
+                               Style="{DynamicResource DescriptionLabelStyle}"
+                               Margin="0,12,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" MaxWidth="640"/>
+                            <ColumnDefinition Width="*" MinWidth="0"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="2.5*" />
+                                <ColumnDefinition Width="2.5*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox x:Name="TbAddress"
+                                     Grid.Column="0"
+                                     Tag="{DynamicResource Glb_AddressName}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     Margin="0,0,10,0"/>
+                            <TextBox x:Name="TbZipCode"
+                                     Grid.Column="1"
+                                     Tag="{DynamicResource Glb_ZipCode}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     Margin="10,0,5,0"/>
+                            <TextBox x:Name="TbCity" 
+                                     Grid.Column="2"
+                                     Tag="{DynamicResource Glb_City}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+
+                    <TextBlock Text="{DynamicResource RegEmployee_WorkInfo}"
+                               Style="{DynamicResource DescriptionLabelStyle}"
+                               Margin="0,12,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" MaxWidth="640"/>
+                            <ColumnDefinition Width="*" MinWidth="0"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="TbRFC"
+                                     Grid.Column="0"
+                                     Tag="{DynamicResource RegEmployee_TbRfc}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     Margin="0,0,10,24"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1"
+                                      x:Name="CbEmployeeRoles"
+                                      Tag="{DynamicResource RegEmployee_CbEmployeeRole}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      Margin="10,0,0,24"
+                                      DisplayMemberPath="Name"
+                                      SelectedValuePath="Name"
+                                      SelectionChanged="CbEmployeeRoles_SelectionChanged"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" MaxWidth="640"/>
+                            <ColumnDefinition Width="*" MinWidth="0"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="AccountBorder" Grid.Column="0"
+                                BorderBrush="{DynamicResource SecondaryBrush}"
+                                BorderThickness="0,0.5,0,0"
+                                Visibility="Collapsed">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{DynamicResource RegEmployee_AccessInfo}"
+                                           Style="{DynamicResource DescriptionLabelStyle}"
+                                           Margin="0,12,0,8"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox x:Name="TbUsername" Grid.Column="0" VerticalAlignment="Top"
+                                             Tag="{DynamicResource RegEmployee_TbUsername}"
+                                             Style="{DynamicResource TextBoxStyle}" Margin="0,0,10,0"/>
+                                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                        <PasswordBox x:Name="PbPassword"
+                                                     Tag="{DynamicResource RegEmployee_PbPassword}"
+                                                     Style="{DynamicResource PasswordBoxStyle}" 
+                                                     Visibility="Visible"
+                                                     PasswordChanged="Password_TextChanged"/>
+                                        <TextBox x:Name="TbPassword"
+                                                 Visibility="Collapsed"
+                                                 Tag="{DynamicResource RegEmployee_PbPassword}"
+                                                 Style="{DynamicResource TextBoxStyle}"
+                                                 TextChanged="Password_TextChanged"/>
+                                        <CheckBox x:Name="ShowPasswordCheckBox"
+                                                  Style="{DynamicResource CheckBoxStyle}"
+                                                  Content="{DynamicResource Glb_ShowPassword}"
+                                                  Margin="5,4,0,0"
+                                                  IsChecked="False"
+                                                  Checked="ShowPasswordCheckBox_Checked"
+                                                  Unchecked="ShowPasswordCheckBox_Unchecked"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    
+                </StackPanel>
 
                 <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
                     BorderThickness="0,0.5,0,0">
