@@ -1,176 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
-  <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
-  <xs:element name="AddCustomer">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="customerDTO" nillable="true" type="q1:CustomerDTO" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddCustomerResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="AddCustomerResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsCustomerEmailAvailable">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsCustomerEmailAvailableResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IsCustomerEmailAvailableResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddPersonal">
-    <xs:complexType>
-      <xs:sequence>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddPersonalResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="AddPersonalResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsUsernameAvailable">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsUsernameAvailableResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IsUsernameAvailableResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsRfcUnique">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="rfc" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsRfcUniqueResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IsRfcUniqueResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsEmailAvailable">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsEmailAvailableResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IsEmailAvailableResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllCategories">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllCategoriesResponse">
-    <xs:complexType>
-      <xs:sequence>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSuppliersByCategory">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="categoryId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSuppliersByCategoryResponse">
-    <xs:complexType>
-      <xs:sequence>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSuppliesBySupplier">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="supplierId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSuppliesBySupplierResponse">
-    <xs:complexType>
-      <xs:sequence>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddProduct">
-    <xs:complexType>
-      <xs:sequence>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddProductResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="AddProductResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RegisterTransaction">
-    <xs:complexType>
-      <xs:sequence>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RegisterTransactionResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="RegisterTransactionResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RegisterOrder">
-    <xs:complexType>
-      <xs:sequence>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RegisterOrderResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="RegisterOrderResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Ping">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="PingResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="PingResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfSupplyCategoryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplyCategoryDTO" nillable="true" type="tns:SupplyCategoryDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplyCategoryDTO" nillable="true" type="tns:ArrayOfSupplyCategoryDTO" />
+  <xs:complexType name="SupplyCategoryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplyCategoryDTO" nillable="true" type="tns:SupplyCategoryDTO" />
+  <xs:complexType name="ArrayOfSupplierDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplierDTO" nillable="true" type="tns:SupplierDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplierDTO" nillable="true" type="tns:ArrayOfSupplierDTO" />
+  <xs:complexType name="SupplierDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategorySupply" type="xs:int" />
+      <xs:element minOccurs="0" name="ContactName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplierDTO" nillable="true" type="tns:SupplierDTO" />
+  <xs:complexType name="ArrayOfSupplyDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplyDTO" nillable="true" type="tns:SupplyDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplyDTO" nillable="true" type="tns:ArrayOfSupplyDTO" />
+  <xs:complexType name="SupplyDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Brand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="MeasureUnit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplyCategoryID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplyDTO" nillable="true" type="tns:SupplyDTO" />
+  <xs:complexType name="SupplierOrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfSupplierOrderDTO.OrderItemDTO" />
+      <xs:element minOccurs="0" name="OrderFolio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
+      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplierOrderDTO" nillable="true" type="tns:SupplierOrderDTO" />
+  <xs:complexType name="ArrayOfSupplierOrderDTO.OrderItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:SupplierOrderDTO.OrderItemDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:ArrayOfSupplierOrderDTO.OrderItemDTO" />
+  <xs:complexType name="SupplierOrderDTO.OrderItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SupplyID" type="xs:int" />
+      <xs:element minOccurs="0" name="UnitPrice" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:SupplierOrderDTO.OrderItemDTO" />
+  <xs:complexType name="ArrayOfOrderSummaryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderSummaryDTO" nillable="true" type="tns:OrderSummaryDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderSummaryDTO" nillable="true" type="tns:ArrayOfOrderSummaryDTO" />
+  <xs:complexType name="OrderSummaryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="Products" nillable="true" type="tns:ArrayOfOrderItemSummaryDTO" />
+      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderSummaryDTO" nillable="true" type="tns:OrderSummaryDTO" />
+  <xs:complexType name="ArrayOfOrderItemSummaryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemSummaryDTO" nillable="true" type="tns:OrderItemSummaryDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItemSummaryDTO" nillable="true" type="tns:ArrayOfOrderItemSummaryDTO" />
+  <xs:complexType name="OrderItemSummaryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Product" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItemSummaryDTO" nillable="true" type="tns:OrderItemSummaryDTO" />
 </xs:schema>

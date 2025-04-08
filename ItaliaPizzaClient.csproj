@@ -150,9 +150,6 @@
     <Compile Include="Views\SuppliesModule\SuppliesPage.xaml.cs">
       <DependentUpon>SuppliesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TicketPage.xaml.cs">
-      <DependentUpon>TicketPage.xaml</DependentUpon>
-    </Compile>
     <Page Include="Properties\MergedResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -249,10 +246,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TicketPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -272,6 +265,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -292,6 +291,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\Service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

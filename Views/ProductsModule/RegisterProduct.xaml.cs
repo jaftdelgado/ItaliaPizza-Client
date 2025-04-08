@@ -44,7 +44,7 @@ namespace ItaliaPizzaClient.Views
             var serviceClient = new ItaliaPizzaServices.MainManagerClient();
             var result = serviceClient.AddProduct(product);
             serviceClient.Close();
-            if (result !=0)
+            if (product != null)
             {
                 MessageBox.Show("Producto creado con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
             }

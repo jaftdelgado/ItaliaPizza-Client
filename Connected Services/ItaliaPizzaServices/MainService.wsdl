@@ -35,20 +35,9 @@
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IMainManager_AddCustomer_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddCustomer" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_AddCustomer_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddCustomerResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_IsCustomerEmailAvailable_InputMessage">
-    <wsdl:part name="parameters" element="tns:IsCustomerEmailAvailable" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_IsCustomerEmailAvailable_OutputMessage">
-    <wsdl:part name="parameters" element="tns:IsCustomerEmailAvailableResponse" />
-  </wsdl:message>
   <wsdl:message name="IMainManager_AddPersonal_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPersonal" />
   </wsdl:message>
@@ -72,23 +61,6 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_IsEmailAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsEmailAvailableResponse" />
-  <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllCategories" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetAllCategories_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllCategoriesResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliesBySupplier_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplier" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliesBySupplier_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplierResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCategories" />
@@ -107,6 +79,12 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetSuppliesBySupplier_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSuppliesBySupplierResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSupplies" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSuppliesResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_AddProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:AddProduct" />
@@ -114,17 +92,41 @@
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterTransaction_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterTransaction" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterTransaction_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterTransactionResponse" />
-  </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrder" />
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrderPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderPayment" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrderPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveredOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveredOrders" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveredOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveredOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRecipeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsCustomerEmailAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsCustomerEmailAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsCustomerEmailAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsCustomerEmailAvailableResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
@@ -133,14 +135,6 @@
     <wsdl:part name="parameters" element="tns:PingResponse" />
   </wsdl:message>
   <wsdl:portType name="IMainManager">
-    <wsdl:operation name="AddCustomer">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomer" message="tns:IMainManager_AddCustomer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomerResponse" message="tns:IMainManager_AddCustomer_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="IsCustomerEmailAvailable">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" message="tns:IMainManager_IsCustomerEmailAvailable_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailableResponse" message="tns:IMainManager_IsCustomerEmailAvailable_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="AddPersonal">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonal" message="tns:IMainManager_AddPersonal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonalResponse" message="tns:IMainManager_AddPersonal_OutputMessage" />
@@ -156,17 +150,6 @@
     <wsdl:operation name="IsEmailAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailable" message="tns:IMainManager_IsEmailAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse" message="tns:IMainManager_IsEmailAvailable_OutputMessage" />
-    <wsdl:operation name="GetAllCategories">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse" message="tns:IMainManager_GetAllCategories_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliersByCategory">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliesBySupplier">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse" message="tns:IMainManager_GetSuppliesBySupplier_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
@@ -179,18 +162,38 @@
     <wsdl:operation name="GetSuppliesBySupplier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse" message="tns:IMainManager_GetSuppliesBySupplier_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplies">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSupplies" message="tns:IMainManager_GetAllSupplies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSuppliesResponse" message="tns:IMainManager_GetAllSupplies_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RegisterTransaction">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterTransaction" message="tns:IMainManager_RegisterTransaction_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterTransactionResponse" message="tns:IMainManager_RegisterTransaction_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="RegisterOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrder" message="tns:IMainManager_RegisterOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrderResponse" message="tns:IMainManager_RegisterOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrderPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveredOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse" message="tns:IMainManager_GetDeliveredOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipe" message="tns:IMainManager_RegisterRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipeResponse" message="tns:IMainManager_RegisterRecipe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomer" message="tns:IMainManager_AddCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomerResponse" message="tns:IMainManager_AddCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCustomerEmailAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" message="tns:IMainManager_IsCustomerEmailAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailableResponse" message="tns:IMainManager_IsCustomerEmailAvailable_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
@@ -200,24 +203,6 @@
   <wsdl:binding name="NetTcpBinding_IMainManager" type="tns:IMainManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IMainManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="AddCustomer">
-      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/AddCustomer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="IsCustomerEmailAvailable">
-      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="AddPersonal">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/AddPersonal" style="document" />
       <wsdl:input>
@@ -247,26 +232,6 @@
     </wsdl:operation>
     <wsdl:operation name="IsEmailAvailable">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsEmailAvailable" style="document" />
-    <wsdl:operation name="GetAllCategories">
-      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllCategories" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliersByCategory">
-      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliesBySupplier">
-      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -294,6 +259,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetSuppliesBySupplier">
       <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplies">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllSupplies" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -310,8 +284,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterTransaction">
-      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterTransaction" style="document" />
+    <wsdl:operation name="RegisterOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/RegisterOrder" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -319,8 +293,44 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterOrder">
-      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/RegisterOrder" style="document" />
+    <wsdl:operation name="RegisterOrderPayment">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/RegisterOrderPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveredOrders">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterRecipe">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/RegisterRecipe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/AddCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCustomerEmailAvailable">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -344,7 +354,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
+          <Upn>MATEBOOK-D15\jafet</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

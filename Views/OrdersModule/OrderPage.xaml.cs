@@ -34,41 +34,8 @@ namespace ItaliaPizzaClient.Views
 
         private void Btn_OrderPay(object sender, RoutedEventArgs e)
         {
-            // 1. Crear la vista del ticket
-            TicketPage ticketPage = new TicketPage();
-            ticketPage.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            ticketPage.Arrange(new Rect(ticketPage.DesiredSize));
 
-            // 2. Renderizar la vista en un Visual
-            RenderTargetBitmap bitmap = new RenderTargetBitmap((int)ticketPage.ActualWidth, (int)ticketPage.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            bitmap.Render(ticketPage);
-
-            // 3. Guardar la imagen en memoria
-            PngBitmapEncoder encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bitmap));
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                encoder.Save(memoryStream);
-                byte[] imageBytes = memoryStream.ToArray();
-
-                // 4. Crear el documento PDF
-                using (FileStream fs = new FileStream("Ticket.pdf", FileMode.Create, FileAccess.Write, FileShare.None))
-                {
-                    Document doc = new Document();
-                    PdfWriter writer = PdfWriter.GetInstance(doc, fs);
-                    doc.Open();
-
-                    // 5. Convertir la imagen a iTextSharp
-                    iTextSharp.text.Image pdfImage = iTextSharp.text.Image.GetInstance(imageBytes);
-                    pdfImage.ScaleToFit(500, 800); // Ajustar tamaño de la imagen en el PDF
-                    doc.Add(pdfImage);
-
-                    doc.Close();
-                }
-            }
-
-            MessageBox.Show("Ticket exportado como PDF.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            
         }
     }
 }
