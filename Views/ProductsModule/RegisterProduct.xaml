@@ -84,6 +84,7 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.6*"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -123,12 +124,18 @@
                                   Style="{DynamicResource CheckBoxStyle}"
                                   Name="CbPrepared"
                                   />
-                        <Grid Grid.Row="3" >
+                        <Button Grid.Row="3" x:Name="addRecipe" Content="{DynamicResource Recipes_BtnNewRecipe}"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="150"
+                                Click="Click_BtnAddRecipe">
+                            <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                        </Button>
+                        <Grid Grid.Row="4" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="txt_description" Grid.Column="0"  Margin="7"  Style="{StaticResource TextBoxStyle}" 
+                            <TextBox x:Name="txt_description" Grid.Column="0"  Margin="7"  Style="{StaticResource TextAreaStyle}" 
                                  Tag="{DynamicResource RegProduct_Description}"
                                  />
 

@@ -1,5 +1,7 @@
 ﻿using ItaliaPizzaClient.ItaliaPizzaServices;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.Dialogs;
+using ItaliaPizzaClient.Views.RecipesModule;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -46,11 +48,11 @@ namespace ItaliaPizzaClient.Views
             serviceClient.Close();
             if (result !=0)
             {
-                MessageBox.Show("Producto creado con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageDialog.Show("Producto creado con éxito", "El producto ha sido creado correctamente.", AlertType.SUCCESS);
             }
             else
             {
-                MessageBox.Show("Error al crear el producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.Show("Error al crear el producto", "El producto no ha podido ser creado.", AlertType.ERROR);
             }
         }
         //Validar entradas campos vacios
@@ -58,7 +60,7 @@ namespace ItaliaPizzaClient.Views
         {
             if (_selectedImageBytes == null || _selectedImageBytes.Length == 0 || string.IsNullOrEmpty(txt_name.Text) || string.IsNullOrEmpty(txt_description.Text) || string.IsNullOrEmpty(txt_price.Text))
             {
-                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageDialog.Show("Error", "Por favor, complete todos los campos.", AlertType.WARNING);
                 return false;
             }else 
                 return true;
@@ -108,6 +110,15 @@ namespace ItaliaPizzaClient.Views
         private void LostFocus_TbUnitPrice(object sender, RoutedEventArgs e)
         {
             InputUtilities.FormatMonetaryValue(sender, e);
+        }
+
+        private void Click_BtnAddRecipe(object sender, RoutedEventArgs e)
+        {
+            //abrir page RecipeRegister
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
+            if (mainWindow != null)
+                mainWindow.NavigateToPage("RegProduct_Header", new RecipeRegister());
         }
     }
 }

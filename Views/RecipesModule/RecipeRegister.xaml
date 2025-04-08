@@ -1,0 +1,111 @@
+﻿<Page x:Class="ItaliaPizzaClient.Views.RecipesModule.RecipeRegister"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ItaliaPizzaClient.Views.RecipesModule"
+      xmlns:utils="clr-namespace:ItaliaPizzaClient.Utilities"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RecipeRegister">
+    <Page.Resources>
+        <utils:StringToDoubleConverter x:Key="StringToDoubleConverter"/>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68"/>
+            <!--Cabecera-->
+            <RowDefinition Height="*"/>
+            <!--Contenido Principal-->
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderThickness="0,0,0,0.5" BorderBrush="{StaticResource SecondaryBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                               Text="{DynamicResource RegRecipe_Header}"/>
+                    <TextBlock Style="{StaticResource DescriptionLabelStyle}"
+                               Text="{DynamicResource RegProduct_Desc}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Margin="20,0,0,10" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0.5,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Style="{DynamicResource SubtitleLabelStyle}"
+                               Text="Receta del producto: xxx"/>
+                    <TextBox Grid.Row="1" Style="{DynamicResource TextAreaStyle}" Height="auto" Margin="0,0,10,0" Tag="Descripción de receta"/>
+                    <TextBox Grid.Row="2" Style="{DynamicResource TextBoxStyle}" Width="190" Tag="Tiempo de preparación"/>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
+                        <Button x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                                Content="{DynamicResource Glb_Cancel}"
+                                Margin="0,0,10,0">
+                            <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                        </Button>
+
+                        <Button x:Name="BtnNewRecipe" Style="{DynamicResource PrimaryButtonStyle}"
+                                Content="{DynamicResource RegRecipe_Header}" Click="BtnNewRecipe_Click">
+                            <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
+                    <TextBlock Text="{DynamicResource RegRecipe_TbSupplyList}"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
+                </StackPanel>
+                <Border Grid.Row="1" Padding="8">
+                    <DataGrid ItemsSource="{Binding suppliesList}" RowStyle="{DynamicResource DataGridRowStyle1}" 
+                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                         CellStyle="{DynamicResource DataGridCellStyle1}" 
+                         x:Name="suppliesDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False" SelectionChanged="suppliesDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+
+                            <!-- Nombre de Insumo -->
+                            <DataGridTextColumn Header="Nombre del insumo" Binding="{Binding Supply.Name}" IsReadOnly="True" Width="*"/>
+
+                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity, Converter={StaticResource StringToDoubleConverter}}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                                <DataGridTextColumn.EditingElementStyle>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                        <EventSetter Event="PreviewTextInput" Handler="NumberValidationTextBox"/>
+                                    </Style>
+                                </DataGridTextColumn.EditingElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Unidad" Binding="{Binding Supply.MeasureUnit}" IsReadOnly="True" Width="0.6*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+                <Button Grid.Row="2" Width="150" Content="Agregar insumo" Style="{DynamicResource PrimaryButtonStyle}" Click="Click_BtnAddSupply"/>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
