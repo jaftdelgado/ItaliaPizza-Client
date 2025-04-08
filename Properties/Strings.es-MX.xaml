@@ -24,6 +24,11 @@
     <sys:String x:Key="Glb_Quantity">Cantidad</sys:String>
     <sys:String x:Key="Glb_SupplyOrders">Ordenes de Compra</sys:String>
     <sys:String x:Key="Glb_Reports">Reportes</sys:String>
+    <sys:String x:Key="Glb_PhoneNumber">Número de Teléfono:</sys:String>
+    <sys:String x:Key="Glb_EmailAddress">Correo Electrónico:</sys:String>
+    <sys:String x:Key="Glb_AddressName">Dirección:</sys:String>
+    <sys:String x:Key="Glb_ZipCode">Código Postal:</sys:String>
+    <sys:String x:Key="Glb_City">Ciudad:</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
@@ -71,14 +76,18 @@
     <sys:String x:Key="RegEmployee_Header">Registrar Empleado</sys:String>
     <sys:String x:Key="RegEmployee_Desc">Ingresa los datos del empleado que se desea registrar.</sys:String>
     <sys:String x:Key="RegEmployee_EmployeeInfo">Información del Empleado</sys:String>
+    <sys:String x:Key="RegEmployee_PersonalInfo">Datos personales</sys:String>
+    <sys:String x:Key="RegEmployee_AddressPersonal">Dirección del Empleado</sys:String>
+    <sys:String x:Key="RegEmployee_WorkInfo">Datos Laborales</sys:String>
+    <sys:String x:Key="RegEmployee_AccessInfo">Datos de Acceso</sys:String>
     <sys:String x:Key="RegEmployee_TbEmployeeName">Nombre(s) del empleado:</sys:String>
+    <sys:String x:Key="RegEmployee_TbLastName">Apellidos del empleado:</sys:String>
     <sys:String x:Key="RegEmployee_TbFatherName">Apellido Paterno:</sys:String>
     <sys:String x:Key="RegEmployee_TbMotherName">Apellido Materno:</sys:String>
     <sys:String x:Key="RegEmployee_TbRfc">RFC:</sys:String>
     <sys:String x:Key="RegEmployee_CbEmployeeRole">Puesto del empleado:</sys:String>
     <sys:String x:Key="RegEmployee_TbUsername">Nombre de usuario:</sys:String>
     <sys:String x:Key="RegEmployee_PbPassword">Contraseña:</sys:String>
-    <sys:String x:Key="RegEmployee_InfoAccounts">Todos los puestos, excepto repartidor, requieren una cuenta de acceso al sistema para gestionar las funciones asignadas.</sys:String>
     <sys:String x:Key="RegEmployee_BtnRegisterEmployee">Registrar Empleado</sys:String>
     <sys:String x:Key="RegEmployee_DialogTSuccess">Empleado registrado</sys:String>
     <sys:String x:Key="RegEmployee_DialogDSuccess">La información del empleado ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
@@ -88,6 +97,8 @@
     <sys:String x:Key="RegEmployee_DialogDRfcDuplicate">El RFC del empleado ya está se encuentrado registrado en el sistema. Verifica los datos e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogTUserDuplicate">Usuario no disponible</sys:String>
     <sys:String x:Key="RegEmployee_DialogDUserDuplicate">El nombre de usuario ingresado ya se encuentra en uso. Por favor, selecciona uno diferente e inténtalo nuevamente.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogTEmailDuplicate">Correo Electrónico duplicado</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDEmailDuplicate">La dirección de correo ingresada ya se encuentra en uso. Por favor, ingresa una diferente e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil</sys:String>
 
     <!--Supplies-->
@@ -115,11 +126,15 @@
     <!--Register customer-->
     <sys:String x:Key="RegCustomer_Header"> Registrar cliente </sys:String>
     <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente a registrar </sys:String>
+    <sys:String x:Key="RegCustomer_PersonalData">Datos personales:</sys:String>
     <sys:String x:Key="RegCustomer_Name"> Nombre(s) </sys:String>
     <sys:String x:Key="RegCustomer_LastName"> Apellido(s)</sys:String>
     <sys:String x:Key="RegCustomer_PhoneNumber"> Telefono</sys:String>
-    <sys:String x:Key="RegCustomer_Address"> Direccion </sys:String>
-    
+    <sys:String x:Key="RegCustomer_AddressData">Datos de la direccion:</sys:String>
+    <sys:String x:Key="RegCustomer_AddressName"> Calle </sys:String>
+    <sys:String x:Key="RegCustomer_AddressZipCode"> Codigo postal </sys:String>
+    <sys:String x:Key="RegCustomer_AddressDistrict"> Colonia </sys:String>
+
     <!-- Register supplier-->
     <sys:String x:Key="RegSupplier_Header">Registrar proveedor</sys:String>
     <sys:String x:Key="RegSupplier_Name">Nombre del proveedor</sys:String>
@@ -163,6 +178,8 @@
     <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
     <sys:String x:Key="RegOrderSupplier_Info">Informacion de la Orden.</sys:String>
     <sys:String x:Key="OrderSupplier_BtnNewOrden">Tramitar Orden</sys:String>
+    <sys:String x:Key="OrderSupplier_BtnDeleteSupply">Eliminar insumo</sys:String>
+    <sys:String x:Key="OrderSupplier_BtnAddSupply">Añadir insumo</sys:String>
     <sys:String x:Key="OrderSupplier_BtnCancelar">Cancelar Orden</sys:String>
     
     <!--Recipes-->

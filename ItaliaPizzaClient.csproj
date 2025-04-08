@@ -86,7 +86,8 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Model\EmployeeRole.cs" />
-    <Compile Include="Model\RecipeSupplyItem.cs" />
+    <Compile Include="Model\RecipeSupplyItem.cs"/>
+    <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\UnitMeasure.cs" />
     <Compile Include="Utilities\Animations.cs" />
@@ -158,9 +159,6 @@
     </Compile>
     <Compile Include="Views\SuppliesModule\SuppliesPage.xaml.cs">
       <DependentUpon>SuppliesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SupplierOrdersModule\TicketPage.xaml.cs">
-      <DependentUpon>TicketPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Properties\MergedResources.xaml">
       <SubType>Designer</SubType>
@@ -266,7 +264,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SupplierOrdersModule\TicketPage.xaml">
+    <Page Include="Views\TicketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,7 +287,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO.datasource">
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">
@@ -314,7 +312,10 @@
     <None Include="Connected Services\ItaliaPizzaServices\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ItaliaPizzaServices\Service4.xsd">
+    <None Include="Connected Services\ItaliaPizzaServices\Service31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -327,8 +328,8 @@
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-HEAVY.OTF" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-LIGHT.OTF" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-MEDIUM.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-REGULAR.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-SEMIBOLD.OTF" />
+    <Resource Include="Resources\Fonts\SFProDisplay-Regular.otf" />
+    <Resource Include="Resources\Fonts\SFProDisplay-Semibold.otf" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-THIN.OTF" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-ULTRALIGHT.OTF" />
   </ItemGroup>
