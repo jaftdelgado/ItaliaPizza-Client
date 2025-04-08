@@ -181,6 +181,10 @@
     <sys:String x:Key="OrderSupplier_BtnDeleteSupply">Eliminar insumo</sys:String>
     <sys:String x:Key="OrderSupplier_BtnAddSupply">Añadir insumo</sys:String>
     <sys:String x:Key="OrderSupplier_BtnCancelar">Cancelar Orden</sys:String>
+   
+    <!--Order-->
+    <sys:String x:Key="OrderPage_BtnAddOrder">Añadir Orden</sys:String>
+    <sys:String x:Key="OrderPage_BtnPayOrder">Pagar Orden</sys:String>
     
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>
@@ -198,5 +202,4 @@
     <sys:String x:Key="RegRecipe_TbRecipeName">Nombre de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbRecipeDescription">Descripción de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbSupplyList">Lista de insumos</sys:String>
-
 </ResourceDictionary>

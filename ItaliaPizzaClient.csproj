@@ -287,7 +287,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO1.datasource">
+
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">

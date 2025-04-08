@@ -98,24 +98,38 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RegisterTransaction">
+  <xs:element name="RegisterIncome">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="transaction" nillable="true" type="q6:TransactionDTO" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="transaction" nillable="true" type="q6:TransactionDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RegisterTransactionResponse">
+  <xs:element name="RegisterIncomeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="RegisterTransactionResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RegisterIncomeResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterExpense">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="transaction" nillable="true" type="q7:TransactionDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterExpenseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegisterExpenseResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterOrder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="order" nillable="true" type="q7:SupplierOrderDTO" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="order" nillable="true" type="q8:SupplierOrderDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -123,6 +137,32 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="RegisterOrderResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterOrderPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="dto" nillable="true" type="q9:OrderDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterOrderPaymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegisterOrderPaymentResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDeliveredOrders">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDeliveredOrdersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetDeliveredOrdersResult" nillable="true" type="q10:ArrayOfOrderSummaryDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

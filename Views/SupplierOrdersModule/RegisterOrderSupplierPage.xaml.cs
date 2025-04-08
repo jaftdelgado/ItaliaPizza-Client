@@ -20,8 +20,14 @@ namespace ItaliaPizzaClient.Views
         public RegisterOrderSupplierPage()
         {
             InitializeComponent();
+            btnAddSupply.IsEnabled = false;
+            txtQuantity.TextChanged += (s, e) => CheckAddSupplyButtonState();
             LoadCategories();
             InputUtilities.ValidateDecimalInput(txtQuantity);
+
+            cbSuppliersName.IsEnabled = false;
+            cbSuppliesName.IsEnabled = false;
+            txtQuantity.IsEnabled = false;
         }
 
         private void LoadCategories()
@@ -43,6 +49,17 @@ namespace ItaliaPizzaClient.Views
         private void cbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ClearOrderIfNeeded();
+            ClearOrderIfNeeded();
+            cbSuppliersName.IsEnabled = false;
+            cbSuppliesName.Items.Clear();
+            cbSuppliesName.SelectedIndex = -1;
+
+            cbSuppliesName.IsEnabled = false;
+            cbSuppliesName.Items.Clear();
+            cbSuppliesName.SelectedIndex = -1;
+
+            txtQuantity.IsEnabled = false;
+
             if (cbSuppliersCategories.SelectedItem is ComboBoxItem selectedItem &&
                 selectedItem.Tag is SupplyCategoryDTO selectedCategory)
             {
@@ -60,32 +77,44 @@ namespace ItaliaPizzaClient.Views
                     });
                 }
 
-                cbSuppliesName.Items.Clear();
+                cbSuppliersName.IsEnabled = true;
             }
         }
 
         private void cbSuppliers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ClearOrderIfNeeded();
+            cbSuppliesName.IsEnabled = false;
+            cbSuppliesName.Items.Clear();
+            cbSuppliesName.SelectedIndex = -1;
+            txtQuantity.IsEnabled = false;
+
             if (cbSuppliersName.SelectedItem is ComboBoxItem selectedItem &&
                 selectedItem.Tag is SupplierDTO selectedSupplier)
             {
                 int supplierId = selectedSupplier.Id;
 
                 var supplies = client.GetSuppliesBySupplier(supplierId);
+
                 cbSuppliesName.Items.Clear();
 
                 foreach (var supply in supplies)
                 {
-                    cbSuppliesName.Items.Add(new ComboBoxItem
+                    bool alreadyAdded = orderItems.Any(o => o.SupplyName == supply.Name);
+                    if (!alreadyAdded)
                     {
-                        Content = supply.Name,
-                        Tag = supply
-                    });
+                        cbSuppliesName.Items.Add(new ComboBoxItem
+                        {
+                            Content = supply.Name,
+                            Tag = supply
+                        });
+                    }
                 }
             }
-            txtQuantity.IsEnabled = false;
+            cbSuppliesName.IsEnabled = true;
+            CheckAddSupplyButtonState();
         }
+
         private void cbSuppliesName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbSuppliesName.SelectedItem is ComboBoxItem selectedItem &&
@@ -99,10 +128,11 @@ namespace ItaliaPizzaClient.Views
 
         private void AddSupplyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (cbSuppliesName.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is SupplyDTO selectedSupply && decimal.TryParse(txtQuantity.Text, out decimal quantity) && quantity > 0)
+            if (cbSuppliesName.SelectedItem is ComboBoxItem selectedItem &&
+                selectedItem.Tag is SupplyDTO selectedSupply &&
+                decimal.TryParse(txtQuantity.Text, out decimal quantity) &&
+                quantity > 0)
             {
-
-                // Agrega el nuevo insumo
                 orderItems.Add(new OrderItem
                 {
                     SupplyName = selectedSupply.Name,
@@ -115,12 +145,27 @@ namespace ItaliaPizzaClient.Views
 
                 txtQuantity.Clear();
                 cbSuppliesName.SelectedIndex = -1;
+
+                int supplierId = selectedSupply.Id;
+                var supplies = client.GetSuppliesBySupplier(supplierId);
+
+                cbSuppliesName.Items.Clear();
+                foreach (var supply in supplies)
+                {
+                    if (!orderItems.Any(o => o.SupplyName == supply.Name))
+                    {
+                        cbSuppliesName.Items.Add(new ComboBoxItem
+                        {
+                            Content = supply.Name,
+                            Tag = supply
+                        });
+                    }
+                }
+                txtQuantity.IsEnabled = false;
             }
-            else
-            {
-                MessageDialog.Show("Error", "Selecciona un insumo y escribe una cantidad válida.", AlertType.WARNING);
-            }
+            btnAddSupply.IsEnabled = false;
         }
+
 
         private void DeleteSelectedSupply_Click(object sender, RoutedEventArgs e)
         {
@@ -129,6 +174,8 @@ namespace ItaliaPizzaClient.Views
                 orderItems.Remove(selectedItem);
                 OrdersuppliersDataGrid.ItemsSource = null;
                 OrdersuppliersDataGrid.ItemsSource = orderItems;
+
+                RefreshSuppliesComboBox();
             }
             else
             {
@@ -203,6 +250,39 @@ namespace ItaliaPizzaClient.Views
             {
                 MessageDialog.Show("Validación", "Debes seleccionar un proveedor y añadir al menos un insumo.", AlertType.WARNING);
             }
+        }
+        private void RefreshSuppliesComboBox()
+        {
+            if (cbSuppliersName.SelectedItem is ComboBoxItem selectedItem &&
+                selectedItem.Tag is SupplierDTO selectedSupplier)
+            {
+                var supplies = client.GetSuppliesBySupplier(selectedSupplier.Id);
+
+                cbSuppliesName.Items.Clear();
+
+                foreach (var supply in supplies)
+                {
+                    bool alreadyAdded = orderItems.Any(o => o.SupplyName == supply.Name);
+                    if (!alreadyAdded)
+                    {
+                        cbSuppliesName.Items.Add(new ComboBoxItem
+                        {
+                            Content = supply.Name,
+                            Tag = supply
+                        });
+                    }
+                }
+
+                cbSuppliesName.SelectedIndex = -1;
+                txtQuantity.IsEnabled = false;
+            }
+        }
+        private void CheckAddSupplyButtonState()
+        {
+            bool isSupplySelected = cbSuppliesName.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is SupplyDTO;
+            bool isQuantityValid = decimal.TryParse(txtQuantity.Text, out decimal quantity) && quantity > 0;
+
+            btnAddSupply.IsEnabled = isSupplySelected && isQuantityValid;
         }
     }
 }
