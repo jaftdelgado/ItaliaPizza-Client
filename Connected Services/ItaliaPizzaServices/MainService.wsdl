@@ -72,6 +72,23 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_IsEmailAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsEmailAvailableResponse" />
+  <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCategories" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesBySupplier_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplier" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesBySupplier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplierResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCategories" />
@@ -139,6 +156,17 @@
     <wsdl:operation name="IsEmailAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailable" message="tns:IMainManager_IsEmailAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse" message="tns:IMainManager_IsEmailAvailable_OutputMessage" />
+    <wsdl:operation name="GetAllCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse" message="tns:IMainManager_GetAllCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesBySupplier">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse" message="tns:IMainManager_GetSuppliesBySupplier_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
@@ -219,6 +247,26 @@
     </wsdl:operation>
     <wsdl:operation name="IsEmailAvailable">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsEmailAvailable" style="document" />
+    <wsdl:operation name="GetAllCategories">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesBySupplier">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -296,7 +344,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MATEBOOK-D15\jafet</Upn>
+          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

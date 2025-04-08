@@ -97,5 +97,19 @@ namespace ItaliaPizzaClient.Utilities
             return Regex.IsMatch(email, Constants.EMAIL_FORMAT_PATTERN);
         }
 
+
+        public static void ValidateDecimalInput(TextBox textBox)
+        {
+            const int maxDigitsBeforeDot = 4;
+            const int maxDecimals = 3;
+
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                string currentText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
+                string pattern = $@"^(\d{{0,{maxDigitsBeforeDot}}})(\.\d{{0,{maxDecimals}}})?$";
+                e.Handled = !Regex.IsMatch(currentText, pattern);
+            };
+            
+        }
     }
 }
