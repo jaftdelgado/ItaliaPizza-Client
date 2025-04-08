@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItaliaPizzaClient.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,12 +38,16 @@ namespace ItaliaPizzaClient.Views
 
         private void RegSupplyBtn(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
+            if (mainWindow != null)
+                mainWindow.NavigateToPage("RegSupply_Header", new RegisterSupplyPage());
         }
 
         private void BtnCancelRegister(object sender, RoutedEventArgs e)
         {
-
+            var client = ConnectionUtilities.IsServerConnected();
+            if (client == null) return;
         }
     }
 }

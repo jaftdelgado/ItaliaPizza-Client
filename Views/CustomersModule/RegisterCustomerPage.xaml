@@ -36,24 +36,24 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Grid.Column="0">
                 <TextBlock Text="{DynamicResource RegCustomer_PersonalData}" Style="{StaticResource RegularLabelStyle}"/>
                 
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_Name}" Width="200" Margin="0, 10"/>
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_LastName}" Width="200" Margin="0, 10"/>
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_PhoneNumber}" Width="200" Margin="0, 10"/>
+                <TextBox x:Name="TbCustomerName" Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_Name}" Width="200" Margin="0, 10"/>
+                <TextBox x:Name="TbCustomerLastName" Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_LastName}" Width="200" Margin="0, 10"/>
+                <TextBox x:Name="TbCustomerPhone" Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_PhoneNumber}" Width="200" Margin="0, 10"/>
             
             </StackPanel>
 
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Grid.Column="1">
                 <TextBlock Text="{DynamicResource RegCustomer_AddressData}" Style="{StaticResource RegularLabelStyle}"/>
 
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_AddressName}" Width="200" Margin="0, 10"/>
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_AddressZipCode}" Width="200" Margin="0, 10"/>
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_AddressDistrict}" Width="200" Margin="0, 10"/>
+                <TextBox x:Name="TbAddressName" Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_AddressName}" Width="200" Margin="0, 10"/>
+                <TextBox x:Name="TbZipcode" Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_AddressZipCode}" Width="200" Margin="0, 10"/>
+                <TextBox x:Name="TbDistrict" Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegCustomer_AddressDistrict}" Width="200" Margin="0, 10"/>
 
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1">
-                <Button Style="{DynamicResource SecondaryButtonStyle}" Content="{DynamicResource Glb_BtnCancel}" Click="BtnCancelRegister"/>
-                <Button Style="{DynamicResource PrimaryButtonStyle}" Content="{DynamicResource Glb_BtnSave}" Click="BtnSaveCustomer" Margin="25"/>
+                <Button  Style="{DynamicResource SecondaryButtonStyle}" Content="{DynamicResource Glb_Cancel}" Click="BtnCancelRegister"/>
+                <Button Style="{DynamicResource PrimaryButtonStyle}" Content="{DynamicResource Glb_Accept}" Click="BtnSaveCustomer" Margin="25"/>
             </StackPanel>
             
         </Grid>

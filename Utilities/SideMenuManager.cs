@@ -140,7 +140,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 7,
                     AllowedRoles = new List<string> { "Admin", "Manager", "Cashier" },
                     IconPath = "/Resources/Icons/suppliers-icon.png",
-                    HoverIconPath = "/Resources/Icons/suppliers-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/suppliers-hover-icon.png",
+                    PageInstance = new RegisterSupplierPage()
                 },
                 new MenuButton
                 {
@@ -156,7 +157,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 10,
                     AllowedRoles = new List<string> { "Cashier" },
                     IconPath = "/Resources/Icons/clients-icon.png",
-                    HoverIconPath = "/Resources/Icons/clients-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/clients-hover-icon.png",
+                    PageInstance = new RegisterCustomerPage()
                 },
                 new MenuButton
                 {

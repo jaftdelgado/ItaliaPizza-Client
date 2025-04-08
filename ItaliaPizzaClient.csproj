@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
-      <HintPath>packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+      <HintPath>packages\BouncyCastle.Cryptography.2.5.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
@@ -78,7 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\ItaliasPizzaServices\Reference.cs">
+    <Compile Include="Connected Services\ItaliaPizzaServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -264,14 +264,26 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ItaliasPizzaServices\MainService.wsdl" />
-    <None Include="Connected Services\ItaliasPizzaServices\Service.xsd">
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\MainService.wsdl" />
+    <None Include="Connected Services\ItaliaPizzaServices\Service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ItaliasPizzaServices\Service1.xsd">
+    <None Include="Connected Services\ItaliaPizzaServices\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ItaliasPizzaServices\Service2.xsd">
+    <None Include="Connected Services\ItaliaPizzaServices\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -336,25 +348,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ItaliasPizzaServices\" />
-    <WCFMetadataStorage Include="Connected Services\SupplyServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\Service.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SupplyServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\gallery-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -370,7 +363,6 @@
     <Resource Include="Resources\Icons\redirect-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ItaliasPizzaServices\Service.disco" />
     <Resource Include="Resources\Icons\error-alert-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -386,13 +378,13 @@
     <None Include="Connected Services\ItaliaPizzaServices\Service.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ItaliasPizzaServices\configuration91.svcinfo" />
+    <None Include="Connected Services\ItaliaPizzaServices\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ItaliasPizzaServices\configuration.svcinfo" />
+    <None Include="Connected Services\ItaliaPizzaServices\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ItaliasPizzaServices\Reference.svcmap">
+    <None Include="Connected Services\ItaliaPizzaServices\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
