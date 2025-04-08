@@ -82,12 +82,21 @@ namespace ItaliaPizzaClient.Utilities
                 textBox.SelectionStart = textBox.Text.Length;
             };
         }
+        
+        public static void ConvertToLowerCase(TextBox textBox)
+        {
+            textBox.TextChanged += (s, e) =>
+            {
+                textBox.Text = textBox.Text.ToLower();
+                textBox.SelectionStart = textBox.Text.Length;
+            };
+        }
+
         public static void ValidateDecimalInput(TextBox textBox)
         {
             const int maxDigitsBeforeDot = 4;
             const int maxDecimals = 3;
 
-            // Validar mientras se escribe
             textBox.PreviewTextInput += (sender, e) =>
             {
                 string currentText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
@@ -95,7 +104,6 @@ namespace ItaliaPizzaClient.Utilities
                 e.Handled = !Regex.IsMatch(currentText, pattern);
             };
 
-            // Validar al pegar texto
             DataObject.AddPastingHandler(textBox, (sender, e) =>
             {
                 if (e.DataObject.GetDataPresent(DataFormats.Text))
@@ -112,7 +120,5 @@ namespace ItaliaPizzaClient.Utilities
                 }
             });
         }
-
-
     }
 }

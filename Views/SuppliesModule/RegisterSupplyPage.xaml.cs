@@ -20,8 +20,15 @@ namespace ItaliaPizzaClient.Views
         {
             InitializeComponent();
             SetCategoriesComboBox();
+            SetInputFields();
 
-            this.KeepAlive = true;
+            KeepAlive = true;
+        }
+
+        private void SetInputFields()
+        {
+            InputUtilities.ValidateInput(TbSupplyName, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES);
+            InputUtilities.ValidateInput(TbSupplyBrand, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES);
         }
 
         private void Click_BtnSelectImage(object sender, RoutedEventArgs e)

@@ -23,7 +23,13 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FatherNameField;
+        private ItaliaPizzaClient.ItaliaPizzaServices.AddressDTO AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AddressIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailAddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
@@ -35,13 +41,16 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private bool IsActiveField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MotherNameField;
+        private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PersonalIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] ProfilePicField;
@@ -66,14 +75,40 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FatherName {
+        public ItaliaPizzaClient.ItaliaPizzaServices.AddressDTO Address {
             get {
-                return this.FatherNameField;
+                return this.AddressField;
             }
             set {
-                if ((object.ReferenceEquals(this.FatherNameField, value) != true)) {
-                    this.FatherNameField = value;
-                    this.RaisePropertyChanged("FatherName");
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AddressID {
+            get {
+                return this.AddressIDField;
+            }
+            set {
+                if ((this.AddressIDField.Equals(value) != true)) {
+                    this.AddressIDField = value;
+                    this.RaisePropertyChanged("AddressID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmailAddress {
+            get {
+                return this.EmailAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailAddressField, value) != true)) {
+                    this.EmailAddressField = value;
+                    this.RaisePropertyChanged("EmailAddress");
                 }
             }
         }
@@ -118,14 +153,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MotherName {
+        public string LastName {
             get {
-                return this.MotherNameField;
+                return this.LastNameField;
             }
             set {
-                if ((object.ReferenceEquals(this.MotherNameField, value) != true)) {
-                    this.MotherNameField = value;
-                    this.RaisePropertyChanged("MotherName");
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
                 }
             }
         }
@@ -152,6 +187,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.PersonalIDField.Equals(value) != true)) {
                     this.PersonalIDField = value;
                     this.RaisePropertyChanged("PersonalID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
                 }
             }
         }
@@ -220,14 +268,25 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddressDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
+    [System.SerializableAttribute()]
+    public partial class AddressDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+
     [System.Runtime.Serialization.DataContractAttribute(Name="SupplyCategoryDTO", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
     public partial class SupplyCategoryDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+   
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+
+        private string AddressNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityField;
+
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -293,9 +352,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ContactNameField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ZipCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
@@ -311,6 +373,28 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AddressName {
+            get {
+                return this.AddressNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressNameField, value) != true)) {
+                    this.AddressNameField = value;
+                    this.RaisePropertyChanged("AddressName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                    
         public int CategorySupply {
             get {
                 return this.CategorySupplyField;
@@ -439,6 +523,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZipCode {
+            get {
+                return this.ZipCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ZipCodeField, value) != true)) {
+                    this.ZipCodeField = value;
+                    this.RaisePropertyChanged("ZipCode");
         public string MeasureUnit {
             get {
                 return this.MeasureUnitField;
@@ -1050,6 +1142,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsRfcUnique", ReplyAction="http://tempuri.org/IPersonalManager/IsRfcUniqueResponse")]
         System.Threading.Tasks.Task<bool> IsRfcUniqueAsync(string rfc);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsEmailAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse")]
+        bool IsEmailAvailable(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsEmailAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse")]
+        System.Threading.Tasks.Task<bool> IsEmailAvailableAsync(string email);
+
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetAllCategories", ReplyAction="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[] GetAllCategories();
         
@@ -1143,7 +1241,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         public System.Threading.Tasks.Task<bool> IsRfcUniqueAsync(string rfc) {
             return base.Channel.IsRfcUniqueAsync(rfc);
         }
+
+        public bool IsEmailAvailable(string email) {
+            return base.Channel.IsEmailAvailable(email);
+        }
         
+        public System.Threading.Tasks.Task<bool> IsEmailAvailableAsync(string email) {
+            return base.Channel.IsEmailAvailableAsync(email);
+
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[] GetAllCategories() {
             return base.Channel.GetAllCategories();
         }
