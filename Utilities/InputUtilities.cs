@@ -91,6 +91,11 @@ namespace ItaliaPizzaClient.Utilities
                 textBox.SelectionStart = textBox.Text.Length;
             };
         }
-        
+
+        public static bool IsValidEmailFormat(string email)
+        {
+            return Regex.IsMatch(email, Constants.EMAIL_FORMAT_PATTERN);
+        }
+
     }
 }

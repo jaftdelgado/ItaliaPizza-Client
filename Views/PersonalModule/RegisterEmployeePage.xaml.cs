@@ -161,7 +161,6 @@ namespace ItaliaPizzaClient.Views
             var client = ConnectionUtilities.IsServerConnected();
             if (client == null) return;
 
-            // Obtener los datos de la imagen de perfil utilizando el nuevo método
             byte[] profilePicData = GetProfilePicData();
 
             var personalDto = new PersonalDTO
@@ -218,7 +217,7 @@ namespace ItaliaPizzaClient.Views
 
             bool isEmailAvailable = service.IsEmailAvailable(email);
             if (!isEmailAvailable)
-                MessageDialog.Show("RegEmployee_DialogTEmailDuplicate", "RegEmployee_DialogDEmailDuplicate", AlertType.WARNING);
+                MessageDialog.Show("GlbDialogD_EmailDuplicate", "GlbDialogD_EmailDuplicate", AlertType.WARNING);
 
             return isEmailAvailable;
         }

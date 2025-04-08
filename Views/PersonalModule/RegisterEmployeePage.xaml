@@ -119,23 +119,27 @@
                                      Tag="{DynamicResource RegEmployee_TbEmployeeName}" 
                                      Style="{DynamicResource TextBoxStyle}"
                                      HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                     Margin="0,0,10,10"/>
+                                     Margin="0,0,10,10"
+                                     TextChanged="RequiredFields_TextChanged"/>
                             <TextBox x:Name="TbLastName" 
                                      Grid.Column="1" Grid.Row="0"
                                      Tag="{DynamicResource RegEmployee_TbLastName}" 
                                      Style="{DynamicResource TextBoxStyle}"
                                      HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                     Margin="10,0,0,10"/>
+                                     Margin="10,0,0,10"
+                                     TextChanged="RequiredFields_TextChanged"/>
                             <TextBox x:Name="TbPhoneNumber"
                                      Grid.Column="0" Grid.Row="1"
                                      Tag="{DynamicResource Glb_PhoneNumber}"
                                      Style="{DynamicResource TextBoxStyle}"
-                                     Margin="0,0,10,0"/>
+                                     Margin="0,0,10,0"
+                                     TextChanged="RequiredFields_TextChanged"/>
                             <TextBox x:Name="TbEmailAddress" 
                                      Grid.Column="1" Grid.Row="1"
                                      Tag="{DynamicResource Glb_EmailAddress}"
                                      Style="{DynamicResource TextBoxStyle}"
-                                     Margin="10,0,0,0"/>
+                                     Margin="10,0,0,0"
+                                     TextChanged="RequiredFields_TextChanged"/>
                         </Grid>
                     </Grid>
 
@@ -159,17 +163,20 @@
                                      Grid.Column="0"
                                      Tag="{DynamicResource Glb_AddressName}"
                                      Style="{DynamicResource TextBoxStyle}"
-                                     Margin="0,0,10,0"/>
+                                     Margin="0,0,10,0"
+                                     TextChanged="RequiredFields_TextChanged"/>
                             <TextBox x:Name="TbZipCode"
                                      Grid.Column="1"
                                      Tag="{DynamicResource Glb_ZipCode}"
                                      Style="{DynamicResource TextBoxStyle}"
-                                     Margin="10,0,5,0"/>
+                                     Margin="10,0,5,0"
+                                     TextChanged="RequiredFields_TextChanged"/>
                             <TextBox x:Name="TbCity" 
                                      Grid.Column="2"
                                      Tag="{DynamicResource Glb_City}"
                                      Style="{DynamicResource TextBoxStyle}"
-                                     Margin="5,0,0,0"/>
+                                     Margin="5,0,0,0"
+                                     TextChanged="RequiredFields_TextChanged"/>
                         </Grid>
                     </Grid>
 
