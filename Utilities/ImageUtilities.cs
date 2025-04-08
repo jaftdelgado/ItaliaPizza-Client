@@ -11,14 +11,32 @@ namespace ItaliaPizzaClient.Utilities
     {
         public static void SetImageSource(Image imageControl, byte[] imageBytes, string defaultImagePath)
         {
-            BitmapImage imageSource;
-
-            if (imageBytes != null && imageBytes.Length > 0)
-                imageSource = ConvertToImageSource(imageBytes);
+            if (imageBytes != null)
+            {
+                using (var ms = new MemoryStream(imageBytes))
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    imageControl.Source = image;
+                }
+            }
             else
-                imageSource = new BitmapImage(new Uri(defaultImagePath, UriKind.Relative));
+            {
+                imageControl.Source = LoadBitmapFromPackUri(defaultImagePath);
+            }
+        }
 
-            imageControl.Source = imageSource;
+        public static BitmapImage LoadBitmapFromPackUri(string packUri)
+        {
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(packUri, UriKind.Absolute);
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.EndInit();
+            return image;
         }
 
         public static BitmapImage ConvertToImageSource(byte[] imageBytes)
@@ -29,12 +47,14 @@ namespace ItaliaPizzaClient.Utilities
             }
         }
 
-        public static byte[] ImageToByteArray(BitmapImage bitmapImage)
+        public static byte[] ImageToByteArray(BitmapSource bitmapSource)
         {
+            if (bitmapSource == null) return null;
+
             using (var memoryStream = new MemoryStream())
             {
-                BitmapEncoder encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                var encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
                 encoder.Save(memoryStream);
                 return memoryStream.ToArray();
             }
@@ -52,6 +72,7 @@ namespace ItaliaPizzaClient.Utilities
             return true;
         }
 
+
         public static bool IsImageSizeValid(string path, long maxSizeInBytes)
         {
             FileInfo fileInfo = new FileInfo(path);
@@ -66,9 +87,9 @@ namespace ItaliaPizzaClient.Utilities
             return resized;
         }
 
-        private static BitmapImage LoadBitmapFromFile(string path)
+        public static BitmapImage LoadBitmapFromFile(string path)
         {
-            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 return LoadBitmapFromStream(stream);
             }
@@ -109,7 +130,6 @@ namespace ItaliaPizzaClient.Utilities
             {
                 encoder.Save(ms);
                 ms.Seek(0, SeekOrigin.Begin);
-
                 return LoadBitmapFromStream(ms);
             }
         }

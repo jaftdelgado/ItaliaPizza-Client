@@ -7,7 +7,6 @@ namespace ItaliaPizzaClient.Views
 {
     public partial class MainWindow : Window
     {
-        private NavigationManager navigationManager;
         private SideMenuManager sideMenuManager;
 
         public MainWindow()
@@ -17,11 +16,8 @@ namespace ItaliaPizzaClient.Views
             string userRole = GetCurrentUserRole();
             SideMenuManager.CurrentUserRole = userRole;
 
-            // Primero, crear la instancia de NavigationManager
-            navigationManager = new NavigationManager(MainFrame, NavigationPanel, BtnBack);
-
-            // Luego, pasarla al constructor de SideMenuManager
-            sideMenuManager = new SideMenuManager(navigationManager);
+            NavigationManager.Initialize(MainFrame, NavigationPanel, BtnBack);
+            sideMenuManager = new SideMenuManager(NavigationManager.Instance);
 
             sideMenuManager.LoadButtons(MenuStackPanel);
 
@@ -34,10 +30,9 @@ namespace ItaliaPizzaClient.Views
             BtnBack.Click += BtnBack_Click;
         }
 
-
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        public void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            navigationManager.GoBack();
+            NavigationManager.Instance.GoBack();
         }
 
         private string GetCurrentUserRole()
@@ -47,12 +42,12 @@ namespace ItaliaPizzaClient.Views
 
         private void LoadProfileImage()
         {
-            BtnProfile.Tag = new System.Windows.Media.Imaging.BitmapImage(new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Relative));
+            BtnProfile.Tag = new System.Windows.Media.Imaging.BitmapImage(new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Absolute));
         }
 
         public void NavigateToPage(string pageName, Page pageInstance)
         {
-            navigationManager.NavigateToPage(pageName, pageInstance);
+            NavigationManager.Instance.NavigateToPage(pageName, pageInstance);
         }
     }
 }

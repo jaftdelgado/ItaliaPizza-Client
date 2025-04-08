@@ -284,8 +284,8 @@
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-HEAVY.OTF" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-LIGHT.OTF" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-MEDIUM.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-REGULAR.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-SEMIBOLD.OTF" />
+    <Resource Include="Resources\Fonts\SFProDisplay-Regular.otf" />
+    <Resource Include="Resources\Fonts\SFProDisplay-Semibold.otf" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-THIN.OTF" />
     <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-ULTRALIGHT.OTF" />
   </ItemGroup>

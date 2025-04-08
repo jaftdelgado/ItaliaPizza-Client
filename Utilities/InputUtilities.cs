@@ -83,5 +83,14 @@ namespace ItaliaPizzaClient.Utilities
             };
         }
         
+        public static void ConvertToLowerCase(TextBox textBox)
+        {
+            textBox.TextChanged += (s, e) =>
+            {
+                textBox.Text = textBox.Text.ToLower();
+                textBox.SelectionStart = textBox.Text.Length;
+            };
+        }
+        
     }
 }
