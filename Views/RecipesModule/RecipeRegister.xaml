@@ -49,9 +49,9 @@
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Style="{DynamicResource SubtitleLabelStyle}"
-                               Text="Receta del producto: xxx"/>
-                    <TextBox Grid.Row="1" Style="{DynamicResource TextAreaStyle}" Height="auto" Margin="0,0,10,0" Tag="Descripción de receta"/>
-                    <TextBox Grid.Row="2" Style="{DynamicResource TextBoxStyle}" Width="190" Tag="Tiempo de preparación"/>
+                               Text="Receta del producto"/>
+                    <TextBox Name="txt_description" Grid.Row="1" Style="{DynamicResource TextAreaStyle}" Height="auto" Margin="0,0,10,0" Tag="Descripción de receta"/>
+                    <TextBox Name="txt_preptime" Grid.Row="2" PreviewTextInput="NumberValidationTextBox" Style="{DynamicResource TextBoxStyle}" Width="190" Tag="Tiempo de preparación en minutos"/>
                     <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
                         <Button x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonNoIconStyle}"
                                 Content="{DynamicResource Glb_Cancel}"
@@ -86,7 +86,7 @@
                             <!-- Nombre de Insumo -->
                             <DataGridTextColumn Header="Nombre del insumo" Binding="{Binding Supply.Name}" IsReadOnly="True" Width="*"/>
 
-                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity, Converter={StaticResource StringToDoubleConverter}}">
+                            <DataGridTextColumn Header="Cantidad" Width="0.6*" Binding="{Binding Quantity, Converter={StaticResource StringToDoubleConverter}}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="HorizontalAlignment" Value="Right"/>

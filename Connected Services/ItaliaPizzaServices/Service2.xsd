@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
   <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
+  <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
   <xs:element name="AddPersonal">
     <xs:complexType>
       <xs:sequence>
@@ -106,14 +107,14 @@
   <xs:element name="AddProductResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AddProductResult" type="xs:int" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="AddProductResult" nillable="true" type="q7:ProductDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterTransaction">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="transaction" nillable="true" type="q7:TransactionDTO" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="transaction" nillable="true" type="q8:TransactionDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -127,7 +128,7 @@
   <xs:element name="RegisterOrder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="order" nillable="true" type="q8:SupplierOrderDTO" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="order" nillable="true" type="q9:SupplierOrderDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -135,6 +136,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="RegisterOrderResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterRecipe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="recipeDTO" nillable="true" type="q10:RecipeDTO" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="supplies" nillable="true" type="q11:ArrayOfRecipeSupplyDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterRecipeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegisterRecipeResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

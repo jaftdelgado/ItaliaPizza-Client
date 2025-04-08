@@ -289,6 +289,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -309,6 +312,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\Service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

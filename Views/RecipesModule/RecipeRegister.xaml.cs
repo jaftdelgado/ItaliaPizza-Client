@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using ItaliaPizzaClient.Model;
+using ItaliaPizzaClient.Views.Dialogs;
 
 namespace ItaliaPizzaClient.Views.RecipesModule
 {
@@ -24,17 +25,62 @@ namespace ItaliaPizzaClient.Views.RecipesModule
     /// </summary>
     public partial class RecipeRegister : Page
     {
-       public ObservableCollection<RecipeSupplyItem> suppliesList { get; } = new ObservableCollection<RecipeSupplyItem>();
-        
-        public RecipeRegister()
+        public ObservableCollection<RecipeSupplyItem> suppliesList { get; } = new ObservableCollection<RecipeSupplyItem>();
+        private readonly RecipeDTO _recipe;
+        private readonly List<RecipeSupplyDTO> _recipeSupplyDTOs;
+
+
+        public RecipeRegister(RecipeDTO recipe,List<RecipeSupplyDTO> recipeSupplyDTOs)
         {
             InitializeComponent();
+            _recipe = recipe;
+            _recipeSupplyDTOs = recipeSupplyDTOs;
             DataContext = this;
         }
 
         private void BtnNewRecipe_Click(object sender, RoutedEventArgs e)
         {
+            //Validar entradas
+            if (string.IsNullOrEmpty(txt_description.Text) || string.IsNullOrEmpty(txt_description.Text) || isColumsCorrect() || string.IsNullOrEmpty(txt_preptime.Text))
+            {
+                MessageDialog.Show("Error", "Por favor, complete todos los campos.", AlertType.WARNING);
+                return;
+            }
+            else
+            {
+                _recipe.Name = txt_description.Text;
+                _recipe.Description = txt_description.Text;
+                _recipe.PreparationTime = int.Parse(txt_preptime.Text);
 
+                //Item de la receta a RecipeSupplyDTO
+                foreach (var item in suppliesList)
+                {
+                    RecipeSupplyDTO recipeSupplyDTO = new RecipeSupplyDTO
+                    {
+                        SupplyID = item.Supply.Id,
+                         UseQuantity = (decimal)item.Quantity
+                    };
+                    _recipeSupplyDTOs.Add(recipeSupplyDTO);
+                }
+                if (NavigationService != null && NavigationService.CanGoBack)
+                {
+                    NavigationService.GoBack();
+                }
+            }
+        }
+
+        private bool isColumsCorrect()
+        {
+            bool valid = false;
+            foreach (var item in suppliesList)
+            {
+                if (item.Quantity <= 0)
+                {
+                    MessageDialog.Show("Error", "Por favor, complete todos los campos.", AlertType.WARNING);
+                    valid = true;
+                }
+            }
+            return valid;
         }
 
         private void suppliesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

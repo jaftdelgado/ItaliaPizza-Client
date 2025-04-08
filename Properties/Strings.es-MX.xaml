@@ -148,6 +148,7 @@
     <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
     <sys:String x:Key="RegProduct_Code">Código</sys:String>
     <sys:String x:Key="RegProduct_BtnRegisterProdcut">Registrar Producto</sys:String>
+    <sys:String x:Key="Glb_CbxCategories">Categorias</sys:String>
 
     <!--OrderSuppliers-->
     <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>
