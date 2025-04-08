@@ -79,17 +79,35 @@
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterTransaction_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterTransaction" />
+  <wsdl:message name="IMainManager_RegisterIncome_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterIncome" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterTransaction_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterTransactionResponse" />
+  <wsdl:message name="IMainManager_RegisterIncome_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterIncomeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterExpense_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterExpense" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterExpense_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterExpenseResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrder" />
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrderPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderPayment" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrderPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveredOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveredOrders" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveredOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveredOrdersResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
@@ -126,13 +144,25 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RegisterTransaction">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterTransaction" message="tns:IMainManager_RegisterTransaction_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterTransactionResponse" message="tns:IMainManager_RegisterTransaction_OutputMessage" />
+    <wsdl:operation name="RegisterIncome">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterIncome" message="tns:IMainManager_RegisterIncome_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterIncomeResponse" message="tns:IMainManager_RegisterIncome_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterExpense">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterExpense" message="tns:IMainManager_RegisterExpense_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterExpenseResponse" message="tns:IMainManager_RegisterExpense_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RegisterOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrder" message="tns:IMainManager_RegisterOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrderResponse" message="tns:IMainManager_RegisterOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrderPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveredOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse" message="tns:IMainManager_GetDeliveredOrders_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
@@ -205,8 +235,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterTransaction">
-      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterTransaction" style="document" />
+    <wsdl:operation name="RegisterIncome">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterIncome" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterExpense">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterExpense" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -216,6 +255,24 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterOrder">
       <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/RegisterOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrderPayment">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/RegisterOrderPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveredOrders">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

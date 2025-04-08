@@ -33,7 +33,7 @@
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,0,20,10"  
                     HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button x:Name="BtnNewOrderSupplier" Style="{DynamicResource PrimaryButtonStyle}"
-                    Content="{DynamicResource Order_BtnNewOrder}"
+                    Content="{DynamicResource OrderPage_BtnAddOrder}"
                     >
                         <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                     </Button>
@@ -83,16 +83,13 @@
                             <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
-                              x:Name="ordersDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                              x:Name="ordersDataGrid" SelectionChanged="ordersDataGrid_SelectionChanged" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <!-- Numero -->
-                                    <DataGridTextColumn Header="#Número" Binding="{Binding Number}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Mesa -->
-                                    <DataGridTextColumn Header="Numero de mesa" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                                    <!-- ID -->
+                                    <DataGridTextColumn Header="ID" Binding="{Binding OrderID}" IsReadOnly="True" Width="*"/>
 
                                     <!-- Total -->
-                                    <DataGridTextColumn Header="Total" Binding="{Binding Brand}" IsReadOnly="True" Width="*"/>
+                                    <DataGridTextColumn Header="Total" Binding="{Binding Total}" IsReadOnly="True" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Border>
@@ -104,15 +101,15 @@
                         <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                             ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                             CellStyle="{DynamicResource DataGridCellStyle1}" 
-                            x:Name="OrdersDetailsDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                            x:Name="OrdersDetailsDataGrid" IsHitTestVisible="False" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <!--Insumo -->
-                                <DataGridTextColumn Header="Productos" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
-                                <DataGridTextColumn Header="Cantidad" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                                <DataGridTextColumn Header="Productos" Binding="{Binding Product}" IsReadOnly="True" Width="*"/>
+                                <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
-                            <Button Content="{DynamicResource Order_BtnPayOrder}" Width="200"
+                            <Button Content="{DynamicResource OrderPage_BtnPayOrder}" Width="200"
                                 Style="{DynamicResource PrimaryButtonStyle}"
                                 Margin="0,12,0,6" Click="Btn_OrderPay">
                                 <Button.Tag>/Resources/Icons/orders-icon.png</Button.Tag>

@@ -64,7 +64,7 @@
                     <Button Content="{DynamicResource OrderSupplier_BtnDeleteSupply}" Width="200"
                             Style="{DynamicResource SecondaryButtonStyle}" Foreground="#FF1654"
                             Click="DeleteSelectedSupply_Click">
-                        <Button.Tag>/Resources/Icons/leftarrow-icon.png</Button.Tag>
+                        <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
                     </Button>
                 </StackPanel>
             </Border>
@@ -88,22 +88,22 @@
                                   Tag="{DynamicResource Glb_SuppliersCategory}"
                                   SelectionChanged="cbCategories_SelectionChanged">
                         </ComboBox>
-                        <ComboBox x:Name="cbSuppliersName" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
+                        <ComboBox x:Name="cbSuppliersName" IsEnabled="False" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
                                   Tag="{DynamicResource Glb_Suppliers}"
                                   SelectionChanged="cbSuppliers_SelectionChanged">
                         </ComboBox>
-                        <ComboBox x:Name="cbSuppliesName" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
+                        <ComboBox x:Name="cbSuppliesName" IsEnabled="False" Style="{DynamicResource ComboBoxStyle}" Margin="0,0,0,10"
                                   Tag="{DynamicResource Glb_Supplies}"
                                   SelectionChanged="cbSuppliesName_SelectionChanged">
                         </ComboBox>
                         <TextBox x:Name="txtQuantity" IsEnabled="False" Style="{StaticResource TextBoxStyle}" 
                             Tag="{DynamicResource Glb_Quantity}"
                             Width="340"/>
-                        <Button Content="{DynamicResource OrderSupplier_BtnAddSupply}" Width="200"
+                        <Button x:Name="btnAddSupply" Content="{DynamicResource OrderSupplier_BtnAddSupply}" Width="200"
                                 Style="{DynamicResource PrimaryButtonStyle}"
                                 Margin="0,12,0,6"
                                 Click="AddSupplyButton_Click">
-                            <Button.Tag>/Resources/Icons/suppliers-icon.png</Button.Tag>
+                            <Button.Tag>/Resources/Icons/supplies-icon.png</Button.Tag>
                         </Button>
                     </StackPanel>
                 </Border>

@@ -12,6 +12,10 @@
 
         public static readonly string IMAGE_FILE_FILTER = "Imágenes (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
 
+        public static readonly int MAX_DIGITS_BEFORE_DECIMAL = 4;
+        public static readonly int MAX_DECIMALS = 3;
+        public static readonly string DECIMAL_PATTERN = $@"^(\d{{0,{MAX_DIGITS_BEFORE_DECIMAL}}})(\.\d{{0,{MAX_DECIMALS}}})?$";
+
         #region STRING-PATTERNS
         public static readonly string ALPHANUMERIC_PATTERN = @"[^a-zA-Z0-9]";
         public static readonly string NAMES_PATTERN = @"[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]";

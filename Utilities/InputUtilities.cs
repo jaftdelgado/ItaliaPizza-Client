@@ -84,15 +84,17 @@ namespace ItaliaPizzaClient.Utilities
         }
         public static void ValidateDecimalInput(TextBox textBox)
         {
-            const int maxDigitsBeforeDot = 4;
-            const int maxDecimals = 3;
+            string pattern = Constants.DECIMAL_PATTERN;
 
             // Validar mientras se escribe
             textBox.PreviewTextInput += (sender, e) =>
             {
                 string currentText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
-                string pattern = $@"^(\d{{0,{maxDigitsBeforeDot}}})(\.\d{{0,{maxDecimals}}})?$";
-                e.Handled = !Regex.IsMatch(currentText, pattern);
+                if (!Regex.IsMatch(currentText, pattern))
+                {
+                    e.Handled = true;
+                    Animations.ShakeTextBox(textBox);
+                }
             };
 
             // Validar al pegar texto
@@ -101,18 +103,17 @@ namespace ItaliaPizzaClient.Utilities
                 if (e.DataObject.GetDataPresent(DataFormats.Text))
                 {
                     string pasteText = e.DataObject.GetData(DataFormats.Text) as string;
-                    string currentText = ((TextBox)sender).Text;
-                    string fullText = currentText.Insert(((TextBox)sender).SelectionStart, pasteText);
+                    var box = (TextBox)sender;
+                    string fullText = box.Text.Insert(box.SelectionStart, pasteText);
 
-                    string pattern = $@"^(\d{{0,{maxDigitsBeforeDot}}})(\.\d{{0,{maxDecimals}}})?$";
                     if (!Regex.IsMatch(fullText, pattern))
                     {
                         e.CancelCommand();
+                        Animations.ShakeTextBox(box);
                     }
                 }
             });
         }
-
 
     }
 }

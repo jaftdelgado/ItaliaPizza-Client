@@ -169,4 +169,8 @@
     <sys:String x:Key="OrderSupplier_BtnDeleteSupply">Eliminar insumo</sys:String>
     <sys:String x:Key="OrderSupplier_BtnAddSupply">Añadir insumo</sys:String>
     <sys:String x:Key="OrderSupplier_BtnCancelar">Cancelar Orden</sys:String>
+
+    <!--Order-->
+    <sys:String x:Key="OrderPage_BtnAddOrder">Añadir Orden</sys:String>
+    <sys:String x:Key="OrderPage_BtnPayOrder">Pagar Orden</sys:String>
 </ResourceDictionary>
