@@ -91,6 +91,34 @@ namespace ItaliaPizzaClient.Utilities
                 textBox.SelectionStart = textBox.Text.Length;
             };
         }
-        
+
+        public static void ValidateDecimalInput(TextBox textBox)
+        {
+            const int maxDigitsBeforeDot = 4;
+            const int maxDecimals = 3;
+
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                string currentText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
+                string pattern = $@"^(\d{{0,{maxDigitsBeforeDot}}})(\.\d{{0,{maxDecimals}}})?$";
+                e.Handled = !Regex.IsMatch(currentText, pattern);
+            };
+
+            DataObject.AddPastingHandler(textBox, (sender, e) =>
+            {
+                if (e.DataObject.GetDataPresent(DataFormats.Text))
+                {
+                    string pasteText = e.DataObject.GetData(DataFormats.Text) as string;
+                    string currentText = ((TextBox)sender).Text;
+                    string fullText = currentText.Insert(((TextBox)sender).SelectionStart, pasteText);
+
+                    string pattern = $@"^(\d{{0,{maxDigitsBeforeDot}}})(\.\d{{0,{maxDecimals}}})?$";
+                    if (!Regex.IsMatch(fullText, pattern))
+                    {
+                        e.CancelCommand();
+                    }
+                }
+            });
+        }
     }
 }
