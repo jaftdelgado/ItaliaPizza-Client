@@ -8,18 +8,40 @@ namespace ItaliaPizzaClient.Utilities
 {
     public class NavigationManager
     {
+        private static NavigationManager _instance;
+
         public List<NavigationItem> navigationStack = new List<NavigationItem>();
         private int currentIndex = -1;
         private Frame mainFrame;
         private StackPanel navigationPanel;
         private Button btnBack;
 
-        public NavigationManager(Frame frame, StackPanel panel, Button backButton)
+        public static NavigationManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    throw new InvalidOperationException("NavigationManager no ha sido inicializado.");
+                }
+                return _instance;
+            }
+        }
+
+        private NavigationManager(Frame frame, StackPanel panel, Button backButton)
         {
             mainFrame = frame;
             navigationPanel = panel;
             btnBack = backButton;
             UpdateButtonStates();
+        }
+
+        public static void Initialize(Frame frame, StackPanel panel, Button backButton)
+        {
+            if (_instance == null)
+            {
+                _instance = new NavigationManager(frame, panel, backButton);
+            }
         }
 
         public class NavigationItem
@@ -51,11 +73,11 @@ namespace ItaliaPizzaClient.Utilities
 
         public void GoBack()
         {
-            if (currentIndex > 0)
+            if (navigationStack.Count > 1)
             {
                 navigationStack.RemoveRange(currentIndex, navigationStack.Count - currentIndex);
-
                 currentIndex--;
+
                 mainFrame.Navigate(navigationStack[currentIndex].PageInstance);
                 UpdateNavigationBar();
                 UpdateButtonStates();
@@ -109,7 +131,6 @@ namespace ItaliaPizzaClient.Utilities
             UpdateButtonStates();
         }
 
-
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.Tag is Page targetPage)
@@ -129,6 +150,17 @@ namespace ItaliaPizzaClient.Utilities
         private void UpdateButtonStates()
         {
             btnBack.IsEnabled = currentIndex > 0;
+        }
+
+        public static bool HasChanges(List<TextBox> textFields, List<ComboBox> comboBoxes)
+        {
+            foreach (TextBox field in textFields)
+                if (field != null && !string.IsNullOrWhiteSpace(field.Text)) return true;
+
+            foreach (ComboBox comboBox in comboBoxes)
+                if (comboBox != null && comboBox.SelectedIndex > 0) return true;
+
+            return false;
         }
     }
 }

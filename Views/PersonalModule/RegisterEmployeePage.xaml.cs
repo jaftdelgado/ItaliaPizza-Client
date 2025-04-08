@@ -5,7 +5,6 @@ using ItaliaPizzaClient.Views.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +24,9 @@ namespace ItaliaPizzaClient.Views
             SetInputFields();
             UpdateRegisterButtonState();
 
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            NavigationManager.Initialize(mainWindow.MainFrame, mainWindow.NavigationPanel, mainWindow.BtnBack);
+
             ImageUtilities.SetImageSource(EmployeeProfilePic, null, Constants.DEFAULT_PROFILE_PIC_PATH);
         }
 
@@ -39,12 +41,22 @@ namespace ItaliaPizzaClient.Views
         }
 
         private void SetInputFields()
-        {
-            InputUtilities.ValidateInput(TbRFC, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_RFC);
+        {   
             InputUtilities.ValidateInput(TbEmployeeName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES);
-            InputUtilities.ValidateInput(TbFatherName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES);
-            InputUtilities.ValidateInput(TbMotherName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES);
+            InputUtilities.ValidateInput(TbLastName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES);
+            InputUtilities.ValidateInput(TbPhoneNumber, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_PHONENUMBER);
+            InputUtilities.ValidateInput(TbEmailAddress, Constants.EMAIL_ALLOWED_CHARS_PATTERN, Constants.MAX_LENGTH_EMAIL);
+            InputUtilities.ValidateInput(TbAddress, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_ADDRESSNAME);
+            InputUtilities.ValidateInput(TbZipCode, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_ZIPCODE);
+            InputUtilities.ValidateInput(TbCity, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_CITY);
+            InputUtilities.ValidateInput(TbRFC, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_RFC);
             InputUtilities.ValidateInput(TbUsername, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_USERNAME);
+            InputUtilities.ValidateInput(TbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD);
+            InputUtilities.ValidatePasswordInput(PbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD);
+
+            InputUtilities.ConvertToUpperCase(TbRFC);
+            InputUtilities.ConvertToLowerCase(TbEmailAddress);
+            InputUtilities.ConvertToLowerCase(TbUsername);
         }
 
         private void SelectProfileImage(Image targetImageControl, int targetWidth, int targetHeight)
@@ -63,7 +75,7 @@ namespace ItaliaPizzaClient.Views
                 {
                     if (!ImageUtilities.IsImageSizeValid(openFileDialog.FileName, Constants.MAX_IMAGE_SIZE))
                     {
-                        string errorMessage = string.Format(Application.Current.Resources["GlbDialogD_InvalidImageSize"].ToString(), 
+                        string errorMessage = string.Format(Application.Current.Resources["GlbDialogD_InvalidImageSize"].ToString(),
                             Application.Current.Resources["Glb_MaxImageSizeMB"].ToString());
 
                         MessageDialog.Show("GlbDialogT_InvalidImageSize", errorMessage, AlertType.WARNING);
@@ -83,7 +95,7 @@ namespace ItaliaPizzaClient.Views
 
         private void UpdateRegisterButtonState()
         {
-            var requiredFields = new List<object> { TbRFC, TbEmployeeName, TbFatherName, TbMotherName };
+            var requiredFields = new List<object> { TbRFC, TbEmployeeName };
 
             if (_selectedRoleId != 6)
             {
@@ -124,67 +136,103 @@ namespace ItaliaPizzaClient.Views
                 AccountBorder.Visibility = Visibility.Collapsed;
         }
 
+        public byte[] GetProfilePicData()
+        {
+            byte[] profilePicData = null;
+
+            if (EmployeeProfilePic.Source is BitmapImage bitmapImage)
+            {
+                profilePicData = ImageUtilities.ImageToByteArray(bitmapImage);
+
+                var defaultImage = new BitmapImage(new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Absolute));
+                var defaultImageBytes = ImageUtilities.ImageToByteArray(defaultImage);
+
+                if (ImageUtilities.AreImageEqual(profilePicData, defaultImageBytes))
+                {
+                    profilePicData = null;
+                }
+            }
+
+            return profilePicData;
+        }
+
         public void RegisterEmployee()
         {
             var client = ConnectionUtilities.IsServerConnected();
             if (client == null) return;
 
+            // Obtener los datos de la imagen de perfil utilizando el nuevo método
+            byte[] profilePicData = GetProfilePicData();
+
             var personalDto = new PersonalDTO
             {
                 FirstName = TbEmployeeName.Text.Trim(),
-                FatherName = TbFatherName.Text.Trim(),
-                MotherName = TbMotherName.Text.Trim(),
+                LastName = TbLastName.Text.Trim(),
                 RFC = TbRFC.Text.Trim(),
+                EmailAddress = TbEmailAddress.Text.Trim(),
+                PhoneNumber = TbPhoneNumber.Text.Trim(),
                 Username = string.IsNullOrWhiteSpace(TbUsername.Text) ? null : TbUsername.Text.Trim(),
                 Password = (_selectedRoleId != 6 && !string.IsNullOrWhiteSpace(PbPassword.Password))
-                    ? PasswordUtilities.HashPassword(PbPassword.Password)
-                    : null,
-                ProfilePic = ImageUtilities.ImageToByteArray((BitmapImage)EmployeeProfilePic.Source),
-                RoleID = _selectedRoleId
+                    ? PasswordUtilities.HashPassword(PbPassword.Password) : null,
+                ProfilePic = profilePicData,
+                RoleID = _selectedRoleId,
+                Address = new AddressDTO
+                {
+                    AddressName = TbAddress.Text.Trim(),
+                    ZipCode = TbZipCode.Text.Trim(),
+                    City = TbCity.Text.Trim()
+                }
             };
-
-            if (_selectedRoleId != 6 && IsUsernameTaken(personalDto.Username))
-            {
-                MessageDialog.Show("RegEmployee_DialogTUserDuplicate", "RegEmployee_DialogDUserDuplicate", AlertType.WARNING);
-                return;
-            }
-
-            if (ValidateRFC(personalDto.RFC))
-            {
-                MessageDialog.Show("RegEmployee_DialogTRfcDuplicate", "RegEmployee_DialogDRfcDuplicate", AlertType.WARNING);
-                return;
-            }
 
             ConnectionUtilities.ExecuteDatabaseSafeAction(() =>
             {
+                if (_selectedRoleId != 6 && !IsUsernameAvailable(personalDto.Username)) return;
+                if (!IsEmailAvailable(personalDto.EmailAddress)) return;
+                if (!IsRfcUnique(personalDto.RFC)) return;
+
                 int result = client.AddPersonal(personalDto);
                 if (result > 0)
                 {
                     MessageDialog.Show("RegEmployee_DialogTSuccess", "RegEmployee_DialogDSuccess", AlertType.SUCCESS);
+                    NavigationManager.Instance.GoBack();
                 }
             });
-
-            ConnectionUtilities.CloseClient();
         }
 
-        private bool IsUsernameTaken(string username)
+        private bool IsUsernameAvailable(string username)
         {
-            return ConnectionUtilities.ExecuteDatabaseSafeFunction(() =>
-            {
-                var service = ConnectionUtilities.IsServerConnected();
-                if (service == null) return false;
-                return service.IsUsernameAvailable(username);
-            }, false);
+            var service = ConnectionUtilities.IsServerConnected();
+            if (service == null) return false;
+
+            bool isUsernameAvailable = service.IsUsernameAvailable(username);
+            if (!isUsernameAvailable)
+                MessageDialog.Show("RegEmployee_DialogTUserDuplicate", "RegEmployee_DialogDUserDuplicate", AlertType.WARNING);
+
+            return isUsernameAvailable;
+        }
+        
+        private bool IsEmailAvailable(string email)
+        {
+            var service = ConnectionUtilities.IsServerConnected();
+            if (service == null) return false;
+
+            bool isEmailAvailable = service.IsEmailAvailable(email);
+            if (!isEmailAvailable)
+                MessageDialog.Show("RegEmployee_DialogTEmailDuplicate", "RegEmployee_DialogDEmailDuplicate", AlertType.WARNING);
+
+            return isEmailAvailable;
         }
 
-        private bool ValidateRFC(string rfc)
+        private bool IsRfcUnique(string rfc)
         {
-            return ConnectionUtilities.ExecuteDatabaseSafeFunction(() =>
-            {
-                var service = ConnectionUtilities.IsServerConnected();
-                if (service == null) return false;
-                return service.IsRfcUnique(rfc);
-            }, false);
+            var service = ConnectionUtilities.IsServerConnected();
+            if (service == null) return false;
+
+            bool isRfcUnique = service.IsRfcUnique(rfc);
+            if (!isRfcUnique)
+                MessageDialog.Show("RegEmployee_DialogTRfcDuplicate", "RegEmployee_DialogDRfcDuplicate", AlertType.WARNING);
+
+            return isRfcUnique;
         }
 
         #region EventHandlers
@@ -249,11 +297,7 @@ namespace ItaliaPizzaClient.Views
 
         private void Click_BtnCancel(object sender, RoutedEventArgs e)
         {
-            var client = ConnectionUtilities.IsServerConnected();
-            if (client == null) return;
-
-            MessageBox.Show("Conexión exitosa con el servidor.", "Ping OK", MessageBoxButton.OK, MessageBoxImage.Information);
+            NavigationManager.Instance.GoBack();
         }
-
     }
 }
