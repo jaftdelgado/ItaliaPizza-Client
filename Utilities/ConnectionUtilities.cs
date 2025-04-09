@@ -99,6 +99,7 @@ namespace ItaliaPizzaClient.Utilities
             }
         }
 
+
         public static T ExecuteDatabaseSafeFunction<T>(Func<T> func, T defaultValue = default)
         {
             try
