@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!--Globals-->
+	
     <sys:String x:Key="Glb_ItaliaPizza">Italia Pizza</sys:String>
     <sys:String x:Key="Glb_Version">v1.0</sys:String>
     <sys:String x:Key="Glb_SignOut">Cerrar Sesión</sys:String>
