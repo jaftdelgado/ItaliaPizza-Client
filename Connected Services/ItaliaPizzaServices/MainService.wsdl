@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="MainService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IMainManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMainManager_AddPersonal_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPersonal" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddPersonal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPersonalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsUsernameAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsernameAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsUsernameAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsernameAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsRfcUnique_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsRfcUnique" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsRfcUnique_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsRfcUniqueResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsEmailAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsEmailAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCategories" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesBySupplier_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplier" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesBySupplier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesBySupplierResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSupplies" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSuppliesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrderPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderPayment" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrderPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveredOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveredOrders" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveredOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveredOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRecipeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsCustomerEmailAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsCustomerEmailAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsCustomerEmailAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsCustomerEmailAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMainManager">
+    <wsdl:operation name="AddPersonal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonal" message="tns:IMainManager_AddPersonal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonalResponse" message="tns:IMainManager_AddPersonal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUsernameAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsUsernameAvailable" message="tns:IMainManager_IsUsernameAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsUsernameAvailableResponse" message="tns:IMainManager_IsUsernameAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsRfcUnique">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsRfcUnique" message="tns:IMainManager_IsRfcUnique_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsRfcUniqueResponse" message="tns:IMainManager_IsRfcUnique_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsEmailAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailable" message="tns:IMainManager_IsEmailAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse" message="tns:IMainManager_IsEmailAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse" message="tns:IMainManager_GetAllCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesBySupplier">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse" message="tns:IMainManager_GetSuppliesBySupplier_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplies">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSupplies" message="tns:IMainManager_GetAllSupplies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSuppliesResponse" message="tns:IMainManager_GetAllSupplies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrder" message="tns:IMainManager_RegisterOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrderResponse" message="tns:IMainManager_RegisterOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrderPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveredOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse" message="tns:IMainManager_GetDeliveredOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipe" message="tns:IMainManager_RegisterRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipeResponse" message="tns:IMainManager_RegisterRecipe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomer" message="tns:IMainManager_AddCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomerResponse" message="tns:IMainManager_AddCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCustomerEmailAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" message="tns:IMainManager_IsCustomerEmailAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailableResponse" message="tns:IMainManager_IsCustomerEmailAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainManager/PingResponse" message="tns:IMainManager_Ping_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IMainManager" type="tns:IMainManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMainManager_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AddPersonal">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/AddPersonal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUsernameAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsUsernameAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsRfcUnique">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsRfcUnique" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsEmailAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsEmailAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCategories">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesBySupplier">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplies">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllSupplies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddProduct">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/AddProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/RegisterOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOrderPayment">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/RegisterOrderPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveredOrders">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterRecipe">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/RegisterRecipe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/AddCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCustomerEmailAvailable">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IMainManager/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MainService">
+    <wsdl:port name="NetTcpBinding_IMainManager" binding="tns:NetTcpBinding_IMainManager">
+      <soap12:address location="net.tcp://localhost:8081/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>MATEBOOK-D15\jafet</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

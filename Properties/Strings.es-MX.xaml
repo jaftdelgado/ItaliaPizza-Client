@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!--Globals-->
+	
     <sys:String x:Key="Glb_ItaliaPizza">Italia Pizza</sys:String>
     <sys:String x:Key="Glb_Version">v1.0</sys:String>
     <sys:String x:Key="Glb_SignOut">Cerrar Sesión</sys:String>
@@ -42,6 +43,11 @@
     <sys:String x:Key="Glb_MaxImageSizeMB">5</sys:String>
     <sys:String x:Key="GlbDialogT_InvalidImageSize">Peso excedido</sys:String>
     <sys:String x:Key="GlbDialogD_InvalidImageSize">El archivo de imagen supera el tamaño permitido (máx. {0} MB). Selecciona una imagen más ligera e inténtalo de nuevo.</sys:String>
+    <sys:String x:Key="GlbDialogT_EmailDuplicate">Correo Electrónico duplicado</sys:String>
+    <sys:String x:Key="GlbDialogD_EmailDuplicate">La dirección de correo ingresada ya se encuentra en uso. Por favor, ingresa una diferente e inténtalo nuevamente.</sys:String>
+    <sys:String x:Key="GlbDialogT_EmailFormat">Correo Electrónico inválido</sys:String>
+    <sys:String x:Key="GlbDialogD_EmailFormat">El correo electrónico ingresado no es válido. Asegúrate dse que tenga el formato correcto (ejemplo@dominio.com) e inténtalo nuevamente.</sys:String>
+
     <sys:String x:Key="GlbDialogT_UnkownImageError">Error desconocido</sys:String>
     <sys:String x:Key="GlbDialogD_UnkownImageError">Ocurrió un error inesperado al procesar la imagen seleccionada. Por favor, verifica el archivo y vuelve a intentarlo.</sys:String>
 
@@ -81,9 +87,7 @@
     <sys:String x:Key="RegEmployee_WorkInfo">Datos Laborales</sys:String>
     <sys:String x:Key="RegEmployee_AccessInfo">Datos de Acceso</sys:String>
     <sys:String x:Key="RegEmployee_TbEmployeeName">Nombre(s) del empleado:</sys:String>
-    <sys:String x:Key="RegEmployee_TbLastName">Apellidos del empleado:</sys:String>
-    <sys:String x:Key="RegEmployee_TbFatherName">Apellido Paterno:</sys:String>
-    <sys:String x:Key="RegEmployee_TbMotherName">Apellido Materno:</sys:String>
+    <sys:String x:Key="RegEmployee_TbLastName">Apellido(s) del empleado:</sys:String>
     <sys:String x:Key="RegEmployee_TbRfc">RFC:</sys:String>
     <sys:String x:Key="RegEmployee_CbEmployeeRole">Puesto del empleado:</sys:String>
     <sys:String x:Key="RegEmployee_TbUsername">Nombre de usuario:</sys:String>
@@ -92,13 +96,11 @@
     <sys:String x:Key="RegEmployee_DialogTSuccess">Empleado registrado</sys:String>
     <sys:String x:Key="RegEmployee_DialogDSuccess">La información del empleado ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
     <sys:String x:Key="RegEmployee_DialogTInvalidPassword">Contraseña insegura</sys:String>
-    <sys:String x:Key="RegEmployee_DialogDInvalidPassword">La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número. Inténtalo nuevamente.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDInvalidPassword">La contraseña debe contener al menos 6 caracteres, una mayúscula, una minúscula y un número. Inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogTRfcDuplicate">RFC duplicado</sys:String>
     <sys:String x:Key="RegEmployee_DialogDRfcDuplicate">El RFC del empleado ya está se encuentrado registrado en el sistema. Verifica los datos e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogTUserDuplicate">Usuario no disponible</sys:String>
     <sys:String x:Key="RegEmployee_DialogDUserDuplicate">El nombre de usuario ingresado ya se encuentra en uso. Por favor, selecciona uno diferente e inténtalo nuevamente.</sys:String>
-    <sys:String x:Key="RegEmployee_DialogTEmailDuplicate">Correo Electrónico duplicado</sys:String>
-    <sys:String x:Key="RegEmployee_DialogDEmailDuplicate">La dirección de correo ingresada ya se encuentra en uso. Por favor, ingresa una diferente e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil</sys:String>
 
     <!--Supplies-->
@@ -123,17 +125,23 @@
     <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
     
-    <!--Register customer-->
-    <sys:String x:Key="RegCustomer_Header"> Registrar cliente </sys:String>
-    <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente a registrar </sys:String>
-    <sys:String x:Key="RegCustomer_PersonalData">Datos personales:</sys:String>
-    <sys:String x:Key="RegCustomer_Name"> Nombre(s) </sys:String>
-    <sys:String x:Key="RegCustomer_LastName"> Apellido(s)</sys:String>
-    <sys:String x:Key="RegCustomer_PhoneNumber"> Telefono</sys:String>
-    <sys:String x:Key="RegCustomer_AddressData">Datos de la direccion:</sys:String>
-    <sys:String x:Key="RegCustomer_AddressName"> Calle </sys:String>
-    <sys:String x:Key="RegCustomer_AddressZipCode"> Codigo postal </sys:String>
-    <sys:String x:Key="RegCustomer_AddressDistrict"> Colonia </sys:String>
+    <!--Customers-->
+    <sys:String x:Key="Customers_Header">Clientes</sys:String>
+    <sys:String x:Key="Customers_Desc">Visualiza, registra, modifica y elimina los clientes de pedidos a domicilio de Italia Pizza.</sys:String>
+    <sys:String x:Key="Customers_BtnNewCustomer">Nuevo Cliente</sys:String>
+    <sys:String x:Key="Customers_TitleTable">Lista de Clientes</sys:String>
+
+    <!--Register Customer-->
+    <sys:String x:Key="RegCustomer_Header">Registrar cliente </sys:String>
+    <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente que se desea registrar.</sys:String>
+    <sys:String x:Key="RegCostumer_CostumerInfo">Información del Cliente</sys:String>
+    <sys:String x:Key="RegCostumer_PersonalInfo">Datos personales</sys:String>
+    <sys:String x:Key="RegCostumer_AddressCostumer">Dirección del Cliente</sys:String>
+    <sys:String x:Key="RegCostumer_TbCostumerName">Nombre(s) del cliente:</sys:String>
+    <sys:String x:Key="RegCostumer_TbLastName">Apellido(s) del cliente:</sys:String>
+    <sys:String x:Key="RegCostumer_BtnRegisterCostumer">Registrar Cliente</sys:String>
+    <sys:String x:Key="RegCostumer_DialogTSuccess">Cliente registrado</sys:String>
+    <sys:String x:Key="RegCostumer_DialogDSuccess">La información del cliente ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
 
     <!-- Register supplier-->
     <sys:String x:Key="RegSupplier_Header">Registrar proveedor</sys:String>
@@ -151,7 +159,6 @@
     <sys:String x:Key="Products_TitleTable">Lista de Productos</sys:String>
     <sys:String x:Key="Products_BtnDeleteProduct">Eliminar producto</sys:String>
     <sys:String x:Key="Products_BtnEditProduct">Editar producto</sys:String>
-    
 
     <!--Register Product-->
     <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>

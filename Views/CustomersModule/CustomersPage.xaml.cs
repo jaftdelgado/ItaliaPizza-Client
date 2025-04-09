@@ -13,16 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ItaliaPizzaClient.Views
+namespace ItaliaPizzaClient.Views.CustomersModule
 {
     /// <summary>
-    /// Lógica de interacción para TicketPage.xaml
+    /// Lógica de interacción para CustomersPage.xaml
     /// </summary>
-    public partial class TicketPage : Page
+    public partial class CustomersPage : Page
     {
-        public TicketPage()
+        public CustomersPage()
         {
             InitializeComponent();
+        }
+
+        private void Click_BtnNewCustomer(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
+            if (mainWindow != null)
+                mainWindow.NavigateToPage("RegCustomer_Header", new RegisterCustomerPage());
         }
     }
 }

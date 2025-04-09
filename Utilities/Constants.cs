@@ -26,9 +26,10 @@
         public static readonly string NUMERIC_PATTERN = @"[^0-9]";
         public static readonly string ALPHANUMERIC_PATTERN = @"[^a-zA-Z0-9]";
         public static readonly string NAMES_PATTERN = @"[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]";
-        public static readonly string GENERAL_TEXT_PATTERN = @"[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9\s\-\.,()/]+$";
+        public static readonly string GENERAL_TEXT_PATTERN = @"[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9\s\-\.,()/#]+$";
         public static readonly string EMAIL_ALLOWED_CHARS_PATTERN = @"[^a-zA-Z0-9@._\-+]";
-        public static readonly string SAFE_PASSWORD_PATTERN = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$";
+        public static readonly string SAFE_PASSWORD_PATTERN = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$";
+        public static readonly string EMAIL_FORMAT_PATTERN = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
         #endregion
     }
 }

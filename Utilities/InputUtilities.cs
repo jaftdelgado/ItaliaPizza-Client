@@ -92,6 +92,12 @@ namespace ItaliaPizzaClient.Utilities
             };
         }
 
+        public static bool IsValidEmailFormat(string email)
+        {
+            return Regex.IsMatch(email, Constants.EMAIL_FORMAT_PATTERN);
+        }
+
+
         public static void ValidateDecimalInput(TextBox textBox)
         {
             string pattern = Constants.DECIMAL_PATTERN;
@@ -105,22 +111,7 @@ namespace ItaliaPizzaClient.Utilities
                     Animations.ShakeTextBox(textBox);
                 }
             };
-
-            DataObject.AddPastingHandler(textBox, (sender, e) =>
-            {
-                if (e.DataObject.GetDataPresent(DataFormats.Text))
-                {
-                    string pasteText = e.DataObject.GetData(DataFormats.Text) as string;
-                    var box = (TextBox)sender;
-                    string fullText = box.Text.Insert(box.SelectionStart, pasteText);
-
-                    if (!Regex.IsMatch(fullText, pattern))
-                    {
-                        e.CancelCommand();
-                        Animations.ShakeTextBox(box);
-                    }
-                }
-            });
+            
         }
     }
 }
