@@ -53,10 +53,12 @@
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -84,6 +86,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Model\EmployeeRole.cs" />
+    <Compile Include="Model\RecipeSupplyItem.cs"/>
     <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\UnitMeasure.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Views\CustomersModule\CustomersPage.xaml.cs">
       <DependentUpon>CustomersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\StringToDoubleConverter.cs" />
     <Compile Include="Views\Dialogs\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
@@ -116,6 +120,15 @@
     </Compile>
     <Compile Include="Views\OrdersModule\OrderPage.xaml.cs">
       <DependentUpon>OrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\RecipesPage.xaml.cs">
+      <DependentUpon>RecipesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\RecipeRegister.xaml.cs">
+      <DependentUpon>RecipeRegister.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\SuppliesList.xaml.cs">
+      <DependentUpon>SuppliesList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SupplierOrdersModule\OrderSuppliersPage.xaml.cs">
       <DependentUpon>OrderSuppliersPage.xaml</DependentUpon>
@@ -202,6 +215,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RecipesModule\RecipesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\RecipeRegister.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\SuppliesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SupplierOrdersModule\OrderSuppliersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -265,6 +290,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO1.datasource">
+
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

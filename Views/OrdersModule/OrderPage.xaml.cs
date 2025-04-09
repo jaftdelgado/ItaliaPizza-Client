@@ -1,41 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using System.Printing;
-using System.Windows.Markup;
-using System.Windows.Xps;
-using System.Windows.Xps.Packaging;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+using ItaliaPizzaClient.ItaliaPizzaServices;
+using System.Linq;
+using ItaliaPizzaClient.Views.Dialogs;
+using System;
 
 namespace ItaliaPizzaClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para OrderPage.xaml
-    /// </summary>
     public partial class OrderPage : Page
     {
+        private readonly MainManagerClient client = new MainManagerClient();
+        private List<OrderSummaryDTO> ordersList = new List<OrderSummaryDTO>();
+
         public OrderPage()
         {
             InitializeComponent();
+            LoadOrders();
         }
+
+        private void LoadOrders()
+        {
+            ordersList = client.GetDeliveredOrders().ToList();
+            ordersDataGrid.ItemsSource = ordersList; 
+        }
+
+
+
+        private void ordersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ordersDataGrid.SelectedItem is OrderSummaryDTO selectedOrder)
+            {
+                OrdersDetailsDataGrid.ItemsSource = selectedOrder.Products.Select(i => new
+                {
+                    i.Product,
+                    i.Quantity
+                }).ToList();
+            }
+        }
+
+
 
         private void Btn_OrderPay(object sender, RoutedEventArgs e)
         {
+            var selectedOrder = ordersDataGrid.SelectedItem as OrderSummaryDTO;
+            if (selectedOrder == null)
+            {
+                MessageDialog.Show("Validación", "Debes seleccionar una orden de la lista para pagar.", AlertType.WARNING);
+                return;
+            }
 
-            
+
+            var orderDto = new OrderDTO
+            {
+                OrderID = selectedOrder.OrderID,
+                Total = selectedOrder.Total,
+                Date = DateTime.Now
+            };
+
+            bool result = client.RegisterOrderPayment(orderDto);
+
+            if (result)
+            {
+                MessageDialog.Show("Éxito", "Orden pagada correctamente.", AlertType.SUCCESS);
+                LoadOrders();
+                OrdersDetailsDataGrid.ItemsSource = null;
+            }
+            else
+            {
+                MessageDialog.Show("Error", "No se pudo completar el pago de la orden.", AlertType.ERROR);
+            }
         }
     }
 }
+    
+
