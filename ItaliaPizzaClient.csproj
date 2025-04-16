@@ -85,7 +85,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\EmployeeRole.cs" />
+    <Compile Include="Model\Personal.cs" />
     <Compile Include="Model\RecipeSupplyItem.cs" />
     <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
@@ -108,6 +110,9 @@
       <DependentUpon>CustomersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\StringToDoubleConverter.cs" />
+    <Compile Include="Views\Dialogs\LoadingDialog.xaml.cs">
+      <DependentUpon>LoadingDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
@@ -200,6 +205,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialogs\LoadingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialogs\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -286,6 +295,9 @@
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -319,15 +331,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-BLACK.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-BOLD.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-HEAVY.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-LIGHT.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-MEDIUM.OTF" />
+    <Resource Include="Resources\Fonts\SFProDisplay-Bold.otf" />
+    <Resource Include="Resources\Fonts\SFProDisplay-Medium.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Regular.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Semibold.otf" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-THIN.OTF" />
-    <Resource Include="Resources\Fonts\SF-PRO-DISPLAY-ULTRALIGHT.OTF" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -338,9 +345,13 @@
     <Resource Include="Resources\Icons\cashregister-icon.png" />
     <Resource Include="Resources\Icons\clients-hover-icon.png" />
     <Resource Include="Resources\Icons\clients-icon.png" />
+    <Resource Include="Resources\Icons\delete-icon.png" />
     <Resource Include="Resources\Icons\edit-icon.png" />
+    <Resource Include="Resources\Icons\error-alert-icon.png" />
+    <Resource Include="Resources\Icons\gallery-icon.png" />
     <Resource Include="Resources\Icons\home-hover-icon.png" />
     <Resource Include="Resources\Icons\home-icon.png" />
+    <Resource Include="Resources\Icons\info-icon.png" />
     <Resource Include="Resources\Icons\italiapizza-icon.png" />
     <Resource Include="Resources\Icons\leftarrow-hover-icon.png" />
     <Resource Include="Resources\Icons\leftarrow-icon.png" />
@@ -352,6 +363,7 @@
     <Resource Include="Resources\Icons\products-icon.png" />
     <Resource Include="Resources\Icons\recipes-hover-icon.png" />
     <Resource Include="Resources\Icons\recipes-icon.png" />
+    <Resource Include="Resources\Icons\redirect-icon.png" />
     <Resource Include="Resources\Icons\reports-hover-icon.png" />
     <Resource Include="Resources\Icons\reports-icon.png" />
     <Resource Include="Resources\Icons\rightarrow-hover-icon.png" />
@@ -360,44 +372,21 @@
     <Resource Include="Resources\Icons\separator-icon.png" />
     <Resource Include="Resources\Icons\stock-hover-icon.png" />
     <Resource Include="Resources\Icons\stock-icon.png" />
+    <Resource Include="Resources\Icons\success-alert-icon.png" />
     <Resource Include="Resources\Icons\suppliers-hover-icon.png" />
     <Resource Include="Resources\Icons\suppliers-icon.png" />
-    <Resource Include="Resources\Icons\supplies-hover-icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\supplies-icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Resources\Icons\supplies-hover-icon.png" />
+    <Resource Include="Resources\Icons\supplies-icon.png" />
     <Resource Include="Resources\Icons\supplyorders-hover-icon.png" />
     <Resource Include="Resources\Icons\supplyorders-icon.png" />
+    <Resource Include="Resources\Icons\warning-alert-icon.png" />
     <Resource Include="Resources\Images\default-profile-pic.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\gallery-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\delete-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\info-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\default-supply-pic.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\redirect-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\error-alert-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\success-alert-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\warning-alert-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ItaliaPizzaServices\" />
@@ -419,6 +408,26 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\OrdersModule\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\supplierorder-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\address-icon.png" />
+    <Resource Include="Resources\Icons\email-icon.png" />
+    <Resource Include="Resources\Icons\phone-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\calendar-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\sort-header-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\person-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\confirm-alert-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

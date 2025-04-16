@@ -3,6 +3,7 @@ using System.ServiceModel;
 using ItaliaPizzaClient.Views.Dialogs;
 using ItaliaPizzaClient.ItaliaPizzaServices;
 using System.Data.SqlClient;
+using System.Windows;
 
 namespace ItaliaPizzaClient.Utilities
 {
@@ -75,6 +76,21 @@ namespace ItaliaPizzaClient.Utilities
             _service = null;
         }
 
+        public static void ShowSafeDialog(string titleKey, string descriptionKey, AlertType alertType)
+        {
+            if (Application.Current.Dispatcher.CheckAccess())
+            {
+                MessageDialog.Show(titleKey, descriptionKey, alertType);
+            }
+            else
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    MessageDialog.Show(titleKey, descriptionKey, alertType);
+                });
+            }
+        }
+
         public static void ExecuteDatabaseSafeAction(Action action)
         {
             try
@@ -83,19 +99,19 @@ namespace ItaliaPizzaClient.Utilities
             }
             catch (SqlException)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
             }
             catch (InvalidOperationException)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
             }
             catch (FaultException)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
             }
             catch (Exception)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
             }
         }
 
@@ -107,22 +123,22 @@ namespace ItaliaPizzaClient.Utilities
             }
             catch (SqlException)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
                 return defaultValue;
             }
             catch (InvalidOperationException)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
                 return defaultValue;
             }
             catch (FaultException)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
                 return defaultValue;
             }
             catch (Exception)
             {
-                MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
                 return defaultValue;
             }
         }

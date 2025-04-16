@@ -38,11 +38,23 @@
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IMainManager_GetAllPersonals_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPersonals" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllPersonals_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPersonalsResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_AddPersonal_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPersonal" />
   </wsdl:message>
   <wsdl:message name="IMainManager_AddPersonal_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddPersonalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeletePersonal_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePersonal" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeletePersonal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePersonalResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_IsUsernameAvailable_InputMessage">
     <wsdl:part name="parameters" element="tns:IsUsernameAvailable" />
@@ -56,11 +68,11 @@
   <wsdl:message name="IMainManager_IsRfcUnique_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsRfcUniqueResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_IsEmailAvailable_InputMessage">
-    <wsdl:part name="parameters" element="tns:IsEmailAvailable" />
+  <wsdl:message name="IMainManager_IsPersonalEmailAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsPersonalEmailAvailable" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_IsEmailAvailable_OutputMessage">
-    <wsdl:part name="parameters" element="tns:IsEmailAvailableResponse" />
+  <wsdl:message name="IMainManager_IsPersonalEmailAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsPersonalEmailAvailableResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCategories" />
@@ -135,9 +147,17 @@
     <wsdl:part name="parameters" element="tns:PingResponse" />
   </wsdl:message>
   <wsdl:portType name="IMainManager">
+    <wsdl:operation name="GetAllPersonals">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/GetAllPersonals" message="tns:IMainManager_GetAllPersonals_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/GetAllPersonalsResponse" message="tns:IMainManager_GetAllPersonals_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddPersonal">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonal" message="tns:IMainManager_AddPersonal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonalResponse" message="tns:IMainManager_AddPersonal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePersonal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/DeletePersonal" message="tns:IMainManager_DeletePersonal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/DeletePersonalResponse" message="tns:IMainManager_DeletePersonal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsUsernameAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsUsernameAvailable" message="tns:IMainManager_IsUsernameAvailable_InputMessage" />
@@ -147,9 +167,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsRfcUnique" message="tns:IMainManager_IsRfcUnique_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsRfcUniqueResponse" message="tns:IMainManager_IsRfcUnique_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="IsEmailAvailable">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailable" message="tns:IMainManager_IsEmailAvailable_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse" message="tns:IMainManager_IsEmailAvailable_OutputMessage" />
+    <wsdl:operation name="IsPersonalEmailAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailable" message="tns:IMainManager_IsPersonalEmailAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailableResponse" message="tns:IMainManager_IsPersonalEmailAvailable_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
@@ -203,8 +223,26 @@
   <wsdl:binding name="NetTcpBinding_IMainManager" type="tns:IMainManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IMainManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetAllPersonals">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/GetAllPersonals" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddPersonal">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/AddPersonal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePersonal">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/DeletePersonal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -230,8 +268,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="IsEmailAvailable">
-      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsEmailAvailable" style="document" />
+    <wsdl:operation name="IsPersonalEmailAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailable" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

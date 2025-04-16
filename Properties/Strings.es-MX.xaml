@@ -2,15 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!--Globals-->
-	
     <sys:String x:Key="Glb_ItaliaPizza">Italia Pizza</sys:String>
     <sys:String x:Key="Glb_Version">v1.0</sys:String>
     <sys:String x:Key="Glb_SignOut">Cerrar Sesión</sys:String>
     <sys:String x:Key="Glb_Settings">Ajustes</sys:String>
     <sys:String x:Key="Glb_Accept">Aceptar</sys:String>
+    <sys:String x:Key="Glb_Confirm">Confirmar</sys:String>
     <sys:String x:Key="Glb_TryAgain">Reintentar</sys:String>
     <sys:String x:Key="Glb_Close">Cerrar</sys:String>
     <sys:String x:Key="Glb_Cancel">Cancelar</sys:String>
+    <sys:String x:Key="Glb_Delete">Eliminar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
     <sys:String x:Key="Glb_Orders">Comandas</sys:String>
@@ -30,6 +31,9 @@
     <sys:String x:Key="Glb_AddressName">Dirección:</sys:String>
     <sys:String x:Key="Glb_ZipCode">Código Postal:</sys:String>
     <sys:String x:Key="Glb_City">Ciudad:</sys:String>
+    <sys:String x:Key="Glb_Active">Activos</sys:String>
+    <sys:String x:Key="Glb_ViewAll">Ver Todos</sys:String>
+    <sys:String x:Key="Glb_Deleted">Eliminados</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
@@ -40,14 +44,12 @@
     <sys:String x:Key="GlbDialogD_TimeOut">Se ha excedido el tiempo de espera. Por favor, verifica tu conexión a Internet y vuelve a intentarlo más tarde.</sys:String>
     <sys:String x:Key="GlbDialogT_DBNoConnection">Sin conexión a la base de datos</sys:String>
     <sys:String x:Key="GlbDialogD_DBNoConnection">No se pudo establecer conexión con la base de datos. Verifica la conexión a Internet o inténtalo de nuevo más tarde.</sys:String>
-    <sys:String x:Key="Glb_MaxImageSizeMB">5</sys:String>
     <sys:String x:Key="GlbDialogT_InvalidImageSize">Peso excedido</sys:String>
-    <sys:String x:Key="GlbDialogD_InvalidImageSize">El archivo de imagen supera el tamaño permitido (máx. {0} MB). Selecciona una imagen más ligera e inténtalo de nuevo.</sys:String>
+    <sys:String x:Key="GlbDialogD_InvalidImageSize">El archivo de imagen supera el tamaño permitido (máx. 5MB). Selecciona una imagen más ligera e inténtalo de nuevo.</sys:String>
     <sys:String x:Key="GlbDialogT_EmailDuplicate">Correo Electrónico duplicado</sys:String>
     <sys:String x:Key="GlbDialogD_EmailDuplicate">La dirección de correo ingresada ya se encuentra en uso. Por favor, ingresa una diferente e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="GlbDialogT_EmailFormat">Correo Electrónico inválido</sys:String>
     <sys:String x:Key="GlbDialogD_EmailFormat">El correo electrónico ingresado no es válido. Asegúrate dse que tenga el formato correcto (ejemplo@dominio.com) e inténtalo nuevamente.</sys:String>
-
     <sys:String x:Key="GlbDialogT_UnkownImageError">Error desconocido</sys:String>
     <sys:String x:Key="GlbDialogD_UnkownImageError">Ocurrió un error inesperado al procesar la imagen seleccionada. Por favor, verifica el archivo y vuelve a intentarlo.</sys:String>
 
@@ -77,7 +79,17 @@
     <sys:String x:Key="Personal_Desc">Visualiza, registra, modifica y elimina la plantilla de empleados de Italia Pizza.</sys:String>
     <sys:String x:Key="Personal_BtnNewEmployee">Nuevo Empleado</sys:String>
     <sys:String x:Key="Personal_TitleTable">Lista de Personal</sys:String>
-    
+    <sys:String x:Key="Personal_TableHEmployee">Empleado</sys:String>
+    <sys:String x:Key="Personal_TableHRFC">RFC</sys:String>
+    <sys:String x:Key="Personal_TableHRole">Puesto</sys:String>
+    <sys:String x:Key="Personal_HiredOn">Contratado el:</sys:String>
+    <sys:String x:Key="Personal_BtnDeleteEmployee">Eliminar Empleado</sys:String>
+    <sys:String x:Key="Personal_BtnEditEmployee">Editar Empleado</sys:String>
+    <sys:String x:Key="Personal_DialogTDeleteEmployee">Eliminar Empleado</sys:String>
+    <sys:String x:Key="Personal_DialogDDeleteEmployee">¿Estás seguro de que deseas eliminar al empleado seleccionado? La eliminación es reversible y podrás restaurarlo más tarde si lo necesitas.</sys:String>
+    <sys:String x:Key="Personal_DialogTDeletedEmployee">Empleado eliminado</sys:String>
+    <sys:String x:Key="Personal_DialogDDeletedEmployee">El empleado fue marcado como eliminado correctamente. Puedes restaurarlo desde la vista de empleados eliminados.</sys:String>
+
     <!--Register Employee-->
     <sys:String x:Key="RegEmployee_Header">Registrar Empleado</sys:String>
     <sys:String x:Key="RegEmployee_Desc">Ingresa los datos del empleado que se desea registrar.</sys:String>
@@ -108,8 +120,8 @@
     <sys:String x:Key="Supplies_Desc">Visualiza, registra, modifica y elimina insumos utilizados por Italia Pizza.</sys:String>
     <sys:String x:Key="Supplies_BtnNewSupply">Nuevo Insumo</sys:String>
     <sys:String x:Key="Supplies_TitleTable">Lista de Insumos</sys:String>
-    <sys:String x:Key="Supplies_BtnDeleteSupply">Eliminar insumo</sys:String>
-    <sys:String x:Key="Supplies_BtnEditSupply">Editar insumo</sys:String>
+    <sys:String x:Key="Supplies_BtnDeleteSupply">Eliminar Insumo</sys:String>
+    <sys:String x:Key="Supplies_BtnEditSupply">Editar Insumo</sys:String>
 
     <!--Register Supply-->
     <sys:String x:Key="RegSupply_Header">Registrar Insumo</sys:String>

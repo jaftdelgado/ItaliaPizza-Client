@@ -41,6 +41,9 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private bool IsActiveField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsOnlineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -148,6 +151,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.IsActiveField.Equals(value) != true)) {
                     this.IsActiveField = value;
                     this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsOnline {
+            get {
+                return this.IsOnlineField;
+            }
+            set {
+                if ((this.IsOnlineField.Equals(value) != true)) {
+                    this.IsOnlineField = value;
+                    this.RaisePropertyChanged("IsOnline");
                 }
             }
         }
@@ -1638,11 +1654,23 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ItaliaPizzaServices.IMainManager")]
     public interface IMainManager {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/GetAllPersonals", ReplyAction="http://tempuri.org/IPersonalManager/GetAllPersonalsResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO[] GetAllPersonals();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/GetAllPersonals", ReplyAction="http://tempuri.org/IPersonalManager/GetAllPersonalsResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO[]> GetAllPersonalsAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/AddPersonal", ReplyAction="http://tempuri.org/IPersonalManager/AddPersonalResponse")]
         int AddPersonal(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/AddPersonal", ReplyAction="http://tempuri.org/IPersonalManager/AddPersonalResponse")]
         System.Threading.Tasks.Task<int> AddPersonalAsync(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/DeletePersonal", ReplyAction="http://tempuri.org/IPersonalManager/DeletePersonalResponse")]
+        bool DeletePersonal(int personalID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/DeletePersonal", ReplyAction="http://tempuri.org/IPersonalManager/DeletePersonalResponse")]
+        System.Threading.Tasks.Task<bool> DeletePersonalAsync(int personalID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsUsernameAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsUsernameAvailableResponse")]
         bool IsUsernameAvailable(string username);
@@ -1656,11 +1684,11 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsRfcUnique", ReplyAction="http://tempuri.org/IPersonalManager/IsRfcUniqueResponse")]
         System.Threading.Tasks.Task<bool> IsRfcUniqueAsync(string rfc);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsEmailAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse")]
-        bool IsEmailAvailable(string email);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailableResponse")]
+        bool IsPersonalEmailAvailable(string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsEmailAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsEmailAvailableResponse")]
-        System.Threading.Tasks.Task<bool> IsEmailAvailableAsync(string email);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailableResponse")]
+        System.Threading.Tasks.Task<bool> IsPersonalEmailAvailableAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetAllCategories", ReplyAction="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[] GetAllCategories();
@@ -1762,12 +1790,28 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 base(binding, remoteAddress) {
         }
         
+        public ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO[] GetAllPersonals() {
+            return base.Channel.GetAllPersonals();
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO[]> GetAllPersonalsAsync() {
+            return base.Channel.GetAllPersonalsAsync();
+        }
+        
         public int AddPersonal(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO) {
             return base.Channel.AddPersonal(personalDTO);
         }
         
         public System.Threading.Tasks.Task<int> AddPersonalAsync(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO) {
             return base.Channel.AddPersonalAsync(personalDTO);
+        }
+        
+        public bool DeletePersonal(int personalID) {
+            return base.Channel.DeletePersonal(personalID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeletePersonalAsync(int personalID) {
+            return base.Channel.DeletePersonalAsync(personalID);
         }
         
         public bool IsUsernameAvailable(string username) {
@@ -1786,12 +1830,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.IsRfcUniqueAsync(rfc);
         }
         
-        public bool IsEmailAvailable(string email) {
-            return base.Channel.IsEmailAvailable(email);
+        public bool IsPersonalEmailAvailable(string email) {
+            return base.Channel.IsPersonalEmailAvailable(email);
         }
         
-        public System.Threading.Tasks.Task<bool> IsEmailAvailableAsync(string email) {
-            return base.Channel.IsEmailAvailableAsync(email);
+        public System.Threading.Tasks.Task<bool> IsPersonalEmailAvailableAsync(string email) {
+            return base.Channel.IsPersonalEmailAvailableAsync(email);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[] GetAllCategories() {

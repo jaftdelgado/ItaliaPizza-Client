@@ -22,7 +22,7 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
                                RenderOptions.BitmapScalingMode="HighQuality"
-                               Width="10" Height="10" Margin="0,0,8,0"/>
+                               Width="11" Height="11" Margin="0,0,8,0"/>
                             <TextBlock Text="{TemplateBinding Content}" 
                                    Foreground="{StaticResource BackgroundBrush}" 
                                    VerticalAlignment="Center"/>
@@ -181,6 +181,55 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="TableHeaderButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border"
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Opacity="{TemplateBinding Opacity}">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock x:Name="Text" Grid.Row="0"
+                                   Margin="0 8 0 0"
+                                   Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+
+                            <Border x:Name="SelectionIndicator"
+                                Grid.Row="1" Height="4" CornerRadius="2 2 0 0"
+                                Background="Transparent"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Text" Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                        </Trigger>
+                        <Trigger Property="Tag" Value="Selected">
+                            <Setter TargetName="Text" Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                            <Setter TargetName="Text" Property="FontFamily" Value="{StaticResource SFProMedium}"/>
+                            <Setter TargetName="SelectionIndicator" Property="Background" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
         <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
         <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
@@ -320,7 +369,7 @@
     </Style>
 
     <Style x:Key="NavigationButtonStyle" TargetType="Button">
-        <Setter Property="FontFamily" Value="SF Pro Display"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -346,7 +395,7 @@
     </Style>
 
     <Style x:Key="NavigationButtonActiveStyle" TargetType="Button" BasedOn="{StaticResource NavigationButtonStyle}">
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProBold}"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="IsEnabled" Value="False"/>
     </Style>
@@ -383,32 +432,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="PasswordBoxButtonStyle" TargetType="Button">
-        <Setter Property="Width" Value="16"/>
-        <Setter Property="Height" Value="16"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Focusable" Value="False"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="Transparent">
-                        <ContentPresenter/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Transparent"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
 </ResourceDictionary>

@@ -215,7 +215,7 @@ namespace ItaliaPizzaClient.Views
             var service = ConnectionUtilities.IsServerConnected();
             if (service == null) return false;
 
-            bool isEmailAvailable = service.IsEmailAvailable(email);
+            bool isEmailAvailable = service.IsPersonalEmailAvailable(email);
             if (!isEmailAvailable)
                 MessageDialog.Show("GlbDialogD_EmailDuplicate", "GlbDialogD_EmailDuplicate", AlertType.WARNING);
 
