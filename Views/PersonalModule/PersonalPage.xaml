@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="520" d:DesignWidth="800"
       Title="PersonalPage">
 
     <Grid Background="{StaticResource BackgroundBrush}">
@@ -44,7 +44,7 @@
         <Border Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="46"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -55,9 +55,24 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="46">
+                            <Button x:Name="BtnActive"
+                                    Content="{DynamicResource Glb_Active}"
+                                    Click="Click_FilterButton"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"/>
+                            <Button x:Name="BtnDeleted" Margin="20 0 0 0"
+                                    Content="{DynamicResource Glb_Deleted}"
+                                    Click="Click_FilterButton"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"/>
+                            <Button x:Name="BtnViewAll" Margin="20 0 0 0"
+                                    Content="{DynamicResource Glb_ViewAll}"
+                                    Click="Click_FilterButton"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"/>
+                        </StackPanel>
+
+                        <TextBox Grid.Column="1" HorizontalAlignment="Right"
                              Style="{DynamicResource SecondarySearchBoxStyle}"
-                             Width="180"/>
+                             Width="160"/>
                     </Grid>
                 </Border>
 
@@ -78,65 +93,116 @@
                                    Style="{DynamicResource SubtitleLabelStyle}"/>
                         </StackPanel>
 
-                        <!-- Tabla de Insumos -->
-                        <Border Grid.Row="1" Padding="8">
-                            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
-                                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                                  x:Name="suppliesDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                        <Grid Grid.Row="1">
+                            <DataGrid x:Name="PersonalDataGrid"
+                                      AutoGenerateColumns="False"
+                                      IsReadOnly="True"
+                                      RowStyle="{DynamicResource DataGridRowStyle1}" 
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                                      Style="{DynamicResource DataGridStyle1}"
+                                      SelectionChanged="PersonalDataGrid_SelectionChanged">
                                 <DataGrid.Columns>
                                     <!-- Número -->
-                                    <DataGridTextColumn Header="#Número" Binding="{Binding Number}" IsReadOnly="True" Width="64"/>
+                                    <DataGridTextColumn Header="#Número" Binding="{Binding PersonalID}" Width="64"/>
 
-                                    <!-- Nombre de Insumo -->
-                                    <DataGridTextColumn Header="Nombre de Insumo" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                                    <!-- Empleado -->
+                                    <DataGridTextColumn Header="Empleado" Binding="{Binding FullName}" Width="4*"/>
 
-                                    <!-- Marca -->
-                                    <DataGridTextColumn Header="Marca" Binding="{Binding Brand}" IsReadOnly="True" Width="*"/>
+                                    <!-- RFC -->
+                                    <DataGridTextColumn Header="RFC" Binding="{Binding RFC}" Width="3*" />
 
-                                    <!-- Categoría -->
-                                    <DataGridTextColumn Header="Categoría" Binding="{Binding Category}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Nombre de Proveedor -->
-                                    <DataGridTextColumn Header="Nombre de Proveedor" Binding="{Binding SupplierName}" IsReadOnly="True" Width="*"/>
+                                    <!-- Rol -->
+                                    <DataGridTextColumn Header="Rol" Binding="{Binding TranslatedRole}" Width="3*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                        </Border>
+
+                            <TextBlock x:Name="LoadingText"
+                                        Text="Cargando datos..."
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Foreground="Gray"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Visibility="Collapsed"
+                                        Background="White"
+                                        Opacity="0.8"
+                                        Padding="20" />
+                        </Grid>
+
                     </Grid>
 
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="6*"/>
-                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="104"/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="24,0">
-                                <TextBlock Text="KIRKLAND®"
+                            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20,24">
+                                <Image Name="EmployeeProfilePic"
+                                       HorizontalAlignment="Center" 
+                                       Width="140" Height="140" Stretch="Fill"
+                                       VerticalAlignment="Center"
+                                       RenderOptions.BitmapScalingMode="HighQuality">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="70" RadiusY="70" Center="70,70"/>
+                                    </Image.Clip>
+                                </Image>
+
+                                <TextBlock x:Name="EmployeeRFC" Margin="0,10,0,0"
                                        Style="{DynamicResource HeaderLabelStyle}" FontWeight="ExtraBold"
-                                       FontSize="11"/>
-                                <TextBlock Text="Queso Mozzarella"
+                                       FontSize="10"/>
+                                <TextBlock x:Name="EmployeeLastName" FontSize="13"
                                        Style="{DynamicResource SubtitleLabelStyle}"/>
-                                <TextBlock Text="Carnes y Lactéos" Margin="0,2,0,0"
+                                <TextBlock x:Name="EmployeeFirstName" FontSize="13"
+                                       Style="{DynamicResource RegularLabelStyle}"/>
+                                <TextBlock x:Name="EmployeeRole" Margin="0,4,0,0"
                                        Style="{DynamicResource RegularLabelStyle}"
                                        Foreground="{StaticResource PrimaryButtonBrush}"/>
-                                <TextBlock Text="Queso italiano de textura suave y elástica, con sabor delicado y gran capacidad de derretirse, ideal para pizzas y gratinados." 
-                                       Margin="0,10"
-                                       TextWrapping="Wrap"
-                                       Style="{DynamicResource DescriptionLabelStyle}"/>
+                                <Border BorderThickness="0,0.5,0,0" BorderBrush="{DynamicResource SecondaryBrush}"
+                                        Margin="0,8">
+                                    <StackPanel Orientation="Vertical" Margin="0,12">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="/Resources/Icons/phone-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                            <TextBlock x:Name="EmployeePhone" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                            <Image Source="/Resources/Icons/email-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                            <TextBlock x:Name="EmployeeEmail" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                            <Image Source="/Resources/Icons/calendar-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                            <TextBlock x:Name="EmployeeHireDate" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                            <Image Source="/Resources/Icons/address-icon.png" Style="{StaticResource IconViewStyle}"
+                                                   VerticalAlignment="Top"/>
+                                            <TextBlock x:Name="EmployeeAddress" Style="{DynamicResource DescriptionLabelStyle}"
+                                                       TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Stretch"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
                             </StackPanel>
 
-                            <StackPanel Grid.Row="2" Margin="28,0">
-                                <Button x:Name="BtnDeleteSupply" Style="{DynamicResource SecondaryButtonStyle}"
-                                    Content="{DynamicResource Supplies_BtnDeleteSupply}">
-                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                </Button>
-                                <Button x:Name="BtnEditSupply" Style="{DynamicResource PrimaryButtonStyle}"
-                                    Content="{DynamicResource Supplies_BtnEditSupply}">
-                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                </Button>
-                            </StackPanel>
+                            <Border Grid.Row="2"
+                                    BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0 0.5 0 0">
+                                <StackPanel VerticalAlignment="Center" Margin="20 0">
+                                    <Button x:Name="BtnDeleteEmployee" Style="{DynamicResource DangerButtonStyle}"
+                                            Content="{DynamicResource Personal_BtnDeleteEmployee}"
+                                            Margin="0 0 0 6"
+                                            Click="Click_BtnDeleteEmployee">
+                                        <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                                    </Button>
+                                    <Button x:Name="BtnEditSupply" Style="{DynamicResource PrimaryButtonStyle}"
+                                            Content="{DynamicResource Personal_BtnEditEmployee}">
+                                        <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
                         </Grid>
                     </Border>
                 </Grid>

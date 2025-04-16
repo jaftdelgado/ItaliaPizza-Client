@@ -8,6 +8,7 @@ namespace ItaliaPizzaClient.Views.Dialogs
     public partial class MessageDialog : UserControl
     {
         private Action _onConfirm;
+        public static readonly (string Brush, string ButtonText) DangerStyle = ("DangerBrush", "Glb_Delete");
 
         public MessageDialog()
         {
@@ -30,7 +31,8 @@ namespace ItaliaPizzaClient.Views.Dialogs
             mainWindow.DialogOverlay.Visibility = Visibility.Visible;
         }
 
-        public static void ShowConfirm(string title, string description, Action onConfirm)
+        public static void ShowConfirm(string title, string description, Action onConfirm,
+            string dangerButtonTextResourceKey = null)
         {
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow == null) return;
@@ -42,8 +44,16 @@ namespace ItaliaPizzaClient.Views.Dialogs
 
             dialog.DialogTitle.Text = FindResourceString(title);
             dialog.DialogDescription.Text = FindResourceString(description);
+            dialog.SetAlertProperties("PrimaryButtonHoverBrush", "confirm-alert-icon.png", "Glb_Accept", Visibility.Visible);
+            dialog.BtnClose.Visibility = Visibility.Visible;
 
-            dialog.SetAlertProperties("ConfirmBrush", "confirmalert-icon.png", "Glb_Accept", Visibility.Visible);
+            if (string.IsNullOrEmpty(dangerButtonTextResourceKey))
+                dialog.BtnAccept.Content = FindResourceString("Glb_Confirm");
+            else
+            {
+                dialog.BtnAccept.Background = (SolidColorBrush)Application.Current.Resources["DangerBrush"];
+                dialog.BtnAccept.Content = FindResourceString(dangerButtonTextResourceKey);
+            }
 
             mainWindow.DialogHost.Content = dialog;
             mainWindow.DialogOverlay.Visibility = Visibility.Visible;
@@ -78,7 +88,7 @@ namespace ItaliaPizzaClient.Views.Dialogs
             HeaderBorder.Background = brush;
             AlertIcon.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri($"/Resources/Icons/{iconSource}", UriKind.Relative));
             BtnAccept.Content = FindResourceString(buttonTextResourceKey);
-            CancelButton.Visibility = secondaryButtonVisibility;
+            BtnClose.Visibility = secondaryButtonVisibility;
         }
 
         private void Click_BtnAccept(object sender, RoutedEventArgs e)

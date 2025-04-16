@@ -11,6 +11,7 @@
     <Color x:Key="BackgroundColor">#F4F4FA</Color>
     <Color x:Key="PrimaryColor">#2D2C32</Color>
     <Color x:Key="SecondaryColor">#7E7B8D</Color>
+    <Color x:Key="SideMenuColor">#EDEDFE</Color>
     <Color x:Key="BorderColor">#D3D1DB</Color>
     <Color x:Key="DangerColor">#FF1654</Color>
     <Color x:Key="SuccessColor">#00AB64</Color>
@@ -24,6 +25,7 @@
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
+    <SolidColorBrush x:Key="SideMenuBrush" Color="{StaticResource SideMenuColor}"/>
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
     <SolidColorBrush x:Key="PrimaryButtonBrush" Color="{StaticResource PrimaryButtonColor}"/>
     <SolidColorBrush x:Key="PrimaryButtonHoverBrush" Color="{StaticResource PrimaryButtonHoverColor}"/>

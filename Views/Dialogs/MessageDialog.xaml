@@ -38,10 +38,11 @@
             <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}" 
                     BorderThickness="0,0.5,0,0" Margin="24,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="CancelButton" 
-                            Content="{DynamicResource Glb_Cancel}" 
+                    <Button x:Name="BtnClose" 
+                            Content="{DynamicResource Glb_Close}" 
                             Margin="6,0"
-                            Style="{DynamicResource SecondaryButtonNoIconStyle}" Width="100"/>
+                            Style="{DynamicResource SecondaryButtonNoIconStyle}" 
+                            Click="Click_BtnCancel" Width="100"/>
                     <Button x:Name="BtnAccept"
                             Style="{DynamicResource PrimaryButtonNoIconStyle}"
                             Click="Click_BtnAccept" Width="100" />
