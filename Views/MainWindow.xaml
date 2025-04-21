@@ -28,9 +28,18 @@
                             </Grid.RowDefinitions>
 
                             <Border Grid.Row="0" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0,0,0,0.5">
-                                <StackPanel Orientation="Horizontal" Margin="16,0,0,0">
+                                <StackPanel Orientation="Horizontal" Margin="16,0,0,0" VerticalAlignment="Center">
                                     <Image Source="/Resources/Icons/italiapizza-icon.png"
-                                           Width="36" Height="36" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                           Width="32" Height="32" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <StackPanel Margin="12 0" >
+                                        <TextBlock Text="{DynamicResource Glb_ItaliaPizza}"
+                                                   Style="{DynamicResource SubtitleLabelStyle}"
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"/>
+                                        <TextBlock Text="SOFT MANAGEMENT"
+                                                   FontSize="9"
+                                                   Style="{DynamicResource DescriptionLabelStyle}"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </Border>
 

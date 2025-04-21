@@ -2,6 +2,7 @@
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -32,7 +33,6 @@ namespace ItaliaPizzaClient.Views
             InputUtilities.ConvertToLowerCase(TbEmailAddress);
         }
 
-
         private void UpdateRegisterButtonState()
         {
             var requiredFields = new List<object> {
@@ -58,7 +58,7 @@ namespace ItaliaPizzaClient.Views
             BtnRegisterCostumer.IsEnabled = allFieldsFilled;
         }
 
-        public void RegisterCustomer()
+        public async Task RegisterCustomer()
         {
             var client = ConnectionUtilities.IsServerConnected();
             if (client == null) return;
@@ -77,15 +77,18 @@ namespace ItaliaPizzaClient.Views
                 }
             };
 
-            ConnectionUtilities.ExecuteDatabaseSafeAction(() =>
+            await ConnectionUtilities.ExecuteServerAction(async () =>
             {
                 if (!IsCustomerEmailAvailable(customerDTO.EmailAddress)) return;
 
                 int result = client.AddCustomer(customerDTO);
                 if (result > 0)
                 {
-                    MessageDialog.Show("RegCostumer_DialogTSuccess", "RegCostumer_DialogDSuccess", AlertType.SUCCESS);
-                    NavigationManager.Instance.GoBack();
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        MessageDialog.Show("RegCostumer_DialogTSuccess", "RegCostumer_DialogDSuccess", AlertType.SUCCESS);
+                        NavigationManager.Instance.GoBack();
+                    });
                 }
             });
         }
@@ -103,10 +106,10 @@ namespace ItaliaPizzaClient.Views
         }
 
         #region EventHandlers
-        private void Click_BtnRegisterCostumer(object sender, RoutedEventArgs e)
+        private async void Click_BtnRegisterCostumer(object sender, RoutedEventArgs e)
         {
             if (InputUtilities.IsValidEmailFormat(TbEmailAddress.Text))
-                RegisterCustomer();
+                await RegisterCustomer();
             else
                 MessageDialog.Show("GlbDialogT_EmailFormat", "GlbDialogD_EmailFormat", AlertType.WARNING);
         }

@@ -331,6 +331,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Fonts\SFMono-Regular.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Bold.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Medium.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Regular.otf" />
@@ -428,6 +429,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\confirm-alert-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\reactivate-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\search-error-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\loading-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
