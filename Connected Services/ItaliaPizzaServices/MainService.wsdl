@@ -50,11 +50,23 @@
   <wsdl:message name="IMainManager_AddPersonal_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddPersonalResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_UpdatePersonal_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePersonal" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdatePersonal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePersonalResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_DeletePersonal_InputMessage">
     <wsdl:part name="parameters" element="tns:DeletePersonal" />
   </wsdl:message>
   <wsdl:message name="IMainManager_DeletePersonal_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeletePersonalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivatePersonal_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivatePersonal" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivatePersonal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivatePersonalResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_IsUsernameAvailable_InputMessage">
     <wsdl:part name="parameters" element="tns:IsUsernameAvailable" />
@@ -155,9 +167,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonal" message="tns:IMainManager_AddPersonal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonalResponse" message="tns:IMainManager_AddPersonal_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdatePersonal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/UpdatePersonal" message="tns:IMainManager_UpdatePersonal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/UpdatePersonalResponse" message="tns:IMainManager_UpdatePersonal_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeletePersonal">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/DeletePersonal" message="tns:IMainManager_DeletePersonal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/DeletePersonalResponse" message="tns:IMainManager_DeletePersonal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReactivatePersonal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/ReactivatePersonal" message="tns:IMainManager_ReactivatePersonal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/ReactivatePersonalResponse" message="tns:IMainManager_ReactivatePersonal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsUsernameAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsUsernameAvailable" message="tns:IMainManager_IsUsernameAvailable_InputMessage" />
@@ -241,8 +261,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdatePersonal">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/UpdatePersonal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeletePersonal">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/DeletePersonal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReactivatePersonal">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/ReactivatePersonal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

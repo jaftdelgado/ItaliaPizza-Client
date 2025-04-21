@@ -94,5 +94,19 @@ namespace ItaliaPizzaClient.Views
             if (mainWindow != null)
                 mainWindow.NavigateToPage("RegSupplier_Header", new RegisterSupplierPage());
         }
+
+        private void Click_BtnRegisterSupply(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Click_BtnCancel(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RequiredFields_TextChanged(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

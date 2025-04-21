@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ItaliaPizzaClient.Utilities;
+using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -15,20 +17,40 @@ namespace ItaliaPizzaClient.Views.Dialogs
             InitializeComponent();
         }
 
-        public static void Show(string title, string description, AlertType alertType)
+        public static void Show(string title, string description, AlertType alertType, Action onConfirm = null)
         {
             var mainWindow = Application.Current.MainWindow as MainWindow;
             if (mainWindow == null) return;
 
-            var dialog = new MessageDialog();
+            var dialog = new MessageDialog
+            {
+                _onConfirm = onConfirm
+            };
 
+            dialog.Opacity = 0;
             dialog.DialogTitle.Text = FindResourceString(title);
             dialog.DialogDescription.Text = FindResourceString(description);
-
             dialog.ConfigureAlertType(alertType);
 
-            mainWindow.DialogHost.Content = dialog;
-            mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+            // Depuración de la visibilidad de los controles
+            Debug.WriteLine("DialogHost Visibility: " + mainWindow.DialogHost.Visibility);
+            Debug.WriteLine("DialogOverlay Visibility: " + mainWindow.DialogOverlay.Visibility);
+
+            if (Application.Current.Dispatcher.CheckAccess())
+            {
+                mainWindow.DialogHost.Content = dialog;
+                mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+                Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
+            }
+            else
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    mainWindow.DialogHost.Content = dialog;
+                    mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+                    Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
+                });
+            }
         }
 
         public static void ShowConfirm(string title, string description, Action onConfirm,
@@ -55,8 +77,21 @@ namespace ItaliaPizzaClient.Views.Dialogs
                 dialog.BtnAccept.Content = FindResourceString(dangerButtonTextResourceKey);
             }
 
-            mainWindow.DialogHost.Content = dialog;
-            mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+            if (Application.Current.Dispatcher.CheckAccess())
+            {
+                mainWindow.DialogHost.Content = dialog;
+                mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+                Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
+            }
+            else
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    mainWindow.DialogHost.Content = dialog;
+                    mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+                    Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
+                });
+            }
         }
 
         private static string FindResourceString(string resourceKey)

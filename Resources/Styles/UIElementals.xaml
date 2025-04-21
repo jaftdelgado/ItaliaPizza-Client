@@ -5,7 +5,7 @@
     <FontFamily x:Key="SFProMedium">pack://application:,,,/Resources/Fonts/SFProDisplay-Medium.otf#SF Pro Display</FontFamily>
     <FontFamily x:Key="SFProSemiBold">pack://application:,,,/Resources/Fonts/SFProDisplay-Semibold.otf#SF Pro Display</FontFamily>
     <FontFamily x:Key="SFProBold">pack://application:,,,/Resources/Fonts/SFProDisplay-Bold.otf#SF Pro Display</FontFamily>
-    <FontFamily x:Key="SFProItalic">pack://application:,,,/Resources/Fonts/SFProDisplay-Italic.otf#SF Pro Display</FontFamily>
+    <FontFamily x:Key="SFMonoRegular">pack://application:,,,/Resources/Fonts/SFMono-Regular.otf#SF Mono Regular</FontFamily>
 
     <!-- Definición de colores -->
     <Color x:Key="BackgroundColor">#F4F4FA</Color>

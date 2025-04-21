@@ -43,5 +43,8 @@ namespace ItaliaPizzaClient.Model
                 return $"{Address.AddressName}, {Address.ZipCode}, {Address.City}";
             }
         }
+
+        public string DisplayUsername => string.IsNullOrWhiteSpace(Username) ? "N/D" : Username;
+
     }
 }

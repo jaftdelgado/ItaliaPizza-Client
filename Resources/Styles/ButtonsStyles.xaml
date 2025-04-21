@@ -224,6 +224,9 @@
                             <Setter TargetName="Text" Property="FontFamily" Value="{StaticResource SFProMedium}"/>
                             <Setter TargetName="SelectionIndicator" Property="Background" Value="{StaticResource PrimaryButtonBrush}"/>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Text" Property="Opacity" Value="0.4"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -278,7 +281,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style x:Key="ProfileButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>

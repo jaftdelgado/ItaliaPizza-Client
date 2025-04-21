@@ -289,7 +289,7 @@
     <Style x:Key="SecondarySearchBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
-        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Height" Value="28"/>
         <Setter Property="Padding" Value="8,0"/>
         <Setter Property="BorderThickness" Value="1"/>
