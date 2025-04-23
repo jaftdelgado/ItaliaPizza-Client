@@ -128,6 +128,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                     row = (DataGridRow)ticketPage.ProductDataGrid.ItemContainerGenerator.ContainerFromItem(item);
                 }
 
+
                 if (row != null)
                     row.UpdateLayout();
             }
