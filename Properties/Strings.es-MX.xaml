@@ -31,6 +31,7 @@
     <sys:String x:Key="Glb_AddressName">Dirección:</sys:String>
     <sys:String x:Key="Glb_ZipCode">Código Postal:</sys:String>
     <sys:String x:Key="Glb_City">Ciudad:</sys:String>
+    <sys:String x:Key="Glb_Description">Descripción:</sys:String>
     <sys:String x:Key="Glb_Active">Activos</sys:String>
     <sys:String x:Key="Glb_ViewAll">Ver Todos</sys:String>
     <sys:String x:Key="Glb_Deleted">Eliminados</sys:String>
@@ -67,6 +68,14 @@
     <sys:String x:Key="Supply_DessertsAndSweets">Postres y Dulces</sys:String>
     <sys:String x:Key="Supply_BakeryProducts">Productos de Panadería</sys:String>
     
+    <!--MeasureUnits-->
+    <sys:String x:Key="MeasureU_Kilograms">Kilogramos</sys:String>
+    <sys:String x:Key="MeasureU_Liters">Litros</sys:String>
+    <sys:String x:Key="MeasureU_Pieces">Piezas</sys:String>
+    <sys:String x:Key="MeasureUA_Kilograms">kg</sys:String>
+    <sys:String x:Key="MeasureUA_Liters">L</sys:String>
+    <sys:String x:Key="MeasureUA_Pieces">pzas.</sys:String>
+
     <!--EmployeeRoles-->
     <sys:String x:Key="EmployeeRole_Admin">Administrador</sys:String>
     <sys:String x:Key="EmployeeRole_Manager">Gerente</sys:String>
@@ -128,7 +137,7 @@
     <sys:String x:Key="RegEmployee_DialogDUserDuplicate">El nombre de usuario ingresado ya se encuentra en uso. Por favor, selecciona uno diferente e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogTEditEmployee">¿Editar empleado?</sys:String>
     <sys:String x:Key="RegEmployee_DialogDEditEmployee">¿Estás seguro de que deseas actualizar los datos del empleado seleccionado? Se sobreescribirá la información guardada anteriormente.</sys:String>
-    <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil</sys:String>
+    <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil...</sys:String>
 
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
@@ -151,6 +160,7 @@
     <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
+    <sys:String x:Key="RegSupply_DialogSelectSupplyImage">Seleccionar imagen del insumo...</sys:String>
     
     <!--Customers-->
     <sys:String x:Key="Customers_Header">Clientes</sys:String>

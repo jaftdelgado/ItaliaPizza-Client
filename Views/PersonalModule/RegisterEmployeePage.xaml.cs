@@ -123,7 +123,7 @@ namespace ItaliaPizzaClient.Views
 
         private void SelectProfileImage(Image targetImageControl, int targetWidth, int targetHeight)
         {
-            var dialogTitle = Application.Current.Resources["RegEmployee_DialogSelectProfilePic"]?.ToString();
+            var dialogTitle = Application.Current.Resources["RegSupply_DialogSelectSupplyImage"]?.ToString();
 
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -338,7 +338,6 @@ namespace ItaliaPizzaClient.Views
             }
         }
 
-
         private bool IsEmailAvailable(string email)
         {
             var service = ConnectionUtilities.IsServerConnected();
@@ -376,7 +375,6 @@ namespace ItaliaPizzaClient.Views
                 MessageDialog.Show("RegEmployee_DialogTInvalidPassword", "RegEmployee_DialogDInvalidPassword", AlertType.WARNING);
             }
         }
-
 
         private async void Click_BtnEditEmployee(object sender, RoutedEventArgs e)
         {
