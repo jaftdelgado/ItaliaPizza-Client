@@ -5,6 +5,7 @@ using System.Windows;
 using ItaliaPizzaClient.Views;
 using System.Windows.Data;
 using ItaliaPizzaClient.Views.CustomersModule;
+using ItaliaPizzaClient.Views.OrdersModule;
 
 namespace ItaliaPizzaClient.Utilities
 {
@@ -98,7 +99,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 2,
                     AllowedRoles = new List<string> { "Cashier", "Waiter", "Cook" },
                     IconPath = "/Resources/Icons/orders-icon.png",
-                    HoverIconPath = "/Resources/Icons/orders-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/orders-hover-icon.png",
+                    PageInstance = new OrderPage()
                 },
                 new MenuButton
                 {
