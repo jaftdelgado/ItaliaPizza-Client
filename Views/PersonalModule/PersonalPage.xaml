@@ -70,9 +70,13 @@
                                     Style="{DynamicResource TableHeaderButtonStyle}"/>
                         </StackPanel>
 
-                        <TextBox Grid.Column="1" HorizontalAlignment="Right"
-                             Style="{DynamicResource SecondarySearchBoxStyle}"
-                             Width="160"/>
+                        <TextBox x:Name="SearchBox"
+                                 Grid.Column="1"
+                                 HorizontalAlignment="Right"
+                                 Style="{DynamicResource SecondarySearchBoxStyle}"
+                                 Width="160"
+                                 TextChanged="SearchBox_TextChanged"/>
+
                     </Grid>
                 </Border>
 
@@ -88,12 +92,29 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" 
+                                    VerticalAlignment="Bottom" 
+                                    Margin="20 0">
                             <TextBlock Text="{DynamicResource Personal_TitleTable}"
-                                   Style="{DynamicResource SubtitleLabelStyle}"/>
+                                   Style="{DynamicResource SubtitleLabelStyle}"
+                                       Margin="0 0 8 0"/>
+                            <Border Background="{StaticResource SecondaryButtonBrush}"
+                                    CornerRadius="5"
+                                    BorderBrush="{DynamicResource BorderBrush}"
+                                    BorderThickness="1"
+                                    Padding="5 2"
+                                    HorizontalAlignment="Left">
+                                <TextBlock x:Name="ElementsCounter"
+                                           Text="-"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Style="{DynamicResource DescriptionLabelStyle}"
+                                           FontSize="11"/>
+                            </Border>
+
                         </StackPanel>
 
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1" Margin="0 10 0 20">
                             <DataGrid x:Name="PersonalDataGrid"
                                       AutoGenerateColumns="False"
                                       IsReadOnly="True"
@@ -103,106 +124,127 @@
                                       Style="{DynamicResource DataGridStyle1}"
                                       SelectionChanged="PersonalDataGrid_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <!-- Número -->
-                                    <DataGridTextColumn Header="#Número" Binding="{Binding PersonalID}" Width="64"/>
-
-                                    <!-- Empleado -->
-                                    <DataGridTextColumn Header="Empleado" Binding="{Binding FullName}" Width="4*"/>
-
-                                    <!-- RFC -->
-                                    <DataGridTextColumn Header="RFC" Binding="{Binding RFC}" Width="3*" />
-
-                                    <!-- Rol -->
-                                    <DataGridTextColumn Header="Rol" Binding="{Binding TranslatedRole}" Width="3*"/>
+                                    <DataGridTextColumn Header="{DynamicResource Personal_TableHEmployee}" 
+                                                        Binding="{Binding FullName}" Width="3.5*" 
+                                                        CellStyle="{StaticResource DataGridCellStyle0}">    
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <StaticResource ResourceKey="DataGridColumnHeaderStyle0"/>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="{DynamicResource Personal_TableHUser}" Binding="{Binding DisplayUsername}" Width="2.1*"/>
+                                    <DataGridTextColumn Header="{DynamicResource Personal_TableHRFC}" Binding="{Binding RFC}" Width="2.2*" FontFamily="{StaticResource SFMonoRegular}"/>
+                                    <DataGridTextColumn Header="{DynamicResource Personal_TableHRole}" Binding="{Binding TranslatedRole}" Width="2.2*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
-                            <TextBlock x:Name="LoadingText"
-                                        Text="Cargando datos..."
-                                        FontSize="16"
-                                        FontWeight="Bold"
-                                        Foreground="Gray"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Visibility="Collapsed"
-                                        Background="White"
-                                        Opacity="0.8"
-                                        Padding="20" />
+                            <StackPanel x:Name="NoMatchesMessage" Orientation="Vertical"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Visibility="Collapsed">
+                                <Image Source="/Resources/Icons/search-error-icon.png"
+                                       Width="64" Height="64"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Text="No se encontraron resultados"
+                                           Style="{DynamicResource SubtitleLabelStyle}"
+                                           Margin="0 6" TextAlignment="Center"/>
+                                <TextBlock Text="Comprueba tu ortografía o intenta buscar algo distinto"
+                                           TextAlignment="Center"
+                                           Style="{DynamicResource DescriptionLabelStyle}"/>
+                            </StackPanel>
                         </Grid>
+                        <TextBlock x:Name="EmptyListMessage"
+Text="No hay empleados registrados."
+FontSize="16"
+FontWeight="Bold"
+Foreground="Gray"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+Visibility="Collapsed"
+Background="White"
+Opacity="0.8"
+Padding="20"/>
 
+                        
                     </Grid>
 
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="104"/>
-                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" x:Name="EmployeeDetailsPanel"
+                                  Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20,24">
-                                <Image Name="EmployeeProfilePic"
-                                       HorizontalAlignment="Center" 
-                                       Width="140" Height="140" Stretch="Fill"
-                                       VerticalAlignment="Center"
-                                       RenderOptions.BitmapScalingMode="HighQuality">
-                                    <Image.Clip>
-                                        <EllipseGeometry RadiusX="70" RadiusY="70" Center="70,70"/>
-                                    </Image.Clip>
-                                </Image>
+                                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20,24">
+                                    <Image Name="EmployeeProfilePic"
+                                           HorizontalAlignment="Center"
+                                           Width="140" Height="140" Stretch="Fill"
+                                           VerticalAlignment="Center"
+                                           RenderOptions.BitmapScalingMode="HighQuality">
+                                        <Image.Clip>
+                                            <EllipseGeometry RadiusX="70" RadiusY="70" Center="70,70"/>
+                                        </Image.Clip>
+                                    </Image>
 
-                                <TextBlock x:Name="EmployeeRFC" Margin="0,10,0,0"
-                                       Style="{DynamicResource HeaderLabelStyle}" FontWeight="ExtraBold"
-                                       FontSize="10"/>
-                                <TextBlock x:Name="EmployeeLastName" FontSize="13"
-                                       Style="{DynamicResource SubtitleLabelStyle}"/>
-                                <TextBlock x:Name="EmployeeFirstName" FontSize="13"
-                                       Style="{DynamicResource RegularLabelStyle}"/>
-                                <TextBlock x:Name="EmployeeRole" Margin="0,4,0,0"
-                                       Style="{DynamicResource RegularLabelStyle}"
-                                       Foreground="{StaticResource PrimaryButtonBrush}"/>
-                                <Border BorderThickness="0,0.5,0,0" BorderBrush="{DynamicResource SecondaryBrush}"
-                                        Margin="0,8">
-                                    <StackPanel Orientation="Vertical" Margin="0,12">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="/Resources/Icons/phone-icon.png" Style="{StaticResource IconViewStyle}"/>
-                                            <TextBlock x:Name="EmployeePhone" Style="{DynamicResource DescriptionLabelStyle}"/>
-                                        </StackPanel>
+                                    <TextBlock x:Name="EmployeeName" FontSize="13"
+                                               Style="{DynamicResource SubtitleLabelStyle}"
+                                               Margin="0 16 0 0"/>
+                                    <TextBlock x:Name="EmployeeUsername"
+                                               Style="{DynamicResource DescriptionLabelStyle}"/>
+                                    <TextBlock x:Name="EmployeeRole" Margin="0 2"
+                                               Style="{DynamicResource RegularLabelStyle}"
+                                               Foreground="{StaticResource PrimaryButtonBrush}"/>
+                                    <Border BorderThickness="0,0.5,0,0" BorderBrush="{DynamicResource SecondaryBrush}" Margin="0,8">
+                                        <StackPanel Orientation="Vertical" Margin="0,12">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="/Resources/Icons/phone-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                                <TextBlock x:Name="EmployeePhone" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                            </StackPanel>
 
-                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                                            <Image Source="/Resources/Icons/email-icon.png" Style="{StaticResource IconViewStyle}"/>
-                                            <TextBlock x:Name="EmployeeEmail" Style="{DynamicResource DescriptionLabelStyle}"/>
-                                        </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                                <Image Source="/Resources/Icons/email-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                                <TextBlock x:Name="EmployeeEmail" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                            </StackPanel>
 
-                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                                            <Image Source="/Resources/Icons/calendar-icon.png" Style="{StaticResource IconViewStyle}"/>
-                                            <TextBlock x:Name="EmployeeHireDate" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                                <Image Source="/Resources/Icons/calendar-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                                <TextBlock x:Name="EmployeeHireDate" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                                <Image Source="/Resources/Icons/address-icon.png" Style="{StaticResource IconViewStyle}"
+                                                       VerticalAlignment="Top"/>
+                                                <TextBlock x:Name="EmployeeAddress" Style="{DynamicResource DescriptionLabelStyle}"
+                                                           TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Stretch"/>
+                                            </StackPanel>
                                         </StackPanel>
-                                        
-                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                                            <Image Source="/Resources/Icons/address-icon.png" Style="{StaticResource IconViewStyle}"
-                                                   VerticalAlignment="Top"/>
-                                            <TextBlock x:Name="EmployeeAddress" Style="{DynamicResource DescriptionLabelStyle}"
-                                                       TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Stretch"/>
-                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}" 
+                                        BorderThickness="0 0.5 0 0">
+                                    <StackPanel VerticalAlignment="Center" Margin="20">
+                                        <Button x:Name="BtnEditEmployee" Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource Personal_BtnEditEmployee}" Margin="0 0 0 6"
+                                                Click="Click_BtnEditEmployee">
+                                            <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                        </Button>
+                                        <Button x:Name="BtnDeleteEmployee" Style="{DynamicResource DangerButtonStyle}"
+                                                Content="{DynamicResource Personal_BtnDeleteEmployee}" 
+                                                Click="Click_BtnDeleteEmployee">
+                                            <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                                        </Button>
+
+                                        <Button x:Name="BtnReactivateEmployee" Visibility="Collapsed"
+                                                Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource Personal_BtnReactivateEmployee}"
+                                                Click="Click_BtnReactivateEmployee">
+                                            <Button.Tag>/Resources/Icons/reactivate-icon.png</Button.Tag>
+                                        </Button>
                                     </StackPanel>
                                 </Border>
-                            </StackPanel>
 
-                            <Border Grid.Row="2"
-                                    BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0 0.5 0 0">
-                                <StackPanel VerticalAlignment="Center" Margin="20 0">
-                                    <Button x:Name="BtnDeleteEmployee" Style="{DynamicResource DangerButtonStyle}"
-                                            Content="{DynamicResource Personal_BtnDeleteEmployee}"
-                                            Margin="0 0 0 6"
-                                            Click="Click_BtnDeleteEmployee">
-                                        <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
-                                    </Button>
-                                    <Button x:Name="BtnEditSupply" Style="{DynamicResource PrimaryButtonStyle}"
-                                            Content="{DynamicResource Personal_BtnEditEmployee}">
-                                        <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                    </Button>
-                                </StackPanel>
-                            </Border>
+                            </Grid>
                         </Grid>
                     </Border>
                 </Grid>

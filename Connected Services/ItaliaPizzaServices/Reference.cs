@@ -545,7 +545,7 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MeasureUnitField;
+        private int MeasureUnitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -596,12 +596,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MeasureUnit {
+        public int MeasureUnit {
             get {
                 return this.MeasureUnitField;
             }
             set {
-                if ((object.ReferenceEquals(this.MeasureUnitField, value) != true)) {
+                if ((this.MeasureUnitField.Equals(value) != true)) {
                     this.MeasureUnitField = value;
                     this.RaisePropertyChanged("MeasureUnit");
                 }
@@ -1573,11 +1573,23 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/AddPersonal", ReplyAction="http://tempuri.org/IPersonalManager/AddPersonalResponse")]
         System.Threading.Tasks.Task<int> AddPersonalAsync(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/UpdatePersonal", ReplyAction="http://tempuri.org/IPersonalManager/UpdatePersonalResponse")]
+        bool UpdatePersonal(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/UpdatePersonal", ReplyAction="http://tempuri.org/IPersonalManager/UpdatePersonalResponse")]
+        System.Threading.Tasks.Task<bool> UpdatePersonalAsync(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/DeletePersonal", ReplyAction="http://tempuri.org/IPersonalManager/DeletePersonalResponse")]
         bool DeletePersonal(int personalID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/DeletePersonal", ReplyAction="http://tempuri.org/IPersonalManager/DeletePersonalResponse")]
         System.Threading.Tasks.Task<bool> DeletePersonalAsync(int personalID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/ReactivatePersonal", ReplyAction="http://tempuri.org/IPersonalManager/ReactivatePersonalResponse")]
+        bool ReactivatePersonal(int personalID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/ReactivatePersonal", ReplyAction="http://tempuri.org/IPersonalManager/ReactivatePersonalResponse")]
+        System.Threading.Tasks.Task<bool> ReactivatePersonalAsync(int personalID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonalManager/IsUsernameAvailable", ReplyAction="http://tempuri.org/IPersonalManager/IsUsernameAvailableResponse")]
         bool IsUsernameAvailable(string username);
@@ -1719,12 +1731,28 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.AddPersonalAsync(personalDTO);
         }
         
+        public bool UpdatePersonal(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO) {
+            return base.Channel.UpdatePersonal(personalDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdatePersonalAsync(ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO personalDTO) {
+            return base.Channel.UpdatePersonalAsync(personalDTO);
+        }
+        
         public bool DeletePersonal(int personalID) {
             return base.Channel.DeletePersonal(personalID);
         }
         
         public System.Threading.Tasks.Task<bool> DeletePersonalAsync(int personalID) {
             return base.Channel.DeletePersonalAsync(personalID);
+        }
+        
+        public bool ReactivatePersonal(int personalID) {
+            return base.Channel.ReactivatePersonal(personalID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ReactivatePersonalAsync(int personalID) {
+            return base.Channel.ReactivatePersonalAsync(personalID);
         }
         
         public bool IsUsernameAvailable(string username) {

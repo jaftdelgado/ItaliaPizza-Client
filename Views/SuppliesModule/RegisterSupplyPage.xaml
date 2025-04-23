@@ -5,18 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="480" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="RegisterSupplyPage">
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="68"/>
-            <!--Cabecera-->
             <RowDefinition Height="*"/>
-            <!--Contenido Principal-->
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="0,0,0,0.5"
+        <Border Grid.Row="0" BorderThickness="0 0 0 0.5"
                 BorderBrush="{StaticResource SecondaryBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -72,134 +70,146 @@
                         <Button.Tag>/Resources/Icons/gallery-icon.png</Button.Tag>
                     </Button>
 
-                    <Button Content="{DynamicResource Glb_BtnDeleteImage}"
+                    <Button x:Name="BtnDeleteImage" 
+                            Content="{DynamicResource Glb_BtnDeleteImage}"
                             Style="{DynamicResource DangerButtonStyle}">
                         <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
                     </Button>
                 </StackPanel>
             </Border>
-            
+
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="36"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0">
                     <TextBlock Text="{DynamicResource RegSupply_SupplyInfo}"
                                Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
-                <Border Grid.Row="1">
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20,12,0,0">
+                    <TextBlock Text="Datos generales"
+                               Style="{DynamicResource DescriptionLabelStyle}" Margin="0,0,0,8"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="12*" MaxWidth="720"/>
+                            <ColumnDefinition Width="7*" MaxWidth="640"/>
                             <ColumnDefinition Width="*" MinWidth="0"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" HorizontalAlignment="Stretch" Margin="20,0,0,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
+                        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <TextBox x:Name="TbSupplyName"
-                                         Grid.Row="0" Grid.Column="0"
-                                         Tag="{DynamicResource RegSupply_TbSupplyName}" 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox x:Name="TbSupplyName" 
+                                     Grid.ColumnSpan="2" Grid.Row="0"
+                                     Tag="{DynamicResource RegSupply_TbSupplyName}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                     Margin="0 0 0 10"
+                                     TextChanged="RequiredFields_TextChanged"/>
+                            <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Top"
+                                        Margin="0 0 10 0">
+                                <TextBox x:Name="TbSupplyBrand"
+                                         Tag="{DynamicResource RegSupply_TbSupplyBrand}"
                                          Style="{DynamicResource TextBoxStyle}"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                         Margin="0,0,10,8"/>
-                                <StackPanel Grid.Row="0" Grid.Column="1"
-                                            Orientation="Vertical" VerticalAlignment="Top"
-                                            Margin="10,0,0,8">
-                                    <TextBox x:Name="TbSupplyBrand"
-                                             Tag="{DynamicResource RegSupply_TbSupplyBrand}" 
-                                             Style="{DynamicResource TextBoxStyle}"/>
-                                    <CheckBox Content="{DynamicResource RegSupply_CheckBSupplyBrand}"
-                                              Style="{DynamicResource CheckBoxStyle}" Margin="5,4,0,0"
-                                              Checked="CheckbBrand_Checked" Unchecked="CheckbBrand_Unchecked"/>
-                                </StackPanel>
-
-                                <ComboBox x:Name="CbCategories"
-                                          Grid.Row="1" Grid.Column="0"
-                                          Tag="{DynamicResource RegSupply_CbCategory}"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          Margin="0,8,10,8"
-                                          DisplayMemberPath="Name"
-                                          SelectedValuePath="Name"/>
-                                <ComboBox x:Name="CbSupplyMeasure"
-                                          Grid.Row="1" Grid.Column="1"
-                                          Tag="{DynamicResource RegSupply_CbSupplyMeasure}"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          Margin="10,8,0,8"/>
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,12,0,16">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2.5*" />
-                                        <ColumnDefinition Width="7.5*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBox Grid.Column="0"
-                                             Tag="{DynamicResource RegSupply_TbUnitPrice}"
-                                             Style="{DynamicResource TextBoxStyle}"
-                                             Margin="0,0,10,0"
-                                             PreviewTextInput="PreviewTextInput_TbUnitPrice"
-                                             LostFocus="LostFocus_TbUnitPrice"/>
-
-                                    <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <ComboBox Grid.Column="0" Tag="{DynamicResource RegSupply_CbSupplier}"
-                                                  Style="{DynamicResource ComboBoxStyle}"
-                                                  HorizontalAlignment="Stretch"
-                                                  Margin="10,10,5,10"/>
-                                        <Button Grid.Column="1" Style="{DynamicResource PrimaryButtonStyle}"
-                                                Content="{DynamicResource RegSupply_BtnRegisterSupplier}"
-                                                HorizontalAlignment="Stretch"
-                                                Margin="5,0,0,0"
-                                                Click="Click_BtnRegisterSupplier">
-                                            <Button.Tag>/Resources/Icons/redirect-icon.png</Button.Tag>
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-
-                                <TextBox Grid.ColumnSpan="2" Grid.Row="3"
-                                         Style="{DynamicResource TextAreaStyle}"
-                                         Tag="Descripción:"/>
-                            </Grid>
+                                         TextChanged="RequiredFields_TextChanged"/>
+                                <CheckBox x:Name="SupplyBrandCheckBox"
+                                          Style="{DynamicResource CheckBoxStyle}"
+                                          Content="{DynamicResource RegSupply_CheckBSupplyBrand}"
+                                          Margin="5 4 0 0"
+                                          IsChecked="False"
+                                          Checked="CheckbBrand_Checked"
+                                          Unchecked="CheckbBrand_Unchecked"/>
+                            </StackPanel>
+                            <ComboBox x:Name="CbCategories"
+                                      Grid.Column="1" Grid.Row="1"
+                                      Tag="{DynamicResource RegSupply_CbCategory}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      Margin="10 0 0 0"
+                                      VerticalAlignment="Top"/>
                         </Grid>
-
                     </Grid>
-                </Border>
+
+                    <TextBlock Text="Datos comerciales"
+                               Style="{DynamicResource DescriptionLabelStyle}"
+                               Margin="0 12 0 8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" MaxWidth="640"/>
+                            <ColumnDefinition Width="*" MinWidth="0"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="TbUnitPrice"
+                                     Grid.Column="0"
+                                     Tag="{DynamicResource RegSupply_TbUnitPrice}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     Margin="0 0 10 0"
+                                     TextChanged="RequiredFields_TextChanged"/>
+                            <ComboBox x:Name="CbSupplyMeasure"
+                                      Grid.Column="1"
+                                      Tag="{DynamicResource RegSupply_CbSupplyMeasure}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      Margin="10 0 0 0"/>
+                        </Grid>
+                    </Grid>
+
+                    <TextBlock Text="Descripción del insumo"
+                               Style="{DynamicResource DescriptionLabelStyle}"
+                               Margin="0 12 0 8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" MaxWidth="640"/>
+                            <ColumnDefinition Width="*" MinWidth="0"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="TbDescription"
+                                     Grid.Column="0"
+                                     Tag="{DynamicResource Glb_Description}"
+                                     Style="{DynamicResource TextAreaStyle}"/>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
 
                 <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
                         BorderThickness="0,0.5,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
-                        <Button x:Name="BtnNewSupply" Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                        <Button x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonNoIconStyle}"
                                 Content="{DynamicResource Glb_Cancel}"
-                                Margin="0,0,10,0">
-                            <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
-                        </Button>
-                        
-                        <Button x:Name="BtnCancel" Style="{DynamicResource PrimaryButtonStyle}"
-                                Content="{DynamicResource RegSupply_BtnRegisterSupply}">
+                                Margin="0,0,10,0"
+                                Click="Click_BtnCancel"/>
+                        <Button x:Name="BtnRegisterSupply" 
+                                Style="{DynamicResource PrimaryButtonStyle}"
+                                Content="{DynamicResource RegSupply_BtnRegisterSupply}"
+                                Click="Click_BtnRegisterSupply">
                             <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                         </Button>
                     </StackPanel>
                 </Border>
 
             </Grid>
-            
+
         </Grid>
     </Grid>
 </Page>

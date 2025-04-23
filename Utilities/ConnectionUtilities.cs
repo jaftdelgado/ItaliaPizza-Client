@@ -4,6 +4,8 @@ using ItaliaPizzaClient.Views.Dialogs;
 using ItaliaPizzaClient.ItaliaPizzaServices;
 using System.Data.SqlClient;
 using System.Windows;
+using System.Threading.Tasks;
+using ItaliaPizzaClient.Views;
 
 namespace ItaliaPizzaClient.Utilities
 {
@@ -12,7 +14,6 @@ namespace ItaliaPizzaClient.Utilities
         private static ChannelFactory<IMainManager> _channelFactory;
         private static IMainManager _service;
 
-        // Manejo de la conexión con el servidor
         public static IMainManager IsServerConnected()
         {
             try
@@ -31,13 +32,13 @@ namespace ItaliaPizzaClient.Utilities
                 }
                 catch
                 {
-                    MessageDialog.Show("GlbDialogT_NoConnection", "GlbDialogD_NoConnection", AlertType.ERROR);
+                    ShowSafeDialog("GlbDialogT_NoConnection", "GlbDialogD_NoConnection", AlertType.ERROR);
                     return null;
                 }
             }
             catch (TimeoutException)
             {
-                MessageDialog.Show("GlbDialogT_TimeOut", "GlbDialogD_TimeOut", AlertType.ERROR);
+                ShowSafeDialog("GlbDialogT_TimeOut", "GlbDialogD_TimeOut", AlertType.ERROR);
                 return null;
             }
         }
@@ -91,56 +92,37 @@ namespace ItaliaPizzaClient.Utilities
             }
         }
 
-        public static void ExecuteDatabaseSafeAction(Action action)
+        public static async Task ExecuteServerAction(Func<Task> action)
         {
+            await Application.Current.Dispatcher.InvokeAsync(() => LoadingDialog.Show());
+
             try
             {
-                action();
-            }
-            catch (SqlException)
-            {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
-            }
-            catch (InvalidOperationException)
-            {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
-            }
-            catch (FaultException)
-            {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                await Task.Run(action);
             }
             catch (Exception)
             {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    LoadingDialog.Close();
+                    MessageDialog.Show("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
+                });
+            }
+            finally
+            {
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    if (IsLoadingDialogVisible())
+                        LoadingDialog.Close();
+                });
             }
         }
 
-        public static T ExecuteDatabaseSafeFunction<T>(Func<T> func, T defaultValue = default)
+        private static bool IsLoadingDialogVisible()
         {
-            try
-            {
-                return func();
-            }
-            catch (SqlException)
-            {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
-                return defaultValue;
-            }
-            catch (InvalidOperationException)
-            {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
-                return defaultValue;
-            }
-            catch (FaultException)
-            {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
-                return defaultValue;
-            }
-            catch (Exception)
-            {
-                ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
-                return defaultValue;
-            }
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            return mainWindow?.DialogHost.Content is LoadingDialog;
         }
+
     }
 }

@@ -16,7 +16,6 @@ namespace ItaliaPizzaClient.Views
         private readonly List<OrderItem> orderItems = new List<OrderItem>();
         private readonly MainManagerClient client = new MainManagerClient();
 
-
         public RegisterOrderSupplierPage()
         {
             InitializeComponent();
@@ -44,7 +43,6 @@ namespace ItaliaPizzaClient.Views
                 });
             }
         }
-
 
         private void cbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -125,7 +123,6 @@ namespace ItaliaPizzaClient.Views
             }
         }
 
-
         private void AddSupplyButton_Click(object sender, RoutedEventArgs e)
         {
             if (cbSuppliesName.SelectedItem is ComboBoxItem selectedItem &&
@@ -133,11 +130,14 @@ namespace ItaliaPizzaClient.Views
                 decimal.TryParse(txtQuantity.Text, out decimal quantity) &&
                 quantity > 0)
             {
+                var allUnits = MeasureUnit.GetDefaultMeasureUnits();
+                var measureUnit = allUnits.FirstOrDefault(mu => mu.Id == selectedSupply.MeasureUnit);
+
                 orderItems.Add(new OrderItem
                 {
                     SupplyName = selectedSupply.Name,
                     Quantity = quantity,
-                    MeasureUnit = selectedSupply.MeasureUnit
+                    MeasureUnit = measureUnit?.Abbreviation
                 });
 
                 OrdersuppliersDataGrid.ItemsSource = null;

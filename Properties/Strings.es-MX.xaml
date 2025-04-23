@@ -31,9 +31,11 @@
     <sys:String x:Key="Glb_AddressName">Dirección:</sys:String>
     <sys:String x:Key="Glb_ZipCode">Código Postal:</sys:String>
     <sys:String x:Key="Glb_City">Ciudad:</sys:String>
+    <sys:String x:Key="Glb_Description">Descripción:</sys:String>
     <sys:String x:Key="Glb_Active">Activos</sys:String>
     <sys:String x:Key="Glb_ViewAll">Ver Todos</sys:String>
     <sys:String x:Key="Glb_Deleted">Eliminados</sys:String>
+    <sys:String x:Key="Glb_NoSelected">Sin selección actual</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
     <sys:String x:Key="Glb_BtnDeleteImage">Eliminar foto</sys:String>
@@ -66,6 +68,14 @@
     <sys:String x:Key="Supply_DessertsAndSweets">Postres y Dulces</sys:String>
     <sys:String x:Key="Supply_BakeryProducts">Productos de Panadería</sys:String>
     
+    <!--MeasureUnits-->
+    <sys:String x:Key="MeasureU_Kilograms">Kilogramos</sys:String>
+    <sys:String x:Key="MeasureU_Liters">Litros</sys:String>
+    <sys:String x:Key="MeasureU_Pieces">Piezas</sys:String>
+    <sys:String x:Key="MeasureUA_Kilograms">kg</sys:String>
+    <sys:String x:Key="MeasureUA_Liters">L</sys:String>
+    <sys:String x:Key="MeasureUA_Pieces">pzas.</sys:String>
+
     <!--EmployeeRoles-->
     <sys:String x:Key="EmployeeRole_Admin">Administrador</sys:String>
     <sys:String x:Key="EmployeeRole_Manager">Gerente</sys:String>
@@ -78,21 +88,30 @@
     <sys:String x:Key="Personal_Header">Personal</sys:String>
     <sys:String x:Key="Personal_Desc">Visualiza, registra, modifica y elimina la plantilla de empleados de Italia Pizza.</sys:String>
     <sys:String x:Key="Personal_BtnNewEmployee">Nuevo Empleado</sys:String>
-    <sys:String x:Key="Personal_TitleTable">Lista de Personal</sys:String>
+    <sys:String x:Key="Personal_TitleTable">Plantilla de Personal</sys:String>
     <sys:String x:Key="Personal_TableHEmployee">Empleado</sys:String>
+    <sys:String x:Key="Personal_TableHUser">Usuario</sys:String>
     <sys:String x:Key="Personal_TableHRFC">RFC</sys:String>
     <sys:String x:Key="Personal_TableHRole">Puesto</sys:String>
+    <sys:String x:Key="Personal_NoEmployeeSelectedD">Actualmente no hay ningún empleado seleccionado. Elige uno de la lista para consultar su información detallada.</sys:String>
     <sys:String x:Key="Personal_HiredOn">Contratado el:</sys:String>
     <sys:String x:Key="Personal_BtnDeleteEmployee">Eliminar Empleado</sys:String>
     <sys:String x:Key="Personal_BtnEditEmployee">Editar Empleado</sys:String>
-    <sys:String x:Key="Personal_DialogTDeleteEmployee">Eliminar Empleado</sys:String>
+    <sys:String x:Key="Personal_BtnReactivateEmployee">Reactivar Empleado</sys:String>
+    <sys:String x:Key="Personal_DialogTDeleteEmployee">¿Eliminar empleado?</sys:String>
     <sys:String x:Key="Personal_DialogDDeleteEmployee">¿Estás seguro de que deseas eliminar al empleado seleccionado? La eliminación es reversible y podrás restaurarlo más tarde si lo necesitas.</sys:String>
     <sys:String x:Key="Personal_DialogTDeletedEmployee">Empleado eliminado</sys:String>
     <sys:String x:Key="Personal_DialogDDeletedEmployee">El empleado fue marcado como eliminado correctamente. Puedes restaurarlo desde la vista de empleados eliminados.</sys:String>
+    <sys:String x:Key="Personal_DialogTReactivateEmployee">¿Reactivar empleado?</sys:String>
+    <sys:String x:Key="Personal_DialogDReactivateEmployee">¿Estás seguro de que deseas reactivar al empleado seleccionado? Se reincorporará a la plantilla del personal y se actualizará su fecha de contratación.</sys:String>
+    <sys:String x:Key="Personal_DialogTReactivatedEmployee">Empleado reactivado</sys:String>
+    <sys:String x:Key="Personal_DialogDReactivatedEmployee">El empleado fue reactivao correctamente. Ahora aparecerá nuevamente en la plantilla del personal.</sys:String>
 
     <!--Register Employee-->
     <sys:String x:Key="RegEmployee_Header">Registrar Empleado</sys:String>
     <sys:String x:Key="RegEmployee_Desc">Ingresa los datos del empleado que se desea registrar.</sys:String>
+    <sys:String x:Key="EditEmployee_Header">Editar Empleado</sys:String>
+    <sys:String x:Key="EditEmployee_Desc">Ingresa los datos del empleado que se desea registrar.</sys:String>
     <sys:String x:Key="RegEmployee_EmployeeInfo">Información del Empleado</sys:String>
     <sys:String x:Key="RegEmployee_PersonalInfo">Datos personales</sys:String>
     <sys:String x:Key="RegEmployee_AddressPersonal">Dirección del Empleado</sys:String>
@@ -105,15 +124,20 @@
     <sys:String x:Key="RegEmployee_TbUsername">Nombre de usuario:</sys:String>
     <sys:String x:Key="RegEmployee_PbPassword">Contraseña:</sys:String>
     <sys:String x:Key="RegEmployee_BtnRegisterEmployee">Registrar Empleado</sys:String>
+    <sys:String x:Key="RegEmployee_BtnEditEmployee">Editar Empleado</sys:String>
     <sys:String x:Key="RegEmployee_DialogTSuccess">Empleado registrado</sys:String>
     <sys:String x:Key="RegEmployee_DialogDSuccess">La información del empleado ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogTEditSuccess">Empleado actualizado</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDEditSuccess">La información del empleado ha sido actualizada correctamente y los cambios han sido guardados con éxito."</sys:String>
     <sys:String x:Key="RegEmployee_DialogTInvalidPassword">Contraseña insegura</sys:String>
     <sys:String x:Key="RegEmployee_DialogDInvalidPassword">La contraseña debe contener al menos 6 caracteres, una mayúscula, una minúscula y un número. Inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogTRfcDuplicate">RFC duplicado</sys:String>
     <sys:String x:Key="RegEmployee_DialogDRfcDuplicate">El RFC del empleado ya está se encuentrado registrado en el sistema. Verifica los datos e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="RegEmployee_DialogTUserDuplicate">Usuario no disponible</sys:String>
     <sys:String x:Key="RegEmployee_DialogDUserDuplicate">El nombre de usuario ingresado ya se encuentra en uso. Por favor, selecciona uno diferente e inténtalo nuevamente.</sys:String>
-    <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil</sys:String>
+    <sys:String x:Key="RegEmployee_DialogTEditEmployee">¿Editar empleado?</sys:String>
+    <sys:String x:Key="RegEmployee_DialogDEditEmployee">¿Estás seguro de que deseas actualizar los datos del empleado seleccionado? Se sobreescribirá la información guardada anteriormente.</sys:String>
+    <sys:String x:Key="RegEmployee_DialogSelectProfilePic">Seleccionar imagen de perfil...</sys:String>
 
     <!--Supplies-->
     <sys:String x:Key="Supplies_Header">Insumos</sys:String>
@@ -136,6 +160,7 @@
     <sys:String x:Key="RegSupply_CbSupplyMeasure">Unidad de medida:</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupplier">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupply_BtnRegisterSupply">Registrar Insumo</sys:String>
+    <sys:String x:Key="RegSupply_DialogSelectSupplyImage">Seleccionar imagen del insumo...</sys:String>
     
     <!--Customers-->
     <sys:String x:Key="Customers_Header">Clientes</sys:String>

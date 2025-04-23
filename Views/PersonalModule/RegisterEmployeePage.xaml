@@ -25,9 +25,11 @@
 
                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                    <TextBlock x:Name="PageHeader" 
+                           Style="{StaticResource HeaderLabelStyle}"
                            Text="{DynamicResource RegEmployee_Header}"/>
-                    <TextBlock Style="{StaticResource DescriptionLabelStyle}"
+                    <TextBlock x:Name="PageDescription"
+                           Style="{StaticResource DescriptionLabelStyle}"
                            Text="{DynamicResource RegEmployee_Desc}"/>
                 </StackPanel>
             </Grid>
@@ -199,6 +201,7 @@
                                      Grid.Column="0"
                                      Tag="{DynamicResource RegEmployee_TbRfc}"
                                      Style="{DynamicResource TextBoxStyle}"
+                                     TextChanged="RequiredFields_TextChanged"
                                      Margin="0,0,10,24"/>
                             <ComboBox Grid.Row="3" Grid.Column="1"
                                       x:Name="CbEmployeeRoles"
@@ -273,6 +276,13 @@
                                 Content="{DynamicResource RegEmployee_BtnRegisterEmployee}"
                                 Click="Click_BtnRegisterEmployee">
                             <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                        </Button>
+                        <Button x:Name="BtnEditEmployee" 
+                                Style="{DynamicResource PrimaryButtonStyle}"
+                                Content="{DynamicResource RegEmployee_BtnEditEmployee}"
+                                Click="Click_BtnEditEmployee"
+                                Visibility="Collapsed">
+                            <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
                         </Button>
                     </StackPanel>
                 </Border>

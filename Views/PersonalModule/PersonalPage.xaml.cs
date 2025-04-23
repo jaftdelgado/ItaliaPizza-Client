@@ -17,112 +17,113 @@ namespace ItaliaPizzaClient.Views
         public PersonalPage()
         {
             InitializeComponent();
+            BtnActive.Tag = "Selected";
             Loaded += PersonalPage_Loaded;
         }
 
-        private async void PersonalPage_Loaded(object sender, RoutedEventArgs e)
+        private void PersonalPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await LoadPersonalDataAsync();
+            LoadPersonalData();
         }
 
-        private async Task LoadPersonalDataAsync()
+        private async void LoadPersonalData()
         {
-            // Mostrar loading en el hilo de UI
-            LoadingText.Visibility = Visibility.Visible;
-            PersonalDataGrid.ItemsSource = null;
-
-            var client = ConnectionUtilities.IsServerConnected();
-            if (client == null)
+            await ConnectionUtilities.ExecuteServerAction(async () =>
             {
-                LoadingText.Visibility = Visibility.Collapsed;
-                return;
-            }
+                var client = ConnectionUtilities.IsServerConnected();
+                if (client == null)
+                    return;
 
-            await Task.Run(() =>
-            {
-                try
+                var dtoList = client.GetAllPersonals();
+
+                var list = dtoList.Select(p => new Personal
                 {
-                    var dtoList = client.GetAllPersonals();
-
-                    _allPersonals = dtoList.Select(p => new Personal
+                    PersonalID = p.PersonalID,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    RFC = p.RFC,
+                    EmailAddress = p.EmailAddress,
+                    PhoneNumber = p.PhoneNumber,
+                    Username = p.Username,
+                    Password = p.Password,
+                    ProfilePic = p.ProfilePic,
+                    HireDate = p.HireDate,
+                    IsActive = p.IsActive,
+                    RoleID = p.RoleID,
+                    AddressID = p.AddressID,
+                    IsOnline = p.IsOnline,
+                    Address = p.Address == null ? null : new Address
                     {
-                        PersonalID = p.PersonalID,
-                        FirstName = p.FirstName,
-                        LastName = p.LastName,
-                        RFC = p.RFC,
-                        EmailAddress = p.EmailAddress,
-                        PhoneNumber = p.PhoneNumber,
-                        Username = p.Username,
-                        Password = p.Password,
-                        ProfilePic = p.ProfilePic,
-                        HireDate = p.HireDate,
-                        IsActive = p.IsActive,
-                        RoleID = p.RoleID,
-                        AddressID = p.AddressID,
-                        IsOnline = p.IsOnline,
-                        Address = p.Address == null ? null : new Address
-                        {
-                            Id = p.Address.Id,
-                            AddressName = p.Address.AddressName,
-                            ZipCode = p.Address.ZipCode,
-                            City = p.Address.City
-                        }
-                    })
-                    .OrderBy(p => p.LastName)
-                    .ThenBy(p => p.FirstName)
-                    .ToList();
+                        Id = p.Address.Id,
+                        AddressName = p.Address.AddressName,
+                        ZipCode = p.Address.ZipCode,
+                        City = p.Address.City
+                    }
+                })
+                .OrderBy(p => p.LastName)
+                .ThenBy(p => p.FirstName)
+                .ToList();
 
+                _allPersonals = list;
 
-                    Dispatcher.Invoke(() =>
-                    {
-                        ApplyFilter("BtnActive");
-                    });
-                }
-                catch (Exception)
+                await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    // Mostrar el mensaje en el hilo de UI
-                    Dispatcher.Invoke(() =>
-                    {
-                        ConnectionUtilities.ShowSafeDialog("GlbDialogT_DBNoConnection", "GlbDialogD_DBNoConnection", AlertType.ERROR);
-                    });
-                }
-                finally
-                {
-                    // Siempre ocultar el loading al final
-                    Dispatcher.Invoke(() =>
-                    {
-                        LoadingText.Visibility = Visibility.Collapsed;
-                    });
-                }
+                    ApplyFilter("BtnActive");
+                });
             });
         }
 
-        private void DeleteEmployee(Personal selected)
+        private async Task DeleteEmployee(Personal selected)
         {
-            var client = ConnectionUtilities.IsServerConnected();
-            if (client == null) return;
-
-            ConnectionUtilities.ExecuteDatabaseSafeAction(() =>
+            await ConnectionUtilities.ExecuteServerAction(async () =>
             {
-                bool result = client.DeletePersonal(selected.PersonalID);
-                if (result)
+                var client = ConnectionUtilities.IsServerConnected();
+                if (client == null) return;
+
+                bool success = client.DeletePersonal(selected.PersonalID);
+                if (!success) return;
+
+                var item = _allPersonals.FirstOrDefault(p => p.PersonalID == selected.PersonalID);
+                if (item != null)
+                    item.IsActive = false;
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    var item = _allPersonals.FirstOrDefault(p => p.PersonalID == selected.PersonalID);
-                    if (item != null)
-                        item.IsActive = false;
+                    string selectedFilter = GetSelectedFilterButtonName();
+                    ApplyFilter(selectedFilter);
 
-                    Dispatcher.Invoke(() =>
-                    {
-                        string selectedFilter = GetSelectedFilterButtonName();
-                        ApplyFilter(selectedFilter);
+                    MessageDialog.Show("Personal_DialogTDeletedEmployee", "Personal_DialogDDeletedEmployee", AlertType.SUCCESS);
+                });
+            });
+        }
 
-                        Dispatcher.InvokeAsync(() =>
-                        {
-                            MessageDialog.Show("Personal_DialogTDeletedEmployee", "Personal_DialogDDeletedEmployee", AlertType.SUCCESS);
-                        });
-                    });
+        private async Task ReactivateEmployee(Personal selected)
+        {
+            await ConnectionUtilities.ExecuteServerAction(async () =>
+            {
+                var client = ConnectionUtilities.IsServerConnected();
+                if (client == null) return;
 
+                bool result = client.ReactivatePersonal(selected.PersonalID);
+                if (!result) return;
+
+                var item = _allPersonals.FirstOrDefault(p => p.PersonalID == selected.PersonalID);
+                if (item != null)
+                {
+                    item.IsActive = true;
+                    item.HireDate = DateTime.Now;
                 }
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    if (!_allPersonals.Any(p => !p.IsActive))
+                        ApplyFilter("BtnActive");
+                    else
+                        ApplyFilter(GetSelectedFilterButtonName());
+
+                    DisplayEmployeeDetails(selected);
+                    MessageDialog.Show("Personal_DialogTReactivatedEmployee", "Personal_DialogDReactivatedEmployee", AlertType.SUCCESS);
+                });
             });
         }
 
@@ -138,9 +139,17 @@ namespace ItaliaPizzaClient.Views
                 case "BtnDeleted":
                     filteredList = _allPersonals.Where(p => !p.IsActive);
                     break;
-                case "BtnViewAll":
-                default:
-                    break;
+            }
+
+            EmptyListMessage.Visibility = Visibility.Collapsed;
+            NoMatchesMessage.Visibility = Visibility.Collapsed;
+
+            if (!filteredList.Any())
+            {
+                if (string.IsNullOrWhiteSpace(SearchBox.Text))
+                    EmptyListMessage.Visibility = Visibility.Visible;
+                else
+                    NoMatchesMessage.Visibility = Visibility.Visible;
             }
 
             PersonalDataGrid.ItemsSource = filteredList;
@@ -161,6 +170,34 @@ namespace ItaliaPizzaClient.Views
                     BtnViewAll.Tag = "Selected";
                     break;
             }
+
+            BtnDeleted.IsEnabled = _allPersonals.Any(p => !p.IsActive);
+            UpdateElementsCounter(filteredList.Count());
+        }
+
+        private void DisplayEmployeeDetails(Personal selected)
+        {
+            if (selected == null)
+                return;
+
+            UpdateEmployeePanelVisibility(selected);
+
+            ImageUtilities.SetImageSource(EmployeeProfilePic, selected.ProfilePic, Constants.DEFAULT_PROFILE_PIC_PATH);
+
+            EmployeeName.Text = selected.FullName;
+            EmployeeUsername.Text = selected.DisplayUsername;
+            EmployeeRole.Text = selected.TranslatedRole;
+            EmployeePhone.Text = selected.PhoneNumber;
+            EmployeeEmail.Text = selected.EmailAddress;
+
+            string hiredOnText = FindResource("Personal_HiredOn") as string ?? "";
+            EmployeeHireDate.Text = $"{hiredOnText.Trim()} {selected.HireDate:dd/MM/yyyy}";
+
+            EmployeeAddress.Text = selected.FullAddress;
+
+            BtnDeleteEmployee.Visibility = selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
+            BtnEditEmployee.Visibility = selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
+            BtnReactivateEmployee.Visibility = !selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private string GetSelectedFilterButtonName()
@@ -168,6 +205,18 @@ namespace ItaliaPizzaClient.Views
             if (BtnActive.Tag?.ToString() == "Selected") return "BtnActive";
             if (BtnDeleted.Tag?.ToString() == "Selected") return "BtnDeleted";
             return "BtnViewAll";
+        }
+
+        private void UpdateEmployeePanelVisibility(Personal selected)
+        {
+            bool hasSelection = selected != null;
+
+            EmployeeDetailsPanel.Visibility = hasSelection ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void UpdateElementsCounter(int count)
+        {
+            ElementsCounter.Text = count.ToString();
         }
 
         private void Click_BtnNewEmployee(object sender, RoutedEventArgs e)
@@ -181,43 +230,96 @@ namespace ItaliaPizzaClient.Views
         private void PersonalDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (PersonalDataGrid.SelectedItem is Personal selected)
-            {
-                ImageUtilities.SetImageSource(EmployeeProfilePic, selected.ProfilePic, Constants.DEFAULT_PROFILE_PIC_PATH);
-
-                EmployeeRFC.Text = selected.RFC;
-                EmployeeLastName.Text = selected.LastName;
-                EmployeeFirstName.Text = selected.FirstName;
-                EmployeeRole.Text = selected.TranslatedRole;
-                EmployeePhone.Text = selected.PhoneNumber;
-                EmployeeEmail.Text = selected.EmailAddress;
-
-                string hiredOnText = FindResource("Personal_HiredOn") as string ?? null;
-                EmployeeHireDate.Text = $"{hiredOnText}{selected.HireDate:dd/MM/yyyy}";
-
-                EmployeeAddress.Text = selected.FullAddress;
-            }
+                DisplayEmployeeDetails(selected);
+            else
+                UpdateEmployeePanelVisibility(null);
         }
-
-        private void Click_BtnDeleteEmployee(object sender, RoutedEventArgs e)
-        {
-            MessageDialog.ShowConfirm(
-                "Personal_DialogTDeleteEmployee", "Personal_DialogDDeleteEmployee",
-                () =>
-                {
-                    if (PersonalDataGrid.SelectedItem is Personal selected)
-                        DeleteEmployee(selected);
-                },
-                "Glb_Delete"
-            );
-        }
-
 
         private void Click_FilterButton(object sender, RoutedEventArgs e)
         {
             if (sender is Button button) ApplyFilter(button.Name);
         }
 
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchBox.Text.Trim().ToLower();
 
+            string selectedFilter = GetSelectedFilterButtonName();
+
+            IEnumerable<Personal> filteredList = _allPersonals;
+
+            switch (selectedFilter)
+            {
+                case "BtnActive":
+                    filteredList = filteredList.Where(p => p.IsActive);
+                    break;
+                case "BtnDeleted":
+                    filteredList = filteredList.Where(p => !p.IsActive);
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                filteredList = filteredList.Where(p =>
+                    $"{p.FirstName} {p.LastName}".ToLower().Contains(searchText) ||
+                    p.RFC?.ToLower().Contains(searchText) == true ||
+                    p.PhoneNumber?.ToLower().Contains(searchText) == true ||
+                    p.Address != null && (
+                        p.Address.AddressName?.ToLower().Contains(searchText) == true ||
+                        p.Address.City?.ToLower().Contains(searchText) == true ||
+                        p.Address.ZipCode?.ToLower().Contains(searchText) == true
+                    )
+                );
+            }
+
+            EmptyListMessage.Visibility = Visibility.Collapsed;
+            NoMatchesMessage.Visibility = Visibility.Collapsed;
+
+            if (!filteredList.Any())
+            {
+                if (string.IsNullOrWhiteSpace(searchText))
+                    EmptyListMessage.Visibility = Visibility.Visible;
+                else
+                    NoMatchesMessage.Visibility = Visibility.Visible;
+            }
+
+            PersonalDataGrid.ItemsSource = filteredList;
+            UpdateElementsCounter(filteredList.Count());
+        }
+
+        private void Click_BtnDeleteEmployee(object sender, RoutedEventArgs e)
+        {
+            MessageDialog.ShowConfirm(
+                "Personal_DialogTDeleteEmployee", "Personal_DialogDDeleteEmployee",
+                async () =>
+                {
+                    if (PersonalDataGrid.SelectedItem is Personal selected)
+                        await DeleteEmployee(selected);
+                },
+                "Glb_Delete"
+            );
+        }
+
+        private void Click_BtnReactivateEmployee(object sender, RoutedEventArgs e)
+        {
+            MessageDialog.ShowConfirm(
+                "Personal_DialogTReactivateEmployee", "Personal_DialogDReactivateEmployee",
+                async () =>
+                {
+                    if (PersonalDataGrid.SelectedItem is Personal selected)
+                        await ReactivateEmployee(selected);
+                }
+            );
+        }
+
+        private void Click_BtnEditEmployee(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            var employeeToEdit = PersonalDataGrid.SelectedItem as Personal;
+
+            if (mainWindow != null && employeeToEdit != null)
+                mainWindow.NavigateToPage("EditEmployee_Header", new RegisterEmployeePage(employeeToEdit));
+        }
     }
 
 }

@@ -91,7 +91,7 @@
     <Compile Include="Model\RecipeSupplyItem.cs" />
     <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
-    <Compile Include="Model\UnitMeasure.cs" />
+    <Compile Include="Model\MeasureUnit.cs" />
     <Compile Include="Utilities\Animations.cs" />
     <Compile Include="Utilities\ConnectionUtilities.cs" />
     <Compile Include="Utilities\Constants.cs" />
@@ -348,6 +348,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Fonts\SFMono-Regular.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Bold.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Medium.otf" />
     <Resource Include="Resources\Fonts\SFProDisplay-Regular.otf" />
@@ -443,6 +444,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\confirm-alert-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\reactivate-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\search-error-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\loading-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

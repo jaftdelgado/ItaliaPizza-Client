@@ -29,7 +29,7 @@
 
     <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#222528"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -37,7 +37,6 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="HeadersVisibility" Value="Column" />
-        <Setter Property="Margin" Value="0 10 0 0" />
         <Setter Property="Grid.Row" Value="5" />
         <Setter Property="SelectionMode" Value="Single" />
         <Setter Property="SelectionUnit" Value="FullRow" />
@@ -115,7 +114,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Border x:Name="DGR_Border"
-                            Padding="0 8"
+                            Padding="0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{StaticResource BorderBrush}"
                             BorderThickness="0 0 0 0.5"
@@ -143,39 +142,68 @@
                 <Setter Property="Background" Value="{StaticResource SecondaryButtonHoverBrush}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#623ED0"/>
-                <Setter Property="Foreground" Value="#ffffff"/>
+                <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="true"/>
                     <Condition Property="Selector.IsSelectionActive" Value="false"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="#dfdfdf"/>
+                <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
             </MultiTrigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
+
+    <Style x:Key="DataGridCellStyle0" TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Margin" Value="8 0 0 0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Border Background="{TemplateBinding Background}" 
-                        SnapsToDevicePixels="True">
-                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    <Border 
+                Background="{TemplateBinding Background}" 
+                SnapsToDevicePixels="True"
+                    Padding="0 8"
+                VerticalAlignment="Stretch">
+                        <ContentPresenter 
+                    Margin="20 0"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                    VerticalAlignment="Stretch" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+    <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border 
+                    Background="{TemplateBinding Background}" 
+                    SnapsToDevicePixels="True"
+                    BorderThickness="0.5 0 0 0"
+                    BorderBrush="{DynamicResource BorderBrush}"
+                    Padding="0 8"
+                    VerticalAlignment="Stretch">
+                        <ContentPresenter 
+                        Margin="8 0"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                        VerticalAlignment="Stretch" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Width" Value="8"/>
+        <Setter Property="Width" Value="2"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Cursor" Value="SizeWE"/>
         <Setter Property="Template">
@@ -187,7 +215,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="DataGridColumnHeaderStyle0" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
@@ -195,7 +223,7 @@
         <Setter Property="FontSize" Value="11" />
         <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="0 0.5 0 0.5"/>
+        <Setter Property="BorderThickness" Value="0 0.5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -208,10 +236,10 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <ContentPresenter Grid.Column="0" Margin="8 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                            <ContentPresenter Grid.Column="0" Margin="22 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" 
                               RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Image Grid.Column="1" Source="/Resources/Icons/sort-header-icon.png" Width="10" Height="10" 
-                                   VerticalAlignment="Center" Margin="0 0 8 0"
+                                   VerticalAlignment="Center" Margin="0 0 10 0"
                                    RenderOptions.BitmapScalingMode="HighQuality"/>
 
                             <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}"/>
@@ -223,6 +251,42 @@
         </Setter>
     </Style>
 
+    <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProMedium}"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0 0.5 0 0.5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-    <!--#endregion-->
+                            <Rectangle HorizontalAlignment="Left" Width="1" Fill="{StaticResource BorderBrush}" />
+
+                            <ContentPresenter Grid.Column="0" Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                            <Image Grid.Column="1" Source="/Resources/Icons/sort-header-icon.png" Width="10" Height="10"
+                               VerticalAlignment="Center" Margin="0 0 8 0"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+                            <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

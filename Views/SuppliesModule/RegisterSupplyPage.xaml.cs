@@ -1,7 +1,9 @@
 ﻿using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.Dialogs;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +22,9 @@ namespace ItaliaPizzaClient.Views
         {
             InitializeComponent();
             SetCategoriesComboBox();
+            SetMeasureComboBox();
             SetInputFields();
-
-            KeepAlive = true;
+            UpdateFormButtonState(BtnRegisterSupply);
         }
 
         private void SetInputFields()
@@ -31,28 +33,40 @@ namespace ItaliaPizzaClient.Views
             InputUtilities.ValidateInput(TbSupplyBrand, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES);
         }
 
-        private void Click_BtnSelectImage(object sender, RoutedEventArgs e)
+        private void SelectProfileImage(Image targetImageControl, int targetWidth, int targetHeight)
         {
+            var dialogTitle = Application.Current.Resources["RegEmployee_DialogSelectProfilePic"]?.ToString();
+
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Title = "Seleccionar imagen",
-                Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
-                Multiselect = false
+                Filter = Constants.IMAGE_FILE_FILTER,
+                Title = dialogTitle
             };
 
             if (openFileDialog.ShowDialog() == true)
             {
                 try
                 {
-                    _selectedImageBytes = File.ReadAllBytes(openFileDialog.FileName);
+                    if (!ImageUtilities.IsImageSizeValid(openFileDialog.FileName, Constants.MAX_IMAGE_SIZE))
+                    {
+                        MessageDialog.Show("GlbDialogT_InvalidImageSize", "GlbDialogD_InvalidImageSize", AlertType.WARNING);
+                        return;
+                    }
 
-                    ImageUtilities.SetImageSource(SupplyImage, _selectedImageBytes, Constants.DEFAULT_SUPPLY_PIC_PATH);
+                    var resizedImage = ImageUtilities.LoadAndResizeImage(openFileDialog.FileName, targetWidth, targetHeight);
+                    targetImageControl.Source = resizedImage;
+                    BtnDeleteImage.IsEnabled = true;
                 }
-                catch (Exception ex)
+                catch (IOException)
                 {
-                    MessageBox.Show($"Error al cargar la imagen: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageDialog.Show("GlbDialogT_InvalidImageSize", "GlbDialogD_InvalidImageSize", AlertType.WARNING);
                 }
             }
+        }
+
+        private void Click_BtnSelectImage(object sender, RoutedEventArgs e)
+        {
+            SelectProfileImage(SupplyImage, 180, 180);
         }
 
         private void SetCategoriesComboBox()
@@ -67,14 +81,56 @@ namespace ItaliaPizzaClient.Views
             CbCategories.ItemsSource = categories;
         }
 
+        private void SetMeasureComboBox()
+        {
+            var unitMeasures = MeasureUnit.GetDefaultMeasureUnits();
+
+            CbSupplyMeasure.ItemsSource = unitMeasures;
+        }
+
+        private void UpdateFormButtonState(Button button)
+        {
+            var requiredFields = new List<Control>
+            {
+                TbSupplyName,
+                TbUnitPrice,
+                CbSupplyMeasure,
+                CbCategories
+            };
+
+            if (SupplyBrandCheckBox.IsChecked == false)
+                requiredFields.Add(TbSupplyBrand);
+
+            bool allFieldsFilled = true;
+
+            foreach (var field in requiredFields)
+            {
+                switch (field)
+                {
+                    case TextBox tb when string.IsNullOrWhiteSpace(tb.Text):
+                        allFieldsFilled = false;
+                        break;
+                    case ComboBox cb when cb.SelectedItem == null:
+                        allFieldsFilled = false;
+                        break;
+                }
+
+                if (!allFieldsFilled) break;
+            }
+
+            button.IsEnabled = allFieldsFilled;
+        }
+
         private void CheckbBrand_Checked(object sender, RoutedEventArgs e)
         {
             TbSupplyBrand.IsEnabled = false;
+            UpdateFormButtonState(BtnRegisterSupply);
         }
-        
+
         private void CheckbBrand_Unchecked(object sender, RoutedEventArgs e)
         {
             TbSupplyBrand.IsEnabled = true;
+            UpdateFormButtonState(BtnRegisterSupply);
         }
 
         private void PreviewTextInput_TbUnitPrice(object sender, TextCompositionEventArgs e)
@@ -93,6 +149,21 @@ namespace ItaliaPizzaClient.Views
 
             if (mainWindow != null)
                 mainWindow.NavigateToPage("RegSupplier_Header", new RegisterSupplierPage());
+        }
+
+        private void Click_BtnRegisterSupply(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Click_BtnCancel(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RequiredFields_TextChanged(object sender, RoutedEventArgs e)
+        {
+            UpdateFormButtonState(BtnRegisterSupply);
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -14,20 +15,75 @@ namespace ItaliaPizzaClient.Views
 {
     public partial class RegisterEmployeePage : Page
     {
+        private Personal _editingEmployee;
         private bool _isAccountVisible = false;
         private int _selectedRoleId = -1;
+        private bool _isEditMode;
 
         public RegisterEmployeePage()
         {
             InitializeComponent();
+            ConfigureInterfaceForMode();
             SetRolesComboBox();
             SetInputFields();
-            UpdateRegisterButtonState();
+            UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
 
             var mainWindow = Application.Current.MainWindow as MainWindow;
             NavigationManager.Initialize(mainWindow.MainFrame, mainWindow.NavigationPanel, mainWindow.BtnBack);
 
             ImageUtilities.SetImageSource(EmployeeProfilePic, null, Constants.DEFAULT_PROFILE_PIC_PATH);
+            _isEditMode = false;
+        }
+
+        public RegisterEmployeePage(Personal editingEmployee)
+        {
+            InitializeComponent();
+            _isEditMode = true;
+            _editingEmployee = editingEmployee;
+            _selectedRoleId = editingEmployee.RoleID - 1;
+
+            ConfigureInterfaceForMode();
+            SetRolesComboBox();
+            SetInputFields();
+            LoadEmployeeData(editingEmployee);
+            UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
+
+            ImageUtilities.SetImageSource(EmployeeProfilePic, editingEmployee.ProfilePic, Constants.DEFAULT_PROFILE_PIC_PATH);
+
+            if (editingEmployee.ProfilePic != null) BtnDeleteImage.IsEnabled = true;
+        }
+
+        private void ConfigureInterfaceForMode()
+        {
+            if (_isEditMode)
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "EditEmployee_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "EditEmployee_Desc");
+                BtnEditEmployee.Visibility = Visibility.Visible;
+                BtnRegisterEmployee.Visibility = Visibility.Collapsed;
+
+                AccountBorder.Visibility = Visibility.Collapsed;
+                _isAccountVisible = false;
+            }
+            else
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "RegEmployee_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "RegEmployee_Desc");
+                BtnEditEmployee.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LoadEmployeeData(Personal employee)
+        {
+            TbEmployeeName.Text = employee.FirstName;
+            TbLastName.Text = employee.LastName;
+            TbRFC.Text = employee.RFC;
+            TbEmailAddress.Text = employee.EmailAddress;
+            TbPhoneNumber.Text = employee.PhoneNumber;
+            TbAddress.Text = employee.Address.AddressName;
+            TbZipCode.Text = employee.Address.ZipCode;
+            TbCity.Text = employee.Address.City;
+            CbEmployeeRoles.SelectedIndex = _selectedRoleId;
         }
 
         private void SetRolesComboBox()
@@ -41,19 +97,25 @@ namespace ItaliaPizzaClient.Views
         }
 
         private void SetInputFields()
-        {   
-            InputUtilities.ValidateInput(TbEmployeeName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES);
-            InputUtilities.ValidateInput(TbLastName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES);
-            InputUtilities.ValidateInput(TbPhoneNumber, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_PHONENUMBER);
-            InputUtilities.ValidateInput(TbEmailAddress, Constants.EMAIL_ALLOWED_CHARS_PATTERN, Constants.MAX_LENGTH_EMAIL);
-            InputUtilities.ValidateInput(TbAddress, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_ADDRESSNAME);
-            InputUtilities.ValidateInput(TbZipCode, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_ZIPCODE);
-            InputUtilities.ValidateInput(TbCity, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_CITY);
-            InputUtilities.ValidateInput(TbRFC, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_RFC);
-            InputUtilities.ValidateInput(TbUsername, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_USERNAME);
-            InputUtilities.ValidateInput(TbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD);
-            InputUtilities.ValidatePasswordInput(PbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD);
+        {
+            var validations = new (TextBox, string, int)[]
+            {
+                (TbEmployeeName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES),
+                (TbLastName, Constants.NAMES_PATTERN, Constants.MAX_LENGTH_NAMES),
+                (TbPhoneNumber, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_PHONENUMBER),
+                (TbEmailAddress, Constants.EMAIL_ALLOWED_CHARS_PATTERN, Constants.MAX_LENGTH_EMAIL),
+                (TbAddress, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_ADDRESSNAME),
+                (TbZipCode, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_ZIPCODE),
+                (TbCity, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_CITY),
+                (TbRFC, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_RFC),
+                (TbUsername, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_USERNAME),
+                (TbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD)
+            };
 
+            foreach (var (textBox, pattern, maxLength) in validations)
+                InputUtilities.ValidateInput(textBox, pattern, maxLength);
+
+            InputUtilities.ValidatePasswordInput(PbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD);
             InputUtilities.ConvertToUpperCase(TbRFC);
             InputUtilities.ConvertToLowerCase(TbEmailAddress);
             InputUtilities.ConvertToLowerCase(TbUsername);
@@ -61,7 +123,7 @@ namespace ItaliaPizzaClient.Views
 
         private void SelectProfileImage(Image targetImageControl, int targetWidth, int targetHeight)
         {
-            var dialogTitle = Application.Current.Resources["RegEmployee_DialogSelectProfilePic"]?.ToString();
+            var dialogTitle = Application.Current.Resources["RegSupply_DialogSelectSupplyImage"]?.ToString();
 
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -93,18 +155,23 @@ namespace ItaliaPizzaClient.Views
             }
         }
 
-        private void UpdateRegisterButtonState()
+        private void UpdateFormButtonState(Button button)
         {
-            var requiredFields = new List<object> { TbRFC, TbEmployeeName };
+            var requiredFields = new List<TextBox>
+            {
+                TbRFC, TbEmployeeName, TbLastName, TbEmailAddress, TbPhoneNumber,
+                TbAddress, TbZipCode, TbCity
+            };
 
-            if (_selectedRoleId != 6)
+            if (!_isEditMode && _selectedRoleId != 6)
             {
                 requiredFields.Add(TbUsername);
                 requiredFields.Add(TbPassword);
             }
 
             bool allFieldsFilled = true;
-            foreach (TextBox field in requiredFields)
+
+            foreach (var field in requiredFields)
             {
                 if (string.IsNullOrWhiteSpace(field.Text))
                 {
@@ -113,7 +180,7 @@ namespace ItaliaPizzaClient.Views
                 }
             }
 
-            BtnRegisterEmployee.IsEnabled = allFieldsFilled;
+            button.IsEnabled = allFieldsFilled;
         }
 
         private void ToggleAccountVisibility(bool showAccount)
@@ -156,7 +223,7 @@ namespace ItaliaPizzaClient.Views
             return profilePicData;
         }
 
-        public void RegisterEmployee()
+        public async Task RegisterEmployee()
         {
             var client = ConnectionUtilities.IsServerConnected();
             if (client == null) return;
@@ -183,43 +250,100 @@ namespace ItaliaPizzaClient.Views
                 }
             };
 
-            ConnectionUtilities.ExecuteDatabaseSafeAction(() =>
+            bool success = false;
+
+            await ConnectionUtilities.ExecuteServerAction(async () =>
             {
                 if (_selectedRoleId != 6 && !IsUsernameAvailable(personalDto.Username)) return;
                 if (!IsEmailAvailable(personalDto.EmailAddress)) return;
                 if (!IsRfcUnique(personalDto.RFC)) return;
 
-                int result = client.AddPersonal(personalDto);
-                if (result > 0)
-                {
-                    MessageDialog.Show("RegEmployee_DialogTSuccess", "RegEmployee_DialogDSuccess", AlertType.SUCCESS);
-                    NavigationManager.Instance.GoBack();
-                }
+                int result = await client.AddPersonalAsync(personalDto);
+                success = result > 0;
             });
+
+            if (success)
+            {
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    MessageDialog.Show("RegEmployee_DialogTSuccess", "RegEmployee_DialogDSuccess", AlertType.SUCCESS,
+                        () =>
+                        {
+                            NavigationManager.Instance.GoBack();
+                        });
+                });
+            }
         }
 
-        private bool IsUsernameAvailable(string username)
+        private async Task EditEmployee()
         {
-            var service = ConnectionUtilities.IsServerConnected();
-            if (service == null) return false;
+            byte[] profilePicData = GetProfilePicData();
+            bool success = false;
+            string validationErrorKey = null;
+            string validationDescriptionKey = null;
 
-            bool isUsernameAvailable = service.IsUsernameAvailable(username);
-            if (!isUsernameAvailable)
-                MessageDialog.Show("RegEmployee_DialogTUserDuplicate", "RegEmployee_DialogDUserDuplicate", AlertType.WARNING);
+            var updatedDto = new PersonalDTO
+            {
+                PersonalID = _editingEmployee.PersonalID,
+                FirstName = TbEmployeeName.Text.Trim(),
+                LastName = TbLastName.Text.Trim(),
+                RFC = TbRFC.Text.Trim(),
+                EmailAddress = TbEmailAddress.Text.Trim(),
+                PhoneNumber = TbPhoneNumber.Text.Trim(),
+                ProfilePic = profilePicData,
+                RoleID = _selectedRoleId,
+                Address = new AddressDTO
+                {
+                    Id = _editingEmployee.AddressID,
+                    AddressName = TbAddress.Text.Trim(),
+                    ZipCode = TbZipCode.Text.Trim(),
+                    City = TbCity.Text.Trim()
+                }
+            };
 
-            return isUsernameAvailable;
+            await ConnectionUtilities.ExecuteServerAction(async () =>
+            {
+                var client = ConnectionUtilities.IsServerConnected();
+                if (client == null) return;
+
+                if (!string.Equals(_editingEmployee.EmailAddress, updatedDto.EmailAddress, StringComparison.OrdinalIgnoreCase) &&
+                    !client.IsPersonalEmailAvailable(updatedDto.EmailAddress))
+                {
+                    validationErrorKey = "GlbDialogD_EmailDuplicate";
+                    validationDescriptionKey = "GlbDialogD_EmailDuplicate";
+                    return;
+                }
+
+                if (!string.Equals(_editingEmployee.RFC, updatedDto.RFC, StringComparison.OrdinalIgnoreCase) &&
+                    !client.IsRfcUnique(updatedDto.RFC))
+                {
+                    validationErrorKey = "RegEmployee_DialogTRfcDuplicate";
+                    validationDescriptionKey = "RegEmployee_DialogDRfcDuplicate";
+                    return;
+                }
+
+                success = await client.UpdatePersonalAsync(updatedDto);
+            });
+
+            if (!string.IsNullOrEmpty(validationErrorKey))
+            {
+                MessageDialog.Show(validationErrorKey, validationDescriptionKey, AlertType.WARNING);
+                return;
+            }
+
+            if (success)
+            {
+                MessageDialog.Show("RegEmployee_DialogTEditSuccess", "RegEmployee_DialogDEditSuccess", AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
+            }
         }
-        
+
         private bool IsEmailAvailable(string email)
         {
             var service = ConnectionUtilities.IsServerConnected();
             if (service == null) return false;
 
-            bool isEmailAvailable = service.IsPersonalEmailAvailable(email);
-            if (!isEmailAvailable)
-                MessageDialog.Show("GlbDialogD_EmailDuplicate", "GlbDialogD_EmailDuplicate", AlertType.WARNING);
-
-            return isEmailAvailable;
+            return service.IsPersonalEmailAvailable(email);
         }
 
         private bool IsRfcUnique(string rfc)
@@ -227,23 +351,36 @@ namespace ItaliaPizzaClient.Views
             var service = ConnectionUtilities.IsServerConnected();
             if (service == null) return false;
 
-            bool isRfcUnique = service.IsRfcUnique(rfc);
-            if (!isRfcUnique)
-                MessageDialog.Show("RegEmployee_DialogTRfcDuplicate", "RegEmployee_DialogDRfcDuplicate", AlertType.WARNING);
-
-            return isRfcUnique;
+            return service.IsRfcUnique(rfc);
         }
 
+        private bool IsUsernameAvailable(string username)
+        {
+            var service = ConnectionUtilities.IsServerConnected();
+            if (service == null) return false;
+
+            return service.IsUsernameAvailable(username);
+        }
+
+
         #region EventHandlers
-        private void Click_BtnRegisterEmployee(object sender, RoutedEventArgs e)
+        private async void Click_BtnRegisterEmployee(object sender, RoutedEventArgs e)
         {
             if (_selectedRoleId == 6 || PasswordUtilities.IsPasswordSecure(PbPassword.Password))
             {
-                RegisterEmployee();
+                await RegisterEmployee();
             }
             else
+            {
                 MessageDialog.Show("RegEmployee_DialogTInvalidPassword", "RegEmployee_DialogDInvalidPassword", AlertType.WARNING);
+            }
         }
+
+        private async void Click_BtnEditEmployee(object sender, RoutedEventArgs e)
+        {
+            await EditEmployee();
+        }
+
 
         private void Click_BtnSelectImage(object sender, RoutedEventArgs e)
         {
@@ -258,7 +395,7 @@ namespace ItaliaPizzaClient.Views
 
         private void RequiredFields_TextChanged(object sender, RoutedEventArgs e)
         {
-            UpdateRegisterButtonState();
+            UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
         }
 
         private void Password_TextChanged(object sender, RoutedEventArgs e)
@@ -268,7 +405,7 @@ namespace ItaliaPizzaClient.Views
             else if (sender is PasswordBox passwordBox && TbPassword.Text != passwordBox.Password)
                 TbPassword.Text = passwordBox.Password;
 
-            UpdateRegisterButtonState();
+            UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
         }
 
         private void CbEmployeeRoles_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -276,21 +413,22 @@ namespace ItaliaPizzaClient.Views
             if (CbEmployeeRoles.SelectedItem is EmployeeRole selectedRole)
             {
                 _selectedRoleId = selectedRole.Id;
-                ToggleAccountVisibility(selectedRole.Id != 6);
-                UpdateRegisterButtonState();
+
+                if (!_isEditMode) ToggleAccountVisibility(selectedRole.Id != 6);
+                UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
             }
         }
 
         private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             PasswordUtilities.ShowPassword(TbPassword, PbPassword);
-            UpdateRegisterButtonState();
+            UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
         }
 
         private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             PasswordUtilities.HidePassword(TbPassword, PbPassword);
-            UpdateRegisterButtonState();
+            UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
         }
         #endregion
 
