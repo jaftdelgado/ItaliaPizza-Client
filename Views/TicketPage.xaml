@@ -1,0 +1,77 @@
+﻿<Page x:Class="ItaliaPizzaClient.Views.TicketPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="TicketPage">
+
+    <Grid Background="White">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Border Width="320" HorizontalAlignment="Center" Padding="10">
+                <StackPanel Background="White" HorizontalAlignment="Center" >
+
+                    <!-- Logo -->
+                    <TextBlock Text="ITALIA PIZZA"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,10"/>
+
+                    <!-- Sucursal info -->
+                    <TextBlock Text="ITALIZA PIZZA MEXICO" TextAlignment="Center"/>
+                    <TextBlock Text="AV. XALAPA #15" TextAlignment="Center"/>
+                    <TextBlock Text="Col. Obrera Campesiona, C.P. 91040" TextAlignment="Center"/>
+                    <TextBlock Text="Xalapa, Veracruz, Mexico" TextAlignment="Center"/>
+                    <TextBlock Text="Tel. 2281-22-33-44" TextAlignment="Center" Margin="0,0,0,10"/>
+
+                    <!-- Fecha -->
+                    <TextBlock x:Name="txtFecha" Text="26/01/2021 15:14                   80519"/>
+                    <TextBlock Text="12796 005058 02               Trans: 8895" Margin="0,0,0,10"/>
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
+            Margin="0,24" Width="300">
+                        <DataGrid x:Name="ProductDataGrid"
+              AutoGenerateColumns="False"
+              HeadersVisibility="Column"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              CanUserResizeRows="False"
+              IsReadOnly="True"
+              GridLinesVisibility="Horizontal"
+              RowHeaderWidth="0"
+              FontSize="13"
+              ColumnWidth="*" 
+              Width="280"
+              HorizontalAlignment="Center">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Producto"
+                                Binding="{Binding Product}"
+                                Width="200"
+                                />
+                                <DataGridTextColumn Header="Cant."
+                                Binding="{Binding Quantity}"
+                                Width="60"
+                                />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+
+
+                    <TextBlock x:Name="TxtTotalItems" Text="TOTAL DE PRODUCTOS                            0" FontWeight="Bold"/>
+                    <TextBlock x:Name="TxtTotal" Text="TOTAL:                                                       0.00" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="12">
+                        Italia Pizza, S.A. de C.V. en su carácter de
+                        asociada en el Contrato de Asociación en Participación denominado
+                        ITALIA PIZZA CONTRATO 1 A EN P
+                        R.F.C. ZMC 960801 538
+                        Régimen fiscal: REGIMEN GENERAL DE LEY PERSONAS MORALES.
+                    </TextBlock>
+
+                    <!-- Footer final -->
+                    <TextBlock Text="3302 553093 02               Trans: 231385" TextAlignment="Center"/>
+                    <TextBlock Text="WWW.ITALIAPIZZA.COM" TextAlignment="Center" Margin="0,0,0,10"/>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Page>

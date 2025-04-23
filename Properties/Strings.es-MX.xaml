@@ -229,6 +229,10 @@
     <!--Order-->
     <sys:String x:Key="OrderPage_BtnAddOrder">Añadir Orden</sys:String>
     <sys:String x:Key="OrderPage_BtnPayOrder">Pagar Orden</sys:String>
+    <sys:String x:Key="OrderPage_BtnCancelOrder">Cancelar Orden</sys:String>
+    <sys:String x:Key="Order_TitleTable">Lista de Ordenes</sys:String>
+    <sys:String x:Key="Orders_Header">Ordenes de Comensales</sys:String>
+    <sys:String x:Key="Orders_Desc">Visualiza, paga y cancela Ordenes de Comensales de Italia Pizza.</sys:String>
     
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>

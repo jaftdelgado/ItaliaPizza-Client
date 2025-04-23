@@ -116,23 +116,29 @@
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterOrder_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterOrder" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterOrder_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterOrderResponse" />
-  </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrderPayment_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderPayment" />
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrderPayment_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderPaymentResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterOrderResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetDeliveredOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDeliveredOrders" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetDeliveredOrders_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDeliveredOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetOrderItemsByOrderID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderItemsByOrderID" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetOrderItemsByOrderID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderItemsByOrderIDResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterRecipe_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterRecipe" />
@@ -211,17 +217,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RegisterOrderPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RegisterOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrder" message="tns:IMainManager_RegisterOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrderResponse" message="tns:IMainManager_RegisterOrder_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RegisterOrderPayment">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetDeliveredOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse" message="tns:IMainManager_GetDeliveredOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderItemsByOrderID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" message="tns:IMainManager_GetOrderItemsByOrderID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderIDResponse" message="tns:IMainManager_GetOrderItemsByOrderID_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RegisterRecipe">
       <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipe" message="tns:IMainManager_RegisterRecipe_InputMessage" />
@@ -360,6 +370,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RegisterOrderPayment">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterOrderPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RegisterOrder">
       <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/RegisterOrder" style="document" />
       <wsdl:input>
@@ -369,8 +388,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterOrderPayment">
-      <soap12:operation soapAction="http://tempuri.org/IOrderManager/RegisterOrderPayment" style="document" />
+    <wsdl:operation name="GetDeliveredOrders">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -378,8 +397,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDeliveredOrders">
-      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
+    <wsdl:operation name="GetOrderItemsByOrderID">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -430,7 +449,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MATEBOOK-D15\jafet</Upn>
+          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
