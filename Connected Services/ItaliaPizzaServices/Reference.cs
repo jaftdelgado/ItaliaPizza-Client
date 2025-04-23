@@ -545,7 +545,7 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MeasureUnitField;
+        private int MeasureUnitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -596,12 +596,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MeasureUnit {
+        public int MeasureUnit {
             get {
                 return this.MeasureUnitField;
             }
             set {
-                if ((object.ReferenceEquals(this.MeasureUnitField, value) != true)) {
+                if ((this.MeasureUnitField.Equals(value) != true)) {
                     this.MeasureUnitField = value;
                     this.RaisePropertyChanged("MeasureUnit");
                 }
