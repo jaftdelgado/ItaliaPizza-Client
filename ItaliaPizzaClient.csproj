@@ -91,7 +91,7 @@
     <Compile Include="Model\RecipeSupplyItem.cs" />
     <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
-    <Compile Include="Model\UnitMeasure.cs" />
+    <Compile Include="Model\MeasureUnit.cs" />
     <Compile Include="Utilities\Animations.cs" />
     <Compile Include="Utilities\ConnectionUtilities.cs" />
     <Compile Include="Utilities\Constants.cs" />
