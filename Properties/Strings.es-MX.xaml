@@ -1,4 +1,5 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!--Globals-->
@@ -35,6 +36,7 @@
     <sys:String x:Key="Glb_Active">Activos</sys:String>
     <sys:String x:Key="Glb_ViewAll">Ver Todos</sys:String>
     <sys:String x:Key="Glb_Deleted">Eliminados</sys:String>
+    <sys:String x:Key="Glb_GeneralInfo">Datos Generales</sys:String>
     <sys:String x:Key="Glb_NoSelected">Sin selección actual</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
@@ -180,15 +182,6 @@
     <sys:String x:Key="RegCostumer_DialogTSuccess">Cliente registrado</sys:String>
     <sys:String x:Key="RegCostumer_DialogDSuccess">La información del cliente ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
 
-    <!-- Register supplier-->
-    <sys:String x:Key="RegSupplier_Header">Registrar proveedor</sys:String>
-    <sys:String x:Key="RegSupplier_Name">Nombre del proveedor</sys:String>
-    <sys:String x:Key="RegSupplier_ContactName">Nombre de contacto</sys:String>
-    <sys:String x:Key="RegSupplier_PhoneNumber">Telefono</sys:String>
-    <sys:String x:Key="RegSupplier_RegProduct">¿Registrar productos?</sys:String>
-    <sys:String x:Key="RegSupplier_RegProductDesc"> Esta opcion puede realizarse despues</sys:String>
-    <sys:String x:Key="RegSupplier_BtnRegSupply">Registrar productos</sys:String>
-    
     <!--Products-->
     <sys:String x:Key="Products_Header">Productos</sys:String>
     <sys:String x:Key="Products_Desc">Visualiza, registra, modifica y elimina productos utilizados por Italia Pizza.</sys:String>
@@ -209,13 +202,39 @@
     <sys:String x:Key="RegProduct_BtnRegisterProdcut">Registrar Producto</sys:String>
     <sys:String x:Key="Glb_CbxCategories">Categorias</sys:String>
 
+    <!--Suppliers-->
+    <sys:String x:Key="Suppliers_Header">Proveedores</sys:String>
+    <sys:String x:Key="Suppliers_Desc">Visualiza, registra, modifica y elimina proveedores asociados con Italia Pizza.</sys:String>
+    <sys:String x:Key="Suppliers_BtnNewSupplier">Nuevo Proveedor</sys:String>
+    <sys:String x:Key="Suppliers_TitleTable">Lista de Proveedores</sys:String>
+    <sys:String x:Key="Suppliers_TableHSupplier">Proveedor</sys:String>
+    <sys:String x:Key="Suppliers_TableHContactName">Nombre de Contacto</sys:String>
+    <sys:String x:Key="Suppliers_TableHPhoneNumber">Núm. Telefónico</sys:String>
+    <sys:String x:Key="Suppliers_TableHCategories">Categoría</sys:String>
+
+
+    <!-- RegisterSupplier-->
+    <sys:String x:Key="RegSupplier_Header">Registrar Proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_Desc">Ingresa los datos y la lista de insumos asociadas al proveedor que se desea registrar.</sys:String>
+    <sys:String x:Key="RegSupplier_SupplierInfo">Información del Proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_ContactInfo">Datos de Contacto</sys:String>
+    <sys:String x:Key="RegSupplier_SupplierDescription">Descripción de Proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_TbSupplierName">Nombre del Proveedor:</sys:String>
+    <sys:String x:Key="RegSupplier_TbContactName">Nombre de Contacto:</sys:String>
+    <sys:String x:Key="RegSupplier_TbCategories">Categoría:</sys:String>
+    <sys:String x:Key="RegSupplier_TbDescription">Descripción:</sys:String>
+    <sys:String x:Key="RegSupplier_SupplyRelationship">Relación de Insumos</sys:String>
+    <sys:String x:Key="RegSupplier_BtnRegisterSupplier">Registrar Proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_DialogTSuccess">Proveedor registrado</sys:String>
+    <sys:String x:Key="RegSupplier_DialogDSuccess">La información del proveedor ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+
     <!--OrderSuppliers-->
-    <sys:String x:Key="Suppliers_Header">Ordenes a Proveedores</sys:String>
-    <sys:String x:Key="Suppliers_Desc">Visualiza y registra pedidos a proveedor realizados por Italia Pizza.</sys:String>
-    <sys:String x:Key="Suppliers_BtnNewOrderSupplier">Nuevo pedido</sys:String>
-    <sys:String x:Key="Suppliers_TitleTable">Lista de Pedidos</sys:String>
-    <sys:String x:Key="Suppliers_BtnDeleteOrder">Eliminar pedido</sys:String>
-    <sys:String x:Key="Suppliers_BtnDeliveredOrder">Marcar como entrado</sys:String>
+    <sys:String x:Key="OrdSuppliers_Header">Ordenes a Proveedores</sys:String>
+    <sys:String x:Key="OrdSuppliers_Desc">Visualiza y registra pedidos a proveedor realizados por Italia Pizza.</sys:String>
+    <sys:String x:Key="OrdSuppliers_BtnNewOrderSupplier">Nuevo Pedido</sys:String>
+    <sys:String x:Key="OrdSuppliers_TitleTable">Lista de Pedidos</sys:String>
+    <sys:String x:Key="OrdSuppliers_BtnDeleteOrder">Eliminar pedido</sys:String>
+    <sys:String x:Key="OrdSuppliers_BtnDeliveredOrder">Marcar como entrado</sys:String>
 
     <!--Register Order Suppliers-->
     <sys:String x:Key="RegOrderSupplier_Header">Registrar orden a proveedor</sys:String>

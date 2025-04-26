@@ -31,6 +31,7 @@ namespace ItaliaPizzaClient.Views
         {
             InputUtilities.ValidateInput(TbSupplyName, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES);
             InputUtilities.ValidateInput(TbSupplyBrand, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES);
+
         }
 
         private void SelectProfileImage(Image targetImageControl, int targetWidth, int targetHeight)
@@ -71,21 +72,12 @@ namespace ItaliaPizzaClient.Views
 
         private void SetCategoriesComboBox()
         {
-            var categories = SupplyCategory.GetDefaultSupplyCategories();
-
-            foreach (var category in categories)
-            {
-                category.Name = Application.Current.Resources[category.ResourceKey]?.ToString() ?? category.Name;
-            }
-
-            CbCategories.ItemsSource = categories;
+            CbCategories.ItemsSource = SupplyCategory.GetDefaultSupplyCategories();
         }
 
         private void SetMeasureComboBox()
         {
-            var unitMeasures = MeasureUnit.GetDefaultMeasureUnits();
-
-            CbSupplyMeasure.ItemsSource = unitMeasures;
+            CbSupplyMeasure.ItemsSource = MeasureUnit.GetDefaultMeasureUnits();
         }
 
         private void UpdateFormButtonState(Button button)
@@ -141,14 +133,6 @@ namespace ItaliaPizzaClient.Views
         private void LostFocus_TbUnitPrice(object sender, RoutedEventArgs e)
         {
             InputUtilities.FormatMonetaryValue(sender, e);
-        }
-
-        private void Click_BtnRegisterSupplier(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-
-            if (mainWindow != null)
-                mainWindow.NavigateToPage("RegSupplier_Header", new RegisterSupplierPage());
         }
 
         private void Click_BtnRegisterSupply(object sender, RoutedEventArgs e)
