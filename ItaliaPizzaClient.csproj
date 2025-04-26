@@ -90,6 +90,7 @@
     <Compile Include="Model\Personal.cs" />
     <Compile Include="Model\RecipeSupplyItem.cs" />
     <Compile Include="Model\OrderItem.cs" />
+    <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\MeasureUnit.cs" />
     <Compile Include="Utilities\Animations.cs" />
@@ -158,6 +159,9 @@
     </Compile>
     <Compile Include="Views\SuppliersModule\RegisterSupplierPage.xaml.cs">
       <DependentUpon>RegisterSupplierPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SuppliersModule\SuppliersPage.xaml.cs">
+      <DependentUpon>SuppliersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SuppliesModule\RegisterSupplyPage.xaml.cs">
       <DependentUpon>RegisterSupplyPage.xaml</DependentUpon>
@@ -262,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SuppliersModule\RegisterSupplierPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SuppliersModule\SuppliersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

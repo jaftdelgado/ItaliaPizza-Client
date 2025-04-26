@@ -86,6 +86,18 @@
   <wsdl:message name="IMainManager_IsPersonalEmailAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsPersonalEmailAvailableResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSuppliers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSuppliers" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSuppliers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSuppliersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddSupplier_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSupplier" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddSupplier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSupplierResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetAllCategories_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCategories" />
   </wsdl:message>
@@ -190,6 +202,14 @@
     <wsdl:operation name="IsPersonalEmailAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailable" message="tns:IMainManager_IsPersonalEmailAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailableResponse" message="tns:IMainManager_IsPersonalEmailAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSuppliers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/GetAllSuppliers" message="tns:IMainManager_GetAllSuppliers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/GetAllSuppliersResponse" message="tns:IMainManager_GetAllSuppliers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSupplier">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/AddSupplier" message="tns:IMainManager_AddSupplier_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/AddSupplierResponse" message="tns:IMainManager_AddSupplier_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
@@ -308,6 +328,24 @@
     </wsdl:operation>
     <wsdl:operation name="IsPersonalEmailAvailable">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/IsPersonalEmailAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSuppliers">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierManager/GetAllSuppliers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSupplier">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierManager/AddSupplier" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 
 namespace ItaliaPizzaClient.Model
 {
@@ -6,13 +7,13 @@ namespace ItaliaPizzaClient.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string ResourceKey { get; set; } 
+        public string ResourceKey { get; set; }
 
-        public SupplyCategory(int id, string name)
+        public SupplyCategory(int id, string nameKeyBase)
         {
             Id = id;
-            Name = name;
-            ResourceKey = $"Supply_{name.Replace(" ", "")}";
+            ResourceKey = $"Supply_{nameKeyBase}";
+            Name = Application.Current.Resources[ResourceKey]?.ToString() ?? nameKeyBase;
         }
 
         public override string ToString()

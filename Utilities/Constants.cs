@@ -15,6 +15,7 @@
         public static readonly int MAX_LENGTH_ZIPCODE = 5;
         public static readonly int MAX_LENGTH_USERNAME = 16;
         public static readonly int MAX_LENGTH_PASSWORD = 24;
+        public static readonly int MAX_LENGTH_DESCRIPTION = 128;
 
         public static readonly string IMAGE_FILE_FILTER = "Imágenes (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
 
