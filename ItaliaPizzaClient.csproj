@@ -124,6 +124,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\OrdersModule\OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecipesModule\RecipesPage.xaml.cs">
       <DependentUpon>RecipesPage.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,9 @@
     </Compile>
     <Compile Include="Views\SuppliesModule\SuppliesPage.xaml.cs">
       <DependentUpon>SuppliesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TicketPage.xaml.cs">
+      <DependentUpon>TicketPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Properties\MergedResources.xaml">
       <SubType>Designer</SubType>
@@ -218,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrdersModule\OrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,6 +291,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TicketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -300,6 +314,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -415,9 +432,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\OrdersModule\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Icons\supplierorder-icon.png" />
   </ItemGroup>
