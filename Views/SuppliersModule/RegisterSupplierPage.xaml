@@ -74,7 +74,8 @@
                                           Grid.Column="0"
                                           Tag="{DynamicResource RegSupplier_TbCategories}"
                                           Style="{DynamicResource ComboBoxStyle}"
-                                          Margin="0 0 10 0"/>
+                                          Margin="0 0 10 0"
+                                          SelectionChanged="CbCategories_SelectionChanged"/>
                                 <TextBox x:Name="TbContactName"
                                          Grid.Column="1" Grid.Row="1"
                                          Tag="{DynamicResource RegSupplier_TbContactName}"
@@ -129,7 +130,7 @@
                 </StackPanel>
 
                 <Border Grid.Row="1" Margin="0 10 0 20">
-                    <DataGrid x:Name="PersonalDataGrid"
+                    <DataGrid x:Name="SuppliesDataGrid"
                               AutoGenerateColumns="False"
                               IsReadOnly="True"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
@@ -138,11 +139,11 @@
                               Style="{DynamicResource DataGridStyle1}">
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="C"
-                                    CanUserResize="False" 
-                                    CellStyle="{DynamicResource DataGridCellStyle1}"
-                                    Width="auto" 
-                                    ElementStyle="{StaticResource CheckBoxStyle}"
-                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}">
+                                                    CanUserResize="False" 
+                                                    CellStyle="{DynamicResource DataGridCellStyle1}"
+                                                    Width="auto" 
+                                                    ElementStyle="{StaticResource CheckBoxStyle}"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}">
                                 <DataGridCheckBoxColumn.HeaderTemplate>
                                     <DataTemplate>
                                         <CheckBox Style="{StaticResource CheckBoxStyle}" />
@@ -150,15 +151,18 @@
                                 </DataGridCheckBoxColumn.HeaderTemplate>
                             </DataGridCheckBoxColumn>
 
-                            <DataGridTextColumn Header="{DynamicResource Personal_TableHEmployee}" 
-                            Binding="{Binding FullName}" Width="3.5*" 
-                            CellStyle="{StaticResource DataGridCellStyle1}">
-                                
-                            </DataGridTextColumn>
-                            
-                            <DataGridTextColumn Header="{DynamicResource Personal_TableHUser}" Binding="{Binding DisplayUsername}" Width="2.1*"/>
+                            <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupply}" 
+                            Binding="{Binding Name}" Width="3.5*" 
+                            CellStyle="{StaticResource DataGridCellStyle1}" />
+
+                            <DataGridTextColumn Header="{DynamicResource Supplies_TableHUnitPrice}" 
+                            Binding="{Binding Price}" Width="2*" />
+
+                            <DataGridTextColumn Header="{DynamicResource Supplies_TableHMeasureUnit}" 
+                            Binding="{Binding MeasureUnit}" Width="2*" />
                         </DataGrid.Columns>
                     </DataGrid>
+
 
                 </Border>
             </Grid>

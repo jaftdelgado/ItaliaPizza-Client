@@ -40,12 +40,15 @@
   <xs:complexType name="SupplyDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Brand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="MeasureUnit" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
+      <xs:element minOccurs="0" name="Stock" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SupplierID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="SupplyCategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplyPic" nillable="true" type="xs:base64Binary" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SupplyDTO" nillable="true" type="tns:SupplyDTO" />
