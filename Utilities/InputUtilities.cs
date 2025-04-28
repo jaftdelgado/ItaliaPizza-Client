@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using ItaliaPizzaClient.Views.Dialogs;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,7 +28,76 @@ namespace ItaliaPizzaClient.Utilities
                 }
             };
         }
-        
+
+        public static void ValidatePriceInput(TextBox textBox)
+        {
+            string pattern = $@"^\d{{0,{Constants.MAX_DIGITS_BEFORE_DECIMAL}}}(\.\d{{0,2}})?$";
+
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                string currentText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
+
+                if (!Regex.IsMatch(currentText, pattern))
+                {
+                    e.Handled = true;
+                    Animations.ShakeTextBox(textBox);
+                    return;
+                }
+
+                if (decimal.TryParse(currentText, out decimal value) && value > Constants.MAX_MONETARY_VALUE)
+                {
+                    e.Handled = true;
+                    Animations.ShakeTextBox(textBox);
+                }
+            };
+
+            textBox.LostFocus += (sender, e) =>
+            {
+                string rawText = textBox.Text.Replace(",", "").Replace("$", "").Trim();
+
+                if (string.IsNullOrEmpty(rawText) || decimal.TryParse(rawText, out decimal val) && val == 0)
+                {
+                    textBox.Clear();
+                    return;
+                }
+
+                if (decimal.TryParse(rawText, out decimal value))
+                {
+                    if (value > Constants.MAX_MONETARY_VALUE)
+                        value = Constants.MAX_MONETARY_VALUE;
+
+                    textBox.Text = string.Format(CultureInfo.InvariantCulture, "${0:N2}", value);
+                }
+                else textBox.Text = string.Empty;
+            };
+
+            textBox.GotFocus += (sender, e) =>
+            {
+                string text = textBox.Text.Replace(",", "").Replace("$", "").Trim();
+
+                if (string.IsNullOrEmpty(text))
+                {
+                    textBox.Text = string.Empty;
+                    return;
+                }
+
+                if (decimal.TryParse(text, out decimal value))
+                {
+                    bool hasDecimals = value % 1 != 0;
+
+                    textBox.Text = hasDecimals
+                        ? value.ToString("0.00", CultureInfo.InvariantCulture)
+                        : value.ToString("0", CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    textBox.Text = string.Empty;
+                }
+
+                textBox.SelectionStart = textBox.Text.Length;
+            };
+        }
+
         public static void ValidatePasswordInput(PasswordBox passwordBox, string pattern, int maxLength)
         {
             passwordBox.PasswordChanged += (s, e) =>
@@ -42,36 +114,6 @@ namespace ItaliaPizzaClient.Utilities
                     Animations.ShakePasswordBox(passwordBox);
                 }
             };
-        }
-
-        public static void ValidateMonetaryInput(object sender, TextCompositionEventArgs e)
-        {
-            var regex = new Regex("[^0-9.]");
-            e.Handled = regex.IsMatch(e.Text);
-
-            if (((TextBox)sender).Text.Contains(".") && e.Text == ".")
-                e.Handled = true;
-        }
-
-        public static void FormatMonetaryValue(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            string text = textBox.Text;
-
-            if (string.IsNullOrWhiteSpace(text))
-            {
-                textBox.Text = "0.00";
-                return;
-            }
-
-            if (!text.Contains("."))
-                textBox.Text = $"{text}.00";
-            else
-            {
-                var parts = text.Split('.');
-                if (parts.Length == 2)
-                    textBox.Text = $"{parts[0]}.{parts[1].PadRight(2, '0').Substring(0, 2)}";
-            }
         }
 
         public static void ConvertToUpperCase(TextBox textBox)

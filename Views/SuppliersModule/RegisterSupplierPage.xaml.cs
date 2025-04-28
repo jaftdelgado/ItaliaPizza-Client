@@ -3,6 +3,7 @@ using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -71,6 +72,35 @@ namespace ItaliaPizzaClient.Views
             button.IsEnabled = allFieldsFilled;
         }
 
+        private async Task LoadSuppliesAvailable(int categoryId)
+        {
+            var client = ConnectionUtilities.IsServerConnected();
+            if (client == null) return;
+
+            var suppliesList = new List<Supply>();
+
+            await ConnectionUtilities.ExecuteServerAction(async () =>
+            {
+                var supplies = await client.GetSuppliesAvailableByCategoryAsync(categoryId);
+
+                suppliesList = supplies.Select(s => new Supply
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    MeasureUnit = s.MeasureUnit,
+                    SupplyCategoryID = s.SupplyCategoryID,
+                    Brand = s.Brand,
+                    SupplierID = s.SupplierID,
+                    Stock = s.Stock,
+                    SupplyPic = s.SupplyPic,
+                    Description = s.Description
+                }).ToList();
+            });
+
+            SuppliesDataGrid.ItemsSource = suppliesList;
+        }
+
         private async Task RegisterSupplier()
         {
             var client = ConnectionUtilities.IsServerConnected();
@@ -111,6 +141,14 @@ namespace ItaliaPizzaClient.Views
         private void RequiredFields_TextChanged(object sender, RoutedEventArgs e)
         {
             UpdateButtonState(BtnRegisterSupplier);
+        }
+
+        private async void CbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedCategory = CbCategories.SelectedItem as SupplyCategory;
+
+            if (selectedCategory != null)
+                await LoadSuppliesAvailable(selectedCategory.Id);
         }
 
         private async void Click_BtnRegisterSupplier(object sender, RoutedEventArgs e)

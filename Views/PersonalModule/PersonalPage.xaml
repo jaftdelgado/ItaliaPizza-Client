@@ -98,19 +98,9 @@
                             <TextBlock Text="{DynamicResource Personal_TitleTable}"
                                    Style="{DynamicResource SubtitleLabelStyle}"
                                        Margin="0 0 8 0"/>
-                            <Border Background="{StaticResource SecondaryButtonBrush}"
-                                    CornerRadius="5"
-                                    BorderBrush="{DynamicResource BorderBrush}"
-                                    BorderThickness="1"
-                                    Padding="5 2"
-                                    HorizontalAlignment="Left">
-                                <TextBlock x:Name="ElementsCounter"
-                                           Text="-"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"
-                                           Style="{DynamicResource DescriptionLabelStyle}"
-                                           FontSize="11"/>
-                            </Border>
+                            <ContentControl x:Name="ElementsCounter" 
+                                            Style="{StaticResource TagStyle}" 
+                                            Content="-"/>
 
                         </StackPanel>
 

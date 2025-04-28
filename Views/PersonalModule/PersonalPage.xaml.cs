@@ -216,7 +216,7 @@ namespace ItaliaPizzaClient.Views
 
         private void UpdateElementsCounter(int count)
         {
-            ElementsCounter.Text = count.ToString();
+            ElementsCounter.Content = count.ToString();
         }
 
         private void Click_BtnNewEmployee(object sender, RoutedEventArgs e)
