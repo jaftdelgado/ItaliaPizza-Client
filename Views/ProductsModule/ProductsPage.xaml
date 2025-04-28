@@ -120,6 +120,7 @@
                                        Style="{DynamicResource SubtitleLabelStyle}"/>
                                 <TextBlock Text="Carnes y Lactéos" Margin="0,2,0,0"
                                        Style="{DynamicResource RegularLabelStyle}"
+                                           
                                        Foreground="{StaticResource PrimaryButtonBrush}"/>
                                 <TextBlock Text="Queso italiano de textura suave y elástica, con sabor delicado y gran capacidad de derretirse, ideal para pizzas y gratinados." 
                                        Margin="0,10"
