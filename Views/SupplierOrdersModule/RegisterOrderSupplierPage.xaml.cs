@@ -13,8 +13,8 @@ namespace ItaliaPizzaClient.Views
 {
     public partial class RegisterOrderSupplierPage : Page
     {
-        private readonly MainManagerClient client = new MainManagerClient();
         private readonly List<OrderItem> orderItems = new List<OrderItem>();
+        private readonly MainManagerClient client = new MainManagerClient();
 
         public RegisterOrderSupplierPage()
         {
@@ -228,7 +228,7 @@ namespace ItaliaPizzaClient.Views
                 }
 
                 dto.Total = total;
-                dto.Items = items.ToArray(); //Se asigna como arreglo
+                dto.Items = items.ToArray();
 
                 int result = client.RegisterOrder(dto);
 
@@ -252,6 +252,9 @@ namespace ItaliaPizzaClient.Views
         }
         private void RefreshSuppliesComboBox()
         {
+            var client = ConnectionUtilities.IsServerConnected();
+            if (client == null) return;
+
             if (cbSuppliersName.SelectedItem is ComboBoxItem selectedItem &&
                 selectedItem.Tag is SupplierDTO selectedSupplier)
             {
@@ -271,7 +274,6 @@ namespace ItaliaPizzaClient.Views
                         });
                     }
                 }
-
                 cbSuppliesName.SelectedIndex = -1;
                 txtQuantity.IsEnabled = false;
             }
