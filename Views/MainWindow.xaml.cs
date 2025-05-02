@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.Dialogs;
 
 namespace ItaliaPizzaClient.Views
 {
@@ -13,21 +15,6 @@ namespace ItaliaPizzaClient.Views
         {
             InitializeComponent();
 
-            string userRole = GetCurrentUserRole();
-            SideMenuManager.CurrentUserRole = userRole;
-
-            NavigationManager.Initialize(MainFrame, NavigationPanel, BtnBack);
-            sideMenuManager = new SideMenuManager(NavigationManager.Instance);
-
-            sideMenuManager.LoadButtons(MenuStackPanel);
-
-            BtnProfile.Content = "Jafeth Delgado";
-
-            NavigateToPage("Glb_Principal", new PrincipalPage());
-
-            LoadProfileImage();
-
-            BtnBack.Click += BtnBack_Click;
         }
 
         public void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -35,10 +22,6 @@ namespace ItaliaPizzaClient.Views
             NavigationManager.Instance.GoBack();
         }
 
-        private string GetCurrentUserRole()
-        {
-            return "Cashier";
-        }
 
         private void LoadProfileImage()
         {
@@ -48,6 +31,62 @@ namespace ItaliaPizzaClient.Views
         public void NavigateToPage(string pageName, Page pageInstance)
         {
             NavigationManager.Instance.NavigateToPage(pageName, pageInstance);
+        }
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var user = txtUsuario.Text;
+            var password = txtPassword.Password;
+            var hashedPassword = PasswordUtilities.HashPassword(password);
+            if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(password))
+            {
+                Console.WriteLine("Error: Campos vacios");
+                MessageDialog.Show("Error", "Por favor ingrese su usuario y contraseña",AlertType.ERROR);
+                return;
+            }
+            var client = ConnectionUtilities.IsServerConnected();
+            var personal = client.Login(user, hashedPassword);
+            if (personal == null)
+            {
+                MessageDialog.Show("Error", "Credenciales incorrectas", AlertType.ERROR);
+                return;
+            }
+
+            
+            //...CREAR SINGLETON SESION
+            CurrentSession.UserID = personal.PersonalID;
+            CurrentSession.Name = personal.FirstName;
+            CurrentSession.Surnames = personal.LastName;
+            CurrentSession.UserName = personal.Username;
+            CurrentSession.UserRole = personal.RoleID;
+
+            SessionManager.Start();
+            //...crear metodo ping para actualizar sesion
+
+
+            //Ocultar componentes para mostrar homw
+            LoginGrid.Visibility = Visibility.Collapsed;
+            RootGrid.Visibility = Visibility.Visible;
+            //Cargar el menu lateral
+            LoadLateralMenu();
+        }
+        private void LoadLateralMenu()
+        {
+            string userRole = EmployeeRole.GetDefaultEmployeeRoles().Find(r => r.Id == CurrentSession.UserRole)?.Name;
+            SideMenuManager.CurrentUserRole = userRole;
+
+            NavigationManager.Initialize(MainFrame, NavigationPanel, BtnBack);
+            sideMenuManager = new SideMenuManager(NavigationManager.Instance);
+
+            sideMenuManager.LoadButtons(MenuStackPanel);
+
+            BtnProfile.Content = CurrentSession.Name;
+
+            NavigateToPage("Glb_Principal", new PrincipalPage());
+
+            LoadProfileImage();
+
+            BtnBack.Click += BtnBack_Click;
         }
     }
 }

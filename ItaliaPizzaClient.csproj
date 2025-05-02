@@ -97,6 +97,7 @@
     <Compile Include="Utilities\Animations.cs" />
     <Compile Include="Utilities\ConnectionUtilities.cs" />
     <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="Utilities\CurrentSession.cs" />
     <Compile Include="Utilities\ImageUtilities.cs" />
     <Compile Include="Utilities\InputUtilities.cs" />
     <Compile Include="Utilities\NavigationManager.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Utilities\PlaceholderManager.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Utilities\SessionManager.cs" />
     <Compile Include="Utilities\SideMenuButtonHelper.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -433,7 +435,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Icons\supplierorder-icon.png" />
   </ItemGroup>
