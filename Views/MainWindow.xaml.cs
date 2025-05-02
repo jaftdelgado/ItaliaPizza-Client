@@ -22,6 +22,10 @@ namespace ItaliaPizzaClient.Views
             NavigationManager.Instance.GoBack();
         }
 
+        private string GetCurrentUserRole()
+        {
+            return "Admin";
+        }
 
         private void LoadProfileImage()
         {

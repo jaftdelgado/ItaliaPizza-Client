@@ -83,8 +83,7 @@
                             <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
-                              x:Name="OrdersDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False"
-                              SelectionChanged="OrdersDataGrid_SelectionChanged">
+                              x:Name="OrdersDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
                                     <!-- ID -->
                                     <DataGridTextColumn Header="ID" Binding="{Binding OrderID}" IsReadOnly="True" Width="*"/>
@@ -120,8 +119,7 @@
                                     </DataGrid>
                                     <Button Content="{DynamicResource OrderPage_BtnPayOrder}" Width="200"
                                             Style="{DynamicResource PrimaryButtonStyle}"
-                                            Margin="0,12,0,6"
-                                            Click="Clic_BtnPayOrder">
+                                            Margin="0,12,0,6">
                                         <Button.Tag>/Resources/Icons/suppliers-icon.png</Button.Tag>
                                     </Button>
                                     <Button Content="{DynamicResource OrderPage_BtnCancelOrder}" Width="200"

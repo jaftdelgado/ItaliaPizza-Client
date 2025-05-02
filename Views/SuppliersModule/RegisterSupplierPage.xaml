@@ -152,7 +152,7 @@
                             </DataGridCheckBoxColumn>
 
                             <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupply}" 
-                            Binding="{Binding Name}" Width="3.5*" 
+                            Binding="{Binding SupplyName}" Width="3.5*" 
                             CellStyle="{StaticResource DataGridCellStyle1}" />
 
                             <DataGridTextColumn Header="{DynamicResource Supplies_TableHUnitPrice}" 

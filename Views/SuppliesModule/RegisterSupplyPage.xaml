@@ -24,9 +24,10 @@
 
                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
                             HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                    <TextBlock x:Name="PageHeader"
+                               Style="{StaticResource HeaderLabelStyle}"
                                Text="{DynamicResource RegSupply_Header}"/>
-                    <TextBlock Style="{StaticResource DescriptionLabelStyle}"
+                    <TextBlock x:Name="PageDescription" Style="{StaticResource DescriptionLabelStyle}"
                                Text="{DynamicResource RegSupply_Desc}"/>
                 </StackPanel>
             </Grid>
@@ -208,6 +209,13 @@
                                 Content="{DynamicResource RegSupply_BtnRegisterSupply}"
                                 Click="Click_BtnRegisterSupply">
                             <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                        </Button>
+                        <Button x:Name="BtnEditSupply" 
+                                Style="{DynamicResource PrimaryButtonStyle}"
+                                Content="{DynamicResource RegSupply_BtnEditSupply}"
+                                Click="Click_BtnEditSupply"
+                                Visibility="Collapsed">
+                            <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
                         </Button>
                     </StackPanel>
                 </Border>
