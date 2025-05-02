@@ -121,9 +121,9 @@ namespace ItaliaPizzaClient.Views
             InputUtilities.ConvertToLowerCase(TbUsername);
         }
 
-        private void SelectProfileImage(Image targetImageControl, int targetWidth, int targetHeight)
+        private void SelectProfileImage(Image targetImageControl)
         {
-            var dialogTitle = Application.Current.Resources["RegSupply_DialogSelectSupplyImage"]?.ToString();
+            var dialogTitle = Application.Current.Resources["RegEmployee_DialogSelectProfilePic"]?.ToString();
 
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -135,20 +135,18 @@ namespace ItaliaPizzaClient.Views
             {
                 try
                 {
-                    if (!ImageUtilities.IsImageSizeValid(openFileDialog.FileName, Constants.MAX_IMAGE_SIZE))
-                    {
-                        string errorMessage = string.Format(Application.Current.Resources["GlbDialogD_InvalidImageSize"].ToString(),
-                            Application.Current.Resources["Glb_MaxImageSizeMB"].ToString());
+                    var processedImageBytes = ImageUtilities.ProcessImageBeforeSaving(openFileDialog.FileName);
 
-                        MessageDialog.Show("GlbDialogT_InvalidImageSize", errorMessage, AlertType.WARNING);
+                    if (!ImageUtilities.IsImageSizeValid(processedImageBytes))
+                    {
+                        MessageDialog.Show("GlbDialogT_InvalidImageSize", "GlbDialogD_InvalidImageSize", AlertType.WARNING);
                         return;
                     }
 
-                    var resizedImage = ImageUtilities.LoadAndResizeImage(openFileDialog.FileName, targetWidth, targetHeight);
-                    targetImageControl.Source = resizedImage;
+                    EmployeeProfilePic.Source = ImageUtilities.ConvertToImageSource(processedImageBytes);
                     BtnDeleteImage.IsEnabled = true;
                 }
-                catch (IOException)
+                catch (Exception)
                 {
                     MessageDialog.Show("GlbDialogT_InvalidImageSize", "GlbDialogD_InvalidImageSize", AlertType.WARNING);
                 }
@@ -214,7 +212,7 @@ namespace ItaliaPizzaClient.Views
                 var defaultImage = new BitmapImage(new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Absolute));
                 var defaultImageBytes = ImageUtilities.ImageToByteArray(defaultImage);
 
-                if (ImageUtilities.AreImageEqual(profilePicData, defaultImageBytes))
+                if (ImageUtilities.AreImagesEqual(profilePicData, defaultImageBytes))
                 {
                     profilePicData = null;
                 }
@@ -381,10 +379,9 @@ namespace ItaliaPizzaClient.Views
             await EditEmployee();
         }
 
-
         private void Click_BtnSelectImage(object sender, RoutedEventArgs e)
         {
-            SelectProfileImage(EmployeeProfilePic, 180, 180);
+            SelectProfileImage(EmployeeProfilePic);
         }
 
         private void Click_BtnDeleteImage(object sender, RoutedEventArgs e)

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="520" d:DesignWidth="800"
+      d:DesignHeight="580" d:DesignWidth="800"
       Title="SuppliesPage">
 
     <Grid Background="{StaticResource BackgroundBrush}">
@@ -64,7 +64,7 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="260"/>
+                        <ColumnDefinition Width="240"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
@@ -78,65 +78,118 @@
                                        Style="{DynamicResource SubtitleLabelStyle}"/>
                         </StackPanel>
 
-                        <!-- Tabla de Insumos -->
-                        <Border Grid.Row="1" Padding="8">
-                            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
-                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                                      CellStyle="{DynamicResource DataGridCellStyle1}" 
-                                      x:Name="suppliesDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                        <Grid Grid.Row="1" Margin="0 10 0 20">
+                            <DataGrid x:Name="SupplyDataGrid"
+                                      AutoGenerateColumns="False"
+                                      IsReadOnly="True"
+                                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                                      Style="{DynamicResource DataGridStyle1}">
                                 <DataGrid.Columns>
-                                    <!-- Número -->
-                                    <DataGridTextColumn Header="#Número" Binding="{Binding Number}" IsReadOnly="True" Width="64"/>
-
-                                    <!-- Nombre de Insumo -->
-                                    <DataGridTextColumn Header="Nombre de Insumo" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Marca -->
-                                    <DataGridTextColumn Header="Marca" Binding="{Binding Brand}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Categoría -->
-                                    <DataGridTextColumn Header="Categoría" Binding="{Binding Category}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Nombre de Proveedor -->
-                                    <DataGridTextColumn Header="Nombre de Proveedor" Binding="{Binding SupplierName}" IsReadOnly="True" Width="*"/>
+                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupply}"
+                                                        Binding="{Binding SupplyName}" Width="3.5*" 
+                                                        CellStyle="{StaticResource DataGridCellStyle0}">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <StaticResource ResourceKey="DataGridColumnHeaderStyle0"/>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupplier}" Binding="{Binding SupplierID}" Width="2.5*"/>
+                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHCategory}" Binding="{Binding CategoryName}" Width="2*" />
+                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHUnitPrice}" Binding="{Binding FormattedPrice}" Width="2*" FontFamily="{StaticResource SFMonoRegular}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                        </Border>
+
+
+                            <StackPanel x:Name="NoMatchesMessage" Orientation="Vertical"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Visibility="Collapsed">
+                                <Image Source="/Resources/Icons/search-error-icon.png"
+                                       Width="64" Height="64"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Text="No se encontraron resultados"
+                                           Style="{DynamicResource SubtitleLabelStyle}"
+                                           Margin="0 6" TextAlignment="Center"/>
+                                <TextBlock Text="Comprueba tu ortografía o intenta buscar algo distinto"
+                                           TextAlignment="Center"
+                                           Style="{DynamicResource DescriptionLabelStyle}"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
 
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="6*"/>
-                                <RowDefinition Height="80"/>
-                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" x:Name="SupplyDetailsPanel"
+                                  Visibility="Visible">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20,24">
+                                    <ContentControl x:Name="ElementsCounter" 
+                Style="{StaticResource TagStyle}" 
+                Content="{DynamicResource Supplies_TableHSupply}"/>
+                                    <Image Name="EmployeeProfilePic"
+                       HorizontalAlignment="Center"
+                       Width="140" Height="140" Stretch="Fill"
+                       VerticalAlignment="Center"
+                       RenderOptions.BitmapScalingMode="HighQuality">
+                                        <Image.Clip>
+                                            <EllipseGeometry RadiusX="70" RadiusY="70" Center="70,70"/>
+                                        </Image.Clip>
+                                    </Image>
 
-                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="24,0">
-                                <TextBlock Text="KIRKLAND®"
-                                           Style="{DynamicResource HeaderLabelStyle}" FontWeight="ExtraBold"
-                                           FontSize="11"/>
-                                <TextBlock Text="Queso Mozzarella"
-                                           Style="{DynamicResource SubtitleLabelStyle}"/>
-                                <TextBlock Text="Carnes y Lactéos" Margin="0,2,0,0"
-                                           Style="{DynamicResource RegularLabelStyle}"
-                                           Foreground="{StaticResource PrimaryButtonBrush}"/>
-                                <TextBlock Text="Queso italiano de textura suave y elástica, con sabor delicado y gran capacidad de derretirse, ideal para pizzas y gratinados." 
-                                           Margin="0,10"
-                                           TextWrapping="Wrap"
-                                           Style="{DynamicResource DescriptionLabelStyle}"/> 
-                            </StackPanel>
+                                    <TextBlock x:Name="SupplyBrand" Text="KIRKLAND®"
+                                               Style="{DynamicResource HeaderLabelStyle}" FontFamily="{StaticResource SFProBold}"
+                                               Margin="0 16 0 0"
+                                               FontSize="10"/>
+                                    <TextBlock x:Name="SupplyName" FontSize="13"
+                                               Style="{DynamicResource SubtitleLabelStyle}"
+                                               Text="Tomate Cherry"/>
+                                    <TextBlock x:Name="SupplyCategory" Margin="0 2"
+                                               Style="{DynamicResource RegularLabelStyle}"
+                                               Foreground="{StaticResource PrimaryButtonBrush}"
+                                               Text="Frutas y Verduras"/>
+                                    <Border BorderThickness="0,0.5,0,0" BorderBrush="{DynamicResource SecondaryBrush}" Margin="0,8">
+                                        <StackPanel Orientation="Vertical" Margin="0,12">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="/Resources/Icons/supplier-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                                <TextBlock x:Name="SupplySupplier" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                            </StackPanel>
 
-                            <StackPanel Grid.Row="2" Margin="28,0">
-                                <Button x:Name="BtnDeleteSupply" Style="{DynamicResource SecondaryButtonStyle}"
-                                        Content="{DynamicResource Supplies_BtnDeleteSupply}">
-                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                </Button>
-                                <Button x:Name="BtnEditSupply" Style="{DynamicResource PrimaryButtonStyle}"
-                                        Content="{DynamicResource Supplies_BtnEditSupply}">
-                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                </Button>
-                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                                <Image Source="/Resources/Icons/measureunit-icon.png" Style="{StaticResource IconViewStyle}"/>
+                                                <TextBlock x:Name="EmployeeEmail" Style="{DynamicResource DescriptionLabelStyle}"/>
+                                            </StackPanel>
+
+                                            <TextBlock x:Name="SupplyDescription"
+                                                        Style="{DynamicResource DescriptionLabelStyle}"
+                                                        TextWrapping="Wrap" MaxWidth="240" HorizontalAlignment="Stretch"/>
+
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+
+                                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}" 
+                    BorderThickness="0 0.5 0 0">
+                                    <StackPanel VerticalAlignment="Center" Margin="20">
+                                        <Button x:Name="BtnEditSupply" 
+                                                Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource Supplies_BtnEditSupply}" Margin="0 0 0 6"
+                                                Click="Click_BtnEditSupply">
+                                            <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                        </Button>
+                                        <Button x:Name="BtnDeleteSupply" 
+                                                Style="{DynamicResource DangerButtonStyle}"
+                                                Content="{DynamicResource Personal_BtnDeleteEmployee}" 
+                                                Click="Click_BtnDeleteSupply">
+                                            <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
                         </Grid>
                     </Border>
                 </Grid>

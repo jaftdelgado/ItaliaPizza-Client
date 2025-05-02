@@ -23,4 +23,29 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
     </Style>
+
+    <Style x:Key="TagStyle" TargetType="ContentControl">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5 2"/>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Border Background="{StaticResource SecondaryButtonBrush}"
+                        BorderBrush="{DynamicResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Padding="5 2">
+                        <TextBlock x:Name="ElementsCounter"
+                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Content}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Style="{DynamicResource DescriptionLabelStyle}"
+                               FontSize="11"/>
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

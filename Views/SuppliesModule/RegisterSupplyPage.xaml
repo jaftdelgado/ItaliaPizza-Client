@@ -137,7 +137,9 @@
                                       Tag="{DynamicResource RegSupply_CbCategory}"
                                       Style="{DynamicResource ComboBoxStyle}"
                                       Margin="10 0 0 0"
-                                      VerticalAlignment="Top"/>
+                                      VerticalAlignment="Top"
+                                      SelectedValuePath="Id"
+                                      SelectionChanged="RequiredFields_SelectionChanged"/>
                         </Grid>
                     </Grid>
 
@@ -166,7 +168,9 @@
                                       Grid.Column="1"
                                       Tag="{DynamicResource RegSupply_CbSupplyMeasure}"
                                       Style="{DynamicResource ComboBoxStyle}"
-                                      Margin="10 0 0 0"/>
+                                      Margin="10 0 0 0"
+                                      SelectedValuePath="Id"
+                                      SelectionChanged="RequiredFields_SelectionChanged"/>
                         </Grid>
                     </Grid>
 

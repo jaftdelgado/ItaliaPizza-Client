@@ -11,75 +11,177 @@
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
-            <!--Cabecera-->
             <RowDefinition Height="*"/>
-            <!--Contenido Principal-->
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="0, 0, 0, 0.5" BorderBrush="{StaticResource SecondaryBrush}">
+        <Border Grid.Row="0" BorderThickness="0,0,0,0.5"
+                BorderBrush="{StaticResource SecondaryBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom" Margin="20, 0, 0, 20">
-                    <TextBlock Style="{StaticResource HeaderLabelStyle}" Text="{DynamicResource RegSupplier_Header}"/>
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock x:Name="PageHeader" 
+                               Style="{StaticResource HeaderLabelStyle}"
+                               Text="{DynamicResource RegSupplier_Header}"/>
+                    <TextBlock x:Name="PageDescription"
+                               Style="{StaticResource DescriptionLabelStyle}"
+                               Text="{DynamicResource RegSupplier_Desc}"/>
                 </StackPanel>
             </Grid>
         </Border>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*" MaxWidth="420"/>
+                <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 20, 10, 0">
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegSupplier_Name}"
-             Width="280" Margin="0, 0, 0, 10"/>
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegSupplier_ContactName}" Margin="0, 0, 0, 10"/>
+            <Border Grid.Column="0" BorderBrush="{DynamicResource SecondaryBrush}"
+                    BorderThickness="0 0 0.5 0">
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <TextBox Style="{StaticResource TextBoxStyle}" Tag="{DynamicResource RegSupplier_PhoneNumber}" Margin="0, 0, 0, 10"/>
-            </StackPanel>
+                    <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0">
+                        <TextBlock Text="{DynamicResource RegSupplier_SupplierInfo}"
+                                   Style="{DynamicResource SubtitleLabelStyle}"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Margin="20 12 20 0">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <TextBlock Text="{DynamicResource Glb_GeneralInfo}"
+                                       Style="{DynamicResource DescriptionLabelStyle}"
+                                       Margin="0 0 0 8"/>
+                            <TextBox x:Name="TbSupplierName"
+                                     Tag="{DynamicResource RegSupplier_TbSupplierName}"
+                                     Style="{DynamicResource TextBoxStyle}"
+                                     HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                     Margin="0 0 0 10"
+                                     TextChanged="RequiredFields_TextChanged"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox x:Name="CbCategories"
+                                          Grid.Column="0"
+                                          Tag="{DynamicResource RegSupplier_TbCategories}"
+                                          Style="{DynamicResource ComboBoxStyle}"
+                                          Margin="0 0 10 0"
+                                          SelectionChanged="CbCategories_SelectionChanged"/>
+                                <TextBox x:Name="TbContactName"
+                                         Grid.Column="1" Grid.Row="1"
+                                         Tag="{DynamicResource RegSupplier_TbContactName}"
+                                         Style="{DynamicResource TextBoxStyle}"
+                                         Margin="10 0 0 0"
+                                         TextChanged="RequiredFields_TextChanged"/>
+                            </Grid>
+
+                            <TextBlock Text="{DynamicResource RegSupplier_ContactInfo}"
+                                       Style="{DynamicResource DescriptionLabelStyle}"
+                                       Margin="0 12 0 8"/>         
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBox x:Name="TbPhoneNumber"
+                                         Grid.Column="0"
+                                         Tag="{DynamicResource Glb_PhoneNumber}"
+                                         Style="{DynamicResource TextBoxStyle}"
+                                         Margin="0 0 10 0"
+                                         TextChanged="RequiredFields_TextChanged"/>
+                                <TextBox x:Name="TbEmailAddress"
+                                         Grid.Column="1"
+                                         Tag="{DynamicResource Glb_EmailAddress}"
+                                         Style="{DynamicResource TextBoxStyle}"
+                                         Margin="10 0 0 0"/>
+                            </Grid>
+
+                            <TextBlock Text="{DynamicResource RegSupplier_SupplierDescription}"
+                                       Style="{DynamicResource DescriptionLabelStyle}"
+                                       Margin="0 12 0 8"/>
+                            <TextBox x:Name="TbDescription"
+      Tag="{DynamicResource RegSupplier_TbDescription}"
+      Style="{DynamicResource TextAreaStyle}"/>
+
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 20, 10, 0">
-                    <TextBlock Style="{StaticResource SubtitleLabelStyle}" Text="{DynamicResource RegSupplier_RegProduct}"/>
-                    <TextBlock Style="{StaticResource DescriptionLabelStyle}" Text="{DynamicResource RegSupplier_RegProductDesc}" Margin="0, 5, 0, 20"/>
-
-                    <Button x:Name="BtnRegSupply" IsEnabled="False" Style="{DynamicResource SecondaryButtonStyle}" Content="{DynamicResource RegSupplier_BtnRegSupply}"
-                            Click="RegSupplyBtn"/>
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0">
+                    <TextBlock Text="{DynamicResource RegSupplier_SupplyRelationship}"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 20, 0, 0">
-                    <Viewbox Height="30">
-                        <RadioButton x:Name="RBtnSupply" IsChecked="False" Click="EnableSupplyBtn" />
-                    </Viewbox>
-                </StackPanel>
+                <Border Grid.Row="1" Margin="0 10 0 20">
+                    <DataGrid x:Name="SuppliesDataGrid"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              Style="{DynamicResource DataGridStyle1}">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="C"
+                                                    CanUserResize="False" 
+                                                    CellStyle="{DynamicResource DataGridCellStyle1}"
+                                                    Width="auto" 
+                                                    ElementStyle="{StaticResource CheckBoxStyle}"
+                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}">
+                                <DataGridCheckBoxColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Style="{StaticResource CheckBoxStyle}" />
+                                    </DataTemplate>
+                                </DataGridCheckBoxColumn.HeaderTemplate>
+                            </DataGridCheckBoxColumn>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0, 0, 15, 0">
-                    <Button Grid.Column="0" Grid.Row="2" x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonStyle}" Content="{DynamicResource Glb_BtnCancel}"
-                        Width="120" Click="BtnCancelRegister" />
-                </StackPanel>
+                            <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupply}" 
+                            Binding="{Binding Name}" Width="3.5*" 
+                            CellStyle="{StaticResource DataGridCellStyle1}" />
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2">
-                    <Button Grid.Column="0" Grid.Row="2" x:Name="BtnSaveSupplier" Style="{DynamicResource PrimaryButtonStyle}" Content="{DynamicResource Glb_BtnSave}"
-                        Width="100"  Click="SaveSupplierBtn"/>
-                </StackPanel>
+                            <DataGridTextColumn Header="{DynamicResource Supplies_TableHUnitPrice}" 
+                            Binding="{Binding Price}" Width="2*" />
+
+                            <DataGridTextColumn Header="{DynamicResource Supplies_TableHMeasureUnit}" 
+                            Binding="{Binding MeasureUnit}" Width="2*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+
+                </Border>
             </Grid>
 
         </Grid>
 
+        <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
+                BorderThickness="0,0.5,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
+                <Button x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                        Content="{DynamicResource Glb_Cancel}"
+                        Margin="0,0,10,0"/>
+                <Button x:Name="BtnRegisterSupplier"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Content="{DynamicResource RegSupplier_BtnRegisterSupplier}"
+                        Click="Click_BtnRegisterSupplier">
+                    <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

@@ -186,11 +186,6 @@ namespace ItaliaPizzaClient.Views
             }
         }
 
-        private void PreviewTextInput_TbUnitPrice(object sender, TextCompositionEventArgs e)
-        {
-            InputUtilities.ValidateMonetaryInput(sender, e);
-        }
-
         private void Click_BtnAddRecipe(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)

@@ -9,9 +9,14 @@ namespace ItaliaPizzaClient.Utilities
 {
     public static class ImageUtilities
     {
+        private const int DefaultWidth = 200;
+        private const int DefaultHeight = 200;
+        private const int DefaultJpegQuality = 90;
+        private const long MaxImageSizeInBytes = 200 * 1024;
+
         public static void SetImageSource(Image imageControl, byte[] imageBytes, string defaultImagePath)
         {
-            if (imageBytes != null)
+            if (IsValidImage(imageBytes))
             {
                 using (var ms = new MemoryStream(imageBytes))
                 {
@@ -53,14 +58,17 @@ namespace ItaliaPizzaClient.Utilities
 
             using (var memoryStream = new MemoryStream())
             {
-                var encoder = new PngBitmapEncoder();
+                var encoder = new JpegBitmapEncoder
+                {
+                    QualityLevel = DefaultJpegQuality
+                };
                 encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
                 encoder.Save(memoryStream);
                 return memoryStream.ToArray();
             }
         }
 
-        public static bool AreImageEqual(byte[] array1, byte[] array2)
+        public static bool AreImagesEqual(byte[] array1, byte[] array2)
         {
             if (array1 == null && array2 == null) return true;
             if (array1 == null || array2 == null) return false;
@@ -72,18 +80,16 @@ namespace ItaliaPizzaClient.Utilities
             return true;
         }
 
-
-        public static bool IsImageSizeValid(string path, long maxSizeInBytes)
+        public static bool IsImageSizeValid(byte[] imageBytes)
         {
-            FileInfo fileInfo = new FileInfo(path);
-            return fileInfo.Length <= maxSizeInBytes;
+            return imageBytes != null && imageBytes.Length <= MaxImageSizeInBytes;
         }
 
-        public static BitmapImage LoadAndResizeImage(string path, int targetWidth, int targetHeight)
+        public static BitmapImage LoadAndResizeImage(string path)
         {
             var originalBitmap = LoadBitmapFromFile(path);
             var cropped = CropImageToCenter(originalBitmap);
-            var resized = ResizeImage(cropped, targetWidth, targetHeight);
+            var resized = ResizeImage(cropped, DefaultWidth, DefaultHeight);
             return resized;
         }
 
@@ -123,7 +129,10 @@ namespace ItaliaPizzaClient.Utilities
 
             var transformedBitmap = new TransformedBitmap(source, scaleTransform);
 
-            var encoder = new PngBitmapEncoder();
+            var encoder = new JpegBitmapEncoder
+            {
+                QualityLevel = DefaultJpegQuality
+            };
             encoder.Frames.Add(BitmapFrame.Create(transformedBitmap));
 
             using (var ms = new MemoryStream())
@@ -133,5 +142,52 @@ namespace ItaliaPizzaClient.Utilities
                 return LoadBitmapFromStream(ms);
             }
         }
+
+        public static bool IsValidImage(byte[] imageBytes)
+        {
+            if (imageBytes == null || imageBytes.Length == 0)
+                return false;
+
+            try
+            {
+                using (var ms = new MemoryStream(imageBytes))
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.StreamSource = ms;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static byte[] ProcessImageBeforeSaving(string imagePath)
+        {
+            var resizedBitmap = LoadAndResizeImage(imagePath);
+            var compressedImageBytes = ImageToByteArray(resizedBitmap);
+
+            long imageSizeInKb = compressedImageBytes.Length / 1024;
+
+            MessageBox.Show(
+                $"La imagen procesada pesa {imageSizeInKb} KB.",
+                "Información de Imagen",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+
+            if (!IsImageSizeValid(compressedImageBytes))
+            {
+                throw new InvalidOperationException("The processed image exceeds the maximum allowed size.");
+            }
+
+            return compressedImageBytes;
+        }
+
     }
 }

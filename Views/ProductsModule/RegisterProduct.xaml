@@ -113,12 +113,10 @@
                             <TextBox x:Name="txt_price" Grid.Column="0" Style="{StaticResource TextBoxStyle}" 
                                  Tag="{DynamicResource RegProduct_Price}"
                                  Margin="7"
-                                 PreviewTextInput="PreviewTextInput_TbUnitPrice"
                                   />
                             <TextBox Grid.Column="1" Style="{StaticResource TextBoxStyle}" 
                                  Tag="{DynamicResource RegProduct_Quantity}"
                                  Margin="7"
-                                 PreviewTextInput="PreviewTextInput_TbUnitPrice"
                                  
                             />
                         </Grid>

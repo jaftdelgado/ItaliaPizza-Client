@@ -1,19 +1,17 @@
-﻿using ItaliaPizzaClient.Model;
+﻿using ItaliaPizzaClient.ItaliaPizzaServices;
+using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace ItaliaPizzaClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para RegisterSupplyPage.xaml
-    /// </summary>
     public partial class RegisterSupplyPage : Page
     {
         private byte[] _selectedImageBytes;
@@ -24,16 +22,26 @@ namespace ItaliaPizzaClient.Views
             SetCategoriesComboBox();
             SetMeasureComboBox();
             SetInputFields();
-            UpdateFormButtonState(BtnRegisterSupply);
+            UpdateButtonState(BtnRegisterSupply);
         }
 
         private void SetInputFields()
         {
-            InputUtilities.ValidateInput(TbSupplyName, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES);
-            InputUtilities.ValidateInput(TbSupplyBrand, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES);
+            var validations = new (TextBox, string, int)[]
+            {
+                (TbSupplyName, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES),
+                (TbSupplyBrand, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_NAMES),
+                (TbUnitPrice, Constants.MONETARY_VALUE_PATTERN, Constants.MAX_LENGTH_MONETARY_VALUE),
+                (TbDescription, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_DESCRIPTION)
+            };
+
+            foreach (var (textBox, pattern, maxLength) in validations)
+                InputUtilities.ValidateInput(textBox, pattern, maxLength);
+
+            InputUtilities.ValidatePriceInput(TbUnitPrice);
         }
 
-        private void SelectProfileImage(Image targetImageControl, int targetWidth, int targetHeight)
+        private void SelectSupplyImage(Image targetImageControl)
         {
             var dialogTitle = Application.Current.Resources["RegEmployee_DialogSelectProfilePic"]?.ToString();
 
@@ -47,48 +55,102 @@ namespace ItaliaPizzaClient.Views
             {
                 try
                 {
-                    if (!ImageUtilities.IsImageSizeValid(openFileDialog.FileName, Constants.MAX_IMAGE_SIZE))
+                    var processedImageBytes = ImageUtilities.ProcessImageBeforeSaving(openFileDialog.FileName);
+
+                    if (!ImageUtilities.IsImageSizeValid(processedImageBytes))
                     {
                         MessageDialog.Show("GlbDialogT_InvalidImageSize", "GlbDialogD_InvalidImageSize", AlertType.WARNING);
                         return;
                     }
 
-                    var resizedImage = ImageUtilities.LoadAndResizeImage(openFileDialog.FileName, targetWidth, targetHeight);
-                    targetImageControl.Source = resizedImage;
+                    _selectedImageBytes = processedImageBytes;
+                    targetImageControl.Source = ImageUtilities.ConvertToImageSource(processedImageBytes);
+
                     BtnDeleteImage.IsEnabled = true;
                 }
-                catch (IOException)
+                catch (Exception)
                 {
                     MessageDialog.Show("GlbDialogT_InvalidImageSize", "GlbDialogD_InvalidImageSize", AlertType.WARNING);
                 }
             }
         }
 
+        public byte[] GetSupplyPicData()
+        {
+            byte[] supplyPicData = null;
+
+            if (SupplyImage.Source is BitmapImage bitmapImage)
+            {
+                supplyPicData = ImageUtilities.ImageToByteArray(bitmapImage);
+
+                var defaultImage = new BitmapImage(new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Absolute));
+                var defaultImageBytes = ImageUtilities.ImageToByteArray(defaultImage);
+
+                if (ImageUtilities.AreImagesEqual(supplyPicData, defaultImageBytes))
+                {
+                    supplyPicData = null;
+                }
+            }
+
+            return supplyPicData;
+        }
+
+        public async Task RegisterSupply()
+        {
+            var client = ConnectionUtilities.IsServerConnected();
+            if (client == null) return;
+
+            string rawText = TbUnitPrice.Text.Replace(",", "").Replace("$", "").Trim();
+            decimal price = decimal.TryParse(rawText, out decimal parsedPrice) ? parsedPrice : 0;
+
+            var supplyDto = new SupplyDTO
+            {
+                Name = TbSupplyName.Text.Trim(),
+                Price = price,
+                MeasureUnit = (int) CbSupplyMeasure.SelectedValue,
+                SupplyCategoryID = (int) CbCategories.SelectedValue,
+                Brand = SupplyBrandCheckBox.IsChecked == true ? TbSupplyBrand.Text.Trim() : null,
+                SupplyPic = GetSupplyPicData(),
+                Description = string.IsNullOrWhiteSpace(TbDescription.Text) ? null : TbDescription.Text.Trim()
+            };
+
+            bool success = false;
+
+            await ConnectionUtilities.ExecuteServerAction(async () =>
+            {
+                int result = await client.AddSupplyAsync(supplyDto);
+                success = result > 0;
+            });
+
+            if (success)
+            {
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    MessageDialog.Show("RegSupply_DialogTSuccess", "RegSupply_DialogDSuccess", AlertType.SUCCESS,
+                        () =>
+                        {
+                            NavigationManager.Instance.GoBack();
+                        });
+                });
+            }
+        }
+
         private void Click_BtnSelectImage(object sender, RoutedEventArgs e)
         {
-            SelectProfileImage(SupplyImage, 180, 180);
+            SelectSupplyImage(SupplyImage);
         }
 
         private void SetCategoriesComboBox()
         {
-            var categories = SupplyCategory.GetDefaultSupplyCategories();
-
-            foreach (var category in categories)
-            {
-                category.Name = Application.Current.Resources[category.ResourceKey]?.ToString() ?? category.Name;
-            }
-
-            CbCategories.ItemsSource = categories;
+            CbCategories.ItemsSource = SupplyCategory.GetDefaultSupplyCategories();
         }
 
         private void SetMeasureComboBox()
         {
-            var unitMeasures = MeasureUnit.GetDefaultMeasureUnits();
-
-            CbSupplyMeasure.ItemsSource = unitMeasures;
+            CbSupplyMeasure.ItemsSource = MeasureUnit.GetDefaultMeasureUnits();
         }
 
-        private void UpdateFormButtonState(Button button)
+        private void UpdateButtonState(Button button)
         {
             var requiredFields = new List<Control>
             {
@@ -124,46 +186,33 @@ namespace ItaliaPizzaClient.Views
         private void CheckbBrand_Checked(object sender, RoutedEventArgs e)
         {
             TbSupplyBrand.IsEnabled = false;
-            UpdateFormButtonState(BtnRegisterSupply);
+            UpdateButtonState(BtnRegisterSupply);
         }
 
         private void CheckbBrand_Unchecked(object sender, RoutedEventArgs e)
         {
             TbSupplyBrand.IsEnabled = true;
-            UpdateFormButtonState(BtnRegisterSupply);
+            UpdateButtonState(BtnRegisterSupply);
         }
 
-        private void PreviewTextInput_TbUnitPrice(object sender, TextCompositionEventArgs e)
+        private async void Click_BtnRegisterSupply(object sender, RoutedEventArgs e)
         {
-            InputUtilities.ValidateMonetaryInput(sender, e);
-        }
-
-        private void LostFocus_TbUnitPrice(object sender, RoutedEventArgs e)
-        {
-            InputUtilities.FormatMonetaryValue(sender, e);
-        }
-
-        private void Click_BtnRegisterSupplier(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-
-            if (mainWindow != null)
-                mainWindow.NavigateToPage("RegSupplier_Header", new RegisterSupplierPage());
-        }
-
-        private void Click_BtnRegisterSupply(object sender, RoutedEventArgs e)
-        {
-
+            await RegisterSupply();
         }
 
         private void Click_BtnCancel(object sender, RoutedEventArgs e)
         {
-
+            NavigationService?.GoBack();
         }
 
-        private void RequiredFields_TextChanged(object sender, RoutedEventArgs e)
+        private void RequiredFields_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateFormButtonState(BtnRegisterSupply);
+            UpdateButtonState(BtnRegisterSupply);
+        }
+
+        private void RequiredFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateButtonState(BtnRegisterSupply);
         }
     }
 }

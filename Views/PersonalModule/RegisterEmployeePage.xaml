@@ -9,10 +9,8 @@
       Title="RegisterEmployeePage">
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68"/>
-            <!--Cabecera-->
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
-            <!--Contenido Principal-->
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" BorderThickness="0,0,0,0.5"
@@ -90,12 +88,12 @@
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,0">
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0">
                     <TextBlock Text="{DynamicResource RegEmployee_EmployeeInfo}"
                            Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20,12,0,0">
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20 12 0 0">
                     <TextBlock Text="{DynamicResource RegEmployee_PersonalInfo}"
                                Style="{DynamicResource DescriptionLabelStyle}"
                                Margin="0,0,0,8"/>
