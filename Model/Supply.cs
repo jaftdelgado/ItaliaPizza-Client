@@ -1,5 +1,5 @@
-﻿using System.Web.Security;
-using System.Windows;
+﻿using System.Windows;
+using MeasureUnitModel = ItaliaPizzaClient.Model.MeasureUnit;
 
 namespace ItaliaPizzaClient.Model
 {
@@ -24,12 +24,29 @@ namespace ItaliaPizzaClient.Model
         public byte[] SupplyPic { get; set; }
 
         public string Description { get; set; }
+        
+        public bool IsActive { get; set; }
+
+        public string SupplierName { get; set; }
 
         public string FormattedPrice
         {
             get
             {
                 return Price.ToString("C", System.Globalization.CultureInfo.CurrentCulture);
+            }
+        }
+
+        public string FormattedPricePerUnit
+        {
+            get
+            {
+                var measureUnit = MeasureUnitModel.GetDefaultMeasureUnits()
+                    .Find(mu => mu.Id == MeasureUnit);
+
+                string abbreviation = measureUnit?.Abbreviation ?? "u";
+
+                return $"{Price.ToString("C", System.Globalization.CultureInfo.CurrentCulture)}/{abbreviation}";
             }
         }
 
@@ -57,6 +74,18 @@ namespace ItaliaPizzaClient.Model
             }
         }
 
-
+        public string Supplier
+        {
+            get
+            {
+                return string.IsNullOrEmpty(SupplierName)
+                    ? Application.Current.TryFindResource("Glb_NotAssigned") as string ?? "Not Assigned"
+                    : SupplierName;
+            }
+            set
+            {
+                SupplierName = value;
+            }
+        }
     }
 }

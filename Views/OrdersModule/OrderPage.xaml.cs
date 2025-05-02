@@ -33,9 +33,9 @@ namespace ItaliaPizzaClient.Views.OrdersModule
         public OrderPage()
         {
             InitializeComponent();
-            LoadDeliveredOrders();
+            //LoadDeliveredOrders();
         }
-        private void LoadDeliveredOrders()
+        /*private void LoadDeliveredOrders()
         {
             var client = ConnectionUtilities.IsServerConnected();
             if (client == null) return;
@@ -163,7 +163,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                     doc.Close();
                 }
             }
-        }
+        }*/
         private void Clic_BtnNewOrder(object sender, RoutedEventArgs e)
         {
 

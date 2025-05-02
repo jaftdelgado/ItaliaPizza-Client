@@ -14,15 +14,67 @@ namespace ItaliaPizzaClient.Views
 {
     public partial class RegisterSupplyPage : Page
     {
+        private Supply _editingSupply;
         private byte[] _selectedImageBytes;
+        private bool _isEditMode;
 
         public RegisterSupplyPage()
         {
             InitializeComponent();
+            ConfigureInterfaceForMode();
             SetCategoriesComboBox();
             SetMeasureComboBox();
             SetInputFields();
             UpdateButtonState(BtnRegisterSupply);
+
+            _isEditMode = false;
+        }
+
+        public RegisterSupplyPage(Supply editingSupply)
+        {
+            InitializeComponent();
+            _isEditMode = true;
+            _editingSupply = editingSupply;
+
+            ConfigureInterfaceForMode();
+            SetCategoriesComboBox();
+            SetMeasureComboBox();
+            SetInputFields();
+            LoadSupplyData(editingSupply);
+
+            ImageUtilities.SetImageSource(SupplyImage, editingSupply.SupplyPic, Constants.DEFAULT_PROFILE_PIC_PATH);
+
+            if (editingSupply.SupplyPic != null) BtnDeleteImage.IsEnabled = true;
+        }
+
+        private void ConfigureInterfaceForMode()
+        {
+            if (_isEditMode)
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "EditSupply_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "EditSupply_Desc");
+                BtnEditSupply.Visibility = Visibility.Visible;
+                BtnRegisterSupply.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "RegSupply_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "RegSupply_Desc");
+                BtnEditSupply.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LoadSupplyData(Supply editingSupply)
+        {
+            TbSupplyName.Text = editingSupply.Name;
+            TbUnitPrice.Text = editingSupply.FormattedPrice;
+            TbDescription.Text = editingSupply.Description;
+
+            if (editingSupply.Brand != null) TbSupplyBrand.Text = editingSupply.Brand;
+            else SupplyBrandCheckBox.IsChecked = true;
+
+            CbCategories.SelectedIndex = editingSupply.SupplyCategoryID - 1;
+            CbSupplyMeasure.SelectedIndex = editingSupply.MeasureUnit - 1;
         }
 
         private void SetInputFields()
@@ -109,7 +161,7 @@ namespace ItaliaPizzaClient.Views
                 Price = price,
                 MeasureUnit = (int) CbSupplyMeasure.SelectedValue,
                 SupplyCategoryID = (int) CbCategories.SelectedValue,
-                Brand = SupplyBrandCheckBox.IsChecked == true ? TbSupplyBrand.Text.Trim() : null,
+                Brand = SupplyBrandCheckBox.IsChecked == false ? TbSupplyBrand.Text.Trim() : null,
                 SupplyPic = GetSupplyPicData(),
                 Description = string.IsNullOrWhiteSpace(TbDescription.Text) ? null : TbDescription.Text.Trim()
             };
@@ -132,6 +184,40 @@ namespace ItaliaPizzaClient.Views
                             NavigationManager.Instance.GoBack();
                         });
                 });
+            }
+        }
+
+        private async Task EditSupply()
+        {
+            byte[] profilePicData = GetSupplyPicData();
+            string rawText = TbUnitPrice.Text.Replace(",", "").Replace("$", "").Trim();
+            decimal price = decimal.TryParse(rawText, out decimal parsedPrice) ? parsedPrice : 0;
+            bool success = false;
+
+            var updatedDto = new SupplyDTO
+            {
+                Id = _editingSupply.Id,
+                Name = TbSupplyName.Text.Trim(),
+                Price = price,
+                MeasureUnit = (int)CbSupplyMeasure.SelectedValue,
+                SupplyCategoryID = (int)CbCategories.SelectedValue,
+                Brand = SupplyBrandCheckBox.IsChecked == false ? TbSupplyBrand.Text.Trim() : null,
+                SupplyPic = GetSupplyPicData(),
+                Description = string.IsNullOrWhiteSpace(TbDescription.Text) ? null : TbDescription.Text.Trim()
+            }; 
+
+            await ConnectionUtilities.ExecuteServerAction(async () =>
+            {
+                var client = ConnectionUtilities.IsServerConnected();
+                if (client == null) return;
+
+                success = await client.UpdateSupplyAsync(updatedDto);
+            });
+
+            if (success)
+            {
+                MessageDialog.Show("RegSupply_DialogTEditSuccess", "RegSupply_DialogDEditSuccess", AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
             }
         }
 
@@ -213,6 +299,11 @@ namespace ItaliaPizzaClient.Views
         private void RequiredFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateButtonState(BtnRegisterSupply);
+        }
+
+        private async void Click_BtnEditSupply(object sender, RoutedEventArgs e)
+        {
+            await EditSupply();
         }
     }
 }

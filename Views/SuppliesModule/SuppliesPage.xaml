@@ -44,7 +44,7 @@
         <Border Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="46"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -55,9 +55,26 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="46">
+                            <Button x:Name="BtnActive"
+                                    Content="{DynamicResource Glb_Active}"
+                                    Click="Click_FilterButton" 
+                                    Style="{DynamicResource TableHeaderButtonStyle}"/>
+                            <Button x:Name="BtnDeleted" Margin="20 0 0 0"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"
+                                    Content="{DynamicResource Glb_Deleted}"
+                                    Click="Click_FilterButton" />
+                            <Button x:Name="BtnViewAll" Margin="20 0 0 0"
+                                    Content="{DynamicResource Glb_ViewAll}"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"
+                                    Click="Click_FilterButton" />
+                        </StackPanel>
+
+                        <TextBox x:Name="SearchBox"
+                                 Grid.Column="1"
+                                 HorizontalAlignment="Right"
                                  Style="{DynamicResource SecondarySearchBoxStyle}"
-                                 Width="180"/>
+                                 Width="160" TextChanged="SearchBox_TextChanged"/>
                     </Grid>
                 </Border>
 
@@ -73,9 +90,15 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" 
+                                    VerticalAlignment="Bottom" 
+                                    Margin="20 0">
                             <TextBlock Text="{DynamicResource Supplies_TitleTable}"
-                                       Style="{DynamicResource SubtitleLabelStyle}"/>
+                                       Style="{DynamicResource SubtitleLabelStyle}"
+                                       Margin="0 0 8 0"/>
+                            <ContentControl x:Name="ElementsCounter" 
+                                            Style="{StaticResource TagStyle}" 
+                                            Content="-"/>
                         </StackPanel>
 
                         <Grid Grid.Row="1" Margin="0 10 0 20">
@@ -85,7 +108,8 @@
                                       RowStyle="{DynamicResource DataGridRowStyle1}"
                                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
                                       CellStyle="{DynamicResource DataGridCellStyle1}"
-                                      Style="{DynamicResource DataGridStyle1}">
+                                      Style="{DynamicResource DataGridStyle1}"
+                                      SelectionChanged="SupplyDataGrid_SelectionChanged">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupply}"
                                                         Binding="{Binding SupplyName}" Width="3.5*" 
@@ -94,9 +118,9 @@
                                             <StaticResource ResourceKey="DataGridColumnHeaderStyle0"/>
                                         </DataGridTextColumn.HeaderStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupplier}" Binding="{Binding SupplierID}" Width="2.5*"/>
+                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHSupplier}" Binding="{Binding Supplier}" Width="2.5*"/>
                                     <DataGridTextColumn Header="{DynamicResource Supplies_TableHCategory}" Binding="{Binding CategoryName}" Width="2*" />
-                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHUnitPrice}" Binding="{Binding FormattedPrice}" Width="2*" FontFamily="{StaticResource SFMonoRegular}"/>
+                                    <DataGridTextColumn Header="{DynamicResource Supplies_TableHUnitPrice}" Binding="{Binding FormattedPricePerUnit}" Width="2*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
@@ -117,62 +141,55 @@
                         </Grid>
                     </Grid>
 
-                    <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
+                    <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5 0 0 0">
                         <Grid>
                             <Grid Grid.Row="0" x:Name="SupplyDetailsPanel"
-                                  Visibility="Visible">
+                                  Visibility="Collapsed">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                
-                                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20,24">
-                                    <ContentControl x:Name="ElementsCounter" 
-                Style="{StaticResource TagStyle}" 
-                Content="{DynamicResource Supplies_TableHSupply}"/>
-                                    <Image Name="EmployeeProfilePic"
-                       HorizontalAlignment="Center"
-                       Width="140" Height="140" Stretch="Fill"
-                       VerticalAlignment="Center"
-                       RenderOptions.BitmapScalingMode="HighQuality">
+
+                                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20 20">
+
+                                    <ContentControl Style="{StaticResource TagStyle}" 
+                                                    Content="{DynamicResource Supplies_TableHSupply}"/>
+
+                                    <Image Name="SupplyPic"
+                                           HorizontalAlignment="Left"
+                                           Width="120" Height="120" Stretch="Fill"
+                                           VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"
+                                           Margin="0 16">
                                         <Image.Clip>
-                                            <EllipseGeometry RadiusX="70" RadiusY="70" Center="70,70"/>
+                                            <RectangleGeometry Rect="0 0 120 120" RadiusX="16" RadiusY="16"/>
                                         </Image.Clip>
                                     </Image>
 
                                     <TextBlock x:Name="SupplyBrand" Text="KIRKLAND®"
                                                Style="{DynamicResource HeaderLabelStyle}" FontFamily="{StaticResource SFProBold}"
-                                               Margin="0 16 0 0"
                                                FontSize="10"/>
                                     <TextBlock x:Name="SupplyName" FontSize="13"
                                                Style="{DynamicResource SubtitleLabelStyle}"
-                                               Text="Tomate Cherry"/>
-                                    <TextBlock x:Name="SupplyCategory" Margin="0 2"
+                                               Text="ABC"/>
+                                    <TextBlock x:Name="SupplyCategory" Margin="0 0 0 4"
                                                Style="{DynamicResource RegularLabelStyle}"
                                                Foreground="{StaticResource PrimaryButtonBrush}"
                                                Text="Frutas y Verduras"/>
+                                    <TextBlock x:Name="SupplierName"
+                                               Style="{DynamicResource DescriptionLabelStyle}"/>
                                     <Border BorderThickness="0,0.5,0,0" BorderBrush="{DynamicResource SecondaryBrush}" Margin="0,8">
                                         <StackPanel Orientation="Vertical" Margin="0,12">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Source="/Resources/Icons/supplier-icon.png" Style="{StaticResource IconViewStyle}"/>
-                                                <TextBlock x:Name="SupplySupplier" Style="{DynamicResource DescriptionLabelStyle}"/>
-                                            </StackPanel>
-
-                                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                                                <Image Source="/Resources/Icons/measureunit-icon.png" Style="{StaticResource IconViewStyle}"/>
-                                                <TextBlock x:Name="EmployeeEmail" Style="{DynamicResource DescriptionLabelStyle}"/>
-                                            </StackPanel>
 
                                             <TextBlock x:Name="SupplyDescription"
                                                         Style="{DynamicResource DescriptionLabelStyle}"
-                                                        TextWrapping="Wrap" MaxWidth="240" HorizontalAlignment="Stretch"/>
+                                                        TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Stretch"/>
 
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
 
-                                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}" 
-                    BorderThickness="0 0.5 0 0">
+                                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}"
+                                        BorderThickness="0 0.5 0 0">
                                     <StackPanel VerticalAlignment="Center" Margin="20">
                                         <Button x:Name="BtnEditSupply" 
                                                 Style="{DynamicResource PrimaryButtonStyle}"
@@ -182,9 +199,15 @@
                                         </Button>
                                         <Button x:Name="BtnDeleteSupply" 
                                                 Style="{DynamicResource DangerButtonStyle}"
-                                                Content="{DynamicResource Personal_BtnDeleteEmployee}" 
+                                                Content="{DynamicResource Supplies_BtnDeleteSupply}" 
                                                 Click="Click_BtnDeleteSupply">
                                             <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                                        </Button>
+                                        <Button x:Name="BtnReactivateSupply" Visibility="Collapsed"
+                                                Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource Supplies_BtnReactivateSupply}"
+                                                Click="Click_BtnReactivateSupply">
+                                            <Button.Tag>/Resources/Icons/reactivate-icon.png</Button.Tag>
                                         </Button>
                                     </StackPanel>
                                 </Border>

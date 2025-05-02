@@ -28,9 +28,6 @@ namespace ItaliaPizzaClient.Views
             SetInputFields();
             UpdateFormButtonState(_isEditMode ? BtnEditEmployee : BtnRegisterEmployee);
 
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            NavigationManager.Initialize(mainWindow.MainFrame, mainWindow.NavigationPanel, mainWindow.BtnBack);
-
             ImageUtilities.SetImageSource(EmployeeProfilePic, null, Constants.DEFAULT_PROFILE_PIC_PATH);
             _isEditMode = false;
         }
