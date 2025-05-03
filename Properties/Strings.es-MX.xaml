@@ -107,7 +107,7 @@
     <sys:String x:Key="Personal_DialogTReactivateEmployee">¿Reactivar empleado?</sys:String>
     <sys:String x:Key="Personal_DialogDReactivateEmployee">¿Estás seguro de que deseas reactivar al empleado seleccionado? Se reincorporará a la plantilla del personal y se actualizará su fecha de contratación.</sys:String>
     <sys:String x:Key="Personal_DialogTReactivatedEmployee">Empleado reactivado</sys:String>
-    <sys:String x:Key="Personal_DialogDReactivatedEmployee">El empleado fue reactivao correctamente. Ahora aparecerá nuevamente en la plantilla del personal.</sys:String>
+    <sys:String x:Key="Personal_DialogDReactivatedEmployee">El empleado fue reactivado correctamente. Ahora aparecerá nuevamente en la plantilla del personal.</sys:String>
 
     <!--Register Employee-->
     <sys:String x:Key="RegEmployee_Header">Registrar Empleado</sys:String>
@@ -161,7 +161,7 @@
     <sys:String x:Key="Supplies_DialogTReactivateSupply">¿Reactivar insumo?</sys:String>
     <sys:String x:Key="Supplies_DialogDReactivateSupply">¿Estás seguro de que deseas reactivar el insumo seleccionado? Podrá ser asociado a proveedores y recetas nuevamente.</sys:String>
     <sys:String x:Key="Supplies_DialogTReactivatedSupply">Insumo reactivado</sys:String>
-    <sys:String x:Key="Supplies_DialogDReactivatedSupply">El insumo fue reactivao correctamente. Ahora aparecerá nuevamente en la lista de insumos e inventarios.</sys:String>
+    <sys:String x:Key="Supplies_DialogDReactivatedSupply">El insumo fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de insumos e inventarios.</sys:String>
 
     <!--Register Supply-->
     <sys:String x:Key="RegSupply_Header">Registrar Insumo</sys:String>
@@ -231,10 +231,23 @@
     <sys:String x:Key="Suppliers_TableHContactName">Nombre de Contacto</sys:String>
     <sys:String x:Key="Suppliers_TableHPhoneNumber">Núm. Telefónico</sys:String>
     <sys:String x:Key="Suppliers_TableHCategories">Categoría</sys:String>
+    <sys:String x:Key="Suppliers_BtnDeleteSupplier">Eliminar Proveedor</sys:String>
+    <sys:String x:Key="Suppliers_BtnEditSupplier">Editar Proveedor</sys:String>
+    <sys:String x:Key="Suppliers_BtnReactivateSupplier">Reactivar Proveedor</sys:String>
+    <sys:String x:Key="Suppliers_DialogTDeleteSupplier">¿Eliminar proveedor?</sys:String>
+    <sys:String x:Key="Suppliers_DialogDDeleteSupplier">¿Estás seguro de que deseas eliminar el proveedor seleccionado? La eliminación es reversible y podrás restaurarlo más tarde si lo necesitas.</sys:String>
+    <sys:String x:Key="Suppliers_DialogTDeletedSupplier">Proveedor eliminado</sys:String>
+    <sys:String x:Key="Suppliers_DialogDDeletedSupplier">El proveedor fue marcado como eliminado correctamente. Puedes restaurarlo desde la vista de proveedores eliminados.</sys:String>
+    <sys:String x:Key="Suppliers_DialogTReactivateSupplier">¿Reactivar proveedor?</sys:String>
+    <sys:String x:Key="Suppliers_DialogDReactivateSupplier">¿Estás seguro de que deseas reactivar el proveedor seleccionado? Podrá ser asociado a insumos y pedidos de reabastecimiento nuevamente.</sys:String>
+    <sys:String x:Key="Suppliers_DialogTReactivatedSupplier">Proveedor reactivado</sys:String>
+    <sys:String x:Key="Suppliers_DialogDReactivatedSupplier">El proveedor fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de proveedores y órdenes.</sys:String>
 
     <!-- RegisterSupplier-->
     <sys:String x:Key="RegSupplier_Header">Registrar Proveedor</sys:String>
     <sys:String x:Key="RegSupplier_Desc">Ingresa los datos y la lista de insumos asociadas al proveedor que se desea registrar.</sys:String>
+    <sys:String x:Key="EditSupplier_Header">Editar Proveedor</sys:String>
+    <sys:String x:Key="EditSupplier_Desc">Modifica los datos del proveedor que se desea actualizar.</sys:String>
     <sys:String x:Key="RegSupplier_SupplierInfo">Información del Proveedor</sys:String>
     <sys:String x:Key="RegSupplier_ContactInfo">Datos de Contacto</sys:String>
     <sys:String x:Key="RegSupplier_SupplierDescription">Descripción de Proveedor</sys:String>
@@ -244,8 +257,11 @@
     <sys:String x:Key="RegSupplier_TbDescription">Descripción:</sys:String>
     <sys:String x:Key="RegSupplier_SupplyRelationship">Relación de Insumos</sys:String>
     <sys:String x:Key="RegSupplier_BtnRegisterSupplier">Registrar Proveedor</sys:String>
+    <sys:String x:Key="RegSupplier_BtnEditSupplier">Actualizar Proveedor</sys:String>
     <sys:String x:Key="RegSupplier_DialogTSuccess">Proveedor registrado</sys:String>
     <sys:String x:Key="RegSupplier_DialogDSuccess">La información del proveedor ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="RegSupplier_DialogTEditSuccess">Proveedor actualizado</sys:String>
+    <sys:String x:Key="RegSupplier_DialogDEditSuccess">La información del insumo ha sido actualizada correctamente y los cambios han sido guardados con éxito.</sys:String>
 
     <!--OrderSuppliers-->
     <sys:String x:Key="OrdSuppliers_Header">Ordenes a Proveedores</sys:String>

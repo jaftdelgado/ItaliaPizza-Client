@@ -60,7 +60,7 @@ namespace ItaliaPizzaClient.Views
 
         public async Task RegisterCustomer()
         {
-            var client = ConnectionUtilities.IsServerConnected();
+            var client = ServiceClientManager.Instance.Client;
             if (client == null) return;
 
             var customerDTO = new CustomerDTO
@@ -77,7 +77,7 @@ namespace ItaliaPizzaClient.Views
                 }
             };
 
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
                 if (!IsCustomerEmailAvailable(customerDTO.EmailAddress)) return;
 
@@ -95,10 +95,10 @@ namespace ItaliaPizzaClient.Views
 
         private bool IsCustomerEmailAvailable(string email)
         {
-            var service = ConnectionUtilities.IsServerConnected();
-            if (service == null) return false;
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return false;
 
-            bool isCustomerEmailAvailable = service.IsCustomerEmailAvailable(email);
+            bool isCustomerEmailAvailable = client.IsCustomerEmailAvailable(email);
             if (!isCustomerEmailAvailable)
                 MessageDialog.Show("RegCostumer_DialogTEmailDuplicate", "RegCostumer_DialogDEmailDuplicate", AlertType.WARNING);
 

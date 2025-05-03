@@ -14,6 +14,23 @@ namespace ItaliaPizzaClient.Views
         public MainWindow()
         {
             InitializeComponent();
+            LoginGrid.Visibility = Visibility.Collapsed;
+            RootGrid.Visibility = Visibility.Visible;
+
+            SideMenuManager.CurrentUserRole = GetCurrentUserRole();
+
+            NavigationManager.Initialize(MainFrame, NavigationPanel, BtnBack);
+            sideMenuManager = new SideMenuManager(NavigationManager.Instance);
+
+            sideMenuManager.LoadButtons(MenuStackPanel);
+
+            BtnProfile.Content = CurrentSession.Name;
+
+            NavigateToPage("Glb_Principal", new PrincipalPage());
+
+            LoadProfileImage();
+
+            BtnBack.Click += BtnBack_Click;
 
         }
 
@@ -48,7 +65,9 @@ namespace ItaliaPizzaClient.Views
                 MessageDialog.Show("Error", "Por favor ingrese su usuario y contraseña",AlertType.ERROR);
                 return;
             }
-            var client = ConnectionUtilities.IsServerConnected();
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return;
+
             var personal = client.Login(user, hashedPassword);
             if (personal == null)
             {

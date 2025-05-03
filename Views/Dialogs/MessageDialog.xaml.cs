@@ -32,10 +32,6 @@ namespace ItaliaPizzaClient.Views.Dialogs
             dialog.DialogDescription.Text = FindResourceString(description);
             dialog.ConfigureAlertType(alertType);
 
-            // Depuración de la visibilidad de los controles
-            Debug.WriteLine("DialogHost Visibility: " + mainWindow.DialogHost.Visibility);
-            Debug.WriteLine("DialogOverlay Visibility: " + mainWindow.DialogOverlay.Visibility);
-
             if (Application.Current.Dispatcher.CheckAccess())
             {
                 mainWindow.DialogHost.Content = dialog;

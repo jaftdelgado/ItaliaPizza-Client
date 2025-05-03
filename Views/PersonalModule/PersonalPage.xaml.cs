@@ -28,11 +28,10 @@ namespace ItaliaPizzaClient.Views
 
         private async void LoadPersonalData()
         {
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
-                if (client == null)
-                    return;
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
 
                 var dtoList = client.GetAllPersonals();
 
@@ -75,9 +74,9 @@ namespace ItaliaPizzaClient.Views
 
         private async Task DeleteEmployee(Personal selected)
         {
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
+                var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
                 bool success = client.DeletePersonal(selected.PersonalID);
@@ -99,9 +98,9 @@ namespace ItaliaPizzaClient.Views
 
         private async Task ReactivateEmployee(Personal selected)
         {
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
+                var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
                 bool result = client.ReactivatePersonal(selected.PersonalID);

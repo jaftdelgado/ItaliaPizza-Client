@@ -115,7 +115,7 @@
 
 
             </Grid>
-            <Grid x:Name="LoginGrid" >
+            <Grid x:Name="LoginGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

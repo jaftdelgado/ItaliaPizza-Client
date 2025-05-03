@@ -95,7 +95,6 @@
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\MeasureUnit.cs" />
     <Compile Include="Utilities\Animations.cs" />
-    <Compile Include="Utilities\ConnectionUtilities.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\CurrentSession.cs" />
     <Compile Include="Utilities\ImageUtilities.cs" />
@@ -105,6 +104,7 @@
     <Compile Include="Utilities\PlaceholderManager.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Utilities\ServiceClientManager.cs" />
     <Compile Include="Utilities\SessionManager.cs" />
     <Compile Include="Utilities\SideMenuButtonHelper.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -317,6 +317,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -349,6 +352,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\Service4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\Service5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

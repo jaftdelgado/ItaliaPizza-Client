@@ -149,7 +149,7 @@ namespace ItaliaPizzaClient.Views
 
         public async Task RegisterSupply()
         {
-            var client = ConnectionUtilities.IsServerConnected();
+            var client = ServiceClientManager.Instance.Client;
             if (client == null) return;
 
             string rawText = TbUnitPrice.Text.Replace(",", "").Replace("$", "").Trim();
@@ -168,7 +168,7 @@ namespace ItaliaPizzaClient.Views
 
             bool success = false;
 
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
                 int result = await client.AddSupplyAsync(supplyDto);
                 success = result > 0;
@@ -206,9 +206,9 @@ namespace ItaliaPizzaClient.Views
                 Description = string.IsNullOrWhiteSpace(TbDescription.Text) ? null : TbDescription.Text.Trim()
             }; 
 
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
+                var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
                 success = await client.UpdateSupplyAsync(updatedDto);
