@@ -17,6 +17,8 @@ namespace ItaliaPizzaClient.Model
 
         public string Description { get; set; }
 
+        public bool IsActive { get; set; }
+
         public int CategorySupply { get; set; }
 
         public SupplyCategory SupplyCategory
@@ -29,7 +31,7 @@ namespace ItaliaPizzaClient.Model
             }
         }
 
-        public string TranslatedCategory
+        public string CategoryName
         {
             get
             {
@@ -52,5 +54,6 @@ namespace ItaliaPizzaClient.Model
                     : PhoneNumber;
             }
         }
+
     }
 }

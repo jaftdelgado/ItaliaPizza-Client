@@ -220,7 +220,7 @@ namespace ItaliaPizzaClient.Views
 
         public async Task RegisterEmployee()
         {
-            var client = ConnectionUtilities.IsServerConnected();
+            var client = ServiceClientManager.Instance.Client;
             if (client == null) return;
 
             byte[] profilePicData = GetProfilePicData();
@@ -247,7 +247,7 @@ namespace ItaliaPizzaClient.Views
 
             bool success = false;
 
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
                 if (_selectedRoleId != 6 && !IsUsernameAvailable(personalDto.Username)) return;
                 if (!IsEmailAvailable(personalDto.EmailAddress)) return;
@@ -296,9 +296,9 @@ namespace ItaliaPizzaClient.Views
                 }
             };
 
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
+                var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
                 if (!string.Equals(_editingEmployee.EmailAddress, updatedDto.EmailAddress, StringComparison.OrdinalIgnoreCase) &&
@@ -335,28 +335,27 @@ namespace ItaliaPizzaClient.Views
 
         private bool IsEmailAvailable(string email)
         {
-            var service = ConnectionUtilities.IsServerConnected();
-            if (service == null) return false;
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return false; 
 
-            return service.IsPersonalEmailAvailable(email);
+            return client.IsPersonalEmailAvailable(email);
         }
 
         private bool IsRfcUnique(string rfc)
         {
-            var service = ConnectionUtilities.IsServerConnected();
-            if (service == null) return false;
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return false;
 
-            return service.IsRfcUnique(rfc);
+            return client.IsRfcUnique(rfc);
         }
 
         private bool IsUsernameAvailable(string username)
         {
-            var service = ConnectionUtilities.IsServerConnected();
-            if (service == null) return false;
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return false;
 
-            return service.IsUsernameAvailable(username);
+            return client.IsUsernameAvailable(username);
         }
-
 
         #region EventHandlers
         private async void Click_BtnRegisterEmployee(object sender, RoutedEventArgs e)

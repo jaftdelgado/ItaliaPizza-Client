@@ -73,15 +73,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductDTO" nillable="true" type="tns:ProductDTO" />
-  <xs:complexType name="OrderDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
-      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OrderDTO" nillable="true" type="tns:OrderDTO" />
   <xs:complexType name="CustomerDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressDTO" />

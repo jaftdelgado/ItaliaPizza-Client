@@ -39,8 +39,9 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         private void LoadSupplies()
         {
-            var client = ConnectionUtilities.IsServerConnected();
+            var client = ServiceClientManager.Instance.Client;
             if (client == null) return;
+
             var supplies = client.GetAllSupplies();
             if (supplies != null)
             {   

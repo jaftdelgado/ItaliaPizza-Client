@@ -26,6 +26,7 @@
     <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="3e3d6c52-f9be-462a-a82a-cf45219dfa72" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd2" />
     <MetadataFile FileName="MainService.wsdl" MetadataType="Wsdl" ID="347dff64-6871-41c5-b353-3814f25efe7f" SourceId="1" SourceUrl="http://localhost:8082/Service?wsdl" />
     <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="44af2d22-fa49-4677-a7c2-8790ca02b5f6" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd4" />
+    <MetadataFile FileName="Service5.xsd" MetadataType="Schema" ID="e76ad38d-eec8-410b-b78b-731143d0dd28" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd5" />
     <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="14bdf437-ba4e-49dd-8236-14c8e4289c95" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd1" />
     <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="b626faf4-ecec-43fd-ade7-9993de7f9f7b" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd3" />
     <MetadataFile FileName="Service4.xsd" MetadataType="Schema" ID="5130be92-fb41-42bb-8991-e3d40ec4f49e" SourceId="1" SourceUrl="http://localhost:8082/Service?xsd=xsd0" />

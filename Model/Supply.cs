@@ -26,6 +26,8 @@ namespace ItaliaPizzaClient.Model
         public string Description { get; set; }
         
         public bool IsActive { get; set; }
+        
+        public bool IsSelected { get; set; }
 
         public string SupplierName { get; set; }
 

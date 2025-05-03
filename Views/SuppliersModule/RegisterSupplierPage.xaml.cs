@@ -12,12 +12,55 @@ namespace ItaliaPizzaClient.Views
 {
     public partial class RegisterSupplierPage : Page
     {
+        private Supplier _editingSupplier;
+        private bool _isEditMode;
+
         public RegisterSupplierPage()
         {
             InitializeComponent();
             SetCategoriesComboBox();
             SetInputFields();
             UpdateButtonState(BtnRegisterSupplier);
+        }
+
+        public RegisterSupplierPage(Supplier editingSupplier)
+        {
+            InitializeComponent();
+            _isEditMode = true;
+            _editingSupplier = editingSupplier;
+
+            ConfigureInterfaceForMode();
+            SetCategoriesComboBox();
+            SetInputFields();
+            LoadSupplierData(editingSupplier);
+        }
+
+        private void ConfigureInterfaceForMode()
+        {
+            if (_isEditMode)
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "EditSupplier_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "EditSupplier_Desc");
+                BtnEditSupplier.Visibility = Visibility.Visible;
+                BtnRegisterSupplier.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "RegSupplier_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "RegSupplier_Desc");
+                BtnEditSupplier.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LoadSupplierData(Supplier editingSupplier)
+        {
+            TbSupplierName.Text = editingSupplier.SupplierName;
+            TbEmailAddress.Text = editingSupplier.EmailAddress;
+            TbDescription.Text = editingSupplier.Description;
+            TbPhoneNumber.Text = editingSupplier.PhoneNumber;
+            TbContactName.Text = editingSupplier.ContactName;
+
+            CbCategories.SelectedIndex = editingSupplier.CategorySupply - 1;
         }
 
         private void SetCategoriesComboBox()
@@ -74,14 +117,16 @@ namespace ItaliaPizzaClient.Views
 
         private async Task LoadSuppliesAvailable(int categoryId)
         {
-            var client = ConnectionUtilities.IsServerConnected();
+            var client = ServiceClientManager.Instance.Client;
             if (client == null) return;
 
             var suppliesList = new List<Supply>();
 
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var supplies = await client.GetSuppliesAvailableByCategoryAsync(categoryId);
+                int? supplierId = _isEditMode ? _editingSupplier?.Id : null;
+
+                var supplies = await client.GetSuppliesAvailableByCategoryAsync(categoryId, supplierId);
 
                 suppliesList = supplies.Select(s => new Supply
                 {
@@ -94,8 +139,12 @@ namespace ItaliaPizzaClient.Views
                     SupplierID = s.SupplierID,
                     Stock = s.Stock,
                     SupplyPic = s.SupplyPic,
-                    Description = s.Description
-                }).ToList();
+                    Description = s.Description,
+                    IsSelected = _isEditMode && s.SupplierID == _editingSupplier?.Id
+                })
+                .OrderByDescending(s => s.IsSelected)
+                .ThenBy(s => s.Name)
+                .ToList();
             });
 
             SuppliesDataGrid.ItemsSource = suppliesList;
@@ -103,8 +152,7 @@ namespace ItaliaPizzaClient.Views
 
         private async Task RegisterSupplier()
         {
-            var client = ConnectionUtilities.IsServerConnected();
-            if (client == null) return;
+            bool success = false;
 
             var supplierDto = new SupplierDTO
             {
@@ -116,27 +164,86 @@ namespace ItaliaPizzaClient.Views
                 CategorySupply = ((SupplyCategory)CbCategories.SelectedItem).Id
             };
 
-            bool success = false;
+            int newSupplierId = -1;
 
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                int result = await client.AddSupplierAsync(supplierDto);
-                success = result > 0;
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                newSupplierId = await client.AddSupplierAsync(supplierDto);
+                success = newSupplierId > 0;
+
+                if (success)
+                {
+                    var selectedSupplies = SuppliesDataGrid.ItemsSource as List<Supply>;
+                    var selectedSupplyIds = selectedSupplies?
+                        .Where(s => s.IsSelected)
+                        .Select(s => s.Id)
+                        .ToList();
+
+                    if (selectedSupplyIds?.Count > 0)
+                    {
+                        bool assignSuccess = await client.AssignSupplierToSupplyAsync(selectedSupplyIds.ToArray(), newSupplierId);
+                        success = assignSuccess;
+                    }
+                }
             });
 
             if (success)
             {
-                await Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    MessageDialog.Show("RegSupplier_DialogTSuccess", "RegSupplier_DialogDSuccess", AlertType.SUCCESS,
-                        () =>
-                        {
-                            NavigationManager.Instance.GoBack();
-                        });
-                });
+                MessageDialog.Show("RegSupplier_DialogTSuccess", "RegSupplier_DialogDSuccess", AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
             }
         }
 
+        private async Task EditSupplier()
+        {
+            bool success = false;
+
+            var supplierDto = new SupplierDTO
+            {
+                Id = _editingSupplier.Id,
+                SupplierName = TbSupplierName.Text.Trim(),
+                ContactName = TbContactName.Text.Trim(),
+                PhoneNumber = TbPhoneNumber.Text.Trim(),
+                EmailAddress = string.IsNullOrWhiteSpace(TbEmailAddress.Text) ? null : TbEmailAddress.Text.Trim(),
+                Description = string.IsNullOrWhiteSpace(TbDescription.Text) ? null : TbDescription.Text.Trim(),
+                CategorySupply = ((SupplyCategory)CbCategories.SelectedItem).Id
+            };
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                success = await client.UpdateSupplierAsync(supplierDto);
+
+                if (success)
+                    success = await AssignSuppliesToSupplier(supplierDto.Id);
+            });
+
+            if (success)
+            {
+                MessageDialog.Show("RegSupplier_DialogTEditSuccess", "RegSupplier_DialogDEditSuccess", AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
+            }
+        }
+
+        private async Task<bool> AssignSuppliesToSupplier(int supplierId)
+        {
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return false;
+
+            var selectedSupplies = SuppliesDataGrid.ItemsSource as List<Supply>;
+            var selectedSupplyIds = selectedSupplies?
+                .Where(s => s.IsSelected).Select(s => s.Id).ToList();
+
+            if (selectedSupplyIds?.Count > 0)
+                return await client.AssignSupplierToSupplyAsync(selectedSupplyIds.ToArray(), supplierId);
+
+            return true;
+        }
 
         private void RequiredFields_TextChanged(object sender, RoutedEventArgs e)
         {
@@ -155,5 +262,11 @@ namespace ItaliaPizzaClient.Views
         {
             await RegisterSupplier();
         }
+
+        private async void Click_BtnEditSupplier(object sender, RoutedEventArgs e)
+        {
+            await EditSupplier();
+        }
+
     }
 }

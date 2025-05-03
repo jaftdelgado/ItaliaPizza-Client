@@ -252,7 +252,7 @@ namespace ItaliaPizzaClient.Views
         }
         private void RefreshSuppliesComboBox()
         {
-            var client = ConnectionUtilities.IsServerConnected();
+            var client = ServiceClientManager.Instance.Client;
             if (client == null) return;
 
             if (cbSuppliersName.SelectedItem is ComboBoxItem selectedItem &&

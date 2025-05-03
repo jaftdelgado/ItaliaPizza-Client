@@ -142,8 +142,8 @@
                 <Setter Property="Background" Value="{StaticResource SecondaryButtonHoverBrush}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}"/>
-                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
+                <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -158,6 +158,7 @@
 
     <Style x:Key="DataGridCellStyle0" TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
@@ -180,6 +181,7 @@
 
     <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">

@@ -27,11 +27,10 @@ namespace ItaliaPizzaClient.Views
 
         private async void LoadSuppliesData()
         {
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
-                if (client == null)
-                    return;
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
 
                 var dtoList = client.GetAllSupplies();
 
@@ -49,6 +48,7 @@ namespace ItaliaPizzaClient.Views
                     SupplierID = s.SupplierID,
                     SupplierName = s.SupplierName
                 })
+                .OrderBy(p => p.SupplyCategoryID)
                 .ToList();
 
                 _allSupplies = list;
@@ -62,9 +62,9 @@ namespace ItaliaPizzaClient.Views
 
         private async Task DeleteSupply(Supply selected)
         {
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
+                var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
                 bool success = client.DeleteSupply(selected.Id);
@@ -85,9 +85,9 @@ namespace ItaliaPizzaClient.Views
 
         private async Task ReactivateSupply(Supply selected)
         {
-            await ConnectionUtilities.ExecuteServerAction(async () =>
+            await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                var client = ConnectionUtilities.IsServerConnected();
+                var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
                 bool result = client.ReactivateSupply(selected.Id);

@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20 0 0 10" 
                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     <TextBlock Style="{StaticResource HeaderLabelStyle}"
                            Text="{DynamicResource Personal_Header}"/>
@@ -119,7 +119,7 @@
                                             <StaticResource ResourceKey="DataGridColumnHeaderStyle0"/>
                                         </DataGridTextColumn.HeaderStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="{DynamicResource Personal_TableHUser}" Binding="{Binding DisplayUsername}" Width="2.1*"/>
+                                    <DataGridTextColumn Header="{DynamicResource Personal_TableHUser}" Binding="{Binding DisplayUsername}" Width="2.1*" />
                                     <DataGridTextColumn Header="{DynamicResource Personal_TableHRFC}" Binding="{Binding RFC}" Width="2.2*" FontFamily="{StaticResource SFMonoRegular}"/>
                                     <DataGridTextColumn Header="{DynamicResource Personal_TableHRole}" Binding="{Binding TranslatedRole}" Width="2.2*"/>
                                 </DataGrid.Columns>
