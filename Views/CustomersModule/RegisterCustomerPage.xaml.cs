@@ -1,4 +1,5 @@
 ﻿using ItaliaPizzaClient.ItaliaPizzaServices;
+using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace ItaliaPizzaClient.Views
     /// </summary>
     public partial class RegisterCustomerPage : Page
     {
+        private Customer _editingCustomer;
+        private bool _isActive = false;
+        private bool _isEditMode;
         public RegisterCustomerPage()
         {
             InitializeComponent();

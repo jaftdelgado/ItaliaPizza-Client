@@ -1585,10 +1585,16 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LastNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime RegDateField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1666,6 +1672,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsActive {
+            get {
+                return this.IsActiveField;
+            }
+            set {
+                if ((this.IsActiveField.Equals(value) != true)) {
+                    this.IsActiveField = value;
+                    this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string LastName {
             get {
                 return this.LastNameField;
@@ -1687,6 +1706,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
                     this.PhoneNumberField = value;
                     this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime RegDate {
+            get {
+                return this.RegDateField;
+            }
+            set {
+                if ((this.RegDateField.Equals(value) != true)) {
+                    this.RegDateField = value;
+                    this.RaisePropertyChanged("RegDate");
                 }
             }
         }
@@ -1885,6 +1917,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/RegisterRecipe", ReplyAction="http://tempuri.org/IRecipeManager/RegisterRecipeResponse")]
         System.Threading.Tasks.Task<int> RegisterRecipeAsync(ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO recipeDTO, ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO[] supplies);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/GetCustomers", ReplyAction="http://tempuri.org/ICustomerManager/GetCustomersResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[] GetCustomers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/GetCustomers", ReplyAction="http://tempuri.org/ICustomerManager/GetCustomersResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[]> GetCustomersAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/AddCustomer", ReplyAction="http://tempuri.org/ICustomerManager/AddCustomerResponse")]
         int AddCustomer(ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO customerDTO);
         
@@ -1896,6 +1934,24 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable", ReplyAction="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailableResponse")]
         System.Threading.Tasks.Task<bool> IsCustomerEmailAvailableAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/UpdateCustomer", ReplyAction="http://tempuri.org/ICustomerManager/UpdateCustomerResponse")]
+        bool UpdateCustomer(ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO customerDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/UpdateCustomer", ReplyAction="http://tempuri.org/ICustomerManager/UpdateCustomerResponse")]
+        System.Threading.Tasks.Task<bool> UpdateCustomerAsync(ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO customerDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/DeleteCustomer", ReplyAction="http://tempuri.org/ICustomerManager/DeleteCustomerResponse")]
+        bool DeleteCustomer(int customerID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/DeleteCustomer", ReplyAction="http://tempuri.org/ICustomerManager/DeleteCustomerResponse")]
+        System.Threading.Tasks.Task<bool> DeleteCustomerAsync(int customerID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/ReactivateCustomer", ReplyAction="http://tempuri.org/ICustomerManager/ReactivateCustomerResponse")]
+        bool ReactivateCustomer(int customerID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/ReactivateCustomer", ReplyAction="http://tempuri.org/ICustomerManager/ReactivateCustomerResponse")]
+        System.Threading.Tasks.Task<bool> ReactivateCustomerAsync(int customerID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/Login", ReplyAction="http://tempuri.org/ISesionManager/LoginResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO Login(string username, string password);
@@ -2177,6 +2233,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.RegisterRecipeAsync(recipeDTO, supplies);
         }
         
+        public ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[] GetCustomers() {
+            return base.Channel.GetCustomers();
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[]> GetCustomersAsync() {
+            return base.Channel.GetCustomersAsync();
+        }
+        
         public int AddCustomer(ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO customerDTO) {
             return base.Channel.AddCustomer(customerDTO);
         }
@@ -2191,6 +2255,30 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> IsCustomerEmailAvailableAsync(string email) {
             return base.Channel.IsCustomerEmailAvailableAsync(email);
+        }
+        
+        public bool UpdateCustomer(ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO customerDTO) {
+            return base.Channel.UpdateCustomer(customerDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateCustomerAsync(ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO customerDTO) {
+            return base.Channel.UpdateCustomerAsync(customerDTO);
+        }
+        
+        public bool DeleteCustomer(int customerID) {
+            return base.Channel.DeleteCustomer(customerID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteCustomerAsync(int customerID) {
+            return base.Channel.DeleteCustomerAsync(customerID);
+        }
+        
+        public bool ReactivateCustomer(int customerID) {
+            return base.Channel.ReactivateCustomer(customerID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ReactivateCustomerAsync(int customerID) {
+            return base.Channel.ReactivateCustomerAsync(customerID);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO Login(string username, string password) {

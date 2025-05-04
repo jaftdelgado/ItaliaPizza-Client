@@ -219,6 +219,12 @@
   <wsdl:message name="IMainManager_RegisterRecipe_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterRecipeResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_AddCustomer_InputMessage">
     <wsdl:part name="parameters" element="tns:AddCustomer" />
   </wsdl:message>
@@ -230,6 +236,24 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_IsCustomerEmailAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsCustomerEmailAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivateCustomerResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_Login_InputMessage">
     <wsdl:part name="parameters" element="tns:Login" />
@@ -364,6 +388,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipe" message="tns:IMainManager_RegisterRecipe_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipeResponse" message="tns:IMainManager_RegisterRecipe_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/GetCustomers" message="tns:IMainManager_GetCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/GetCustomersResponse" message="tns:IMainManager_GetCustomers_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddCustomer">
       <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomer" message="tns:IMainManager_AddCustomer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/AddCustomerResponse" message="tns:IMainManager_AddCustomer_OutputMessage" />
@@ -371,6 +399,18 @@
     <wsdl:operation name="IsCustomerEmailAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" message="tns:IMainManager_IsCustomerEmailAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailableResponse" message="tns:IMainManager_IsCustomerEmailAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/UpdateCustomer" message="tns:IMainManager_UpdateCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/UpdateCustomerResponse" message="tns:IMainManager_UpdateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/DeleteCustomer" message="tns:IMainManager_DeleteCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/DeleteCustomerResponse" message="tns:IMainManager_DeleteCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReactivateCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/ReactivateCustomer" message="tns:IMainManager_ReactivateCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/ReactivateCustomerResponse" message="tns:IMainManager_ReactivateCustomer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/ISesionManager/Login" message="tns:IMainManager_Login_InputMessage" />
@@ -654,6 +694,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCustomers">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/GetCustomers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddCustomer">
       <soap12:operation soapAction="http://tempuri.org/ICustomerManager/AddCustomer" style="document" />
       <wsdl:input>
@@ -665,6 +714,33 @@
     </wsdl:operation>
     <wsdl:operation name="IsCustomerEmailAvailable">
       <soap12:operation soapAction="http://tempuri.org/ICustomerManager/IsCustomerEmailAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/DeleteCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReactivateCustomer">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/ReactivateCustomer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -697,7 +773,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MATEBOOK-D15\jafet</Upn>
+          <Upn>_3776_\abrah</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
