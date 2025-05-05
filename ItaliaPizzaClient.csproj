@@ -94,6 +94,9 @@
     <Compile Include="Model\Supply.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\MeasureUnit.cs" />
+    <Compile Include="Views\UserControls\SupplyCard.xaml.cs">
+      <DependentUpon>SupplyCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Animations.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\CurrentSession.cs" />
@@ -163,6 +166,9 @@
     <Compile Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage.xaml.cs">
       <DependentUpon>RegisterOrderSupplierPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage1.xaml.cs">
+      <DependentUpon>RegisterOrderSupplierPage1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SuppliersModule\RegisterSupplierPage.xaml.cs">
       <DependentUpon>RegisterSupplierPage.xaml</DependentUpon>
     </Compile>
@@ -178,6 +184,9 @@
     <Compile Include="Views\TicketPage.xaml.cs">
       <DependentUpon>TicketPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\SupplyOrderDetail.xaml.cs">
+      <DependentUpon>SupplyOrderDetail.xaml</DependentUpon>
+    </Compile>
     <Page Include="Properties\MergedResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ButtonsStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SupplyCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,6 +291,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SuppliersModule\RegisterSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TicketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SupplyOrderDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -473,5 +494,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\measureunit-icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

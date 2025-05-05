@@ -10,10 +10,10 @@
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68"/>
+            <RowDefinition Height="70"/>
             <!--Cabecera-->
             <RowDefinition Height="*"/>
-            <!--Contenido Principal-->
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" BorderThickness="0,0,0,0.5"
@@ -108,6 +108,22 @@
                     </StackPanel>
                 </Border>
             </Grid>
+        
+            
         </Grid>
+
+        <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
+        BorderThickness="0,0.5,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
+                <Button x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonNoIconStyle}"
+    Content="{DynamicResource Glb_Cancel}"
+    Margin="0,0,10,0"/>
+                <Button x:Name="BtnConfirmOrder"
+    Style="{DynamicResource PrimaryButtonStyle}"
+    Content="{DynamicResource RegOrderSupplier_BtnConfirmOrder}">
+                    <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

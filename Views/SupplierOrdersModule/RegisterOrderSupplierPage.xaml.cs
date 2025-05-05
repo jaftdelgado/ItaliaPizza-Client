@@ -8,7 +8,6 @@ using System;
 using System.Linq;
 using ItaliaPizzaClient.Utilities;
 
-
 namespace ItaliaPizzaClient.Views
 {
     public partial class RegisterOrderSupplierPage : Page

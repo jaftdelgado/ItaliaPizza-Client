@@ -26,6 +26,7 @@
     <sys:String x:Key="Glb_Quantity">Cantidad</sys:String>
     <sys:String x:Key="Glb_SupplyOrders">Ordenes de Compra</sys:String>
     <sys:String x:Key="Glb_Reports">Reportes</sys:String>
+    <sys:String x:Key="Glb_Categories">Categorías:</sys:String>
     <sys:String x:Key="Glb_PhoneNumber">Número de Teléfono:</sys:String>
     <sys:String x:Key="Glb_EmailAddress">Correo Electrónico:</sys:String>
     <sys:String x:Key="Glb_AddressName">Dirección:</sys:String>
@@ -272,9 +273,14 @@
     <sys:String x:Key="OrdSuppliers_BtnDeliveredOrder">Marcar como entrado</sys:String>
 
     <!--Register Order Suppliers-->
-    <sys:String x:Key="RegOrderSupplier_Header">Registrar orden a proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Header">Crear Pedido a Proveedor</sys:String>
     <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
-    <sys:String x:Key="RegOrderSupplier_Info">Informacion de la Orden.</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Info">Insumos del Proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_SupplierInfo">Información del Proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_OrderDetails">Detalles del Pedido</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Supplier">Proveedor:</sys:String>
+    <sys:String x:Key="RegOrderSupplier_SelectSupplies">Selecciona los insumos deseados:</sys:String>
+    <sys:String x:Key="RegOrderSupplier_BtnConfirmOrder">Confirmar Pedido</sys:String>
     <sys:String x:Key="OrderSupplier_BtnNewOrden">Tramitar Orden</sys:String>
     <sys:String x:Key="OrderSupplier_BtnDeleteSupply">Eliminar insumo</sys:String>
     <sys:String x:Key="OrderSupplier_BtnAddSupply">Añadir insumo</sys:String>
