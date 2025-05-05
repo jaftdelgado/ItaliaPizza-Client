@@ -25,4 +25,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RecipeSupplyDTO" nillable="true" type="tns:RecipeSupplyDTO" />
+  <xs:complexType name="ArrayOfRecipeDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RecipeDTO" nillable="true" type="tns:RecipeDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRecipeDTO" nillable="true" type="tns:ArrayOfRecipeDTO" />
 </xs:schema>
