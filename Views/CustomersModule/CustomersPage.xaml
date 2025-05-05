@@ -55,9 +55,10 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
+                        <TextBox x:Name="SearchBox" Grid.Column="0" HorizontalAlignment="Left"
                          Style="{DynamicResource SecondarySearchBoxStyle}"
-                         Width="180"/>
+                         Width="180"
+                         TextChanged="SearchBox_TextChanged"/>
                     </Grid>
                 </Border>
 
