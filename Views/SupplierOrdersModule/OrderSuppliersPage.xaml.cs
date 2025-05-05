@@ -30,7 +30,7 @@ namespace ItaliaPizzaClient.Views
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
             if (mainWindow != null)
-                mainWindow.NavigateToPage("RegOrderSupplier_Header", new RegisterOrderSupplierPage());
+                mainWindow.NavigateToPage("RegOrderSupplier_Header", new RegisterOrderSupplierPage1());
 
         }
 

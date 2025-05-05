@@ -1759,6 +1759,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/GetAllSuppliers", ReplyAction="http://tempuri.org/ISupplierManager/GetAllSuppliersResponse")]
         System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[]> GetAllSuppliersAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/GetSuppliersByCategory", ReplyAction="http://tempuri.org/ISupplierManager/GetSuppliersByCategoryResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[] GetSuppliersByCategory(int categoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/GetSuppliersByCategory", ReplyAction="http://tempuri.org/ISupplierManager/GetSuppliersByCategoryResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[]> GetSuppliersByCategoryAsync(int categoryId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/AddSupplier", ReplyAction="http://tempuri.org/ISupplierManager/AddSupplierResponse")]
         int AddSupplier(ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO supplierDTO);
         
@@ -1788,12 +1794,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetAllCategories", ReplyAction="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse")]
         System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[]> GetAllCategoriesAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategory", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliersByCategoryResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[] GetSuppliersByCategory(int categoryId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategory", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliersByCategoryResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[]> GetSuppliersByCategoryAsync(int categoryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId);
@@ -2009,6 +2009,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.GetAllSuppliersAsync();
         }
         
+        public ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[] GetSuppliersByCategory(int categoryId) {
+            return base.Channel.GetSuppliersByCategory(categoryId);
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[]> GetSuppliersByCategoryAsync(int categoryId) {
+            return base.Channel.GetSuppliersByCategoryAsync(categoryId);
+        }
+        
         public int AddSupplier(ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO supplierDTO) {
             return base.Channel.AddSupplier(supplierDTO);
         }
@@ -2047,14 +2055,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[]> GetAllCategoriesAsync() {
             return base.Channel.GetAllCategoriesAsync();
-        }
-        
-        public ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[] GetSuppliersByCategory(int categoryId) {
-            return base.Channel.GetSuppliersByCategory(categoryId);
-        }
-        
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO[]> GetSuppliersByCategoryAsync(int categoryId) {
-            return base.Channel.GetSuppliersByCategoryAsync(categoryId);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId) {

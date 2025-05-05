@@ -13,6 +13,7 @@ namespace ItaliaPizzaClient.Views
     public partial class RegisterSupplierPage : Page
     {
         private Supplier _editingSupplier;
+        private List<int> _assignedSupplyIds = new List<int>();
         private bool _isEditMode;
 
         public RegisterSupplierPage()
@@ -20,7 +21,7 @@ namespace ItaliaPizzaClient.Views
             InitializeComponent();
             SetCategoriesComboBox();
             SetInputFields();
-            UpdateButtonState(BtnRegisterSupplier);
+            UpdateButtonState(_isEditMode ? BtnEditSupplier : BtnRegisterSupplier);
         }
 
         public RegisterSupplierPage(Supplier editingSupplier)
@@ -33,6 +34,7 @@ namespace ItaliaPizzaClient.Views
             SetCategoriesComboBox();
             SetInputFields();
             LoadSupplierData(editingSupplier);
+            UpdateButtonState(_isEditMode ? BtnEditSupplier : BtnRegisterSupplier);
         }
 
         private void ConfigureInterfaceForMode()
@@ -43,6 +45,7 @@ namespace ItaliaPizzaClient.Views
                 PageDescription.SetResourceReference(TextBlock.TextProperty, "EditSupplier_Desc");
                 BtnEditSupplier.Visibility = Visibility.Visible;
                 BtnRegisterSupplier.Visibility = Visibility.Collapsed;
+                CbCategories.IsEnabled = false;
             }
             else
             {
@@ -142,9 +145,13 @@ namespace ItaliaPizzaClient.Views
                     Description = s.Description,
                     IsSelected = _isEditMode && s.SupplierID == _editingSupplier?.Id
                 })
-                .OrderByDescending(s => s.IsSelected)
-                .ThenBy(s => s.Name)
-                .ToList();
+                .OrderByDescending(s => s.IsSelected).ThenBy(s => s.Name).ToList();
+
+                if (_isEditMode)
+                {
+                    _assignedSupplyIds = suppliesList
+                        .Where(s => s.IsSelected).Select(s => s.Id).ToList();
+                }
             });
 
             SuppliesDataGrid.ItemsSource = suppliesList;
@@ -172,22 +179,9 @@ namespace ItaliaPizzaClient.Views
                 if (client == null) return;
 
                 newSupplierId = await client.AddSupplierAsync(supplierDto);
-                success = newSupplierId > 0;
 
-                if (success)
-                {
-                    var selectedSupplies = SuppliesDataGrid.ItemsSource as List<Supply>;
-                    var selectedSupplyIds = selectedSupplies?
-                        .Where(s => s.IsSelected)
-                        .Select(s => s.Id)
-                        .ToList();
-
-                    if (selectedSupplyIds?.Count > 0)
-                    {
-                        bool assignSuccess = await client.AssignSupplierToSupplyAsync(selectedSupplyIds.ToArray(), newSupplierId);
-                        success = assignSuccess;
-                    }
-                }
+                if (newSupplierId > 0)
+                    success = await AssignSuppliesToSupplier(newSupplierId);
             });
 
             if (success)
@@ -220,7 +214,11 @@ namespace ItaliaPizzaClient.Views
                 success = await client.UpdateSupplierAsync(supplierDto);
 
                 if (success)
-                    success = await AssignSuppliesToSupplier(supplierDto.Id);
+                {
+                    var assignSuccess = await AssignSuppliesToSupplier(supplierDto.Id);
+                    var unassignSuccess = await UnassignSuppliesFromSupplier(supplierDto.Id);
+                    success = assignSuccess && unassignSuccess;
+                }
             });
 
             if (success)
@@ -245,9 +243,29 @@ namespace ItaliaPizzaClient.Views
             return true;
         }
 
+        private async Task<bool> UnassignSuppliesFromSupplier(int supplierId)
+        {
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return false;
+
+            var selectedSupplies = SuppliesDataGrid.ItemsSource as List<Supply>;
+            if (selectedSupplies == null) return true;
+
+            var currentlySelectedIds = selectedSupplies
+                .Where(s => s.IsSelected).Select(s => s.Id).ToList();
+
+            var toUnassign = _assignedSupplyIds
+                .Where(id => !currentlySelectedIds.Contains(id)).ToList();
+
+            if (toUnassign.Count > 0)
+                return await client.UnassignSupplierFromSupplyAsync(toUnassign.ToArray(), supplierId);
+
+            return true;
+        }
+
         private void RequiredFields_TextChanged(object sender, RoutedEventArgs e)
         {
-            UpdateButtonState(BtnRegisterSupplier);
+            UpdateButtonState(_isEditMode ? BtnEditSupplier : BtnRegisterSupplier);
         }
 
         private async void CbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)

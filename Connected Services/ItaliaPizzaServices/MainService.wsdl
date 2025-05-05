@@ -93,6 +93,12 @@
   <wsdl:message name="IMainManager_GetAllSuppliers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSuppliersResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_AddSupplier_InputMessage">
     <wsdl:part name="parameters" element="tns:AddSupplier" />
   </wsdl:message>
@@ -122,12 +128,6 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllCategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCategoriesResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetSuppliesBySupplier_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSuppliesBySupplier" />
@@ -280,6 +280,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/GetAllSuppliers" message="tns:IMainManager_GetAllSuppliers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/GetAllSuppliersResponse" message="tns:IMainManager_GetAllSuppliers_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddSupplier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/AddSupplier" message="tns:IMainManager_AddSupplier_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/AddSupplierResponse" message="tns:IMainManager_AddSupplier_OutputMessage" />
@@ -299,10 +303,6 @@
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse" message="tns:IMainManager_GetAllCategories_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliersByCategory">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSuppliesBySupplier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
@@ -465,6 +465,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierManager/GetSuppliersByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddSupplier">
       <soap12:operation soapAction="http://tempuri.org/ISupplierManager/AddSupplier" style="document" />
       <wsdl:input>
@@ -503,15 +512,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllCategories" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliersByCategory">
-      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

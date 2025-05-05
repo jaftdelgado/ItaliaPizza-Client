@@ -21,6 +21,11 @@ namespace ItaliaPizzaClient.Model
 
         public int CategorySupply { get; set; }
 
+        public override string ToString()
+        {
+            return SupplierName;
+        }
+
         public SupplyCategory SupplyCategory
         {
             get
