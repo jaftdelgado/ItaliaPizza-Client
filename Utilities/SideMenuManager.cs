@@ -7,6 +7,7 @@ using System.Windows.Data;
 using ItaliaPizzaClient.Views.CustomersModule;
 using ItaliaPizzaClient.Views.SuppliersModule;
 using ItaliaPizzaClient.Views.OrdersModule;
+using ItaliaPizzaClient.Views.RecepiesModule;
 
 namespace ItaliaPizzaClient.Utilities
 {
@@ -118,7 +119,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 4,
                     AllowedRoles = new List<string> { "Admin", "Cook" },
                     IconPath = "/Resources/Icons/recipes-icon.png",
-                    HoverIconPath = "/Resources/Icons/recipes-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/recipes-hover-icon.png",
+                    PageInstance = new RecipesPage()
                 },
                 new MenuButton
                 {

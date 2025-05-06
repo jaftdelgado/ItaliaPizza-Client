@@ -41,7 +41,7 @@ namespace ItaliaPizzaClient.Views
 
         private string GetCurrentUserRole()
         {
-            return "Admin";
+            return "Cook";
         }
 
         private void LoadProfileImage()
