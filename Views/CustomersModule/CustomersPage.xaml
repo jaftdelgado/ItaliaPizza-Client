@@ -55,9 +55,10 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
+                        <TextBox x:Name="SearchBox" Grid.Column="0" HorizontalAlignment="Left"
                          Style="{DynamicResource SecondarySearchBoxStyle}"
-                         Width="180"/>
+                         Width="180"
+                         TextChanged="SearchBox_TextChanged"/>
                     </Grid>
                 </Border>
 
@@ -78,28 +79,23 @@
                                Style="{DynamicResource SubtitleLabelStyle}"/>
                         </StackPanel>
 
-                        <!-- Tabla de Insumos -->
+                        <!-- Tabla de clientes -->
                         <Border Grid.Row="1" Padding="8">
                             <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
-                              x:Name="suppliesDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                              x:Name="CustomerDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <!-- Número -->
-                                    <DataGridTextColumn Header="#Número" Binding="{Binding Number}" IsReadOnly="True" Width="64"/>
+                                    <!-- Nombre completo -->
+                                    <DataGridTextColumn Header="nombre" Binding="{Binding FullName}" IsReadOnly="True" Width="*"/>
 
-                                    <!-- Nombre de Insumo -->
-                                    <DataGridTextColumn Header="Nombre de Insumo" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
+                                    <!-- Correo -->
+                                    <DataGridTextColumn Header="Correo" Binding="{Binding EmailAddress}" IsReadOnly="True" Width="*"/>
 
-                                    <!-- Marca -->
-                                    <DataGridTextColumn Header="Marca" Binding="{Binding Brand}" IsReadOnly="True" Width="*"/>
+                                    <!-- Telefono -->
+                                    <DataGridTextColumn Header="Telefono" Binding="{Binding PhoneNumber}" IsReadOnly="True" Width="0.5*"/>
 
-                                    <!-- Categoría -->
-                                    <DataGridTextColumn Header="Categoría" Binding="{Binding Category}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Nombre de Proveedor -->
-                                    <DataGridTextColumn Header="Nombre de Proveedor" Binding="{Binding SupplierName}" IsReadOnly="True" Width="*"/>
-                                </DataGrid.Columns>
+                                    </DataGrid.Columns>
                             </DataGrid>
                         </Border>
                     </Grid>

@@ -110,6 +110,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:SupplierOrderDTO.OrderItemDTO" />
+  <xs:complexType name="ArrayOfCustomerDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerDTO" nillable="true" type="tns:CustomerDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomerDTO" nillable="true" type="tns:ArrayOfCustomerDTO" />
   <xs:complexType name="CustomerDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressDTO" />
@@ -117,8 +123,10 @@
       <xs:element minOccurs="0" name="CustomerID" type="xs:int" />
       <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegDate" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CustomerDTO" nillable="true" type="tns:CustomerDTO" />
