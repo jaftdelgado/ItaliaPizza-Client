@@ -73,6 +73,43 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductDTO" nillable="true" type="tns:ProductDTO" />
+  <xs:complexType name="ArrayOfSupplierOrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplierOrderDTO" nillable="true" type="tns:SupplierOrderDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplierOrderDTO" nillable="true" type="tns:ArrayOfSupplierOrderDTO" />
+  <xs:complexType name="SupplierOrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Delivered" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfSupplierOrderDTO.OrderItemDTO" />
+      <xs:element minOccurs="0" name="OrderFolio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplierName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplierOrderDTO" nillable="true" type="tns:SupplierOrderDTO" />
+  <xs:complexType name="ArrayOfSupplierOrderDTO.OrderItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:SupplierOrderDTO.OrderItemDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:ArrayOfSupplierOrderDTO.OrderItemDTO" />
+  <xs:complexType name="SupplierOrderDTO.OrderItemDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MeasureUnit" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Subtotal" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SupplyID" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SupplyPic" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="UnitPrice" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:SupplierOrderDTO.OrderItemDTO" />
   <xs:complexType name="CustomerDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressDTO" />

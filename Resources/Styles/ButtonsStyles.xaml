@@ -22,7 +22,7 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
                                RenderOptions.BitmapScalingMode="HighQuality"
-                               Width="11" Height="11" Margin="0,0,8,0"/>
+                               Width="11" Height="11" Margin="0 0 8 0"/>
                             <TextBlock Text="{TemplateBinding Content}" 
                                    Foreground="{StaticResource BackgroundBrush}" 
                                    VerticalAlignment="Center"/>
@@ -155,14 +155,14 @@
                     <Border Background="{TemplateBinding Background}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="8,0,14,0"
+                            Padding="14 0"
                             CornerRadius="12"
                             Opacity="{TemplateBinding Opacity}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
-                        Width="20" Height="20" Margin="0,0,6,0"/>
+                        Width="11" Height="11" Margin="0 0 8 0"/>
                             <TextBlock Text="{TemplateBinding Content}" 
-                                       Foreground="{DynamicResource DangerButtonBrush}" 
+                                       Foreground="{DynamicResource DangerBrush}" 
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
@@ -434,4 +434,70 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="EditButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="8"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Image x:Name="IconImage" Width="12" Height="12"
+                                   Source="/Resources/Icons/edit2-icon.png"
+                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="DeleteButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="8"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Image x:Name="IconImage" Width="12" Height="12"
+                                   Source="/Resources/Icons/discard-icon.png"
+                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="IconImage" Property="Source" Value="/Resources/Icons/discard-hover-icon.png"/>
+                            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

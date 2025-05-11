@@ -10,6 +10,7 @@ namespace ItaliaPizzaClient.Views.Dialogs
     public partial class MessageDialog : UserControl
     {
         private Action _onConfirm;
+        public static Action OnCancel;
         public static readonly (string Brush, string ButtonText) DangerStyle = ("DangerBrush", "Glb_Delete");
 
         public MessageDialog()
@@ -130,6 +131,8 @@ namespace ItaliaPizzaClient.Views.Dialogs
 
         private void Click_BtnCancel(object sender, RoutedEventArgs e)
         {
+            OnCancel?.Invoke();
+            OnCancel = null;
             CloseDialog();
         }
 

@@ -6,16 +6,30 @@
              mc:Ignorable="d"
              d:DesignHeight="160" d:DesignWidth="160">
 
-    <Border CornerRadius="14" BorderThickness="0.5"
-            BorderBrush="{StaticResource BorderBrush}"
-            Background="{StaticResource SecondaryButtonBrush}"
-            Padding="14">
+    <UserControl.Resources>
+        <Style x:Key="HoverableBorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+            <Setter Property="Padding" Value="14"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SecondaryButtonHoverBrush}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource HoverableBorderStyle}" MouseLeftButtonUp="Border_MouseLeftButtonUp">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="36" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <StackPanel>
                 <Image Grid.Row="0" x:Name="SupplyPic"
                        Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -37,10 +51,11 @@
                            Style="{DynamicResource DescriptionLabelStyle}" />
             </StackPanel>
 
-            <TextBlock Grid.Row="1" VerticalAlignment="Bottom"
-                        Text="{Binding PriceText, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        Style="{DynamicResource RegularLabelStyle}"
-                        FontSize="13"/>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom">
+                <TextBlock Text="{Binding PriceText, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           Style="{DynamicResource RegularLabelStyle}"
+                           FontSize="13"/>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
