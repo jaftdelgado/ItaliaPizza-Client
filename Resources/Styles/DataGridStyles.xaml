@@ -164,15 +164,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Border 
-                Background="{TemplateBinding Background}" 
-                SnapsToDevicePixels="True"
-                    Padding="0 8"
-                VerticalAlignment="Stretch">
-                        <ContentPresenter 
-                    Margin="20 0"
-                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                    VerticalAlignment="Stretch" />
+                    <Border Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            Padding="0 8"
+                            VerticalAlignment="Stretch">
+                        <ContentPresenter Margin="20 0 8 0"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="Stretch" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

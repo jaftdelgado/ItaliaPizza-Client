@@ -34,6 +34,7 @@
         public static readonly string SAFE_PASSWORD_PATTERN = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$";
         public static readonly string EMAIL_FORMAT_PATTERN = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
         public static readonly string MONETARY_VALUE_PATTERN = @"[^$0-9,.]";
+        public static readonly string QUANTITY_VALUE_PATTERN = @"[^0-9,.]";
         #endregion
     }
 }

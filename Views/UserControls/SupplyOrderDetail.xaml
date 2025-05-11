@@ -5,17 +5,74 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ItaliaPizzaClient.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="42" d:DesignWidth="180">
-    <Border Background="{StaticResource BackgroundBrush}">
+             d:DesignHeight="68" d:DesignWidth="200">
+    <Border Background="{StaticResource BackgroundBrush}"
+            BorderThickness="0 0 0 0.5" 
+            BorderBrush="{DynamicResource SecondaryBrush}"
+            Padding="0 4 0 8" >
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="48" />
                 <ColumnDefinition Width="7*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="1" Orientation="Vertical">
-                <TextBlock Text="SupplyName"
-                           Style="{DynamicResource RegularLabelStyle}"/>
+            <Image Grid.Column="0" x:Name="SupplyPic"
+                   Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                   Width="48" Height="48" Stretch="Fill"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   RenderOptions.BitmapScalingMode="HighQuality">
+                <Image.Clip>
+                    <RectangleGeometry Rect="0 0 48 48" RadiusX="10" RadiusY="10"/>
+                </Image.Clip>
+            </Image>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center"
+                        Margin="10 0 0 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="SupplyTitle" Grid.Column="0" Text="{Binding SupplyName}" 
+                               Style="{DynamicResource RegularLabelStyle}"
+                               FontFamily="{StaticResource SFProMedium}"
+                               FontSize="14" VerticalAlignment="Center" 
+                               TextTrimming="CharacterEllipsis" />
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"
+                                Margin="8 0 0 0">
+                        <Button x:Name="BtnEdit"
+                                Style="{DynamicResource EditButtonStyle}" />
+                        <Button x:Name="BtnDelete"
+                                Style="{DynamicResource DeleteButtonStyle}" 
+                                Click="Click_BtnDelete" />
+                    </StackPanel>
+
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="TbQuantity"
+                                 Text="{Binding QuantityText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                 Width="60"
+                                 Style="{DynamicResource TransparentTextBoxStyle}"/>
+
+                    </StackPanel>
+
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding Subtotal, StringFormat={}{0:C}}"
+                               Style="{StaticResource RegularLabelStyle}"
+                               FontFamily="{StaticResource SFProBold}"
+                               Foreground="{StaticResource PrimaryButtonBrush}"/>
+                </Grid>
+
+                
             </StackPanel>
         </Grid>
     </Border>

@@ -167,7 +167,7 @@ namespace ItaliaPizzaClient.Utilities
                 },
                 new MenuButton
                 {
-                    ResourceName = "Glb_SupplyOrders",
+                    ResourceName = "Glb_SupplierOrders",
                     Order = 11,
                     AllowedRoles = new List<string> { "Admin", "Manager", "Cashier" },
                     IconPath = "/Resources/Icons/supplyorders-icon.png",

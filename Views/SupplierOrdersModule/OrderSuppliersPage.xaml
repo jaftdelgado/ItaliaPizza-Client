@@ -10,7 +10,7 @@
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -18,23 +18,23 @@
             BorderBrush="{StaticResource SecondaryBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     <TextBlock Style="{StaticResource HeaderLabelStyle}"
-                           Text="{DynamicResource Suppliers_Header}"/>
+                           Text="{DynamicResource OrdSuppliers_Header}"/>
                     <TextBlock Style="{StaticResource DescriptionLabelStyle}"
-                           Text="{DynamicResource Suppliers_Desc}"/>
+                           Text="{DynamicResource OrdSuppliers_Desc}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,0,20,10"  
                         HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button x:Name="BtnNewOrderSupplier" Style="{DynamicResource PrimaryButtonStyle}"
-                        Content="{DynamicResource Suppliers_BtnNewOrderSupplier}"
-                        Click="Clic_BtnNewOrderSupplier" >
+                        Content="{DynamicResource OrdSuppliers_BtnNewOrderSupplier}"
+                        Click="Click_BtnNewOrderSupplier" >
                         <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                     </Button>
                 </StackPanel>
@@ -73,70 +73,146 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20,4">
-                            <TextBlock Text="{DynamicResource Suppliers_TitleTable}"
-                                   Style="{DynamicResource SubtitleLabelStyle}"/>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" 
+                                    VerticalAlignment="Bottom" Margin="20 0">
+                            <TextBlock Text="{DynamicResource OrdSuppliers_TitleTable}"
+                                       Style="{DynamicResource SubtitleLabelStyle}"
+                                       Margin="0 0 8 0"/>
+                            <ContentControl x:Name="ElementsCounter" 
+                                            Style="{StaticResource TagStyle}" 
+                                            Content="-"/>
                         </StackPanel>
 
-                        <!-- Tabla de Insumos -->
-                        <Border Grid.Row="1" Padding="8">
-                            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
-                                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                                  x:Name="suppliesDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                        <Grid Grid.Row="1" Margin="0 10 0 20">
+                            <DataGrid x:Name="SupplierOrdersDataGrid"
+                                      AutoGenerateColumns="False"
+                                      IsReadOnly="True"
+                                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                                      Style="{DynamicResource DataGridStyle1}"
+                                      SelectionChanged="SupplierOrdersDataGrid_SelectionChanged" >
                                 <DataGrid.Columns>
-                                    <!-- Número -->
-                                    <DataGridTextColumn Header="#Número" Binding="{Binding Number}" IsReadOnly="True" Width="64"/>
-
-                                    <!-- Nombre de Insumo -->
-                                    <DataGridTextColumn Header="Nombre de Insumo" Binding="{Binding SupplyName}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Marca -->
-                                    <DataGridTextColumn Header="Marca" Binding="{Binding Brand}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Categoría -->
-                                    <DataGridTextColumn Header="Categoría" Binding="{Binding Category}" IsReadOnly="True" Width="*"/>
-
-                                    <!-- Nombre de Proveedor -->
-                                    <DataGridTextColumn Header="Nombre de Proveedor" Binding="{Binding SupplierName}" IsReadOnly="True" Width="*"/>
+                                    <DataGridTextColumn Header="{DynamicResource OrdSuppliers_TableHFolio}"
+                                                        Binding="{Binding OrderFolio}" Width="2*" 
+                                                        CellStyle="{StaticResource DataGridCellStyle0}">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <StaticResource ResourceKey="DataGridColumnHeaderStyle0"/>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="{DynamicResource OrdSuppliers_TableHSupplier}" 
+                                                        Binding="{Binding SupplierName}" Width="3.5*"/>
+                                    <DataGridTextColumn Header="{DynamicResource OrdSuppliers_TableHStatus}" 
+                                                        Binding="{Binding StatusDescription}" Width="2*"/>
+                                    <DataGridTextColumn Header="{DynamicResource OrdSuppliers_TableHOrderDate}" 
+                                                        Binding="{Binding OrderedDateFormatted}" Width="2.5*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                        </Border>
+
+                            <StackPanel x:Name="NoMatchesMessage" Orientation="Vertical"
+                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        Visibility="Collapsed" >
+                                <Image Source="/Resources/Icons/search-error-icon.png"
+                                       Width="64" Height="64"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Text="No se encontraron resultados"
+                                           Style="{DynamicResource SubtitleLabelStyle}"
+                                           Margin="0 6" TextAlignment="Center"/>
+                                <TextBlock Text="Comprueba tu ortografía o intenta buscar algo distinto"
+                                           TextAlignment="Center"
+                                           Style="{DynamicResource DescriptionLabelStyle}"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
 
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="6*"/>
-                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="24,0">
-                                <TextBlock Text="KIRKLAND®"
-                                       Style="{DynamicResource HeaderLabelStyle}" FontWeight="ExtraBold"
-                                       FontSize="11"/>
-                                <TextBlock Text="Queso Mozzarella"
-                                       Style="{DynamicResource SubtitleLabelStyle}"/>
-                                <TextBlock Text="Carnes y Lactéos" Margin="0,2,0,0"
-                                       Style="{DynamicResource RegularLabelStyle}"
-                                       Foreground="{StaticResource PrimaryButtonBrush}"/>
-                                <TextBlock Text="Queso italiano de textura suave y elástica, con sabor delicado y gran capacidad de derretirse, ideal para pizzas y gratinados." 
-                                       Margin="0,10"
-                                       TextWrapping="Wrap"
-                                       Style="{DynamicResource DescriptionLabelStyle}"/>
-                            </StackPanel>
+                            <ContentControl Grid.Row="0" Margin="20 0" VerticalAlignment="Bottom"
+                                            Style="{StaticResource TagStyle}" 
+                                            Content="{DynamicResource OrdSuppliers_OrdSupplier}" />
 
-                            <StackPanel Grid.Row="2" Margin="28,0">
-                                <Button x:Name="BtnDeleteOrder" Style="{DynamicResource SecondaryButtonStyle}"
-                                    Content="{DynamicResource Suppliers_BtnDeleteOrder}">
-                                    <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
-                                </Button>
-                                <Button x:Name="BtnDeliveredOrder" Style="{DynamicResource PrimaryButtonStyle}"
-                                    Content="{DynamicResource Suppliers_BtnDeliveredOrder}">
-                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                </Button>
-                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Border Margin="20 0" Grid.Row="0" 
+                                        BorderThickness="0 0 0 0.5"
+                                        BorderBrush="{StaticResource SecondaryBrush}">
+                                    <StackPanel Margin="0 10 0 16">
+                                        <TextBlock x:Name="SupplierName" FontSize="13"
+                                                   Style="{DynamicResource SubtitleLabelStyle}" />
+                                        <TextBlock x:Name="OrderStatus" Margin="0 2 0 0"
+                                                   Style="{DynamicResource RegularLabelStyle}"
+                                                   Foreground="{StaticResource PrimaryButtonBrush}" />
+                                        <TextBlock x:Name="OrderFolio" Margin="0 4 0 0"
+                                                   FontFamily="{StaticResource SFMonoRegular}"
+                                                   Style="{DynamicResource DescriptionLabelStyle}" />
+                                        <StackPanel Orientation="Horizontal" Margin="0 6 0 0">
+                                            <Image Source="/Resources/Icons/calendar-icon.png" 
+                                                   Style="{StaticResource IconViewStyle}" />
+                                            <TextBlock Text="{DynamicResource OrdSuppliers_DetailsOrderedDate}"
+                                                       Style="{DynamicResource DescriptionLabelStyle}" 
+                                                       Margin="0 0 4 0" />
+                                            <TextBlock x:Name="OrderedDate" 
+                                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                        </StackPanel>
+
+                                        <StackPanel x:Name="DeliveredPanel" Orientation="Horizontal" Margin="0 6 0 0">
+                                            <Image Source="/Resources/Icons/calendar-icon.png" 
+                                                   Style="{StaticResource IconViewStyle}" />
+                                            <TextBlock Text="{DynamicResource OrdSuppliers_DetailsDeliveredDate}"
+                                                       Style="{DynamicResource DescriptionLabelStyle}" 
+                                                       Margin="0 0 4 0" />
+                                            <TextBlock x:Name="DeliveredDate" 
+                                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </Border>
+
+                                <StackPanel x:Name="OrderDetailsPanel" Grid.Row="1" Margin="20"/>
+                            </Grid>
+
+                            <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
+                                    BorderThickness="0 0.5 0 0">
+                                <StackPanel VerticalAlignment="Center" Margin="20">
+                                    <Button x:Name="BtnEditSupply" 
+                                            Style="{DynamicResource PrimaryButtonStyle}"
+                                            Content="{DynamicResource OrdSuppliers_BtnMarkReceived}" Margin="0 0 0 6" >
+                                        <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                    </Button>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button x:Name="BtnCancel" Grid.Column="0"
+                                                Margin="0 0 5 0"
+                                                Style="{DynamicResource DangerButtonStyle}"
+                                                Content="{DynamicResource Glb_Cancel}" 
+                                                Click="Click_BtnCancelOrder" >
+                                            <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
+                                        </Button>
+
+                                        <Button x:Name="BtnEdit" Grid.Column="1"
+                                                Margin="5 0 0 0"
+                                                Style="{DynamicResource SecondaryButtonStyle}"
+                                                Content="Modificar" >
+                                            <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
                         </Grid>
                     </Border>
                 </Grid>

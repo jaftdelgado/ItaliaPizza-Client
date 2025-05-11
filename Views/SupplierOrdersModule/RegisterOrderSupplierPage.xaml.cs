@@ -1,288 +1,328 @@
-﻿using System.Windows.Controls;
-using ItaliaPizzaClient.Views.Dialogs;
-using System.Windows;
-using ItaliaPizzaClient.ItaliaPizzaServices;
+﻿using ItaliaPizzaClient.ItaliaPizzaServices;
 using ItaliaPizzaClient.Model;
-using System.Collections.Generic;
-using System;
-using System.Linq;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.UserControls;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows;
+using System.Linq;
+using System.Collections.Generic;
+using ItaliaPizzaClient.Views.Dialogs;
+using System.Threading.Tasks;
+using System;
 
 namespace ItaliaPizzaClient.Views
 {
     public partial class RegisterOrderSupplierPage : Page
     {
-        private readonly List<OrderItem> orderItems = new List<OrderItem>();
-        private readonly MainManagerClient client = new MainManagerClient();
+        public ObservableCollection<SupplyCard> SupplyCards { get; set; } = new ObservableCollection<SupplyCard>();
+        private ObservableCollection<Supplier> _suppliers = new ObservableCollection<Supplier>();
+        private List<OrderedSupply> _orderedSupplies = new List<OrderedSupply>();
+        private SupplyCategory _previousCategory;
+        private Supplier _previousSupplier;
 
         public RegisterOrderSupplierPage()
         {
             InitializeComponent();
-            btnAddSupply.IsEnabled = false;
-            txtQuantity.TextChanged += (s, e) => CheckAddSupplyButtonState();
-            LoadCategories();
-            InputUtilities.ValidateDecimalInput(txtQuantity);
-
-            cbSuppliersName.IsEnabled = false;
-            cbSuppliesName.IsEnabled = false;
-            txtQuantity.IsEnabled = false;
+            SetCategoriesComboBox();
+            UpdateButtonState(BtnConfirmOrder);
+            UpdateTotal();
+            TbCurrentDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
-        private void LoadCategories()
+        private void SetCategoriesComboBox()
         {
-            var categories = client.GetAllCategories();
+            CbCategories.ItemsSource = SupplyCategory.GetDefaultSupplyCategories();
+        }
 
-            cbSuppliersCategories.Items.Clear();
-            foreach (var category in categories)
+        private void ClearOrderDetails()
+        {
+            SupplyCards.Clear();
+            _orderedSupplies.Clear();
+            OrderDetailsPanel.Children.Clear();
+            UpdateButtonState(BtnConfirmOrder);
+            UpdateTotal();
+        }
+
+        private void UpdateTotal()
+        {
+            decimal total = _orderedSupplies.Sum(o => o.Quantity * o.Supply.Price);
+            TbTotal.Text = total.ToString("C");
+        }
+
+        private async Task ConfirmAndClearOrderDetails(Func<Task> continueAction, Action onCancel = null)
+        {
+            if (_orderedSupplies.Count == 0)
             {
-                cbSuppliersCategories.Items.Add(new ComboBoxItem
-                {
-                    Content = category.Name,
-                    Tag = category
-                });
+                await continueAction();
+                return;
             }
-        }
 
-        private void cbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ClearOrderIfNeeded();
-            ClearOrderIfNeeded();
-            cbSuppliersName.IsEnabled = false;
-            cbSuppliesName.Items.Clear();
-            cbSuppliesName.SelectedIndex = -1;
-
-            cbSuppliesName.IsEnabled = false;
-            cbSuppliesName.Items.Clear();
-            cbSuppliesName.SelectedIndex = -1;
-
-            txtQuantity.IsEnabled = false;
-
-            if (cbSuppliersCategories.SelectedItem is ComboBoxItem selectedItem &&
-                selectedItem.Tag is SupplyCategoryDTO selectedCategory)
-            {
-                int categoryId = selectedCategory.Id;
-
-                var suppliers = client.GetSuppliersByCategory(categoryId);
-                cbSuppliersName.Items.Clear();
-
-                foreach (var supplier in suppliers)
+            MessageDialog.ShowConfirm(
+                "RegOrderSupplier_DialogTDialogTSelection", "RegOrderSupplier_DialogDDialogTSelection",
+                async () =>
                 {
-                    cbSuppliersName.Items.Add(new ComboBoxItem
-                    {
-                        Content = supplier.ContactName,
-                        Tag = supplier
-                    });
-                }
-
-                cbSuppliersName.IsEnabled = true;
-            }
-        }
-
-        private void cbSuppliers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ClearOrderIfNeeded();
-            cbSuppliesName.IsEnabled = false;
-            cbSuppliesName.Items.Clear();
-            cbSuppliesName.SelectedIndex = -1;
-            txtQuantity.IsEnabled = false;
-
-            if (cbSuppliersName.SelectedItem is ComboBoxItem selectedItem &&
-                selectedItem.Tag is SupplierDTO selectedSupplier)
-            {
-                int supplierId = selectedSupplier.Id;
-
-                var supplies = client.GetSuppliesBySupplier(supplierId);
-
-                cbSuppliesName.Items.Clear();
-
-                foreach (var supply in supplies)
-                {
-                    bool alreadyAdded = orderItems.Any(o => o.SupplyName == supply.Name);
-                    if (!alreadyAdded)
-                    {
-                        cbSuppliesName.Items.Add(new ComboBoxItem
-                        {
-                            Content = supply.Name,
-                            Tag = supply
-                        });
-                    }
-                }
-            }
-            cbSuppliesName.IsEnabled = true;
-            CheckAddSupplyButtonState();
-        }
-
-        private void cbSuppliesName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbSuppliesName.SelectedItem is ComboBoxItem selectedItem &&
-                selectedItem.Tag is SupplyDTO selectedSupply)
-            {
-                txtQuantity.IsEnabled = true;
-                txtQuantity.Focus();
-            }
-        }
-
-        private void AddSupplyButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbSuppliesName.SelectedItem is ComboBoxItem selectedItem &&
-                selectedItem.Tag is SupplyDTO selectedSupply &&
-                decimal.TryParse(txtQuantity.Text, out decimal quantity) &&
-                quantity > 0)
-            {
-                var allUnits = MeasureUnit.GetDefaultMeasureUnits();
-                var measureUnit = allUnits.FirstOrDefault(mu => mu.Id == selectedSupply.MeasureUnit);
-
-                orderItems.Add(new OrderItem
-                {
-                    SupplyName = selectedSupply.Name,
-                    Quantity = quantity,
-                    MeasureUnit = measureUnit?.Abbreviation
+                    ClearOrderDetails();
+                    await continueAction();
                 });
 
-                OrdersuppliersDataGrid.ItemsSource = null;
-                OrdersuppliersDataGrid.ItemsSource = orderItems;
-
-                txtQuantity.Clear();
-                cbSuppliesName.SelectedIndex = -1;
-
-                int supplierId = selectedSupply.Id;
-                var supplies = client.GetSuppliesBySupplier(supplierId);
-
-                cbSuppliesName.Items.Clear();
-                foreach (var supply in supplies)
-                {
-                    if (!orderItems.Any(o => o.SupplyName == supply.Name))
-                    {
-                        cbSuppliesName.Items.Add(new ComboBoxItem
-                        {
-                            Content = supply.Name,
-                            Tag = supply
-                        });
-                    }
-                }
-                txtQuantity.IsEnabled = false;
-            }
-            btnAddSupply.IsEnabled = false;
+            MessageDialog.OnCancel = onCancel;
         }
 
-
-        private void DeleteSelectedSupply_Click(object sender, RoutedEventArgs e)
+        private void UpdateButtonState(Button button)
         {
-            if (OrdersuppliersDataGrid.SelectedItem is OrderItem selectedItem)
-            {
-                orderItems.Remove(selectedItem);
-                OrdersuppliersDataGrid.ItemsSource = null;
-                OrdersuppliersDataGrid.ItemsSource = orderItems;
+            button.IsEnabled = _orderedSupplies.Count > 0;
+        }
 
-                RefreshSuppliesComboBox();
+        private async Task LoadSuppliers()
+        {
+            var selectedCategory = CbCategories.SelectedItem as SupplyCategory;
+            if (selectedCategory == null) return;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var dtoList = client.GetSuppliersByCategory(selectedCategory.Id);
+
+                var suppliers = dtoList.Select(s => new Supplier
+                {
+                    Id = s.Id,
+                    SupplierName = s.SupplierName,
+                    ContactName = s.ContactName,
+                    PhoneNumber = s.PhoneNumber,
+                    EmailAddress = s.EmailAddress,
+                    Description = s.Description,
+                    CategorySupply = s.CategorySupply,
+                    IsActive = s.IsActive
+                })
+                .Where(s => s.IsActive).OrderBy(s => s.SupplierName).ToList();
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    _suppliers.Clear();
+                    foreach (var supplier in suppliers)
+                        _suppliers.Add(supplier);
+
+                    CbSuppliers.ItemsSource = _suppliers.ToList();
+                });
+            });
+        }
+
+        private async Task LoadSuppliesForSelectedSupplier()
+        {
+            var selectedSupplier = CbSuppliers.SelectedItem as Supplier;
+            if (selectedSupplier == null) return;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var dtoList = client.GetSuppliesBySupplier(selectedSupplier.Id);
+
+                var supplies = dtoList.Select(s => new Supply
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    MeasureUnit = s.MeasureUnit,
+                    Stock = s.Stock,
+                    Brand = s.Brand,
+                    SupplyPic = s.SupplyPic,
+                    SupplierID = s.SupplierID
+                }).ToList();
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    SupplyCards.Clear();
+                    foreach (var supply in supplies)
+                    {
+                        var card = CreateSupplyCard(supply);
+                        SupplyCards.Add(card);
+                    }
+
+                    ButtonsPanel.ItemsSource = SupplyCards;
+                    TbSupplier.Text = selectedSupplier.SupplierName;
+                });
+            });
+        }
+
+        private async Task RegisterSupplierOrder()
+        {
+            var selectedSupplier = CbSuppliers.SelectedItem as Supplier;
+
+            if (selectedSupplier is null || !_orderedSupplies.Any())
+            {
+                MessageDialog.Show("RegOrderSupplier_DialogTInvalid", "RegOrderSupplier_DialogDInvalid", AlertType.WARNING);
+                return;
+            }
+
+            var orderDto = new SupplierOrderDTO
+            {
+                SupplierID = selectedSupplier.Id,
+                OrderedDate = DateTime.Now,
+                Total = _orderedSupplies.Sum(o => o.Quantity * o.Supply.Price),
+                Items = _orderedSupplies.Select(o => new SupplierOrderDTO.OrderItemDTO
+                {
+                    SupplyID = o.Supply.Id,
+                    Quantity = o.Quantity,
+                    Subtotal = o.Quantity * o.Supply.Price
+                }).ToArray()
+            };
+
+            bool success = false;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var result = await client.AddSupplierOrderAsync(orderDto);
+                success = result > 0;
+            });
+
+            if (success)
+            {
+                MessageDialog.Show("RegOrderSupplier_DialogTSuccess", "RegOrderSupplier_DialogDSuccess", AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
+            }
+        }
+
+        private SupplyCard CreateSupplyCard(Supply supply)
+        {
+            var card = new SupplyCard
+            {
+                SupplyName = supply.SupplyName,
+                StockText = $"Stock: {supply.Stock}",
+                PriceText = supply.FormattedPricePerUnit,
+                Margin = new Thickness(0, 0, 10, 10)
+            };
+
+            ImageUtilities.SetImageSource(card.SupplyPic, supply.SupplyPic, Constants.DEFAULT_SUPPLY_PIC_PATH);
+
+            card.CardClicked += (_, __) => OnSupplyCardClicked(supply);
+
+            return card;
+        }
+
+        private void RemoveOrderedSupply(SupplyOrderDetail detail, OrderedSupply orderedSupply)
+        {
+            OrderDetailsPanel.Children.Remove(detail);
+            _orderedSupplies.Remove(orderedSupply);
+            UpdateButtonState(BtnConfirmOrder);
+            UpdateTotal();
+        }
+
+        private void OnSupplyCardClicked(Supply supply)
+        {
+            var existing = _orderedSupplies.FirstOrDefault(o => o.Supply.Id == supply.Id);
+
+            if (existing != null)
+            {
+                existing.Quantity += 1;
+
+                var detail = OrderDetailsPanel.Children
+                    .OfType<SupplyOrderDetail>()
+                    .FirstOrDefault(d => d.SupplyName == existing.Supply.SupplyName);
+
+                if (detail != null) 
+                {
+                    detail.Quantity += 1;
+                    detail.RefreshBinding();
+                }
             }
             else
             {
-                MessageDialog.Show("Eliminar Insumo", "Selecciona un insumo de la lista para eliminar.", AlertType.WARNING);
-            }
-        }
-        private void ClearOrderIfNeeded()
-        {
-            if (orderItems.Count > 0)
-            {
-                orderItems.Clear();
-                OrdersuppliersDataGrid.ItemsSource = null;
-            }
-        }
-
-        private void SubmitOrder_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbSuppliersName.SelectedItem is ComboBoxItem supplierItem &&
-                supplierItem.Tag is SupplierDTO selectedSupplier &&
-                orderItems.Count > 0)
-            {
-                var supplies = client.GetSuppliesBySupplier(selectedSupplier.Id);
-
-                var dto = new SupplierOrderDTO
+                var ordered = new OrderedSupply
                 {
-                    SupplierID = selectedSupplier.Id,
-                    OrderedDate = DateTime.Now,
-                    Status = "En espera"
+                    Supply = supply,
+                    Quantity = 1,
                 };
 
-                decimal total = 0;
+                _orderedSupplies.Add(ordered);
 
-                var items = new List<SupplierOrderDTO.OrderItemDTO>();
-
-                foreach (var item in orderItems)
-                {
-                    var matchingSupply = supplies.FirstOrDefault(s => s.Name == item.SupplyName);
-                    if (matchingSupply != null)
-                    {
-                        decimal lineTotal = item.Quantity * matchingSupply.Price;
-                        total += lineTotal;
-
-                        items.Add(new SupplierOrderDTO.OrderItemDTO
-                        {
-                            SupplyID = matchingSupply.Id,
-                            Quantity = item.Quantity,
-                            UnitPrice = matchingSupply.Price
-                        });
-                    }
-                }
-
-                dto.Total = total;
-                dto.Items = items.ToArray();
-
-                int result = client.RegisterOrder(dto);
-
-                if (result == 1)
-                {
-                    MessageDialog.Show("Éxito", "Orden registrada exitosamente.", AlertType.SUCCESS);
-                    orderItems.Clear();
-                    OrdersuppliersDataGrid.ItemsSource = null;
-                    txtQuantity.Clear();
-                    cbSuppliesName.SelectedIndex = -1;
-                }
-                else
-                {
-                    MessageDialog.Show("Error", "Ocurrió un error al registrar la orden.", AlertType.ERROR);
-                }
+                var detail = AddSupplyOrderDetail(ordered);
+                OrderDetailsPanel.Children.Add(detail);
             }
-            else
-            {
-                MessageDialog.Show("Validación", "Debes seleccionar un proveedor y añadir al menos un insumo.", AlertType.WARNING);
-            }
+
+            UpdateButtonState(BtnConfirmOrder);
+            UpdateTotal();
         }
-        private void RefreshSuppliesComboBox()
-        {
-            var client = ServiceClientManager.Instance.Client;
-            if (client == null) return;
 
-            if (cbSuppliersName.SelectedItem is ComboBoxItem selectedItem &&
-                selectedItem.Tag is SupplierDTO selectedSupplier)
+        private SupplyOrderDetail AddSupplyOrderDetail(OrderedSupply orderedSupply)
+        {
+            var detail = new SupplyOrderDetail
             {
-                var supplies = client.GetSuppliesBySupplier(selectedSupplier.Id);
+                SupplyName = orderedSupply.Supply.SupplyName,
+                Price = orderedSupply.Supply.Price,
+                Quantity = orderedSupply.Quantity,
+                MeasureUnitId = orderedSupply.Supply.MeasureUnit,
+                Margin = new Thickness(0, 0, 0, 6)
+            };
 
-                cbSuppliesName.Items.Clear();
+            detail.Subtotal = detail.Price * detail.Quantity;
+            detail.Unit = orderedSupply.Unit;
 
-                foreach (var supply in supplies)
-                {
-                    bool alreadyAdded = orderItems.Any(o => o.SupplyName == supply.Name);
-                    if (!alreadyAdded)
-                    {
-                        cbSuppliesName.Items.Add(new ComboBoxItem
-                        {
-                            Content = supply.Name,
-                            Tag = supply
-                        });
-                    }
-                }
-                cbSuppliesName.SelectedIndex = -1;
-                txtQuantity.IsEnabled = false;
-            }
+            detail.DeleteClicked += (_, __) => RemoveOrderedSupply(detail, orderedSupply);
+
+            ImageUtilities.SetImageSource(detail.SupplyPic, orderedSupply.Supply.SupplyPic, Constants.DEFAULT_SUPPLY_PIC_PATH);
+
+            detail.QuantityChanged += (sender, newQuantity) =>
+            {
+                orderedSupply.Quantity = newQuantity;
+                UpdateTotal();
+            };
+
+            return detail;
         }
-        private void CheckAddSupplyButtonState()
-        {
-            bool isSupplySelected = cbSuppliesName.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is SupplyDTO;
-            bool isQuantityValid = decimal.TryParse(txtQuantity.Text, out decimal quantity) && quantity > 0;
 
-            btnAddSupply.IsEnabled = isSupplySelected && isQuantityValid;
+
+        private async void Click_BtnConfirmOrder(object sender, RoutedEventArgs e)
+        {
+            await RegisterSupplierOrder();
+        }
+
+        private async void CbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var newCategory = CbCategories.SelectedItem as SupplyCategory;
+            if (newCategory == null || Equals(newCategory, _previousCategory)) return;
+
+            CbCategories.SelectionChanged -= CbCategories_SelectionChanged;
+            CbCategories.SelectedItem = _previousCategory;
+            CbCategories.SelectionChanged += CbCategories_SelectionChanged;
+
+            await ConfirmAndClearOrderDetails(async () =>
+            {
+                _previousCategory = newCategory;
+                CbCategories.SelectionChanged -= CbCategories_SelectionChanged;
+                CbCategories.SelectedItem = newCategory;
+                CbCategories.SelectionChanged += CbCategories_SelectionChanged;
+
+                TbSupplier.Text = "-";
+                CbSuppliers.IsEnabled = newCategory != null;
+                await LoadSuppliers();
+            });
+        }
+
+        private async void CbSuppliers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var newSupplier = CbSuppliers.SelectedItem as Supplier;
+            if (newSupplier == null || Equals(newSupplier, _previousSupplier)) return;
+
+            CbSuppliers.SelectionChanged -= CbSuppliers_SelectionChanged;
+            CbSuppliers.SelectedItem = _previousSupplier;
+            CbSuppliers.SelectionChanged += CbSuppliers_SelectionChanged;
+
+            await ConfirmAndClearOrderDetails(async () =>
+            {
+                _previousSupplier = newSupplier;
+                CbSuppliers.SelectionChanged -= CbSuppliers_SelectionChanged;
+                CbSuppliers.SelectedItem = newSupplier;
+                CbSuppliers.SelectionChanged += CbSuppliers_SelectionChanged;
+                await LoadSuppliesForSelectedSupplier();
+            });
         }
     }
 }

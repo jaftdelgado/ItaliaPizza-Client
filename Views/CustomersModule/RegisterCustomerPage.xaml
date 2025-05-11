@@ -10,10 +10,8 @@
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68"/>
-            <!--Cabecera-->
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
-            <!--Contenido Principal-->
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" BorderThickness="0,0,0,0.5"

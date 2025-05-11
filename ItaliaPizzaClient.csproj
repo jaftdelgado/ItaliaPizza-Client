@@ -91,11 +91,14 @@
     <Compile Include="Model\Personal.cs" />
     <Compile Include="Model\Recipe.cs" />
     <Compile Include="Model\RecipeSupplyItem.cs" />
-    <Compile Include="Model\OrderItem.cs" />
+    <Compile Include="Model\SupplierOrder.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\Supply.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\MeasureUnit.cs" />
+    <Compile Include="Views\SignInWindow.xaml.cs">
+      <DependentUpon>SignInWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\SupplyCard.xaml.cs">
       <DependentUpon>SupplyCard.xaml</DependentUpon>
     </Compile>
@@ -168,9 +171,6 @@
     <Compile Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage.xaml.cs">
       <DependentUpon>RegisterOrderSupplierPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage1.xaml.cs">
-      <DependentUpon>RegisterOrderSupplierPage1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SuppliersModule\RegisterSupplierPage.xaml.cs">
       <DependentUpon>RegisterSupplierPage.xaml</DependentUpon>
     </Compile>
@@ -202,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ButtonsStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SignInWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,10 +297,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\SuppliersModule\RegisterSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -359,6 +359,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO.datasource">
@@ -502,6 +505,15 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\measureunit-icon.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\edit2-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\discard-hover-icon.png" />
+    <Resource Include="Resources\Icons\discard-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\check-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
