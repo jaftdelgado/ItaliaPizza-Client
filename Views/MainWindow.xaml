@@ -11,7 +11,7 @@
         Width="1080" MinWidth="920">
     <Border Background="{StaticResource BackgroundBrush}" CornerRadius="12">
         <Grid>
-            <Grid x:Name="RootGrid" Visibility="Collapsed">
+            <Grid x:Name="RootGrid" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="241*"/>
                     <ColumnDefinition Width="839*"/>
@@ -53,24 +53,26 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="64"/>
                                             <RowDefinition Height="*"/>
-                                            <RowDefinition Height="84"/>
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
                                         <Border Grid.Row="0" Margin="18,0">
                                             <TextBox Style="{DynamicResource PrimarySearchBoxStyle}"/>
                                         </Border>
 
-                                        <StackPanel Grid.Row="1" x:Name="MenuStackPanel" Orientation="Vertical" Margin="14,4"/>
+                                        <StackPanel Grid.Row="1" x:Name="MenuStackPanel" Orientation="Vertical" Margin="14,4" />
 
                                         <StackPanel Grid.Row="2" Orientation="Vertical">
-                                            <Border Margin="14,8">
-                                                <Button x:Name="BtnProfile" Style="{DynamicResource ProfileButtonStyle}"/>
+                                            <Border Margin="14 10">
+                                                <Button x:Name="BtnProfile" Style="{DynamicResource UserButtonStyle}"/>
                                             </Border>
-                                            <Border BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0,0.5,0,0">
-                                                <StackPanel Orientation="Horizontal" Margin="16,8">
+                                            
+                                            <Border BorderBrush="{StaticResource SecondaryBrush}" 
+                                                    BorderThickness="0 0.5 0 0" >
+                                                <StackPanel Orientation="Horizontal" Margin="16 10" >
                                                     <TextBlock Text="{DynamicResource Glb_ItaliaPizza}"
-                                                           Style="{DynamicResource RegularLabelStyle}"
-                                                           FontWeight="Medium" Margin="0,0,6,0"/>
+                                                               Style="{DynamicResource RegularLabelStyle}"
+                                                               Margin="0 0 4 0" />
                                                     <TextBlock Text="{DynamicResource Glb_Version}"
                                                            Style="{DynamicResource DescriptionLabelStyle}"/>
                                                 </StackPanel>
@@ -115,7 +117,7 @@
 
 
             </Grid>
-            <Grid x:Name="LoginGrid">
+            <Grid x:Name="LoginGrid" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -160,6 +162,21 @@
                 </Border>
                 
             </Grid>
+
+            <Border x:Name="PopUpOverlay"
+                    Visibility="Collapsed" 
+                    Grid.ColumnSpan="2"
+                    Background="Transparent"
+                    MouseDown="PopUpOverlay_MouseDown"
+                    IsHitTestVisible="True" >
+                <Canvas>
+                    <ContentControl x:Name="PopUpHost"
+                        Canvas.Left="0" Canvas.Top="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
+                </Canvas>
+            </Border>
+
             <Border x:Name="DialogOverlay"
                     Background="#80000000"
                     Visibility="Collapsed" Grid.ColumnSpan="2">
@@ -167,7 +184,6 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
             </Border>
-
         </Grid>
     </Border>
 </Window>

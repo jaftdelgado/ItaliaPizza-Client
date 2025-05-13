@@ -7,6 +7,8 @@ namespace ItaliaPizzaClient.Model
 {
     public class SupplierOrder
     {
+        public int SupplierOrderID { get; set; }
+
         public string OrderFolio { get; set; }
 
         public string SupplierName { get; set; }
@@ -22,6 +24,8 @@ namespace ItaliaPizzaClient.Model
         public DateTime? Delivered { get; set; }
 
         public int? Status { get; set; }
+        
+        public int CategorySupplyID { get; set; }
 
         public List<OrderedSupply> Items { get; set; }
 
@@ -46,7 +50,6 @@ namespace ItaliaPizzaClient.Model
         }
 
     }
-
 
     public class OrderedSupply
     {

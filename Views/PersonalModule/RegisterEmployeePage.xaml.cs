@@ -183,12 +183,12 @@ namespace ItaliaPizzaClient.Views
             if (showAccount && !_isAccountVisible)
             {
                 AccountBorder.Visibility = Visibility.Visible;
-                Animations.BeginAnimation(AccountBorder, "ShowAccountBorderAnimation");
+                Animations.BeginAnimation(AccountBorder, "ShowBorderAnimation");
                 _isAccountVisible = true;
             }
             else if (!showAccount && _isAccountVisible)
             {
-                Animations.BeginAnimation(AccountBorder, "HideAccountBorderAnimation", () =>
+                Animations.BeginAnimation(AccountBorder, "HideBorderAnimation", () =>
                 {
                     AccountBorder.Visibility = Visibility.Collapsed;
                     _isAccountVisible = false;

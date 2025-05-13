@@ -5,14 +5,16 @@ using System.Windows;
 using System.Windows.Controls;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.UserControls;
+using ItaliaPizzaClient.Views.Dialogs;
+using System.Threading.Tasks;
 
 namespace ItaliaPizzaClient.Views
 {
-    public partial class OrderSuppliersPage : Page
+    public partial class SupplierOrdersPage : Page
     {
         private List<SupplierOrder> _supplierOrders = new List<SupplierOrder>();
 
-        public OrderSuppliersPage()
+        public SupplierOrdersPage()
         {
             InitializeComponent();
             Loaded += OrderSuppliersPage_Loaded;
@@ -110,7 +112,7 @@ namespace ItaliaPizzaClient.Views
         private void Click_BtnNewOrderSupplier(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
-                mainWindow.NavigateToPage("RegOrderSupplier_Header", new RegisterOrderSupplierPage());
+                mainWindow.NavigateToPage("RegOrderSupplier_Header", new RegisterSupplierOrdersPage());
         }
 
         private void Click_BtnCancelOrder(object sender, RoutedEventArgs e)
@@ -120,7 +122,7 @@ namespace ItaliaPizzaClient.Views
 
         private void SupplierOrdersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = (SupplierOrder) SupplierOrdersDataGrid.SelectedItem;
+            var selected = (SupplierOrder)SupplierOrdersDataGrid.SelectedItem;
 
             if (selected != null)
             {

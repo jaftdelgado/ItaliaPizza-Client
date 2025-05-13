@@ -94,8 +94,10 @@
                             CornerRadius="12">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
-                            Width="20" Height="20" Margin="0,0,6,0"/>
-                            <TextBlock Text="{TemplateBinding Content}" Foreground="{StaticResource PrimaryBrush}" VerticalAlignment="Center"/>
+                            Width="20" Height="20" Margin="0 0 6 0"/>
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                       Foreground="{StaticResource SecondaryBrush}" 
+                                       VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
@@ -282,6 +284,57 @@
         </Setter>
     </Style>
 
+    <Style x:Key="UserButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{StaticResource SecondaryButtonBrush}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="12"
+                            Padding="10 8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Width="30" Height="30" Grid.Column="0">
+                                <Ellipse />
+                                     <Image Source="/Resources/Images/default-profile-pic.png" 
+                                            Stretch="Fill"
+                                            RenderOptions.BitmapScalingMode="HighQuality" >
+                                        <Image.Clip>
+                                            <EllipseGeometry Center="15 15" RadiusX="15" RadiusY="15"/>
+                                        </Image.Clip>
+                                </Image>
+                            </Grid>
+
+                            <!-- Nombre y rol -->
+                            <StackPanel Grid.Column="1" Margin="8 0" VerticalAlignment="Center">
+                                <TextBlock Text="Jafeth Delgado" 
+                                           FontFamily="{StaticResource SFProMedium}"
+                                           Style="{DynamicResource RegularLabelStyle}" />
+                                <TextBlock Text="Administrador" 
+                                           FontSize="11"
+                                           Style="{DynamicResource DescriptionLabelStyle}"/>
+                            </StackPanel>
+
+                            <!-- Icono a la derecha -->
+                            <Viewbox Width="14" Height="14" Grid.Column="2" VerticalAlignment="Center">
+                                <Image Source="/Resources/Icons/sort-header-icon.png"
+                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                       Stretch="Fill"/>
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
     <Style x:Key="ProfileButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>

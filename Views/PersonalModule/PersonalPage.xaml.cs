@@ -176,8 +176,7 @@ namespace ItaliaPizzaClient.Views
 
         private void DisplayEmployeeDetails(Personal selected)
         {
-            if (selected == null)
-                return;
+            if (selected == null) return;
 
             UpdateEmployeePanelVisibility(selected);
 

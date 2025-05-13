@@ -1013,6 +1013,9 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CategorySupplyIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> DeliveredField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1034,6 +1037,9 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private string SupplierNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SupplierOrderIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal TotalField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1043,6 +1049,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CategorySupplyID {
+            get {
+                return this.CategorySupplyIDField;
+            }
+            set {
+                if ((this.CategorySupplyIDField.Equals(value) != true)) {
+                    this.CategorySupplyIDField = value;
+                    this.RaisePropertyChanged("CategorySupplyID");
+                }
             }
         }
         
@@ -1133,6 +1152,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((object.ReferenceEquals(this.SupplierNameField, value) != true)) {
                     this.SupplierNameField = value;
                     this.RaisePropertyChanged("SupplierName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SupplierOrderID {
+            get {
+                return this.SupplierOrderIDField;
+            }
+            set {
+                if ((this.SupplierOrderIDField.Equals(value) != true)) {
+                    this.SupplierOrderIDField = value;
+                    this.RaisePropertyChanged("SupplierOrderID");
                 }
             }
         }
@@ -2001,6 +2033,18 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/AddSupplierOrder", ReplyAction="http://tempuri.org/ISupplierOrderManager/AddSupplierOrderResponse")]
         System.Threading.Tasks.Task<int> AddSupplierOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO orderDTO);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrder", ReplyAction="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrderResponse")]
+        bool UpdateSupplierOrder(ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO orderDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrder", ReplyAction="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrderResponse")]
+        System.Threading.Tasks.Task<bool> UpdateSupplierOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO orderDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/DeliverOrder", ReplyAction="http://tempuri.org/ISupplierOrderManager/DeliverOrderResponse")]
+        bool DeliverOrder(int supplierOrderID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/DeliverOrder", ReplyAction="http://tempuri.org/ISupplierOrderManager/DeliverOrderResponse")]
+        System.Threading.Tasks.Task<bool> DeliverOrderAsync(int supplierOrderID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder", ReplyAction="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrderResponse")]
         bool CancelSupplierOrder(int supplierOrderID);
         
@@ -2335,6 +2379,22 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<int> AddSupplierOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO orderDTO) {
             return base.Channel.AddSupplierOrderAsync(orderDTO);
+        }
+        
+        public bool UpdateSupplierOrder(ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO orderDTO) {
+            return base.Channel.UpdateSupplierOrder(orderDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateSupplierOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO orderDTO) {
+            return base.Channel.UpdateSupplierOrderAsync(orderDTO);
+        }
+        
+        public bool DeliverOrder(int supplierOrderID) {
+            return base.Channel.DeliverOrder(supplierOrderID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeliverOrderAsync(int supplierOrderID) {
+            return base.Channel.DeliverOrderAsync(supplierOrderID);
         }
         
         public bool CancelSupplierOrder(int supplierOrderID) {
