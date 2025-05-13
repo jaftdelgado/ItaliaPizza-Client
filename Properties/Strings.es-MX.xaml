@@ -284,30 +284,42 @@
     <sys:String x:Key="OrdSuppliers_OrdSupplier">Pedido a Proveedor</sys:String>
     <sys:String x:Key="OrdSuppliers_DetailsSupplier">Proveedor:</sys:String>
     <sys:String x:Key="OrdSuppliers_DetailsFolio">Folio:</sys:String>
-    <sys:String x:Key="OrdSuppliers_DetailsOrderedDate">Fecha del Pedido:</sys:String>
-    <sys:String x:Key="OrdSuppliers_DetailsDeliveredDate">Fecha de Entrega:</sys:String>
+    <sys:String x:Key="OrdSuppliers_DetailsOrderedDate">Ordenado:</sys:String>
+    <sys:String x:Key="OrdSuppliers_DetailsDeliveredDate">Entregado:</sys:String>
     <sys:String x:Key="OrdSuppliers_TableHOrderDate">Fecha del Pedido</sys:String>
     <sys:String x:Key="OrdSuppliers_BtnDeleteOrder">Eliminar pedido</sys:String>
     <sys:String x:Key="OrdSuppliers_BtnMarkReceived">Marcar como Recibido</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogTCancelOrder">¿Cancelar pedido?</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogDCancelOrder">¿Estás seguro de que deseas cancelar el pedido a proveedor seleccionado? Esta acción es permanente y no se puede deshacer.</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogTCancelledOrder">Pedido cancelado</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogDCancelledOrder">El pedido fue marcado como cancelado correctamente. Esta acción es irreversible y el pedido ya no podrá ser procesado ni recuperado.</sys:String>
 
     <!--Register Order Suppliers-->
     <sys:String x:Key="RegOrderSupplier_Header">Crear Pedido a Proveedor</sys:String>
-    <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos del pedido a proveedor que se desea registrar.</sys:String>
+    <sys:String x:Key="EditOrderSupplier_Header">Editar Pedido a Proveedor</sys:String>
+    <sys:String x:Key="EditOrderSupplier_Desc">Modifica los insumos del pedido a proveedor que se desea actualizar.</sys:String>
     <sys:String x:Key="RegOrderSupplier_Info">Insumos del Proveedor</sys:String>
     <sys:String x:Key="RegOrderSupplier_SupplierInfo">Información del Proveedor</sys:String>
     <sys:String x:Key="RegOrderSupplier_OrderDetails">Detalles del Pedido</sys:String>
     <sys:String x:Key="RegOrderSupplier_Supplier">Proveedor:</sys:String>
     <sys:String x:Key="RegOrderSupplier_SelectSupplies">Selecciona los insumos deseados:</sys:String>
     <sys:String x:Key="RegOrderSupplier_BtnConfirmOrder">Confirmar Pedido</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnNewOrden">Tramitar Orden</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnDeleteSupply">Eliminar insumo</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnAddSupply">Añadir insumo</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnCancelar">Cancelar Orden</sys:String>
+    <sys:String x:Key="RegOrderSupplier_BtnEditOrder">Actualizar Pedido</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogTDialogTSelection">¿Cambiar selección?</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogDDialogTSelection">¿Estás seguro de que deseas seleccionar otro proveedor? Se descartarán todos los elementos del pedido a proveedor actual.</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogTSuccess">Pedido a Proveedor registrado</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogDSuccess">La orden de compra ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
 
+    <!--Supplies-->
+    <sys:String x:Key="CashRegister_Header">Caja Registradora</sys:String>
+    <sys:String x:Key="CashRegister_Desc">Realiza apertura y corte de caja, y visualiza las transacciones generadas durante el turno en Italia Pizza.</sys:String>
+    <sys:String x:Key="CashRegister_BtnOpenRegister">Abrir Caja</sys:String>
+    <sys:String x:Key="CashRegister_TitleTable">Historial de Transacciones</sys:String>
+    <sys:String x:Key="CashRegister_TbOpeningDate">Fecha de apertura:</sys:String>
+    <sys:String x:Key="CashRegister_TbInitialBalance">Balance inicial:</sys:String>
+    <sys:String x:Key="CashRegister_CheckBConfirmOpening">Confirmar apertura de caja.</sys:String>
+    <sys:String x:Key="CashRegister_BtnOpening">Abrir caja</sys:String>
     <!--Order-->
     <sys:String x:Key="OrderPage_BtnAddOrder">Añadir Orden</sys:String>
     <sys:String x:Key="OrderPage_BtnPayOrder">Pagar Orden</sys:String>

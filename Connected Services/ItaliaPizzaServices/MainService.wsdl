@@ -207,6 +207,18 @@
   <wsdl:message name="IMainManager_AddSupplierOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddSupplierOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateSupplierOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateSupplierOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeliverOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeliverOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeliverOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeliverOrderResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_CancelSupplierOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:CancelSupplierOrder" />
   </wsdl:message>
@@ -403,6 +415,14 @@
     <wsdl:operation name="AddSupplierOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/AddSupplierOrder" message="tns:IMainManager_AddSupplierOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/AddSupplierOrderResponse" message="tns:IMainManager_AddSupplierOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrder" message="tns:IMainManager_UpdateSupplierOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrderResponse" message="tns:IMainManager_UpdateSupplierOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeliverOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/DeliverOrder" message="tns:IMainManager_DeliverOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/DeliverOrderResponse" message="tns:IMainManager_DeliverOrder_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CancelSupplierOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder" message="tns:IMainManager_CancelSupplierOrder_InputMessage" />
@@ -716,6 +736,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliverOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/DeliverOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CancelSupplierOrder">
       <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder" style="document" />
       <wsdl:input>
@@ -849,7 +887,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>_3776_\abrah</Upn>
+          <Upn>MATEBOOK-D15\jafet</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

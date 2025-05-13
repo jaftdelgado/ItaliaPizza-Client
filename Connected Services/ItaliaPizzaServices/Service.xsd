@@ -81,6 +81,7 @@
   <xs:element name="ArrayOfSupplierOrderDTO" nillable="true" type="tns:ArrayOfSupplierOrderDTO" />
   <xs:complexType name="SupplierOrderDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CategorySupplyID" type="xs:int" />
       <xs:element minOccurs="0" name="Delivered" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfSupplierOrderDTO.OrderItemDTO" />
       <xs:element minOccurs="0" name="OrderFolio" nillable="true" type="xs:string" />
@@ -88,6 +89,7 @@
       <xs:element minOccurs="0" name="Status" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="SupplierID" type="xs:int" />
       <xs:element minOccurs="0" name="SupplierName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SupplierOrderID" type="xs:int" />
       <xs:element minOccurs="0" name="Total" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>

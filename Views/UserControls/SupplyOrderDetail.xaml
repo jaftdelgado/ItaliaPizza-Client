@@ -12,18 +12,18 @@
             Padding="0 4 0 8" >
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="48" />
-                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="44" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Image Grid.Column="0" x:Name="SupplyPic"
                    Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                   Width="48" Height="48" Stretch="Fill"
+                   Width="44" Height="44" Stretch="Fill"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    RenderOptions.BitmapScalingMode="HighQuality">
                 <Image.Clip>
-                    <RectangleGeometry Rect="0 0 48 48" RadiusX="10" RadiusY="10"/>
+                    <RectangleGeometry Rect="0 0 44 44" RadiusX="8" RadiusY="8"/>
                 </Image.Clip>
             </Image>
 

@@ -13,7 +13,7 @@ using System;
 
 namespace ItaliaPizzaClient.Views
 {
-    public partial class RegisterOrderSupplierPage : Page
+    public partial class RegisterSupplierOrdersPage : Page
     {
         public ObservableCollection<SupplyCard> SupplyCards { get; set; } = new ObservableCollection<SupplyCard>();
         private ObservableCollection<Supplier> _suppliers = new ObservableCollection<Supplier>();
@@ -21,7 +21,7 @@ namespace ItaliaPizzaClient.Views
         private SupplyCategory _previousCategory;
         private Supplier _previousSupplier;
 
-        public RegisterOrderSupplierPage()
+        public RegisterSupplierOrdersPage()
         {
             InitializeComponent();
             SetCategoriesComboBox();
@@ -227,7 +227,7 @@ namespace ItaliaPizzaClient.Views
                     .OfType<SupplyOrderDetail>()
                     .FirstOrDefault(d => d.SupplyName == existing.Supply.SupplyName);
 
-                if (detail != null) 
+                if (detail != null)
                 {
                     detail.Quantity += 1;
                     detail.RefreshBinding();
