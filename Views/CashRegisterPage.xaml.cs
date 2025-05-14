@@ -14,5 +14,10 @@ namespace ItaliaPizzaClient.Views
         {
             UserControls.OpeningCash.Show(sender as FrameworkElement);
         }
+
+        private void Click_BtnRegisterOutflow(object sender, RoutedEventArgs e)
+        {
+            UserControls.RegisterOutflowMoney.Show(sender as FrameworkElement);
+        }
     }
 }

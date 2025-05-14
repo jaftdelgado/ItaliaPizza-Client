@@ -30,10 +30,17 @@
                        Text="{DynamicResource CashRegister_Desc}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Vertical" 
+                <StackPanel Grid.Column="1" Orientation="Horizontal" 
                             Margin="0 0 20 10"  
                             HorizontalAlignment="Right" 
                             VerticalAlignment="Bottom">
+                    <Button x:Name="BtnRegisterOutflow" 
+                            Style="{DynamicResource SecondaryButtonStyle}"
+                            Content="{DynamicResource CashRegister_BtnRegisterOutflow}"
+                            Click="Click_BtnRegisterOutflow" 
+                            Margin="0,0,10,0">
+                        <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                    </Button>
                     <Button x:Name="BtnOpenRegister" 
                             Style="{DynamicResource PrimaryButtonStyle}"
                             Content="{DynamicResource CashRegister_BtnOpenRegister}"
