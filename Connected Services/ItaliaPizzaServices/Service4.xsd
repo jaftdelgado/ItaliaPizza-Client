@@ -363,6 +363,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="OpenCashRegister">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="initialAmount" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OpenCashRegisterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="OpenCashRegisterResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAllSupplierOrders">
     <xs:complexType>
       <xs:sequence />

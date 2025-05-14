@@ -195,6 +195,12 @@
   <wsdl:message name="IMainManager_RegisterOrderPayment_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderPaymentResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_OpenCashRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpenCashRegister" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_OpenCashRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpenCashRegisterResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetAllSupplierOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSupplierOrders" />
   </wsdl:message>
@@ -407,6 +413,10 @@
     <wsdl:operation name="RegisterOrderPayment">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenCashRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/OpenCashRegister" message="tns:IMainManager_OpenCashRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/OpenCashRegisterResponse" message="tns:IMainManager_OpenCashRegister_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllSupplierOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders" message="tns:IMainManager_GetAllSupplierOrders_InputMessage" />
@@ -718,6 +728,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="OpenCashRegister">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/OpenCashRegister" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAllSupplierOrders">
       <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders" style="document" />
       <wsdl:input>
@@ -887,7 +906,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MATEBOOK-D15\jafet</Upn>
+          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
