@@ -2027,6 +2027,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/OpenCashRegister", ReplyAction="http://tempuri.org/IFinanceManager/OpenCashRegisterResponse")]
         System.Threading.Tasks.Task<bool> OpenCashRegisterAsync(decimal initialAmount);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterCashOut", ReplyAction="http://tempuri.org/IFinanceManager/RegisterCashOutResponse")]
+        int RegisterCashOut(decimal amount, string description);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterCashOut", ReplyAction="http://tempuri.org/IFinanceManager/RegisterCashOutResponse")]
+        System.Threading.Tasks.Task<int> RegisterCashOutAsync(decimal amount, string description);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders", ReplyAction="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrdersResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO[] GetAllSupplierOrders();
         
@@ -2377,6 +2383,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> OpenCashRegisterAsync(decimal initialAmount) {
             return base.Channel.OpenCashRegisterAsync(initialAmount);
+        }
+        
+        public int RegisterCashOut(decimal amount, string description) {
+            return base.Channel.RegisterCashOut(amount, description);
+        }
+        
+        public System.Threading.Tasks.Task<int> RegisterCashOutAsync(decimal amount, string description) {
+            return base.Channel.RegisterCashOutAsync(amount, description);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO[] GetAllSupplierOrders() {

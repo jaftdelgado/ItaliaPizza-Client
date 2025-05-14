@@ -27,13 +27,22 @@ namespace ItaliaPizzaClient.Views.UserControls
         }
         private async void Click_BtnAccept(object sender, RoutedEventArgs e)
         {
+            bool hasError = false;
+
+            if (string.IsNullOrWhiteSpace(TbInitialBalance.Text))
+            {
+                Animations.ShakeTextBox(TbInitialBalance);
+                hasError = true;
+            }
+
+            if (hasError)
+                return;
+
             decimal initialBalance = decimal.Parse(TbInitialBalance.Text, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.CurrentCulture);
-
-
             var client = ServiceClientManager.Instance.Client;
             if (client == null)
             {
-                MessageDialog.Show("GlbDialogT_ServerUnavailable", "GlbDialogD_ServerUnavailable", AlertType.ERROR);
+                MessageDialog.Show("GlbDialogT_NoConnection", "GlbDialogD_NoConnection", AlertType.ERROR);
                 return;
             }
 

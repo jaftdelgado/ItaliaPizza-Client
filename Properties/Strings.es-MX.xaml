@@ -315,6 +315,7 @@
     <sys:String x:Key="CashRegister_Header">Caja Registradora</sys:String>
     <sys:String x:Key="CashRegister_Desc">Realiza apertura y corte de caja, y visualiza las transacciones generadas durante el turno en Italia Pizza.</sys:String>
     <sys:String x:Key="CashRegister_BtnOpenRegister">Abrir Caja</sys:String>
+    <sys:String x:Key="CashRegister_BtnRegisterOutflow">Registrar salida</sys:String>
     <sys:String x:Key="CashRegister_TitleTable">Historial de Transacciones</sys:String>
     <sys:String x:Key="CashRegister_TbOpeningDate">Fecha de apertura:</sys:String>
     <sys:String x:Key="CashRegister_TbInitialBalance">Balance inicial:</sys:String>
@@ -351,4 +352,17 @@
     <sys:String x:Key="RegRecipe_TbRecipeName">Nombre de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbRecipeDescription">Descripción de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbSupplyList">Lista de insumos</sys:String>
+
+    <!--Register Outflow Money-->
+    <sys:String x:Key="OutflowMoney_Header">Registrar Salida de Dinero.</sys:String>
+    <sys:String x:Key="OutflowMoney_Description">Descripción</sys:String>
+    <sys:String x:Key="OutflowMoney_Amount">Monto</sys:String>
+    <sys:String x:Key="OutflowMoney_RegisterOutflow">Registrar Salida</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogTSuccess">Salida registrada</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogDSuccess">La salida de dinero fue registrada correctamente en la caja.</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogTNoCashOpen">Caja no abierta</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogDNoCashOpen">Debe abrir una caja antes de registrar una salida de dinero.</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogTInsufficientFunds">Fondos insuficientes</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogDInsufficientFunds">El monto ingresado excede el balance disponible en la caja.</sys:String>
+
 </ResourceDictionary>
