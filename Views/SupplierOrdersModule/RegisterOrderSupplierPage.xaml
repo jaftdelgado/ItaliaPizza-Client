@@ -56,8 +56,8 @@
 
                     <Button Content="{DynamicResource OrderSupplier_BtnNewOrden}" Width="200"
                         Style="{DynamicResource PrimaryButtonStyle}"
-                        Margin="0,12,0,6"
-                            Click="SubmitOrder_Click">
+                        Margin="0,12,0,6">
+                        <!--Click="SubmitOrder_Click">-->
                         <Button.Tag>/Resources/Icons/suppliers-icon.png</Button.Tag>
                     </Button>
 

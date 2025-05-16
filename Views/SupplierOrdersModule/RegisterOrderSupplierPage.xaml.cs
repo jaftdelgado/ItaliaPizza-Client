@@ -190,7 +190,7 @@ namespace ItaliaPizzaClient.Views
                 OrdersuppliersDataGrid.ItemsSource = null;
             }
         }
-
+        /*
         private void SubmitOrder_Click(object sender, RoutedEventArgs e)
         {
             if (cbSuppliersName.SelectedItem is ComboBoxItem supplierItem &&
@@ -250,6 +250,7 @@ namespace ItaliaPizzaClient.Views
                 MessageDialog.Show("Validación", "Debes seleccionar un proveedor y añadir al menos un insumo.", AlertType.WARNING);
             }
         }
+        */
         private void RefreshSuppliesComboBox()
         {
             var client = ServiceClientManager.Instance.Client;

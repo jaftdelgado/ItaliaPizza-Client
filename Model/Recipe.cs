@@ -14,8 +14,9 @@ namespace ItaliaPizzaClient.Model
 
         public int PreparationTime { get; set; }
 
-        public int? ProductID { get; set; }
+        public Product Product { get; set; }
 
-        //TODO order, product and supplies relations
+        public RecipeSupplyItem RecipeSupplyItem { get; set; }
+
     }
 }

@@ -93,6 +93,12 @@
   <wsdl:message name="IMainManager_GetAllSuppliers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSuppliersResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_AddSupplier_InputMessage">
     <wsdl:part name="parameters" element="tns:AddSupplier" />
   </wsdl:message>
@@ -122,12 +128,6 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllCategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCategoriesResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliersByCategory_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliersByCategory" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetSuppliersByCategory_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSuppliersByCategoryResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetSuppliesBySupplier_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSuppliesBySupplier" />
@@ -195,11 +195,47 @@
   <wsdl:message name="IMainManager_RegisterOrderPayment_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderPaymentResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterOrder_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterOrder" />
+  <wsdl:message name="IMainManager_OpenCashRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpenCashRegister" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterOrder_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterOrderResponse" />
+  <wsdl:message name="IMainManager_OpenCashRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpenCashRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterCashOut_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCashOut" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterCashOut_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCashOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplierOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSupplierOrders" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSupplierOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSupplierOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddSupplierOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSupplierOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddSupplierOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSupplierOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateSupplierOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateSupplierOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSupplierOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeliverOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeliverOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeliverOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeliverOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_CancelSupplierOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelSupplierOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_CancelSupplierOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelSupplierOrderResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetDeliveredOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDeliveredOrders" />
@@ -267,6 +303,12 @@
   <wsdl:message name="IMainManager_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_updateActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateActivity" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_updateActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateActivityResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
   </wsdl:message>
@@ -310,6 +352,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/GetAllSuppliers" message="tns:IMainManager_GetAllSuppliers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/GetAllSuppliersResponse" message="tns:IMainManager_GetAllSuppliers_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddSupplier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/AddSupplier" message="tns:IMainManager_AddSupplier_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/AddSupplierResponse" message="tns:IMainManager_AddSupplier_OutputMessage" />
@@ -329,10 +375,6 @@
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategories" message="tns:IMainManager_GetAllCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse" message="tns:IMainManager_GetAllCategories_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliersByCategory">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" message="tns:IMainManager_GetSuppliersByCategory_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliersByCategoryResponse" message="tns:IMainManager_GetSuppliersByCategory_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSuppliesBySupplier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
@@ -378,9 +420,33 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RegisterOrder">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrder" message="tns:IMainManager_RegisterOrder_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/RegisterOrderResponse" message="tns:IMainManager_RegisterOrder_OutputMessage" />
+    <wsdl:operation name="OpenCashRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/OpenCashRegister" message="tns:IMainManager_OpenCashRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/OpenCashRegisterResponse" message="tns:IMainManager_OpenCashRegister_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCashOut">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterCashOut" message="tns:IMainManager_RegisterCashOut_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterCashOutResponse" message="tns:IMainManager_RegisterCashOut_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplierOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders" message="tns:IMainManager_GetAllSupplierOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrdersResponse" message="tns:IMainManager_GetAllSupplierOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSupplierOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/AddSupplierOrder" message="tns:IMainManager_AddSupplierOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/AddSupplierOrderResponse" message="tns:IMainManager_AddSupplierOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrder" message="tns:IMainManager_UpdateSupplierOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrderResponse" message="tns:IMainManager_UpdateSupplierOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeliverOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/DeliverOrder" message="tns:IMainManager_DeliverOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/DeliverOrderResponse" message="tns:IMainManager_DeliverOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelSupplierOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder" message="tns:IMainManager_CancelSupplierOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrderResponse" message="tns:IMainManager_CancelSupplierOrder_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetDeliveredOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
@@ -425,6 +491,10 @@
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/ISesionManager/Login" message="tns:IMainManager_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISesionManager/LoginResponse" message="tns:IMainManager_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateActivity">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISesionManager/updateActivity" message="tns:IMainManager_updateActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISesionManager/updateActivityResponse" message="tns:IMainManager_updateActivity_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
@@ -515,6 +585,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetSuppliersByCategory">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierManager/GetSuppliersByCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddSupplier">
       <soap12:operation soapAction="http://tempuri.org/ISupplierManager/AddSupplier" style="document" />
       <wsdl:input>
@@ -553,15 +632,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllCategories">
       <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllCategories" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetSuppliersByCategory">
-      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliersByCategory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -668,8 +738,62 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterOrder">
-      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/RegisterOrder" style="document" />
+    <wsdl:operation name="OpenCashRegister">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/OpenCashRegister" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCashOut">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterCashOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSupplierOrders">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSupplierOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/AddSupplierOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSupplierOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/UpdateSupplierOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliverOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/DeliverOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelSupplierOrder">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -769,6 +893,15 @@
     </wsdl:operation>
     <wsdl:operation name="Login">
       <soap12:operation soapAction="http://tempuri.org/ISesionManager/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateActivity">
+      <soap12:operation soapAction="http://tempuri.org/ISesionManager/updateActivity" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

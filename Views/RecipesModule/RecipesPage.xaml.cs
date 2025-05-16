@@ -1,5 +1,6 @@
 ﻿using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.RecipesModule;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -36,7 +37,13 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
                 {
                     Id = r.RecipeID,
                     Description = r.Description,
-                    PreparationTime = r.PreparationTime
+                    PreparationTime = r.PreparationTime,
+                    Product = r.Product == null ? null : new Product
+                    {
+                        ProductID = r.Product.Id,
+                        Name = r.Product.Name,
+                        Photo = r.Product.Photo
+                    }
                 })
                 .OrderBy(r => r.Id)
                 .ToList();
@@ -53,12 +60,29 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
 
         private void Clic_BtnNewRecipe(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void recipesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (recipesDataGrid.SelectedItem is Recipe selected)
+                DisplayRecipeDetails(selected);
+            else
+                UpdateRecipePanelVisibility(null);
+        }
 
+        private void UpdateRecipePanelVisibility(Recipe selected)
+        {
+            bool hasSelection = selected != null;
+
+            RecipeDetailsPanel.Visibility = hasSelection ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void DisplayRecipeDetails(Recipe selected)
+        {
+            if (selected == null)
+                return;
+
+            UpdateRecipePanelVisibility(selected);
         }
     }
 }
