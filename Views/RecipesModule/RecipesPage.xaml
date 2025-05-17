@@ -93,7 +93,7 @@
                     </Grid>
 
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5, 0, 0, 0">
-                        <Grid Grid.Row="0" x:Name="RecipeDetailsPanel">
+                        <Grid Grid.Row="0" x:Name="RecipeDetailsPanel" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="4*"/>
                                 <RowDefinition Height="6*"/>

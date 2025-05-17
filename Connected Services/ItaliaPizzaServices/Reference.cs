@@ -2109,6 +2109,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/GetAllRecipes", ReplyAction="http://tempuri.org/IRecipeManager/GetAllRecipesResponse")]
         System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO[]> GetAllRecipesAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/GetRecipes", ReplyAction="http://tempuri.org/IRecipeManager/GetRecipesResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO[] GetRecipes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/GetRecipes", ReplyAction="http://tempuri.org/IRecipeManager/GetRecipesResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO[]> GetRecipesAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/GetCustomers", ReplyAction="http://tempuri.org/ICustomerManager/GetCustomersResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[] GetCustomers();
         
@@ -2493,6 +2499,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO[]> GetAllRecipesAsync() {
             return base.Channel.GetAllRecipesAsync();
+        }
+        
+        public ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO[] GetRecipes() {
+            return base.Channel.GetRecipes();
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO[]> GetRecipesAsync() {
+            return base.Channel.GetRecipesAsync();
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[] GetCustomers() {
