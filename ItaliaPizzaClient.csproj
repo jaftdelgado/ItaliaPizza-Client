@@ -114,6 +114,9 @@
     <Compile Include="Views\UserControls\RegisterOutflowMoney.xaml.cs">
       <DependentUpon>RegisterOutflowMoney.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ProductCard.xaml.cs">
+      <DependentUpon>ProductCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\SupplyCard.xaml.cs">
       <DependentUpon>SupplyCard.xaml</DependentUpon>
     </Compile>
@@ -245,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\RegisterOutflowMoney.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ProductCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -556,6 +563,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\confirm-hover-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\signin-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pizza-signin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pizza-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\italiapizza-icon2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

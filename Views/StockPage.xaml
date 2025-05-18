@@ -114,7 +114,7 @@
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="{DynamicResource Stock_TableHSupplier}" Binding="{Binding Supplier}" Width="2.5*"/>
                                     <DataGridTextColumn Header="{DynamicResource Stock_TableHCategory}" Binding="{Binding CategoryName}" Width="2*" />
-                                    <DataGridTextColumn Header="{DynamicResource Stock_TableHStock}" Binding="{Binding FormattedPricePerUnit}" Width="2*"/>
+                                    <DataGridTextColumn Header="{DynamicResource Stock_TableHStock}" Binding="{Binding FormattedStock}" Width="2*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
