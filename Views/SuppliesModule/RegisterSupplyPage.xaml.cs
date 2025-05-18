@@ -25,7 +25,7 @@ namespace ItaliaPizzaClient.Views
             SetCategoriesComboBox();
             SetMeasureComboBox();
             SetInputFields();
-            UpdateButtonState(BtnRegisterSupply);
+            UpdateButtonState(_isEditMode ? BtnEditSupply : BtnRegisterSupply);
 
             _isEditMode = false;
         }
@@ -41,6 +41,7 @@ namespace ItaliaPizzaClient.Views
             SetMeasureComboBox();
             SetInputFields();
             LoadSupplyData(editingSupply);
+            UpdateButtonState(_isEditMode ? BtnEditSupply : BtnRegisterSupply);
 
             ImageUtilities.SetImageSource(SupplyImage, editingSupply.SupplyPic, Constants.DEFAULT_PROFILE_PIC_PATH);
 
@@ -221,6 +222,7 @@ namespace ItaliaPizzaClient.Views
             }
         }
 
+
         private void Click_BtnSelectImage(object sender, RoutedEventArgs e)
         {
             SelectSupplyImage(SupplyImage);
@@ -272,13 +274,13 @@ namespace ItaliaPizzaClient.Views
         private void CheckbBrand_Checked(object sender, RoutedEventArgs e)
         {
             TbSupplyBrand.IsEnabled = false;
-            UpdateButtonState(BtnRegisterSupply);
+            UpdateButtonState(_isEditMode ? BtnEditSupply : BtnRegisterSupply);
         }
 
         private void CheckbBrand_Unchecked(object sender, RoutedEventArgs e)
         {
             TbSupplyBrand.IsEnabled = true;
-            UpdateButtonState(BtnRegisterSupply);
+            UpdateButtonState(_isEditMode ? BtnEditSupply : BtnRegisterSupply);
         }
 
         private async void Click_BtnRegisterSupply(object sender, RoutedEventArgs e)
@@ -293,12 +295,12 @@ namespace ItaliaPizzaClient.Views
 
         private void RequiredFields_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateButtonState(BtnRegisterSupply);
+            UpdateButtonState(_isEditMode ? BtnEditSupply : BtnRegisterSupply);
         }
 
         private void RequiredFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateButtonState(BtnRegisterSupply);
+            UpdateButtonState(_isEditMode ? BtnEditSupply : BtnRegisterSupply);
         }
 
         private async void Click_BtnEditSupply(object sender, RoutedEventArgs e)

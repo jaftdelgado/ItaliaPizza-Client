@@ -21,9 +21,8 @@
 
         public static readonly string IMAGE_FILE_FILTER = "Imágenes (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
 
-        public static readonly int MAX_DIGITS_BEFORE_DECIMAL = 4;
-        public static readonly int MAX_DECIMALS = 3;
-        public static readonly string DECIMAL_PATTERN = $@"^(\d{{0,{MAX_DIGITS_BEFORE_DECIMAL}}})(\.\d{{0,{MAX_DECIMALS}}})?$";
+        public static readonly int UNIT_ID_PIECES = 3;
+        public static readonly string MONETARY_DECIMAL_PATTERN = $@"^(\d{{0,3}})(\.\d{{0,3}})?$";
 
         #region STRING-PATTERNS
         public static readonly string NUMERIC_PATTERN = @"[^0-9]";

@@ -8,8 +8,8 @@
 
     <UserControl.Resources>
         <Style x:Key="HoverableBorderStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
             <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
             <Setter Property="Padding" Value="14"/>
@@ -23,7 +23,14 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Style="{StaticResource HoverableBorderStyle}" MouseLeftButtonUp="Border_MouseLeftButtonUp">
+    <Border x:Name="CardBorder"
+            Style="{StaticResource HoverableBorderStyle}" 
+            MouseLeftButtonUp="Border_MouseLeftButtonUp"
+            RenderTransformOrigin="0.5 0.5">
+        <Border.RenderTransform>
+            <ScaleTransform />
+        </Border.RenderTransform>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

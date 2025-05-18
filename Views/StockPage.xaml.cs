@@ -16,21 +16,13 @@ using System.Windows.Shapes;
 namespace ItaliaPizzaClient.Views
 {
     /// <summary>
-    /// Lógica de interacción para SuppliersPage.xaml
+    /// Lógica de interacción para StockPage.xaml
     /// </summary>
-    public partial class SuppliersPage : Page
+    public partial class StockPage : Page
     {
-        public SuppliersPage()
+        public StockPage()
         {
             InitializeComponent();
-        }
-
-        private void BtnNewOrder_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-
-            if (mainWindow != null)
-                mainWindow.NavigateToPage("RegOrderSupplier_Header", new RegisterOrderSupplierPage());
         }
     }
 }

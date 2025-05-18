@@ -28,7 +28,7 @@ namespace ItaliaPizzaClient.Utilities
 
         public static void ValidatePriceInput(TextBox textBox)
         {
-            string pattern = $@"^\d{{0,{Constants.MAX_DIGITS_BEFORE_DECIMAL}}}(\.\d{{0,2}})?$";
+            string pattern = $@"^\d{{0,3}}(\.\d{{0,2}})?$";
 
             textBox.PreviewTextInput += (sender, e) =>
             {
@@ -139,7 +139,7 @@ namespace ItaliaPizzaClient.Utilities
 
         public static void ValidateDecimalInput(TextBox textBox)
         {
-            string pattern = Constants.DECIMAL_PATTERN;
+            string pattern = Constants.MONETARY_DECIMAL_PATTERN;
 
             textBox.PreviewTextInput += (sender, e) =>
             {

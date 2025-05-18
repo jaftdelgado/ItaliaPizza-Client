@@ -32,10 +32,10 @@
             <Setter.Value>
                 <DataTemplate>
                     <Border Background="{StaticResource SecondaryButtonBrush}"
-                        BorderBrush="{DynamicResource BorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="5"
-                        Padding="5 2">
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="5"
+                            Padding="5 2">
                         <TextBlock x:Name="ElementsCounter"
                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Content}"
                                VerticalAlignment="Center"

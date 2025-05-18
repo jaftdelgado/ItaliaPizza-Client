@@ -19,19 +19,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SupplierDTO" nillable="true" type="tns:SupplierDTO" />
-  <xs:complexType name="ArrayOfSupplyCategoryDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplyCategoryDTO" nillable="true" type="tns:SupplyCategoryDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSupplyCategoryDTO" nillable="true" type="tns:ArrayOfSupplyCategoryDTO" />
-  <xs:complexType name="SupplyCategoryDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SupplyCategoryDTO" nillable="true" type="tns:SupplyCategoryDTO" />
   <xs:complexType name="ArrayOfOrderSummaryDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderSummaryDTO" nillable="true" type="tns:OrderSummaryDTO" />
