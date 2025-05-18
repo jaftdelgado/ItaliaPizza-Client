@@ -5,8 +5,136 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
         mc:Ignorable="d"
-        Title="SignInWindow" Height="450" Width="800">
+        Title="SignInWindow" Height="520" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Imagen de fondo completa -->
+        <Image Grid.RowSpan="2" 
+               Source="/Resources/Images/pizza-signin.png"
+               Stretch="UniformToFill"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <!-- Contenedor principal para el formulario -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- StackPanel vertical que contiene logo y formulario -->
+            <StackPanel Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,0,20,0"
+                        Width="280">
+                <!-- Logo y texto -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,20">
+                    <Image Source="/Resources/Icons/italiapizza-icon2.png"
+                           Width="48" Height="48"
+                           Margin="0,0,8,0"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <StackPanel Margin="12 0" Orientation="Vertical">
+                        <TextBlock Text="{DynamicResource Glb_ItaliaPizza}"
+                                   Style="{DynamicResource SubtitleLabelStyle}"
+                                   FontSize="18"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="SOFT MANAGEMENT"
+                                   FontSize="9"
+                                   Style="{DynamicResource DescriptionLabelStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Formulario -->
+                <Border Background="{StaticResource BackgroundBrush}"
+                        CornerRadius="12"
+                        Padding="0 20">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0"
+                                BorderBrush="{StaticResource SecondaryBrush}"
+                                BorderThickness="0 0 0 0.5">
+                            <StackPanel Orientation="Vertical" Margin="20 0 20 10" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock x:Name="PageHeader" 
+                                           Style="{StaticResource HeaderLabelStyle}"
+                                           Text="{DynamicResource SignIn_Header}"/>
+                                <TextBlock x:Name="PageDescription"
+                                           Style="{StaticResource DescriptionLabelStyle}"
+                                           Text="{DynamicResource SignIn_Desc}"
+                                           Width="240" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Grid.Row="1"
+                                    Margin="20 20 20 0"
+                                    Orientation="Vertical">
+                            <TextBox Style="{DynamicResource TextBoxStyle}"
+                                     Tag="{DynamicResource SignIn_TbUsername}" />
+                            <StackPanel Margin="0 10 0 0">
+                                <PasswordBox x:Name="PbPassword"
+                                             Tag="{DynamicResource SignIn_TbPassword}"
+                                             Style="{DynamicResource PasswordBoxStyle}" 
+                                             Visibility="Visible"
+                                             PasswordChanged="Password_TextChanged" />
+                                <TextBox x:Name="TbPassword"
+                                         Visibility="Collapsed"
+                                         Tag="{DynamicResource SignIn_TbPassword}"
+                                         Style="{DynamicResource TextBoxStyle}"
+                                         TextChanged="Password_TextChanged" />
+                                <CheckBox x:Name="ShowPasswordCheckBox"
+                                          Style="{DynamicResource CheckBoxStyle}"
+                                          Content="{DynamicResource Glb_ShowPassword}"
+                                          Margin="5 4 0 0"
+                                          IsChecked="False"
+                                          Checked="ShowPasswordCheckBox_Checked"
+                                          Unchecked="ShowPasswordCheckBox_Unchecked" />
+                            </StackPanel>
+
+                            <Button Style="{DynamicResource PrimaryButtonStyle}"
+                                    Content="{DynamicResource SignIn_BtnSignIn}"
+                                    Margin="0 20 0 0"
+                                    Click="Click_BtnSignIn">
+                                <Button.Tag>/Resources/Icons/signin-icon.png</Button.Tag>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- Fila inferior con derechos reservados y ComboBox -->
+        <Grid Grid.Row="1" Background="#CCFFFFFF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Texto de derechos reservados -->
+            <TextBlock Grid.Column="0" 
+                       Text="© 2023 ItaliaPizza - Todos los derechos reservados"
+                       VerticalAlignment="Center"
+                       Margin="10,5"
+                       Foreground="{StaticResource SecondaryBrush}"/>
+
+            <!-- ComboBox para selección de idioma -->
+            <ComboBox Grid.Column="1"
+                      Margin="0,5,10,5"
+                      Width="120"
+                      Style="{StaticResource ComboBoxStyle}">
+                <ComboBoxItem Content="Español"/>
+                <ComboBoxItem Content="English"/>
+            </ComboBox>
+        </Grid>
     </Grid>
 </Window>

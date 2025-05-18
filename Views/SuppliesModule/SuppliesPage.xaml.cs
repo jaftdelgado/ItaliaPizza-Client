@@ -33,7 +33,7 @@ namespace ItaliaPizzaClient.Views
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                var dtoList = client.GetAllSupplies();
+                var dtoList = client.GetAllSupplies(false);
 
                 var list = dtoList.Select(s => new Supply
                 {

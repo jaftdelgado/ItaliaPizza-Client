@@ -42,7 +42,7 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             var client = ServiceClientManager.Instance.Client;
             if (client == null) return;
 
-            var supplies = client.GetAllSupplies();
+            var supplies = client.GetAllSupplies(true);
             if (supplies != null)
             {   
                 suppliesList = supplies.ToList();
