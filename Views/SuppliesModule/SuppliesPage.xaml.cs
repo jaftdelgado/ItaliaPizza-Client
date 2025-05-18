@@ -22,6 +22,7 @@ namespace ItaliaPizzaClient.Views
 
         private void SupplyPage_Loaded(object sender, RoutedEventArgs e)
         {
+            UpdateSupplyPanelVisibility(null);
             LoadSuppliesData();
         }
 
@@ -46,7 +47,8 @@ namespace ItaliaPizzaClient.Views
                     IsActive = s.IsActive,
                     SupplyCategoryID = s.SupplyCategoryID,
                     SupplierID = s.SupplierID,
-                    SupplierName = s.SupplierName
+                    SupplierName = s.SupplierName,
+                    CanBeDeleted = s.IsDeletable
                 })
                 .OrderBy(p => p.SupplyCategoryID)
                 .ToList();
@@ -67,6 +69,17 @@ namespace ItaliaPizzaClient.Views
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
+                bool canDelete = client.IsSupplyDeletable(selected.Id);
+                if (!canDelete)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        MessageDialog.Show("Supplies_DialogTUnableToDelete", "Supplies_DialogDUnableToDelete", AlertType.WARNING
+                        );
+                    });
+                    return;
+                }
+
                 bool success = client.DeleteSupply(selected.Id);
                 if (!success) return;
 
@@ -78,7 +91,11 @@ namespace ItaliaPizzaClient.Views
                     string selectedFilter = GetSelectedFilterButtonName();
                     ApplyFilter(selectedFilter);
 
-                    MessageDialog.Show("Supplies_DialogTDeletedSupply", "Supplies_DialogDDeletedSupply", AlertType.SUCCESS);
+                    MessageDialog.Show(
+                        "Supplies_DialogTDeletedSupply",
+                        "Supplies_DialogDDeletedSupply",
+                        AlertType.SUCCESS
+                    );
                 });
             });
         }
@@ -198,20 +215,18 @@ namespace ItaliaPizzaClient.Views
 
         private void DisplaySupplyDetails(Supply selected)
         {
-            if (selected == null)
-                return;
-            
+            if (selected == null) return;
+
             UpdateSupplyPanelVisibility(selected);
 
             ImageUtilities.SetImageSource(SupplyPic, selected.SupplyPic, Constants.DEFAULT_PROFILE_PIC_PATH);
 
-            if (string.IsNullOrWhiteSpace(selected.Brand)) SupplyBrand.Visibility = Visibility.Collapsed;
+            SupplyBrand.Visibility = string.IsNullOrWhiteSpace(selected.Brand)
+                ? Visibility.Collapsed
+                : Visibility.Visible;
 
-            else
-            {
+            if (!string.IsNullOrWhiteSpace(selected.Brand))
                 SupplyBrand.Text = selected.Brand.ToUpper() + "®";
-                SupplyBrand.Visibility = Visibility.Visible;
-            }
 
             SupplyName.Text = selected.Name;
             SupplyCategory.Text = selected.CategoryName;
@@ -221,6 +236,8 @@ namespace ItaliaPizzaClient.Views
             BtnDeleteSupply.Visibility = selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
             BtnEditSupply.Visibility = selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
             BtnReactivateSupply.Visibility = !selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
+
+            BtnDeleteSupply.IsEnabled = selected.CanBeDeleted;
         }
 
         private string GetSelectedFilterButtonName()

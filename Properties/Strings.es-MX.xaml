@@ -12,6 +12,8 @@
     <sys:String x:Key="Glb_Close">Cerrar</sys:String>
     <sys:String x:Key="Glb_Cancel">Cancelar</sys:String>
     <sys:String x:Key="Glb_Delete">Eliminar</sys:String>
+    <sys:String x:Key="Glb_Edit">Editar</sys:String>
+    <sys:String x:Key="Glb_Reactivate">Reactivar</sys:String>
     <sys:String x:Key="Glb_Change">Cambiar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
@@ -161,8 +163,6 @@
     <sys:String x:Key="Supplies_TableHCategory">Categoría</sys:String>
     <sys:String x:Key="Supplies_TableHUnitPrice">Precio Unitario</sys:String>
     <sys:String x:Key="Supplies_TableHMeasureUnit">Unidad de Medida</sys:String>
-    <sys:String x:Key="Supplies_BtnDeleteSupply">Eliminar Insumo</sys:String>
-    <sys:String x:Key="Supplies_BtnEditSupply">Editar Insumo</sys:String>
     <sys:String x:Key="Supplies_BtnReactivateSupply">Reactivar Insumo</sys:String>
     <sys:String x:Key="Supplies_DialogTDeleteSupply">¿Eliminar insumo?</sys:String>
     <sys:String x:Key="Supplies_DialogDDeleteSupply">¿Estás seguro de que deseas eliminar el insumo seleccionado? La eliminación es reversible y podrás restaurarlo más tarde si lo necesitas.</sys:String>
@@ -272,7 +272,7 @@
     <sys:String x:Key="RegSupplier_DialogDSuccess">La información del proveedor ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
     <sys:String x:Key="RegSupplier_DialogTEditSuccess">Proveedor actualizado</sys:String>
     <sys:String x:Key="RegSupplier_DialogDEditSuccess">La información del insumo ha sido actualizada correctamente y los cambios han sido guardados con éxito.</sys:String>
-
+    
     <!--OrderSuppliers-->
     <sys:String x:Key="OrdSuppliers_Header">Pedidos a Proveedor</sys:String>
     <sys:String x:Key="OrdSuppliers_Desc">Visualiza, registra, modifica y cancela pedidos de reabastecimiento realizados por Italia Pizza.</sys:String>
@@ -310,8 +310,10 @@
     <sys:String x:Key="RegOrderSupplier_DialogDDialogTSelection">¿Estás seguro de que deseas seleccionar otro proveedor? Se descartarán todos los elementos del pedido a proveedor actual.</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogTSuccess">Pedido a Proveedor registrado</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogDSuccess">La orden de compra ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="RegOrderSupplier_DialogTEditSuccess">Pedido a Proveedor actualizado</sys:String>
+    <sys:String x:Key="RegOrderSupplier_DialogDEditSuccess">La orden de compra ha sido actualizada correctamente y los cambios han sido guardados con éxito.</sys:String>
 
-    <!--Supplies-->
+    <!--CashRegister-->
     <sys:String x:Key="CashRegister_Header">Caja Registradora</sys:String>
     <sys:String x:Key="CashRegister_Desc">Realiza apertura y corte de caja, y visualiza las transacciones generadas durante el turno en Italia Pizza.</sys:String>
     <sys:String x:Key="CashRegister_BtnOpenRegister">Abrir Caja</sys:String>
@@ -327,6 +329,18 @@
     <sys:String x:Key="Order_TitleTable">Lista de Ordenes</sys:String>
     <sys:String x:Key="Orders_Header">Ordenes de Comensales</sys:String>
     <sys:String x:Key="Orders_Desc">Visualiza, paga y cancela Ordenes de Comensales de Italia Pizza.</sys:String>
+
+    <!--RegisterOrder-->
+    <sys:String x:Key="RegOrder_Header">Registrar Comanda</sys:String>
+    <sys:String x:Key="RegOrder_Desc">Ingresa los datos del pedido en sucursal que se desea registrar.</sys:String>
+    <sys:String x:Key="EditOrder_Header">Editar Comanda</sys:String>
+    <sys:String x:Key="EditOrder_Desc">Modifica los datos del insumo que se desea actualizar.</sys:String>
+    <sys:String x:Key="RegOrder_OrderInfo">Información de la Comanda</sys:String>
+    <sys:String x:Key="RegOrder_TbTableNumber">Núm. de Mesa:</sys:String>
+    <sys:String x:Key="RegOrder_CbCustomers">Cliente:</sys:String>
+    <sys:String x:Key="RegOrder_CbDelivery">Repartidor(a):</sys:String>
+    <sys:String x:Key="RegOrder_OrderDetails">Detalles de la Orden:</sys:String>
+    <sys:String x:Key="RegOrder_OrderSummary">Resumen de la Orden:</sys:String>
     
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>
@@ -344,4 +358,15 @@
     <sys:String x:Key="RegRecipe_TbRecipeName">Nombre de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbRecipeDescription">Descripción de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbSupplyList">Lista de insumos</sys:String>
+
+    <!--Stock-->
+    <sys:String x:Key="Stock_Header">Inventario</sys:String>
+    <sys:String x:Key="Stock_Desc">Visualiza y modifica el número de unidades por insumo de Italia Pizza.</sys:String>
+    <sys:String x:Key="Stock_BtnRegisterWaste">Registrar Merma</sys:String>
+    <sys:String x:Key="Stock_TitleTable">Control de Inventario</sys:String>
+    <sys:String x:Key="Stock_TableHSupply">Insumo</sys:String>
+    <sys:String x:Key="Stock_TableHSupplier">Proveedor</sys:String>
+    <sys:String x:Key="Stock_TableHCategory">Categoría</sys:String>
+    <sys:String x:Key="Stock_TableHStock">Existencia</sys:String>
+    
 </ResourceDictionary>
