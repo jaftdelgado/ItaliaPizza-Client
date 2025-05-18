@@ -534,67 +534,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SupplyCategoryDTO", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class SupplyCategoryDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SupplyDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
     [System.SerializableAttribute()]
     public partial class SupplyDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -613,6 +552,9 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDeletableField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int MeasureUnitField;
@@ -696,6 +638,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.IsActiveField.Equals(value) != true)) {
                     this.IsActiveField = value;
                     this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDeletable {
+            get {
+                return this.IsDeletableField;
+            }
+            set {
+                if ((this.IsDeletableField.Equals(value) != true)) {
+                    this.IsDeletableField = value;
+                    this.RaisePropertyChanged("IsDeletable");
                 }
             }
         }
@@ -2013,12 +1968,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/ReactivateSupplier", ReplyAction="http://tempuri.org/ISupplierManager/ReactivateSupplierResponse")]
         System.Threading.Tasks.Task<bool> ReactivateSupplierAsync(int supplierID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetAllCategories", ReplyAction="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[] GetAllCategories();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetAllCategories", ReplyAction="http://tempuri.org/ISupplyManager/GetAllCategoriesResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[]> GetAllCategoriesAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId);
         
@@ -2084,6 +2033,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/UnassignSupplierFromSupply", ReplyAction="http://tempuri.org/ISupplyManager/UnassignSupplierFromSupplyResponse")]
         System.Threading.Tasks.Task<bool> UnassignSupplierFromSupplyAsync(int[] supplyIds, int supplierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/IsSupplyDeletable", ReplyAction="http://tempuri.org/ISupplyManager/IsSupplyDeletableResponse")]
+        bool IsSupplyDeletable(int supplyId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/IsSupplyDeletable", ReplyAction="http://tempuri.org/ISupplyManager/IsSupplyDeletableResponse")]
+        System.Threading.Tasks.Task<bool> IsSupplyDeletableAsync(int supplyId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/AddProduct", ReplyAction="http://tempuri.org/IProductManager/AddProductResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
@@ -2363,14 +2318,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.ReactivateSupplierAsync(supplierID);
         }
         
-        public ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[] GetAllCategories() {
-            return base.Channel.GetAllCategories();
-        }
-        
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO[]> GetAllCategoriesAsync() {
-            return base.Channel.GetAllCategoriesAsync();
-        }
-        
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId) {
             return base.Channel.GetSuppliesBySupplier(supplierId);
         }
@@ -2457,6 +2404,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> UnassignSupplierFromSupplyAsync(int[] supplyIds, int supplierId) {
             return base.Channel.UnassignSupplierFromSupplyAsync(supplyIds, supplierId);
+        }
+        
+        public bool IsSupplyDeletable(int supplyId) {
+            return base.Channel.IsSupplyDeletable(supplyId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsSupplyDeletableAsync(int supplyId) {
+            return base.Channel.IsSupplyDeletableAsync(supplyId);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {

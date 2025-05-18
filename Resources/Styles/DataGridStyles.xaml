@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
-    
+
     <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
@@ -185,9 +185,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Border 
-                    Background="{TemplateBinding Background}" 
-                    SnapsToDevicePixels="True"
+                    <Border Background="{TemplateBinding Background}" 
+                            SnapsToDevicePixels="True"
                     BorderThickness="0.5 0 0 0"
                     BorderBrush="{DynamicResource BorderBrush}"
                     Padding="0 8"
@@ -289,7 +288,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="DataGridColumnHeaderStyle2" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Height" Value="30"/>
@@ -322,3 +321,4 @@
         </Setter>
     </Style>
 </ResourceDictionary>
+

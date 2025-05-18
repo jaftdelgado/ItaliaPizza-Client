@@ -7,21 +7,25 @@ using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.UserControls;
 using ItaliaPizzaClient.Views.Dialogs;
 using System.Threading.Tasks;
+using System;
 
 namespace ItaliaPizzaClient.Views
 {
     public partial class SupplierOrdersPage : Page
     {
-        private List<SupplierOrder> _supplierOrders = new List<SupplierOrder>();
+        private List<SupplierOrder> _allSupplierOrders = new List<SupplierOrder>();
 
         public SupplierOrdersPage()
         {
             InitializeComponent();
+            BtnPending.Tag = "Selected";
             Loaded += OrderSuppliersPage_Loaded;
+            InputUtilities.ValidatePriceInput(TbPayment);
         }
 
         private void OrderSuppliersPage_Loaded(object sender, RoutedEventArgs e)
         {
+            SupplierOrderDetailsPanel.Visibility = Visibility.Collapsed;
             LoadSupplierOrdersData();
         }
 
@@ -61,6 +65,7 @@ namespace ItaliaPizzaClient.Views
 
                 var orders = dtoList.Select(dto => new SupplierOrder
                 {
+                    SupplierOrderID = dto.SupplierOrderID,
                     SupplierID = dto.SupplierID,
                     SupplierName = dto.SupplierName,
                     OrderedDate = dto.OrderedDate,
@@ -69,6 +74,7 @@ namespace ItaliaPizzaClient.Views
                     Total = dto.Total,
                     OrderedDateFormatted = dto.OrderedDate.ToString("dd/MM/yyyy"),
                     Status = dto.Status,
+                    CategorySupplyID = dto.CategorySupplyID,
                     Items = dto.Items.Select(item => new OrderedSupply
                     {
                         Quantity = item.Quantity,
@@ -83,18 +89,171 @@ namespace ItaliaPizzaClient.Views
                     }).ToList()
                 }).ToList();
 
-                _supplierOrders = orders;
+                _allSupplierOrders = orders;
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    SupplierOrdersDataGrid.ItemsSource = _supplierOrders;
+                    ApplyFilter("BtnPending");
                 });
             });
         }
 
-        private void DisplaySupplyDetails(SupplierOrder selected)
+        private async Task DeliverSupplierOrder(SupplierOrder selected)
+        {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                bool success = client.DeliverOrder(selected.SupplierOrderID);
+                if (!success) return;
+
+                var item = _allSupplierOrders.FirstOrDefault(p => p.SupplierOrderID == selected.SupplierOrderID);
+                if (item != null)
+                {
+                    item.Status = 1;
+                    item.Delivered = System.DateTime.Now;
+                }
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    MessageDialog.Show("OrdSuppliers_DialogTDeliveredOrder", "OrdSuppliers_DialogDDeliveredOrder", AlertType.SUCCESS);
+                });
+            });
+        }
+
+        private async Task CancelSupplierOrder(SupplierOrder selected)
+        {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                bool success = client.CancelSupplierOrder(selected.SupplierOrderID);
+                if (!success) return;
+
+                var item = _allSupplierOrders.FirstOrDefault(p => p.SupplierOrderID == selected.SupplierOrderID);
+                if (item != null) item.Status = 2;
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    MessageDialog.Show("OrdSuppliers_DialogTCancelledOrder", "OrdSuppliers_DialogDCancelledOrder", AlertType.SUCCESS);
+                });
+            });
+        }
+
+        private void SearchSupplierOrders()
+        {
+            string searchText = SearchBox.Text.Trim().ToLower();
+            string selectedFilter = GetSelectedFilterButtonName();
+
+            IEnumerable<SupplierOrder> filteredList = _allSupplierOrders;
+
+            switch (selectedFilter)
+            {
+                case "BtnPending":
+                    filteredList = filteredList.Where(p => p.Status == 0);
+                    break;
+                case "BtnDelivered":
+                    filteredList = filteredList.Where(p => p.Status == 1);
+                    break;
+                case "BtnCancelled":
+                    filteredList = filteredList.Where(p => p.Status == 2);
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                filteredList = filteredList.Where(p =>
+                    $"{p.OrderFolio}".ToLower().Contains(searchText) ||
+                    p.SupplierName?.ToLower().Contains(searchText) == true ||
+                    p.OrderedDate.ToString().Contains(searchText) == true ||
+                    p.Delivered.ToString().Contains(searchText) == true 
+                );
+            }
+
+            //EmptyListMessage.Visibility = Visibility.Collapsed;
+            NoMatchesMessage.Visibility = Visibility.Collapsed;
+
+            if (!filteredList.Any())
+            {
+                NoMatchesMessage.Visibility = Visibility.Visible;
+            }
+
+            SupplierOrdersDataGrid.ItemsSource = filteredList;
+            UpdateElementsCounter(filteredList.Count());
+        }
+
+        private void ApplyFilter(string buttonName)
+        {
+            IEnumerable<SupplierOrder> filteredList = _allSupplierOrders;
+
+            switch (buttonName)
+            {
+                case "BtnPending":
+                    filteredList = _allSupplierOrders.Where(p => p.Status == 0);
+                    break;
+                case "BtnDelivered":
+                    filteredList = _allSupplierOrders.Where(p => p.Status == 1);
+                    break;
+                case "BtnCancelled":
+                    filteredList = _allSupplierOrders.Where(p => p.Status == 2);
+                    break;
+                case "BtnViewAll":
+                    filteredList = _allSupplierOrders;
+                    break;
+            }
+
+            NoMatchesMessage.Visibility = Visibility.Collapsed;
+
+            if (!filteredList.Any())
+            {
+                if (string.IsNullOrWhiteSpace(SearchBox.Text))
+                {
+                    //EmptyListMessage.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    NoMatchesMessage.Visibility = Visibility.Visible;
+                }
+            }
+
+            SupplierOrdersDataGrid.ItemsSource = filteredList;
+
+            BtnPending.Tag = null;
+            BtnDelivered.Tag = null;
+            BtnCancelled.Tag = null;
+            BtnViewAll.Tag = null;
+
+            switch (buttonName)
+            {
+                case "BtnPending":
+                    BtnPending.Tag = "Selected";
+                    break;
+                case "BtnDelivered":
+                    BtnDelivered.Tag = "Selected";
+                    break;
+                case "BtnCancelled":
+                    BtnCancelled.Tag = "Selected";
+                    break;
+                case "BtnViewAll":
+                    BtnViewAll.Tag = "Selected";
+                    break;
+            }
+
+            BtnDelivered.IsEnabled = _allSupplierOrders.Any(p => p.Status == 1);
+            BtnCancelled.IsEnabled = _allSupplierOrders.Any(p => p.Status == 2);
+
+            UpdateElementsCounter(filteredList.Count());
+        }
+
+        private void DisplayOrderDetails(SupplierOrder selected)
         {
             if (selected == null) return;
+
+            UpdateOrderPanelVisibility(selected);
+            OperationsPanel.Visibility = Visibility.Visible;
+            PaymentPanel.Visibility = Visibility.Collapsed;
 
             SupplierName.Text = selected.SupplierName;
             OrderStatus.Text = selected.StatusDescription;
@@ -107,6 +266,30 @@ namespace ItaliaPizzaClient.Views
                 DeliveredDate.Text = selected.Delivered.Value.ToString("dd/MM/yyyy");
             }
             else DeliveredPanel.Visibility = Visibility.Collapsed;
+
+            TbOrderTotal.Text = selected.Total.ToString("C2");
+            LblCurrentDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            ButtonsPanel.Visibility = selected.Status == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private string GetSelectedFilterButtonName()
+        {
+            if (BtnPending.Tag?.ToString() == "Selected") return "BtnPending";
+            if (BtnDelivered.Tag?.ToString() == "Selected") return "BtnDelivered";
+            if (BtnCancelled.Tag?.ToString() == "Selected") return "BtnCancelled";
+            return "BtnViewAll";
+        }
+
+        private void UpdateOrderPanelVisibility(SupplierOrder selected)
+        {
+            bool hasSelection = selected != null;
+
+            SupplierOrderDetailsPanel.Visibility = hasSelection ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void UpdateElementsCounter(int count)
+        {
+            ElementsCounter.Content = count.ToString();
         }
 
         private void Click_BtnNewOrderSupplier(object sender, RoutedEventArgs e)
@@ -115,20 +298,76 @@ namespace ItaliaPizzaClient.Views
                 mainWindow.NavigateToPage("RegOrderSupplier_Header", new RegisterSupplierOrdersPage());
         }
 
+        private void Click_BtnEditOrder(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            var orderToEdit = SupplierOrdersDataGrid.SelectedItem as SupplierOrder;
+
+            if (mainWindow != null && orderToEdit != null)
+                mainWindow.NavigateToPage("EditOrderSupplier_Header", new RegisterSupplierOrdersPage(orderToEdit));
+        }
+
+        private void Click_BtnDeliverOrder(object sender, RoutedEventArgs e)
+        {
+            OperationsPanel.Visibility = Visibility.Collapsed;
+            PaymentPanel.Visibility = Visibility.Visible;
+        }
+
         private void Click_BtnCancelOrder(object sender, RoutedEventArgs e)
         {
+            MessageDialog.ShowConfirm(
+                "OrdSuppliers_DialogTCancelOrder", "OrdSuppliers_DialogDCancelOrder",
+                async () =>
+                {
+                    if (SupplierOrdersDataGrid.SelectedItem is SupplierOrder selected)
+                        await CancelSupplierOrder(selected);
+                },
+                "Glb_Cancel"
+            );
+        }
 
+        private void Click_FilterButton(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button) ApplyFilter(button.Name);
         }
 
         private void SupplierOrdersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = (SupplierOrder)SupplierOrdersDataGrid.SelectedItem;
-
-            if (selected != null)
+            if (SupplierOrdersDataGrid.SelectedItem is SupplierOrder selected)
             {
-                DisplaySupplyDetails(selected);
+                DisplayOrderDetails(selected);
                 ShowOrderDetails(selected.Items);
             }
+            else
+                UpdateOrderPanelVisibility(null);
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchSupplierOrders();
+        }
+
+        private void TbPayment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (decimal.TryParse(TbOrderTotal.Text, System.Globalization.NumberStyles.Currency, null, out decimal total) &&
+                decimal.TryParse(TbPayment.Text, out decimal efectivo))
+            {
+                decimal cambio = efectivo - total;
+                TbChange.Text = cambio >= 0 ? cambio.ToString("C2") : string.Empty;
+                BtnConfirm.IsEnabled = cambio >= 0;
+            }
+            else
+            {
+                TbChange.Text = string.Empty;
+                BtnConfirm.IsEnabled = false;
+            }
+        }
+
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            PaymentPanel.Visibility = Visibility.Collapsed;
+            OperationsPanel.Visibility = Visibility.Visible;
         }
     }
 }

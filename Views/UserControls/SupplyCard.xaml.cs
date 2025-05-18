@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ItaliaPizzaClient.Utilities;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -52,7 +53,11 @@ namespace ItaliaPizzaClient.Views.UserControls
 
         private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            CardClicked?.Invoke(this, new RoutedEventArgs());
+            Animations.BeginAnimation(CardBorder, "ClickAnimation", () =>
+            {
+                CardClicked?.Invoke(this, new RoutedEventArgs());
+            });
         }
+
     }
 }

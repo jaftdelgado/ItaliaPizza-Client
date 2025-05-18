@@ -100,8 +100,14 @@
     <Compile Include="Views\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OrdersModule\RegisterOrderPage.xaml.cs">
+      <DependentUpon>RegisterOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SignInWindow.xaml.cs">
       <DependentUpon>SignInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StockPage.xaml.cs">
+      <DependentUpon>StockPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\OpeningCash.xaml.cs">
       <DependentUpon>OpeningCash.xaml</DependentUpon>
@@ -215,11 +221,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Styles\ScrollerStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CashRegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OrdersModule\RegisterOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SignInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StockPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -389,9 +407,6 @@
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyCategoryDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -539,6 +554,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\check-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\confirm-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\confirm-hover-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

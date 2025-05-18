@@ -31,6 +31,8 @@ namespace ItaliaPizzaClient.Model
 
         public string SupplierName { get; set; }
 
+        public bool CanBeDeleted { get; set; }
+
         public string FormattedPrice
         {
             get

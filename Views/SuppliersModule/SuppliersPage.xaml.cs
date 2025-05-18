@@ -22,6 +22,7 @@ namespace ItaliaPizzaClient.Views.SuppliersModule
 
         private async void SuppliersPage_Loaded(object sender, RoutedEventArgs e)
         {
+            UpdateSupplierPanelVisibility(null);
             await LoadSupplierData();
         }
 

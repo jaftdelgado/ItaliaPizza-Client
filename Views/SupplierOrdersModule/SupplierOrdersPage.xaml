@@ -44,7 +44,7 @@
         <Border Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="46"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -55,9 +55,31 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
-                             Style="{DynamicResource SecondarySearchBoxStyle}"
-                             Width="180"/>
+                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="46">
+                            <Button x:Name="BtnPending"
+                                    Content="{DynamicResource OrdSupplier_BtnStatusPending}"
+                                    Click="Click_FilterButton" 
+                                    Style="{DynamicResource TableHeaderButtonStyle}"/>
+                            <Button x:Name="BtnDelivered" Margin="20 0 0 0"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"
+                                    Content="{DynamicResource OrdSupplier_BtnStatusDelivered}"
+                                    Click="Click_FilterButton" />
+                            <Button x:Name="BtnCancelled" Margin="20 0 0 0"
+                                    Content="{DynamicResource OrdSupplier_BtnStatusCancelled}"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"
+                                    Click="Click_FilterButton" />
+                            <Button x:Name="BtnViewAll" Margin="20 0 0 0"
+                                    Content="{DynamicResource Glb_ViewAll}"
+                                    Style="{DynamicResource TableHeaderButtonStyle}"
+                                    Click="Click_FilterButton" />
+                        </StackPanel>
+
+                        <TextBox x:Name="SearchBox"
+                                 Grid.Column="1"
+                                 HorizontalAlignment="Right"
+                                 Style="{DynamicResource SecondarySearchBoxStyle}"
+                                 Width="160"
+                                 TextChanged="SearchBox_TextChanged" />
                     </Grid>
                 </Border>
 
@@ -94,7 +116,7 @@
                                       SelectionChanged="SupplierOrdersDataGrid_SelectionChanged" >
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource OrdSuppliers_TableHFolio}"
-                                                        Binding="{Binding OrderFolio}" Width="2*" 
+                                                        Binding="{Binding OrderFolio}" Width="2.4*" 
                                                         CellStyle="{StaticResource DataGridCellStyle0}">
                                         <DataGridTextColumn.HeaderStyle>
                                             <StaticResource ResourceKey="DataGridColumnHeaderStyle0"/>
@@ -105,7 +127,7 @@
                                     <DataGridTextColumn Header="{DynamicResource OrdSuppliers_TableHStatus}" 
                                                         Binding="{Binding StatusDescription}" Width="2*"/>
                                     <DataGridTextColumn Header="{DynamicResource OrdSuppliers_TableHOrderDate}" 
-                                                        Binding="{Binding OrderedDateFormatted}" Width="2.5*"/>
+                                                        Binding="{Binding OrderedDateFormatted}" Width="2.1*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
@@ -125,8 +147,11 @@
                         </Grid>
                     </Grid>
 
-                    <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
-                        <Grid>
+                    <Border Grid.Column="1" 
+                            BorderBrush="{StaticResource SecondaryBrush}" 
+                            BorderThickness="0.5,0,0,0">
+                        <Grid x:Name="SupplierOrderDetailsPanel"
+                              Visibility="Visible" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>
@@ -143,10 +168,10 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                <Border Margin="20 0" Grid.Row="0" 
+                                <Border Grid.Row="0" 
                                         BorderThickness="0 0 0 0.5"
                                         BorderBrush="{StaticResource SecondaryBrush}">
-                                    <StackPanel Margin="0 10 0 16">
+                                    <StackPanel Margin="20 10 20 12">
                                         <TextBlock x:Name="SupplierName" FontSize="13"
                                                    Style="{DynamicResource SubtitleLabelStyle}" />
                                         <TextBlock x:Name="OrderStatus" Margin="0 2 0 0"
@@ -178,40 +203,129 @@
                                     </StackPanel>
                                 </Border>
 
-                                <StackPanel x:Name="OrderDetailsPanel" Grid.Row="1" Margin="20"/>
+                                <ScrollViewer Grid.Row="1"
+                                              VerticalScrollBarVisibility="Auto"
+                                              Style="{StaticResource ScrollViewerStyle}" >
+                                    <StackPanel x:Name="OrderDetailsPanel" Margin="20 0"/>
+                                </ScrollViewer>
+
                             </Grid>
 
-                            <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
+                            <Border x:Name="ButtonsPanel" Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
                                     BorderThickness="0 0.5 0 0">
-                                <StackPanel VerticalAlignment="Center" Margin="20">
-                                    <Button x:Name="BtnEditSupply" 
-                                            Style="{DynamicResource PrimaryButtonStyle}"
-                                            Content="{DynamicResource OrdSuppliers_BtnMarkReceived}" Margin="0 0 0 6" >
-                                        <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
-                                    </Button>
+                                <Grid>
+                                    <StackPanel x:Name="PaymentPanel"
+                                                Margin="20" 
+                                                Visibility="Visible">
+                                        <ContentControl Grid.Row="0" Margin="0 0 0 14" VerticalAlignment="Bottom"
+                                                        Style="{StaticResource TagStyle}" 
+                                                        Content="Confirmar Entrega" />
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
 
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Grid.Row="0"
+                                                       Text="Recibido:"
+                                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                            <TextBlock x:Name="LblCurrentDate"
+                                                       Grid.Column="1" Grid.Row="0"
+                                                       HorizontalAlignment="Right"
+                                                       Style="{DynamicResource RegularLabelStyle}"/>
 
-                                        <Button x:Name="BtnCancel" Grid.Column="0"
-                                                Margin="0 0 5 0"
-                                                Style="{DynamicResource DangerButtonStyle}"
-                                                Content="{DynamicResource Glb_Cancel}" 
-                                                Click="Click_BtnCancelOrder" >
-                                            <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
-                                        </Button>
+                                            <TextBlock Grid.Column="0" Grid.Row="1"
+                                                       Text="Total:" VerticalAlignment="Bottom"
+                                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                            <TextBlock x:Name="TbOrderTotal" Grid.Row="1"
+                                                       Grid.Column="1" HorizontalAlignment="Right"
+                                                       Style="{DynamicResource SubtitleLabelStyle}"
+                                                       FontFamily="{StaticResource SFProSemiBold}"/>
+                                        </Grid>
 
-                                        <Button x:Name="BtnEdit" Grid.Column="1"
-                                                Margin="5 0 0 0"
-                                                Style="{DynamicResource SecondaryButtonStyle}"
-                                                Content="Modificar" >
+                                        <Grid Margin="0 10 0 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBox x:Name="TbPayment"
+                                                     Grid.Column="0" Grid.Row="1"
+                                                     Style="{DynamicResource TextBoxStyle}" 
+                                                     Tag="Efectivo:" Margin="0 0 5 0"
+                                                     TextChanged="TbPayment_TextChanged" />
+
+                                            <TextBox x:Name="TbChange"
+                                                     Grid.Column="1" Grid.Row="1"
+                                                     Style="{DynamicResource TextBoxStyle}" 
+                                                     Tag="Cambio:" Margin="5 0 0 0"
+                                                     IsReadOnly="True" />
+                                        </Grid>
+
+                                        <Grid Margin="0 28 0 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button x:Name="BtnCancel" Grid.Column="0"
+                                                    Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                                                    Content="{DynamicResource Glb_Cancel}"
+                                                    Margin="0 0 5 0" Click="BtnCancel_Click" />
+                                            <Button x:Name="BtnConfirm" Grid.Column="1"
+                                                    Style="{DynamicResource PrimaryButtonStyle}"
+                                                    Content="{DynamicResource Glb_Confirm}"
+                                                    Margin="5 0 0 0" IsEnabled="False" >
+                                                <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                            </Button>
+
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <StackPanel x:Name="OperationsPanel"
+                                                Margin="20" Visibility="Collapsed" >
+                                        <Button x:Name="BtnDeliverOrder" 
+                                                Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource OrdSuppliers_BtnMarkReceived}"
+                                                Margin="0 0 0 6" 
+                                                Click="Click_BtnDeliverOrder" >
                                             <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
                                         </Button>
-                                    </Grid>
-                                </StackPanel>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button x:Name="BtnCancelOrder" Grid.Column="0"
+                                                    Margin="0 0 5 0"
+                                                    Style="{DynamicResource DangerButtonStyle}"
+                                                    Content="{DynamicResource Glb_Cancel}" 
+                                                    Click="Click_BtnCancelOrder" >
+                                                <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
+                                            </Button>
+
+                                            <Button x:Name="BtnEdit" Grid.Column="1"
+                                                    Margin="5 0 0 0"
+                                                    Style="{DynamicResource SecondaryButtonStyle}"
+                                                    Content="Modificar"
+                                                    Click="Click_BtnEditOrder" >
+                                                <Button.Tag>/Resources/Icons/edit2-icon.png</Button.Tag>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
                             </Border>
                         </Grid>
                     </Border>

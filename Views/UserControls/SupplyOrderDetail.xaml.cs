@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Input;
+using System.Windows.Media;
 using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 
@@ -19,25 +19,20 @@ namespace ItaliaPizzaClient.Views.UserControls
         {
             InitializeComponent();
             DataContext = this;
-
             AssignEventHandlers();
 
-            QuantityChanged += (s, q) =>
-            {
-                OnPropertyChanged(nameof(QuantityText));
-            };
-
+            QuantityChanged += (s, q) => OnPropertyChanged(nameof(QuantityText));
             UpdateReadOnlyState();
         }
 
         public static readonly DependencyProperty SupplyNameProperty =
-            DependencyProperty.Register("SupplyName", typeof(string), typeof(SupplyOrderDetail), new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(SupplyName), typeof(string), typeof(SupplyOrderDetail), new PropertyMetadata(""));
 
         public static readonly DependencyProperty UnitProperty =
-            DependencyProperty.Register("Unit", typeof(string), typeof(SupplyOrderDetail), new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(Unit), typeof(string), typeof(SupplyOrderDetail), new PropertyMetadata(""));
 
         public static readonly DependencyProperty PriceProperty =
-            DependencyProperty.Register("Price", typeof(decimal), typeof(SupplyOrderDetail), new PropertyMetadata(0m));
+            DependencyProperty.Register(nameof(Price), typeof(decimal), typeof(SupplyOrderDetail), new PropertyMetadata(0m));
 
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register(nameof(ImageSource), typeof(ImageSource), typeof(SupplyOrderDetail), new PropertyMetadata(null));
@@ -55,63 +50,6 @@ namespace ItaliaPizzaClient.Views.UserControls
 
         public static readonly DependencyProperty IsReadOnlyProperty =
             DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(SupplyOrderDetail), new PropertyMetadata(false, OnIsReadOnlyChanged));
-
-        public event EventHandler<decimal> QuantityChanged;
-
-        public event EventHandler DeleteClicked;
-
-        private static void OnQuantityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var control = (SupplyOrderDetail)d;
-
-            if (e.NewValue is decimal newQty)
-            {
-                control.Subtotal = control.Price * newQty;
-                control.QuantityChanged?.Invoke(control, newQty);
-                control.OnPropertyChanged(nameof(control.QuantityText));
-            }
-        }
-
-        private static void OnMeasureUnitIdChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var control = (SupplyOrderDetail)d;
-
-            int id = (int)e.NewValue;
-
-            var unit = MeasureUnit.GetDefaultMeasureUnits().FirstOrDefault(mu => mu.Id == id);
-            control.Unit = unit?.Abbreviation ?? "u";
-
-            control.OnPropertyChanged(nameof(QuantityText));
-        }
-
-        private static void OnIsReadOnlyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var control = (SupplyOrderDetail)d;
-            control.UpdateReadOnlyState();
-        }
-
-        private void UpdateReadOnlyState()
-        {
-            bool isReadOnly = IsReadOnly;
-
-            TbQuantity.IsReadOnly = isReadOnly;
-            TbQuantity.IsHitTestVisible = !isReadOnly;
-            BtnDelete.Visibility = isReadOnly ? Visibility.Collapsed : Visibility.Visible;
-            BtnEdit.Visibility = isReadOnly ? Visibility.Collapsed : Visibility.Visible;
-            SupplyTitle.FontSize = isReadOnly ? 13 : 14;
-        }
-
-        public bool IsReadOnly
-        {
-            get => (bool)GetValue(IsReadOnlyProperty);
-            set => SetValue(IsReadOnlyProperty, value);
-        }
-
-        public ImageSource ImageSource
-        {
-            get => (ImageSource)GetValue(ImageSourceProperty);
-            set => SetValue(ImageSourceProperty, value);
-        }
 
         public string SupplyName
         {
@@ -141,51 +79,77 @@ namespace ItaliaPizzaClient.Views.UserControls
             }
         }
 
-        public int MeasureUnitId
-        {
-            get => (int)GetValue(MeasureUnitIdProperty);
-            set => SetValue(MeasureUnitIdProperty, value);
-        }
-
-        public string QuantityText
-        {
-            get => $"x {Quantity.ToString("0.00", CultureInfo.InvariantCulture)} {Unit}";
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value) || decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal val) && val == 0)
-                {
-                    Quantity = _originalQuantity;
-                }
-                else if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed))
-                {
-                    Quantity = parsed;
-                }
-            }
-        }
-
         public decimal Subtotal
         {
             get => (decimal)GetValue(SubtotalProperty);
             set => SetValue(SubtotalProperty, value);
         }
 
-        public void RefreshBinding()
+        public int MeasureUnitId
         {
-            var binding = TbQuantity.GetBindingExpression(TextBox.TextProperty);
-            binding?.UpdateTarget();
+            get => (int)GetValue(MeasureUnitIdProperty);
+            set => SetValue(MeasureUnitIdProperty, value);
         }
 
-        protected void OnPropertyChanged(string propertyName)
+        public ImageSource ImageSource
         {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            get => (ImageSource)GetValue(ImageSourceProperty);
+            set => SetValue(ImageSourceProperty, value);
         }
 
+        public bool IsReadOnly
+        {
+            get => (bool)GetValue(IsReadOnlyProperty);
+            set => SetValue(IsReadOnlyProperty, value);
+        }
+
+        public string QuantityText
+        {
+            get => $"x {Quantity:0.00} {Unit}";
+            set
+            {
+                if (decimal.TryParse(value, NumberStyles.Number,
+                    CultureInfo.InvariantCulture, out var parsed) && parsed != 0) Quantity = parsed;
+
+                else Quantity = _originalQuantity;
+            }
+        }
+
+        public event EventHandler<decimal> QuantityChanged;
+        public event EventHandler DeleteClicked;
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
-        public void SetOriginalQuantity(decimal quantity)
+        private static void OnQuantityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            _originalQuantity = quantity;
+            var control = (SupplyOrderDetail)d;
+            if (e.NewValue is decimal newQty)
+            {
+                control.Subtotal = control.Price * newQty;
+                control.QuantityChanged?.Invoke(control, newQty);
+                control.OnPropertyChanged(nameof(QuantityText));
+            }
+        }
+
+        private static void OnMeasureUnitIdChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = (SupplyOrderDetail)d;
+            var id = (int)e.NewValue;
+            control.Unit = MeasureUnit.GetDefaultMeasureUnits().FirstOrDefault(mu => mu.Id == id)?.Abbreviation ?? "u";
+            control.OnPropertyChanged(nameof(QuantityText));
+        }
+
+        private static void OnIsReadOnlyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((SupplyOrderDetail)d).UpdateReadOnlyState();
+        }
+
+        private void UpdateReadOnlyState()
+        {
+            bool isReadOnly = IsReadOnly;
+            TbQuantity.IsReadOnly = isReadOnly;
+            TbQuantity.IsHitTestVisible = !isReadOnly;
+            BtnDelete.Visibility = BtnEdit.Visibility = isReadOnly ? Visibility.Collapsed : Visibility.Visible;
+            SupplyTitle.FontSize = isReadOnly ? 13 : 14;
         }
 
         private void QuantityTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -201,42 +165,31 @@ namespace ItaliaPizzaClient.Views.UserControls
         {
             if (!IsReadOnly)
             {
-                string rawText = TbQuantity.Text.Trim();
-
-                if (string.IsNullOrEmpty(rawText) || !decimal.TryParse(rawText, NumberStyles.Number, CultureInfo.InvariantCulture, out var val) || val == 0)
-                {
-                    Quantity = _originalQuantity;
-                }
-                else
-                {
-                    if (val > 999) val = 999;
-                    if (IsIntegerOnlyUnit()) val = Math.Floor(val);
-                    Quantity = val;
-                }
-
-                TbQuantity.Text = $"x {Quantity.ToString("0.00", CultureInfo.InvariantCulture)} {Unit}";
+                ConfirmQuantityChange();
             }
+        }
+
+        private void Click_BtnDelete(object sender, RoutedEventArgs e) => DeleteClicked?.Invoke(this, EventArgs.Empty);
+
+        private void Click_BtnEdit(object sender, RoutedEventArgs e)
+        {
+            EnableEditMode(true);
+        }
+
+        private void Click_BtnConfirm(object sender, RoutedEventArgs e)
+        {
+            ConfirmQuantityChange();
+            EnableEditMode(false);
         }
 
         private void QuantityTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!IsReadOnly)
             {
-                string pattern = IsIntegerOnlyUnit()
-                    ? @"^\d{0,4}$"
-                    : @"^\d{0,4}(\.\d{0,2})?$";
+                string currentText = TbQuantity.Text.Remove(TbQuantity.SelectionStart, TbQuantity.SelectionLength)
+                                        .Insert(TbQuantity.SelectionStart, e.Text);
 
-                var currentText = TbQuantity.Text.Remove(TbQuantity.SelectionStart, TbQuantity.SelectionLength)
-                                    .Insert(TbQuantity.SelectionStart, e.Text);
-
-                if (!Regex.IsMatch(currentText, pattern) ||
-                    (decimal.TryParse(currentText, NumberStyles.Number, CultureInfo.InvariantCulture, out var val) && val > 9999))
-                {
-                    e.Handled = true;
-                    Animations.ShakeTextBox(TbQuantity);
-                }
-
-                if (IsIntegerOnlyUnit() && e.Text.Contains("."))
+                if (!IsValidQuantityInput(currentText))
                 {
                     e.Handled = true;
                     Animations.ShakeTextBox(TbQuantity);
@@ -246,33 +199,59 @@ namespace ItaliaPizzaClient.Views.UserControls
 
         private void OnPaste(object sender, DataObjectPastingEventArgs e)
         {
-            if (!IsReadOnly)
+            if (!IsReadOnly && e.DataObject.GetDataPresent(DataFormats.Text))
             {
-                if (e.DataObject.GetDataPresent(DataFormats.Text))
-                {
-                    string pasteText = e.DataObject.GetData(DataFormats.Text) as string;
-
-                    if (IsIntegerOnlyUnit() && pasteText.Contains('.'))
-                    {
-                        e.CancelCommand();
-                        Animations.ShakeTextBox(TbQuantity);
-                    }
-                    else if (!Regex.IsMatch(pasteText, IsIntegerOnlyUnit() ? @"^\d{0,4}$" : @"^\d{0,4}(\.\d{0,2})?$"))
-                    {
-                        e.CancelCommand();
-                        Animations.ShakeTextBox(TbQuantity);
-                    }
-                }
-                else
+                var pasteText = e.DataObject.GetData(DataFormats.Text) as string;
+                if (!IsValidQuantityInput(pasteText))
                 {
                     e.CancelCommand();
+                    Animations.ShakeTextBox(TbQuantity);
                 }
+            }
+            else
+            {
+                e.CancelCommand();
             }
         }
 
-        private bool IsIntegerOnlyUnit()
+        private void ConfirmQuantityChange()
         {
-            return MeasureUnitId == 3;
+            if (!decimal.TryParse(TbQuantity.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out var val) || val == 0)
+            {
+                Quantity = _originalQuantity;
+            }
+            else
+            {
+                if (val > 999) val = 999;
+                if (IsIntegerOnlyUnit()) val = Math.Floor(val);
+                Quantity = val;
+            }
+
+            Keyboard.ClearFocus();
+            FocusManager.SetFocusedElement(FocusManager.GetFocusScope(this), null);
+            TbQuantity.Text = QuantityText;
+        }
+
+        private bool IsValidQuantityInput(string input)
+        {
+            string pattern = IsIntegerOnlyUnit() ? @"^\d{0,4}$" : @"^\d{0,4}(\.\d{0,2})?$";
+            return Regex.IsMatch(input, pattern) &&
+                   (!decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out var val) || val <= 9999) &&
+                   (!IsIntegerOnlyUnit() || !input.Contains('.'));
+        }
+
+        private bool IsIntegerOnlyUnit() => MeasureUnitId == 3;
+
+        private void EnableEditMode(bool enable)
+        {
+            TbQuantity.IsEnabled = enable;
+            if (enable)
+            {
+                TbQuantity.Focus();
+            }
+
+            BtnConfirm.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
+            BtnDelete.Visibility = BtnEdit.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public void AssignEventHandlers()
@@ -281,11 +260,41 @@ namespace ItaliaPizzaClient.Views.UserControls
             TbQuantity.LostFocus += QuantityTextBox_LostFocus;
             TbQuantity.PreviewTextInput += QuantityTextBox_PreviewTextInput;
             DataObject.AddPastingHandler(TbQuantity, OnPaste);
+
+            Loaded += (s, e) => Application.Current.MainWindow.PreviewMouseDown += HandleGlobalClick;
+            Unloaded += (s, e) => Application.Current.MainWindow.PreviewMouseDown -= HandleGlobalClick;
         }
 
-        private void Click_BtnDelete(object sender, RoutedEventArgs e)
+        private void HandleGlobalClick(object sender, MouseButtonEventArgs e)
         {
-            DeleteClicked?.Invoke(this, EventArgs.Empty);
+            if (!IsReadOnly && TbQuantity.IsEnabled && e.OriginalSource is DependencyObject clickedElement && !IsDescendantOf(this, clickedElement))
+            {
+                ConfirmQuantityChange();
+                EnableEditMode(false);
+                Keyboard.ClearFocus();
+            }
+        }
+
+        private bool IsDescendantOf(DependencyObject parent, DependencyObject child)
+        {
+            while (child != null)
+            {
+                if (child == parent) return true;
+                child = VisualTreeHelper.GetParent(child);
+            }
+            return false;
+        }
+
+        public void SetOriginalQuantity(decimal quantity) => _originalQuantity = quantity;
+
+        public void RefreshBinding()
+        {
+            TbQuantity.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
         }
     }
 }

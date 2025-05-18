@@ -199,6 +199,53 @@
         </Setter>
     </Style>
 
+    <Style x:Key="QuantityTextBoxStyle1" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="Padding" Value="5 2"/>
+    </Style>
+
+    <Style x:Key="QuantityTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="5 2"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="TextBoxBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                  Margin="0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="TextBoxBorder" Property="BorderBrush" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#808080"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
         <Setter Property="Height" Value="44"/>

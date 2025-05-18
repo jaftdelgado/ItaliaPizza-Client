@@ -1,20 +1,22 @@
 ﻿using ItaliaPizzaClient.ItaliaPizzaServices;
 using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
-using ItaliaPizzaClient.Views.UserControls;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows;
-using System.Linq;
-using System.Collections.Generic;
 using ItaliaPizzaClient.Views.Dialogs;
-using System.Threading.Tasks;
+using ItaliaPizzaClient.Views.UserControls;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace ItaliaPizzaClient.Views
 {
     public partial class RegisterSupplierOrdersPage : Page
     {
+        private SupplierOrder _editingOrder;
+        private bool _isEditMode;
         public ObservableCollection<SupplyCard> SupplyCards { get; set; } = new ObservableCollection<SupplyCard>();
         private ObservableCollection<Supplier> _suppliers = new ObservableCollection<Supplier>();
         private List<OrderedSupply> _orderedSupplies = new List<OrderedSupply>();
@@ -25,9 +27,148 @@ namespace ItaliaPizzaClient.Views
         {
             InitializeComponent();
             SetCategoriesComboBox();
-            UpdateButtonState(BtnConfirmOrder);
+            UpdateButtonState(_isEditMode ? BtnEditOrder : BtnConfirmOrder);
+            ConfigureInterfaceForMode();
             UpdateTotal();
-            TbCurrentDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            OrderDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+        }
+
+        public RegisterSupplierOrdersPage(SupplierOrder editingOrder)
+        {
+            InitializeComponent();
+            _isEditMode = true;
+            _editingOrder = editingOrder;
+
+            Loaded += async (s, e) =>
+            {
+                await ServiceClientManager.ExecuteServerAction(async () =>
+                {
+                    await LoadOrderDataInSingleOperation(editingOrder);
+                });
+            };
+
+            ConfigureInterfaceForMode();
+            SetCategoriesComboBox();
+            UpdateButtonState(_isEditMode ? BtnEditOrder : BtnConfirmOrder);
+        }
+
+        private async Task LoadOrderDataInSingleOperation(SupplierOrder editingOrder)
+        {
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                CbCategories.SelectedIndex = editingOrder.CategorySupplyID - 1;
+                OrderDate.Text = editingOrder.OrderedDateFormatted;
+            });
+
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return;
+
+            var suppliersTask = Task.Run(() => client.GetSuppliersByCategory(editingOrder.CategorySupplyID));
+            var suppliesTask = Task.Run(() => client.GetSuppliesBySupplier(editingOrder.SupplierID));
+
+            await Task.WhenAll(suppliersTask, suppliesTask);
+
+            var suppliers = suppliersTask.Result.Select(s => new Supplier
+            {
+                Id = s.Id,
+                SupplierName = s.SupplierName,
+                ContactName = s.ContactName,
+                PhoneNumber = s.PhoneNumber,
+                EmailAddress = s.EmailAddress,
+                Description = s.Description,
+                CategorySupply = s.CategorySupply,
+                IsActive = s.IsActive
+            }).Where(s => s.IsActive).OrderBy(s => s.SupplierName).ToList();
+
+            var supplies = suppliesTask.Result.Select(s => new Supply
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Price = s.Price,
+                MeasureUnit = s.MeasureUnit,
+                Stock = s.Stock,
+                Brand = s.Brand,
+                SupplyPic = s.SupplyPic,
+                SupplierID = s.SupplierID
+            }).ToList();
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                // Crear el proveedor seleccionado
+                var selectedSupplier = new Supplier
+                {
+                    Id = editingOrder.SupplierID,
+                    SupplierName = editingOrder.SupplierName
+                };
+
+                // Limpiar y cargar la colección observable
+                _suppliers.Clear();
+
+                // Agregar todos los proveedores de la categoría
+                foreach (var supplier in suppliers)
+                {
+                    _suppliers.Add(supplier);
+                }
+
+                CbSuppliers.ItemsSource = _suppliers;
+
+                CbSuppliers.SelectedItem = _suppliers.FirstOrDefault(s => s.Id == selectedSupplier.Id);
+                CbSuppliers.IsEnabled = false;
+
+                CbSuppliers.DisplayMemberPath = "SupplierName";
+
+                // Establecer el texto del TextBox
+                TbSupplier.Text = selectedSupplier.SupplierName;
+
+                SupplyCards.Clear();
+                foreach (var supply in supplies)
+                {
+                    var card = CreateSupplyCard(supply);
+                    SupplyCards.Add(card);
+                }
+                ButtonsPanel.ItemsSource = SupplyCards;
+
+                _orderedSupplies.Clear();
+                OrderDetailsPanel.Children.Clear();
+                foreach (var item in editingOrder.Items)
+                {
+                    var supply = supplies.FirstOrDefault(s => s.Id == item.Supply.Id);
+                    if (supply != null)
+                    {
+                        var orderedSupply = new OrderedSupply
+                        {
+                            Supply = supply,
+                            Quantity = item.Quantity
+                        };
+                        _orderedSupplies.Add(orderedSupply);
+
+                        var detail = AddSupplyOrderDetail(orderedSupply);
+                        OrderDetailsPanel.Children.Add(detail);
+                    }
+                }
+
+                UpdateButtonState(BtnEditOrder);
+                UpdateTotal();
+            });
+        }
+
+        private void ConfigureInterfaceForMode()
+        {
+            if (_isEditMode)
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "EditOrderSupplier_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "EditOrderSupplier_Desc");
+                BtnEditOrder.Visibility = Visibility.Visible;
+                BtnConfirmOrder.Visibility = Visibility.Collapsed;
+                CbCategories.IsEnabled = false;
+                CbSuppliers.IsEnabled = false;
+            }
+            else
+            {
+                PageHeader.SetResourceReference(TextBlock.TextProperty, "RegOrderSupplier_Header");
+                PageDescription.SetResourceReference(TextBlock.TextProperty, "RegOrderSupplier_Desc");
+                BtnEditOrder.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void SetCategoriesComboBox()
@@ -40,7 +181,7 @@ namespace ItaliaPizzaClient.Views
             SupplyCards.Clear();
             _orderedSupplies.Clear();
             OrderDetailsPanel.Children.Clear();
-            UpdateButtonState(BtnConfirmOrder);
+            UpdateButtonState(_isEditMode ? BtnEditOrder : BtnConfirmOrder);
             UpdateTotal();
         }
 
@@ -84,20 +225,21 @@ namespace ItaliaPizzaClient.Views
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                var dtoList = client.GetSuppliersByCategory(selectedCategory.Id);
-
-                var suppliers = dtoList.Select(s => new Supplier
-                {
-                    Id = s.Id,
-                    SupplierName = s.SupplierName,
-                    ContactName = s.ContactName,
-                    PhoneNumber = s.PhoneNumber,
-                    EmailAddress = s.EmailAddress,
-                    Description = s.Description,
-                    CategorySupply = s.CategorySupply,
-                    IsActive = s.IsActive
-                })
-                .Where(s => s.IsActive).OrderBy(s => s.SupplierName).ToList();
+                var suppliers = client.GetSuppliersByCategory(selectedCategory.Id)
+                    .Select(s => new Supplier
+                    {
+                        Id = s.Id,
+                        SupplierName = s.SupplierName,
+                        ContactName = s.ContactName,
+                        PhoneNumber = s.PhoneNumber,
+                        EmailAddress = s.EmailAddress,
+                        Description = s.Description,
+                        CategorySupply = s.CategorySupply,
+                        IsActive = s.IsActive
+                    })
+                    .Where(s => s.IsActive)
+                    .OrderBy(s => s.SupplierName)
+                    .ToList();
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
@@ -110,7 +252,7 @@ namespace ItaliaPizzaClient.Views
             });
         }
 
-        private async Task LoadSuppliesForSelectedSupplier()
+        private async Task LoadSuppliesForSelectedSupplier(IEnumerable<OrderedSupply> orderedSupplies = null)
         {
             var selectedSupplier = CbSuppliers.SelectedItem as Supplier;
             if (selectedSupplier == null) return;
@@ -120,31 +262,50 @@ namespace ItaliaPizzaClient.Views
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                var dtoList = client.GetSuppliesBySupplier(selectedSupplier.Id);
-
-                var supplies = dtoList.Select(s => new Supply
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Price = s.Price,
-                    MeasureUnit = s.MeasureUnit,
-                    Stock = s.Stock,
-                    Brand = s.Brand,
-                    SupplyPic = s.SupplyPic,
-                    SupplierID = s.SupplierID
-                }).ToList();
+                var supplies = client.GetSuppliesBySupplier(selectedSupplier.Id)
+                    .Select(s => new Supply
+                    {
+                        Id = s.Id,
+                        Name = s.Name,
+                        Price = s.Price,
+                        MeasureUnit = s.MeasureUnit,
+                        Stock = s.Stock,
+                        Brand = s.Brand,
+                        SupplyPic = s.SupplyPic,
+                        SupplierID = s.SupplierID
+                    }).ToList();
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
                     SupplyCards.Clear();
                     foreach (var supply in supplies)
                     {
-                        var card = CreateSupplyCard(supply);
-                        SupplyCards.Add(card);
+                        SupplyCards.Add(CreateSupplyCard(supply));
                     }
 
                     ButtonsPanel.ItemsSource = SupplyCards;
-                    TbSupplier.Text = selectedSupplier.SupplierName;
+                    TbSupplier.Text = _isEditMode ? TbSupplier.Text : selectedSupplier.SupplierName;
+
+                    if (_isEditMode && orderedSupplies != null && orderedSupplies.Any())
+                    {
+                        _orderedSupplies.Clear();
+                        OrderDetailsPanel.Children.Clear();
+
+                        foreach (var item in orderedSupplies)
+                        {
+                            var supply = supplies.FirstOrDefault(s => s.Id == item.Supply.Id);
+                            if (supply != null)
+                            {
+                                var orderedSupply = new OrderedSupply
+                                {
+                                    Supply = supply,
+                                    Quantity = item.Quantity
+                                };
+                                _orderedSupplies.Add(orderedSupply);
+                                OrderDetailsPanel.Children.Add(AddSupplyOrderDetail(orderedSupply));
+                            }
+                        }
+                    }
                 });
             });
         }
@@ -190,13 +351,47 @@ namespace ItaliaPizzaClient.Views
             }
         }
 
+        private async Task UpdateSupplierOrder()
+        {
+            var orderDto = new SupplierOrderDTO
+            {
+                SupplierOrderID = _editingOrder.SupplierOrderID,
+                SupplierID = _editingOrder.SupplierID,
+                Total = _orderedSupplies.Sum(o => o.Quantity * o.Supply.Price),
+                Items = _orderedSupplies.Select(o => new SupplierOrderDTO.OrderItemDTO
+                {
+                    SupplyID = o.Supply.Id,
+                    Quantity = o.Quantity,
+                    Subtotal = o.Quantity * o.Supply.Price
+                }).ToArray()
+            };
+
+            bool success = false;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                success = await client.UpdateSupplierOrderAsync(orderDto);
+            });
+
+            if (success)
+            {
+                MessageDialog.Show("RegOrderSupplier_DialogTEditSuccess", 
+                    "RegOrderSupplier_DialogDEditSuccess", 
+                    AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
+            }
+        }
+
         private SupplyCard CreateSupplyCard(Supply supply)
         {
             var card = new SupplyCard
             {
-                SupplyName = supply.SupplyName,
+                SupplyName = supply.Name,
                 StockText = $"Stock: {supply.Stock}",
-                PriceText = supply.FormattedPricePerUnit,
+                PriceText = $"${supply.Price:N2}",
                 Margin = new Thickness(0, 0, 10, 10)
             };
 
@@ -209,10 +404,13 @@ namespace ItaliaPizzaClient.Views
 
         private void RemoveOrderedSupply(SupplyOrderDetail detail, OrderedSupply orderedSupply)
         {
-            OrderDetailsPanel.Children.Remove(detail);
-            _orderedSupplies.Remove(orderedSupply);
-            UpdateButtonState(BtnConfirmOrder);
-            UpdateTotal();
+            Animations.BeginAnimation(detail, "HideBorderAnimation", () =>
+            {
+                OrderDetailsPanel.Children.Remove(detail);
+                _orderedSupplies.Remove(orderedSupply);
+                UpdateButtonState(_isEditMode ? BtnEditOrder : BtnConfirmOrder);
+                UpdateTotal();
+            });
         }
 
         private void OnSupplyCardClicked(Supply supply)
@@ -225,12 +423,12 @@ namespace ItaliaPizzaClient.Views
 
                 var detail = OrderDetailsPanel.Children
                     .OfType<SupplyOrderDetail>()
-                    .FirstOrDefault(d => d.SupplyName == existing.Supply.SupplyName);
+                    .FirstOrDefault(d => d.SupplyName == existing.Supply.Name);
 
                 if (detail != null)
                 {
                     detail.Quantity += 1;
-                    detail.RefreshBinding();
+                    detail.Subtotal = detail.Price * detail.Quantity;
                 }
             }
             else
@@ -245,9 +443,11 @@ namespace ItaliaPizzaClient.Views
 
                 var detail = AddSupplyOrderDetail(ordered);
                 OrderDetailsPanel.Children.Add(detail);
+
+                Animations.BeginAnimation(detail, "PopupFadeInAnimation");
             }
 
-            UpdateButtonState(BtnConfirmOrder);
+            UpdateButtonState(_isEditMode ? BtnEditOrder : BtnConfirmOrder);
             UpdateTotal();
         }
 
@@ -255,33 +455,35 @@ namespace ItaliaPizzaClient.Views
         {
             var detail = new SupplyOrderDetail
             {
-                SupplyName = orderedSupply.Supply.SupplyName,
+                SupplyName = orderedSupply.Supply.Name,
                 Price = orderedSupply.Supply.Price,
                 Quantity = orderedSupply.Quantity,
                 MeasureUnitId = orderedSupply.Supply.MeasureUnit,
-                Margin = new Thickness(0, 0, 0, 6)
+                Margin = new Thickness(0, 0, 0, 6),
+                Subtotal = orderedSupply.Supply.Price * orderedSupply.Quantity,
+                Unit = orderedSupply.Unit
             };
 
-            detail.Subtotal = detail.Price * detail.Quantity;
-            detail.Unit = orderedSupply.Unit;
-
             detail.DeleteClicked += (_, __) => RemoveOrderedSupply(detail, orderedSupply);
-
-            ImageUtilities.SetImageSource(detail.SupplyPic, orderedSupply.Supply.SupplyPic, Constants.DEFAULT_SUPPLY_PIC_PATH);
-
             detail.QuantityChanged += (sender, newQuantity) =>
             {
                 orderedSupply.Quantity = newQuantity;
                 UpdateTotal();
             };
 
+            ImageUtilities.SetImageSource(detail.SupplyPic, orderedSupply.Supply.SupplyPic, Constants.DEFAULT_SUPPLY_PIC_PATH);
+
             return detail;
         }
-
 
         private async void Click_BtnConfirmOrder(object sender, RoutedEventArgs e)
         {
             await RegisterSupplierOrder();
+        }
+
+        private async void Click_BtnEditOrder(object sender, RoutedEventArgs e)
+        {
+            await UpdateSupplierOrder();
         }
 
         private async void CbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
