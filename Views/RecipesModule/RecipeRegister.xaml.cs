@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Views.Dialogs;
+using ItaliaPizzaClient.Utilities;
 
 namespace ItaliaPizzaClient.Views.RecipesModule
 {
@@ -27,20 +28,72 @@ namespace ItaliaPizzaClient.Views.RecipesModule
     {
         public ObservableCollection<RecipeSupplyItem> suppliesList { get; } = new ObservableCollection<RecipeSupplyItem>();
         private readonly RecipeDTO _recipe;
+        private Recipe _recipeToEdit;
         private readonly List<RecipeSupplyDTO> _recipeSupplyDTOs;
+        private bool _isRecipeRegistered;
 
 
         public RecipeRegister(RecipeDTO recipe,List<RecipeSupplyDTO> recipeSupplyDTOs)
         {
             InitializeComponent();
+
             _recipe = recipe;
             _recipeSupplyDTOs = recipeSupplyDTOs;
             DataContext = this;
         }
 
+        public RecipeRegister(Recipe recipeToEdit)
+        {
+            InitializeComponent();
+            _isRecipeRegistered = true;
+            _recipeToEdit = recipeToEdit;
+            DataContext = this;
+            loadSupplies(recipeToEdit.Id);
+            loadEditInterface();
+            loadEditRecipeData();
+
+
+        }
+
+        private void loadEditRecipeData()
+        {
+            txt_description.Text = _recipeToEdit.Description;
+            txt_preptime.Text = _recipeToEdit.PreparationTime.ToString();
+        }
+
+        private void loadEditInterface()
+        {
+            txt_description.IsReadOnly = true;
+            txt_preptime.IsReadOnly = true;
+            colDelete.Visibility = Visibility.Collapsed;
+            BtnAddSupply.Visibility = Visibility.Collapsed;
+            lblRecipeTitle.Text = "Editar receta";
+            BtnNewRecipe.Content = "Actualizar receta";
+        }
+
+        private void loadSupplies(int idRecipe)
+        {
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null) return;
+            var recipeSupplies = client.GetSuppliesByRecipe(idRecipe);
+            if (recipeSupplies == null) return;
+            foreach (var item in recipeSupplies)
+            {
+                RecipeSupplyItem recipeSupplyItem = new RecipeSupplyItem
+                {
+                    Supply = new SupplyDTO
+                    {
+                        Id = item.SupplyID,
+                        Name = item.RecipeSupplyName,
+                    },
+                    Quantity = (double)item.UseQuantity
+                };
+                suppliesList.Add(recipeSupplyItem);
+            }   
+        }
+
         private void BtnNewRecipe_Click(object sender, RoutedEventArgs e)
         {
-            //Validar entradas
             if (string.IsNullOrEmpty(txt_description.Text) || string.IsNullOrEmpty(txt_description.Text) || isColumsCorrect() || string.IsNullOrEmpty(txt_preptime.Text))
             {
                 MessageDialog.Show("Error", "Por favor, complete todos los campos.", AlertType.WARNING);
@@ -107,6 +160,20 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             string newText = textBox.Text.Insert(textBox.CaretIndex, e.Text);
 
             e.Handled = !double.TryParse(newText, NumberStyles.Any, CultureInfo.InvariantCulture, out _);
+        }
+        private void EliminarFila_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is RecipeSupplyItem item) 
+            {
+                MessageDialog.ShowConfirm(
+                    title: "Confirmar eliminación",
+                    description: $"¿Estás seguro que deseas eliminar el insumo '{item.Supply?.Name}'?",
+                    onConfirm: () =>
+                    {
+                        suppliesList.Remove(item);
+                    }
+                    );
+            }
         }
     }
 }

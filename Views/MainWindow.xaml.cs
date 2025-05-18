@@ -75,7 +75,6 @@ namespace ItaliaPizzaClient.Views
             var hashedPassword = PasswordUtilities.HashPassword(password);
             if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(password))
             {
-                Console.WriteLine("Error: Campos vacios");
                 MessageDialog.Show("Error", "Por favor ingrese su usuario y contraseña",AlertType.ERROR);
                 return;
             }
@@ -90,7 +89,7 @@ namespace ItaliaPizzaClient.Views
             }
 
             
-            //...CREAR SINGLETON SESION
+
             CurrentSession.UserID = personal.PersonalID;
             CurrentSession.Name = personal.FirstName;
             CurrentSession.Surnames = personal.LastName;
@@ -98,13 +97,12 @@ namespace ItaliaPizzaClient.Views
             CurrentSession.UserRole = personal.RoleID;
 
             SessionManager.Start();
-            //...crear metodo ping para actualizar sesion
 
 
-            //Ocultar componentes para mostrar homw
+
+
             LoginGrid.Visibility = Visibility.Collapsed;
             RootGrid.Visibility = Visibility.Visible;
-            //Cargar el menu lateral
             LoadLateralMenu();
         }
         private void LoadLateralMenu()

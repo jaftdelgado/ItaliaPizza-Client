@@ -29,7 +29,7 @@ namespace ItaliaPizzaClient.Views.RecipesModule
         List<SupplyDTO> suppliesList = new List<SupplyDTO>();
         public SupplyDTO supplySelected = null;
         private readonly ObservableCollection<RecipeSupplyItem> _listaPrincipal;
-        public SuppliesList(System.Collections.ObjectModel.ObservableCollection<RecipeSupplyItem> suppliesListObs)
+        public SuppliesList(ObservableCollection<RecipeSupplyItem> suppliesListObs)
         {
             InitializeComponent();
             _listaPrincipal = suppliesListObs;
