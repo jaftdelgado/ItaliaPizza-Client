@@ -1,4 +1,6 @@
 ﻿using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.Dialogs;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,8 +11,60 @@ namespace ItaliaPizzaClient.Views.UserControls
         public OpeningCash()
         {
             InitializeComponent();
+            InitializeOpeningDate();
+            BtnAccept.IsEnabled = false;
+            ConfirmOpenCashCheckBox.Checked += ConfirmCheckBox_Changed;
+            ConfirmOpenCashCheckBox.Unchecked += ConfirmCheckBox_Changed;
+            InputUtilities.ValidatePriceInput(TbInitialBalance);
         }
+        private void InitializeOpeningDate()
+        {
+            TxbDateOpening.Text = DateTime.Now.ToString("dd/MM/yyyy");    
+        }
+        private void ConfirmCheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            BtnAccept.IsEnabled = ConfirmOpenCashCheckBox.IsChecked == true;
+        }
+        private async void Click_BtnAccept(object sender, RoutedEventArgs e)
+        {
+            bool hasError = false;
 
+            if (string.IsNullOrWhiteSpace(TbInitialBalance.Text))
+            {
+                Animations.ShakeTextBox(TbInitialBalance);
+                hasError = true;
+            }
+
+            if (hasError)
+                return;
+
+            decimal initialBalance = decimal.Parse(TbInitialBalance.Text, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.CurrentCulture);
+            var client = ServiceClientManager.Instance.Client;
+            if (client == null)
+            {
+                MessageDialog.Show("GlbDialogT_NoConnection", "GlbDialogD_NoConnection", AlertType.ERROR);
+                return;
+            }
+
+            bool success = false;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                success = await client.OpenCashRegisterAsync(initialBalance);
+            });
+
+            if (success)
+            {
+                MessageDialog.Show("CashRegister_DialogTSuccess", "CashRegister_DialogDSuccess", AlertType.SUCCESS, () =>
+                {
+                    ClosePopup();
+                });
+            }
+            else
+            {
+                MessageDialog.Show("CashRegister_DialogTFail", "CashRegister_DialogDAlreadyOpen", AlertType.WARNING);
+            }
+        }
         public static void Show(FrameworkElement triggerButton)
         {
             var openingCash = new OpeningCash();
@@ -38,21 +92,16 @@ namespace ItaliaPizzaClient.Views.UserControls
 
             Animations.BeginAnimation(openingCash, "ShowBorderAnimation");
         }
-
-
-        private void Click_BtnAccept(object sender, RoutedEventArgs e)
-        {
-            // lógica de aceptación
-        }
-
-        private void Click_BtnCancel(object sender, RoutedEventArgs e)
+        private void ClosePopup()
         {
             var mainWindow = Application.Current.MainWindow as MainWindow;
-
-
             mainWindow.PopUpOverlay.Visibility = Visibility.Collapsed;
             mainWindow.PopUpHost.Content = null;
         }
 
+        private void Click_BtnCancel(object sender, RoutedEventArgs e)
+        {
+           ClosePopup();
+        }
     }
 }
