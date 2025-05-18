@@ -207,6 +207,12 @@
   <wsdl:message name="IMainManager_RegisterCashOut_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterCashOutResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterSupplierOrderExpense_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterSupplierOrderExpense" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterSupplierOrderExpense_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterSupplierOrderExpenseResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetAllSupplierOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSupplierOrders" />
   </wsdl:message>
@@ -427,6 +433,10 @@
     <wsdl:operation name="RegisterCashOut">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterCashOut" message="tns:IMainManager_RegisterCashOut_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterCashOutResponse" message="tns:IMainManager_RegisterCashOut_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterSupplierOrderExpense">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpense" message="tns:IMainManager_RegisterSupplierOrderExpense_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpenseResponse" message="tns:IMainManager_RegisterSupplierOrderExpense_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllSupplierOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders" message="tns:IMainManager_GetAllSupplierOrders_InputMessage" />
@@ -749,6 +759,15 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterCashOut">
       <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterCashOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterSupplierOrderExpense">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpense" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

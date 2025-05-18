@@ -394,6 +394,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RegisterSupplierOrderExpense">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="supplierOrderID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterSupplierOrderExpenseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegisterSupplierOrderExpenseResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAllSupplierOrders">
     <xs:complexType>
       <xs:sequence />

@@ -269,7 +269,8 @@
                                                      Grid.Column="1" Grid.Row="1"
                                                      Style="{DynamicResource TextBoxStyle}" 
                                                      Tag="Cambio:" Margin="5 0 0 0"
-                                                     IsReadOnly="True" />
+                                                     IsReadOnly="True" 
+                                                     IsEnabled="False"/>
                                         </Grid>
 
                                         <Grid Margin="0 28 0 0">
@@ -285,7 +286,8 @@
                                             <Button x:Name="BtnConfirm" Grid.Column="1"
                                                     Style="{DynamicResource PrimaryButtonStyle}"
                                                     Content="{DynamicResource Glb_Confirm}"
-                                                    Margin="5 0 0 0" IsEnabled="False" >
+                                                    Margin="5 0 0 0" IsEnabled="False"
+                                                    Click="Clic_BtnConfirm">
                                                 <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
                                             </Button>
 
