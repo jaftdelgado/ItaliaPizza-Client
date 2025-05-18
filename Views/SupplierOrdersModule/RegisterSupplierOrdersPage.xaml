@@ -1,0 +1,193 @@
+﻿<Page x:Class="ItaliaPizzaClient.Views.RegisterSupplierOrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegisterSupplierOrdersPage">
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderThickness="0,0,0,0.5"
+                BorderBrush="{StaticResource SecondaryBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                       Text="{DynamicResource RegOrderSupplier_Header}"/>
+                    <TextBlock Style="{StaticResource DescriptionLabelStyle}"
+                       Text="{DynamicResource RegOrderSupplier_Desc}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6.75*"/>
+                <ColumnDefinition Width="3.25*" MaxWidth="320"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0" Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource RegOrderSupplier_Info}"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="0 12 0 0">
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <Border BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0 0 0 0.5">
+                            <StackPanel Margin="20 0 20 16">
+                                <TextBlock Text="{DynamicResource RegOrderSupplier_SupplierInfo}"
+                                           Style="{DynamicResource DescriptionLabelStyle}"
+                                           Margin="0 0 0 8"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="CbCategories"
+                                              Width="160"
+                                              Style="{DynamicResource ComboBoxStyle}"
+                                              Tag="{DynamicResource Glb_Categories}"
+                                              SelectionChanged="CbCategories_SelectionChanged" />
+                                    <ComboBox x:Name="CbSuppliers"
+                                              IsEnabled="False"
+                                              Style="{DynamicResource ComboBoxStyle}"
+                                              Tag="{DynamicResource RegOrderSupplier_Supplier}"
+                                              Width="190" Margin="10 0 0 0"
+                                              DisplayMemberPath="SupplierName"
+                                              SelectionChanged="CbSuppliers_SelectionChanged"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Grid Margin="20 20 0 0">
+                            <ScrollViewer VerticalScrollBarVisibility="Visible"
+                                          HorizontalScrollBarVisibility="Disabled">
+                                <ItemsControl x:Name="ButtonsPanel">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"
+                                                       ItemHeight="170"
+                                                       ItemWidth="170"
+                                                       Margin="0"
+                                                       HorizontalAlignment="Left" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style>
+                                            <Setter Property="FrameworkElement.Margin" Value="8"/>
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+                                </ItemsControl>
+                            </ScrollViewer>
+
+                        </Grid>
+
+
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <Border Grid.Column="1" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0.5 0 0 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0" Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource RegOrderSupplier_OrderDetails}"
+                                   Style="{DynamicResource SubtitleLabelStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="OrderDetailsPanel" Grid.Row="1" Margin="20"/>
+
+                    <Border Grid.Row="2"
+                            BorderBrush="{StaticResource SecondaryBrush}"
+                            BorderThickness="0 0.5 0 0">
+                        <StackPanel Margin="20 14 20 26" >
+                            <TextBlock Text="Total" Margin="0 0 0 8"
+                                        Style="{DynamicResource SubtitleLabelStyle}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="Proveedor:"
+                                           Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="TbSupplier"
+                                           Grid.Column="1" HorizontalAlignment="Right"
+                                           Text="-"
+                                           Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+
+                            <Grid Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="7*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="Fecha:"
+                                           Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="TbCurrentDate"
+                                           Grid.Column="1" HorizontalAlignment="Right"
+                                           Text="-"
+                                           Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+
+                            <Grid Margin="0 8 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="Total:" VerticalAlignment="Bottom"
+                                           Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="TbTotal"
+                                           Grid.Column="1" HorizontalAlignment="Right"
+                                           Style="{DynamicResource SubtitleLabelStyle}"
+                                           FontFamily="{StaticResource SFProSemiBold}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+        <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
+                BorderThickness="0,0.5,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
+                <Button x:Name="BtnCancel" 
+                        Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                        Content="{DynamicResource Glb_Cancel}"
+                        Margin="0 0 10 0"/>
+                <Button x:Name="BtnConfirmOrder"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Content="{DynamicResource RegOrderSupplier_BtnConfirmOrder}"
+                        Click="Click_BtnConfirmOrder">
+                    <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

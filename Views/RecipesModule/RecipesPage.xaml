@@ -93,42 +93,40 @@
                     </Grid>
 
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5, 0, 0, 0">
-                        <Grid Grid.Row="0" x:Name="RecipeDetailsPanel" Visibility="Collapsed">
+                        <Grid Grid.Row="0" x:Name="RecipeDetailsPanel" >
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="6*"/>
-                                <RowDefinition Height="1.5*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <!-- TODO add Image on row 0-->
-                            <StackPanel Grid.Row="0" Orientation="Vertical">
-                                <Image Name="RecipePic" HorizontalAlignment="Left" Width="100"
-                                    Height="100" Stretch="Fill" VerticalAlignment="Top"
-                                    RenderOptions.BitmapScalingMode="LowQuality" Margin="0, 16">
-                                    <Image.Clip>
-                                        <RectangleGeometry Rect="0, 0, 0, 0" RadiusX="12" RadiusY="12"/>
-                                    </Image.Clip>
-                                </Image>
-                            </StackPanel>
-                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="24, 0">
-                                <TextBlock x:Name="RecipeTitle" Text="Pizza de pepperoni"
+
+                            <StackPanel VerticalAlignment="Center" Grid.Row="0" Orientation="Vertical" Margin="24, 10">
+                                <TextBlock x:Name="ProductRecipeTitle" Text="Pizza de pepperoni"
                                     Style="{DynamicResource SubtitleLabelStyle}"/>
-                                <TextBlock x:Name="RecipeIngredients" Text="Ingredientes: " Margin="0, 2, 0, 0"
-                                    Style="{DynamicResource RegularLabelStyle}"
-                                    Foreground="{StaticResource PrimaryButtonBrush}"/>
                                 <TextBlock x:Name="RecipeDescription" Text="Ejemplo de descripcion e ingredientes..." 
                                     Margin="0, 10"
                                     TextWrapping="Wrap"
                                     Style="{DynamicResource DescriptionLabelStyle}"/>
+                                <TextBlock x:Name="RecipePreparationTime"
+                                    Margin="0,10"
+                                    TextWrapping="Wrap"
+                                    Style="{DynamicResource SubtitleLabelStyle}">
+                                    <Run FontFamily="Segoe MDL2 Assets" Text="&#xE823;" />
+                                    <Run Text=" 140 minutos" />
+                                </TextBlock>
                             </StackPanel>
 
-                            <StackPanel Grid.Row="2" Margin="10, 0" Orientation="Horizontal">
-                                <Button x:Name="BtnDeleteRecipe" Style="{DynamicResource SecondaryButtonStyle}"
-                                        Content="{DynamicResource Recipes_BtnDeleteRecipe}">
-                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                </Button>
-
-                            </StackPanel>
+                            <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
+                                        BorderThickness="0 0.5 0 0">
+                                <StackPanel VerticalAlignment="Center" Margin="20">
+                                    <Button x:Name="BtnShowRecipe" 
+                                                Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="Mostrar receta completa" Margin="0 0 0 6" 
+                                                Click="Click_BtnShowRecipe">
+                                        <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
                         </Grid>
                     </Border>
                 </Grid>

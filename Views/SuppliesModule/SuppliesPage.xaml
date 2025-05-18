@@ -124,7 +124,6 @@
                                 </DataGrid.Columns>
                             </DataGrid>
 
-
                             <StackPanel x:Name="NoMatchesMessage" Orientation="Vertical"
                                         VerticalAlignment="Center" HorizontalAlignment="Center"
                                         Visibility="Collapsed">
@@ -144,7 +143,7 @@
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5 0 0 0">
                         <Grid>
                             <Grid Grid.Row="0" x:Name="SupplyDetailsPanel"
-                                  Visibility="Collapsed">
+                                  Visibility="Visible">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>

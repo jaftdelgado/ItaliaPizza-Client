@@ -816,6 +816,131 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RecipeSupplyDTO", Namespace="http://schemas.datacontract.org/2004/07/Services")]
+    [System.SerializableAttribute()]
+    public partial class RecipeSupplyDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MeasureUnitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RecipeIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RecipeSupplyIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RecipeSupplyNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SupplyIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal UseQuantityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MeasureUnit {
+            get {
+                return this.MeasureUnitField;
+            }
+            set {
+                if ((this.MeasureUnitField.Equals(value) != true)) {
+                    this.MeasureUnitField = value;
+                    this.RaisePropertyChanged("MeasureUnit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RecipeID {
+            get {
+                return this.RecipeIDField;
+            }
+            set {
+                if ((this.RecipeIDField.Equals(value) != true)) {
+                    this.RecipeIDField = value;
+                    this.RaisePropertyChanged("RecipeID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RecipeSupplyID {
+            get {
+                return this.RecipeSupplyIDField;
+            }
+            set {
+                if ((this.RecipeSupplyIDField.Equals(value) != true)) {
+                    this.RecipeSupplyIDField = value;
+                    this.RaisePropertyChanged("RecipeSupplyID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RecipeSupplyName {
+            get {
+                return this.RecipeSupplyNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RecipeSupplyNameField, value) != true)) {
+                    this.RecipeSupplyNameField = value;
+                    this.RaisePropertyChanged("RecipeSupplyName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SupplyID {
+            get {
+                return this.SupplyIDField;
+            }
+            set {
+                if ((this.SupplyIDField.Equals(value) != true)) {
+                    this.SupplyIDField = value;
+                    this.RaisePropertyChanged("SupplyID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal UseQuantity {
+            get {
+                return this.UseQuantityField;
+            }
+            set {
+                if ((this.UseQuantityField.Equals(value) != true)) {
+                    this.UseQuantityField = value;
+                    this.RaisePropertyChanged("UseQuantity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ProductDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
     [System.SerializableAttribute()]
     public partial class ProductDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1511,6 +1636,9 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private int ProductIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ProductNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RecipeIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1589,56 +1717,15 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int RecipeID {
+        public string ProductName {
             get {
-                return this.RecipeIDField;
+                return this.ProductNameField;
             }
             set {
-                if ((this.RecipeIDField.Equals(value) != true)) {
-                    this.RecipeIDField = value;
-                    this.RaisePropertyChanged("RecipeID");
+                if ((object.ReferenceEquals(this.ProductNameField, value) != true)) {
+                    this.ProductNameField = value;
+                    this.RaisePropertyChanged("ProductName");
                 }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RecipeSupplyDTO", Namespace="http://schemas.datacontract.org/2004/07/Services")]
-    [System.SerializableAttribute()]
-    public partial class RecipeSupplyDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RecipeIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RecipeSupplyIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SupplyIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal UseQuantityField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
             }
         }
         
@@ -1651,45 +1738,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.RecipeIDField.Equals(value) != true)) {
                     this.RecipeIDField = value;
                     this.RaisePropertyChanged("RecipeID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int RecipeSupplyID {
-            get {
-                return this.RecipeSupplyIDField;
-            }
-            set {
-                if ((this.RecipeSupplyIDField.Equals(value) != true)) {
-                    this.RecipeSupplyIDField = value;
-                    this.RaisePropertyChanged("RecipeSupplyID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SupplyID {
-            get {
-                return this.SupplyIDField;
-            }
-            set {
-                if ((this.SupplyIDField.Equals(value) != true)) {
-                    this.SupplyIDField = value;
-                    this.RaisePropertyChanged("SupplyID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal UseQuantity {
-            get {
-                return this.UseQuantityField;
-            }
-            set {
-                if ((this.UseQuantityField.Equals(value) != true)) {
-                    this.UseQuantityField = value;
-                    this.RaisePropertyChanged("UseQuantity");
                 }
             }
         }
@@ -1994,6 +2042,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetAllSuppliesPage", ReplyAction="http://tempuri.org/ISupplyManager/GetAllSuppliesPageResponse")]
         System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[]> GetAllSuppliesPageAsync(int pageNumber, int pageSize);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliesByRecipe", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliesByRecipeResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO[] GetSuppliesByRecipe(int recipeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliesByRecipe", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliesByRecipeResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO[]> GetSuppliesByRecipeAsync(int recipeId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/AddSupply", ReplyAction="http://tempuri.org/ISupplyManager/AddSupplyResponse")]
         int AddSupply(ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO supplyDTO);
@@ -2347,6 +2401,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[]> GetAllSuppliesPageAsync(int pageNumber, int pageSize) {
             return base.Channel.GetAllSuppliesPageAsync(pageNumber, pageSize);
+        }
+        
+        public ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO[] GetSuppliesByRecipe(int recipeId) {
+            return base.Channel.GetSuppliesByRecipe(recipeId);
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO[]> GetSuppliesByRecipeAsync(int recipeId) {
+            return base.Channel.GetSuppliesByRecipeAsync(recipeId);
         }
         
         public int AddSupply(ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO supplyDTO) {

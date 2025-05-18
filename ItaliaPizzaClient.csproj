@@ -92,11 +92,26 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Recipe.cs" />
     <Compile Include="Model\RecipeSupplyItem.cs" />
-    <Compile Include="Model\OrderItem.cs" />
+    <Compile Include="Model\SupplierOrder.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\Supply.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\MeasureUnit.cs" />
+    <Compile Include="Views\CashRegisterPage.xaml.cs">
+      <DependentUpon>CashRegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SignInWindow.xaml.cs">
+      <DependentUpon>SignInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\OpeningCash.xaml.cs">
+      <DependentUpon>OpeningCash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\RegisterOutflowMoney.xaml.cs">
+      <DependentUpon>RegisterOutflowMoney.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SupplyCard.xaml.cs">
+      <DependentUpon>SupplyCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Animations.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\CurrentSession.cs" />
@@ -142,8 +157,8 @@
     <Compile Include="Views\RecipesModule\SuppliesList.xaml.cs">
       <DependentUpon>SuppliesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SupplierOrdersModule\OrderSuppliersPage.xaml.cs">
-      <DependentUpon>OrderSuppliersPage.xaml</DependentUpon>
+    <Compile Include="Views\SupplierOrdersModule\SupplierOrdersPage.xaml.cs">
+      <DependentUpon>SupplierOrdersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonalModule\PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
@@ -163,8 +178,8 @@
     <Compile Include="Views\PersonalModule\RegisterEmployeePage.xaml.cs">
       <DependentUpon>RegisterEmployeePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage.xaml.cs">
-      <DependentUpon>RegisterOrderSupplierPage.xaml</DependentUpon>
+    <Compile Include="Views\SupplierOrdersModule\RegisterSupplierOrdersPage.xaml.cs">
+      <DependentUpon>RegisterSupplierOrdersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SuppliersModule\RegisterSupplierPage.xaml.cs">
       <DependentUpon>RegisterSupplierPage.xaml</DependentUpon>
@@ -181,6 +196,9 @@
     <Compile Include="Views\TicketPage.xaml.cs">
       <DependentUpon>TicketPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\SupplyOrderDetail.xaml.cs">
+      <DependentUpon>SupplyOrderDetail.xaml</DependentUpon>
+    </Compile>
     <Page Include="Properties\MergedResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +212,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ButtonsStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CashRegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SignInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\OpeningCash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RegisterOutflowMoney.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SupplyCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -249,7 +287,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SupplierOrdersModule\OrderSuppliersPage.xaml">
+    <Page Include="Views\SupplierOrdersModule\SupplierOrdersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -277,7 +315,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SupplierOrdersModule\RegisterOrderSupplierPage.xaml">
+    <Page Include="Views\SupplierOrdersModule\RegisterSupplierOrdersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,6 +336,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TicketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SupplyOrderDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -336,6 +378,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplierDTO.datasource">
@@ -484,6 +529,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\measureunit-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\edit2-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\discard-hover-icon.png" />
+    <Resource Include="Resources\Icons\discard-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\check-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
@@ -24,7 +25,7 @@ namespace ItaliaPizzaClient.Views
 
             sideMenuManager.LoadButtons(MenuStackPanel);
 
-            BtnProfile.Content = CurrentSession.Name;
+            //BtnProfile.Content = CurrentSession.Name;
 
             NavigateToPage("Glb_Principal", new PrincipalPage());
 
@@ -41,7 +42,7 @@ namespace ItaliaPizzaClient.Views
 
         private string GetCurrentUserRole()
         {
-            return "Cook";
+            return "Test";
         }
 
         private void LoadProfileImage()
@@ -54,6 +55,19 @@ namespace ItaliaPizzaClient.Views
             NavigationManager.Instance.NavigateToPage(pageName, pageInstance);
         }
 
+        private void PopUpOverlay_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource == PopUpOverlay)
+            {
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.PopUpOverlay.Visibility = Visibility.Collapsed;
+                mainWindow.PopUpHost.Content = null;
+            }
+
+            e.Handled = true;
+        }
+
+
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             var user = txtUsuario.Text;
@@ -61,7 +75,6 @@ namespace ItaliaPizzaClient.Views
             var hashedPassword = PasswordUtilities.HashPassword(password);
             if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(password))
             {
-                Console.WriteLine("Error: Campos vacios");
                 MessageDialog.Show("Error", "Por favor ingrese su usuario y contraseña",AlertType.ERROR);
                 return;
             }
@@ -76,7 +89,7 @@ namespace ItaliaPizzaClient.Views
             }
 
             
-            //...CREAR SINGLETON SESION
+
             CurrentSession.UserID = personal.PersonalID;
             CurrentSession.Name = personal.FirstName;
             CurrentSession.Surnames = personal.LastName;
@@ -84,13 +97,12 @@ namespace ItaliaPizzaClient.Views
             CurrentSession.UserRole = personal.RoleID;
 
             SessionManager.Start();
-            //...crear metodo ping para actualizar sesion
 
 
-            //Ocultar componentes para mostrar homw
+
+
             LoginGrid.Visibility = Visibility.Collapsed;
             RootGrid.Visibility = Visibility.Visible;
-            //Cargar el menu lateral
             LoadLateralMenu();
         }
         private void LoadLateralMenu()

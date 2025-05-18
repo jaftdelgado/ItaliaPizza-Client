@@ -143,7 +143,8 @@
                                   Style="{DynamicResource DataGridStyle1}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="C" Width="Auto"
-                        HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}">
+                                                        HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
+                                                        CellStyle="{StaticResource DataGridCellStyle0}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

@@ -16,6 +16,9 @@ namespace ItaliaPizzaClient.Model
 
         public Product Product { get; set; }
 
+        public string ProductName { get; set; }
+        public int ProductID { get; set; }
+
         public RecipeSupplyItem RecipeSupplyItem { get; set; }
 
     }

@@ -164,6 +164,41 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="TransparentTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF8888FF"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF5555FF"/>
+                            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Gray"/>
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
         <Setter Property="Height" Value="44"/>
@@ -176,31 +211,31 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
-                    <Grid>
+                    <Grid x:Name="RootGrid">
                         <Border x:Name="ComboBoxBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="12"
-                            Padding="5">
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="12"
+                        Padding="5">
                             <Grid>
                                 <TextBlock Text="{TemplateBinding Tag}" 
-                                       Foreground="{StaticResource SecondaryBrush}"
-                                       FontSize="10"
-                                       FontWeight="SemiBold"
-                                       VerticalAlignment="Top"
-                                       Margin="8,2,5,0"/>
+                                   Foreground="{StaticResource SecondaryBrush}"
+                                   FontSize="10"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Top"
+                                   Margin="8,2,5,0"/>
 
                                 <Grid Margin="0,14,0,0">
                                     <ToggleButton x:Name="ToggleButton"
-                                              Focusable="False"
-                                              Background="Transparent"
-                                              BorderThickness="0"
-                                              HorizontalAlignment="Right"
-                                              VerticalAlignment="Center"
-                                              Width="20"
-                                              Height="20"
-                                              IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                          Focusable="False"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center"
+                                          Width="20"
+                                          Height="20"
+                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
                                         <ToggleButton.FocusVisualStyle>
                                             <Style TargetType="ToggleButton">
                                                 <Setter Property="Background" Value="Transparent"/>
@@ -209,28 +244,28 @@
                                         </ToggleButton.FocusVisualStyle>
 
                                         <Path Data="M 4,6 L 8,10 L 12,6"
-                                              Stroke="{StaticResource SecondaryBrush}"
-                                              StrokeThickness="1.5"
-                                              StrokeLineJoin="Round"
-                                              StrokeStartLineCap="Round"
-                                              StrokeEndLineCap="Round"/>
+                                          Stroke="{StaticResource SecondaryBrush}"
+                                          StrokeThickness="1.5"
+                                          StrokeLineJoin="Round"
+                                          StrokeStartLineCap="Round"
+                                          StrokeEndLineCap="Round"/>
                                     </ToggleButton>
 
                                     <ContentPresenter x:Name="ContentPresenter"
-                                                  Content="{TemplateBinding SelectionBoxItem}"
-                                                  Margin="8,0,30,0"
-                                                  VerticalAlignment="Center"/>
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              Margin="8,0,30,0"
+                                              VerticalAlignment="Center"/>
                                 </Grid>
                             </Grid>
                         </Border>
 
                         <Popup x:Name="Popup"
-                           Placement="Bottom"
-                           IsOpen="{TemplateBinding IsDropDownOpen}"
-                           AllowsTransparency="True" Focusable="False">
+                       Placement="Bottom"
+                       IsOpen="{TemplateBinding IsDropDownOpen}"
+                       AllowsTransparency="True" Focusable="False">
                             <Border Background="{StaticResource SecondaryButtonBrush}"
-                                BorderBrush="#D3D1DB" BorderThickness="1"
-                                CornerRadius="8">
+                            BorderBrush="#D3D1DB" BorderThickness="1"
+                            CornerRadius="8">
                                 <ScrollViewer>
                                     <StackPanel>
                                         <ItemsPresenter/>
@@ -239,6 +274,11 @@
                             </Border>
                         </Popup>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="RootGrid" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

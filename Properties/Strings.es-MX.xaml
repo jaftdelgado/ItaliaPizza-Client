@@ -12,6 +12,7 @@
     <sys:String x:Key="Glb_Close">Cerrar</sys:String>
     <sys:String x:Key="Glb_Cancel">Cancelar</sys:String>
     <sys:String x:Key="Glb_Delete">Eliminar</sys:String>
+    <sys:String x:Key="Glb_Change">Cambiar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
     <sys:String x:Key="Glb_Orders">Comandas</sys:String>
@@ -24,8 +25,9 @@
     <sys:String x:Key="Glb_Suppliers">Proveedores</sys:String>
     <sys:String x:Key="Glb_SuppliersCategory">Categorias de Proveedor</sys:String>
     <sys:String x:Key="Glb_Quantity">Cantidad</sys:String>
-    <sys:String x:Key="Glb_SupplyOrders">Ordenes de Compra</sys:String>
+    <sys:String x:Key="Glb_SupplierOrders">Pedidos a Proveedor</sys:String>
     <sys:String x:Key="Glb_Reports">Reportes</sys:String>
+    <sys:String x:Key="Glb_Categories">Categorías:</sys:String>
     <sys:String x:Key="Glb_PhoneNumber">Número de Teléfono:</sys:String>
     <sys:String x:Key="Glb_EmailAddress">Correo Electrónico:</sys:String>
     <sys:String x:Key="Glb_AddressName">Dirección:</sys:String>
@@ -85,6 +87,14 @@
     <sys:String x:Key="EmployeeRole_Waiter">Mesero(a)</sys:String>
     <sys:String x:Key="EmployeeRole_Cook">Cocinero(a)</sys:String>
     <sys:String x:Key="EmployeeRole_DeliveryDriver">Repartidor(a)</sys:String>
+    
+    <!--OrderSupplierStatus-->
+    <sys:String x:Key="OrdSupplier_StatusPending">Pendiente</sys:String>
+    <sys:String x:Key="OrdSupplier_StatusDelivered">Entregado</sys:String>
+    <sys:String x:Key="OrdSupplier_StatusCancelled">Cancelado</sys:String>
+    <sys:String x:Key="OrdSupplier_BtnStatusPending">Pendientes</sys:String>
+    <sys:String x:Key="OrdSupplier_BtnStatusDelivered">Entregados</sys:String>
+    <sys:String x:Key="OrdSupplier_BtnStatusCancelled">Cancelados</sys:String>
     
     <!--Personal-->
     <sys:String x:Key="Personal_Header">Personal</sys:String>
@@ -264,22 +274,60 @@
     <sys:String x:Key="RegSupplier_DialogDEditSuccess">La información del insumo ha sido actualizada correctamente y los cambios han sido guardados con éxito.</sys:String>
 
     <!--OrderSuppliers-->
-    <sys:String x:Key="OrdSuppliers_Header">Ordenes a Proveedores</sys:String>
-    <sys:String x:Key="OrdSuppliers_Desc">Visualiza y registra pedidos a proveedor realizados por Italia Pizza.</sys:String>
+    <sys:String x:Key="OrdSuppliers_Header">Pedidos a Proveedor</sys:String>
+    <sys:String x:Key="OrdSuppliers_Desc">Visualiza, registra, modifica y cancela pedidos de reabastecimiento realizados por Italia Pizza.</sys:String>
     <sys:String x:Key="OrdSuppliers_BtnNewOrderSupplier">Nuevo Pedido</sys:String>
     <sys:String x:Key="OrdSuppliers_TitleTable">Lista de Pedidos</sys:String>
+    <sys:String x:Key="OrdSuppliers_TableHFolio">Folio</sys:String>
+    <sys:String x:Key="OrdSuppliers_TableHSupplier">Proveedor</sys:String>
+    <sys:String x:Key="OrdSuppliers_TableHStatus">Estado</sys:String>
+    <sys:String x:Key="OrdSuppliers_OrdSupplier">Pedido a Proveedor</sys:String>
+    <sys:String x:Key="OrdSuppliers_DetailsSupplier">Proveedor:</sys:String>
+    <sys:String x:Key="OrdSuppliers_DetailsFolio">Folio:</sys:String>
+    <sys:String x:Key="OrdSuppliers_DetailsOrderedDate">Ordenado:</sys:String>
+    <sys:String x:Key="OrdSuppliers_DetailsDeliveredDate">Entregado:</sys:String>
+    <sys:String x:Key="OrdSuppliers_TableHOrderDate">Fecha del Pedido</sys:String>
     <sys:String x:Key="OrdSuppliers_BtnDeleteOrder">Eliminar pedido</sys:String>
-    <sys:String x:Key="OrdSuppliers_BtnDeliveredOrder">Marcar como entrado</sys:String>
+    <sys:String x:Key="OrdSuppliers_BtnMarkReceived">Marcar como Recibido</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogTCancelOrder">¿Cancelar pedido?</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogDCancelOrder">¿Estás seguro de que deseas cancelar el pedido a proveedor seleccionado? Esta acción es permanente y no se puede deshacer.</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogTCancelledOrder">Pedido cancelado</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogDCancelledOrder">El pedido fue marcado como cancelado correctamente. Esta acción es irreversible y el pedido ya no podrá ser procesado ni recuperado.</sys:String>
 
     <!--Register Order Suppliers-->
-    <sys:String x:Key="RegOrderSupplier_Header">Registrar orden a proveedor</sys:String>
-    <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos de la orden que se desea registrar.</sys:String>
-    <sys:String x:Key="RegOrderSupplier_Info">Informacion de la Orden.</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnNewOrden">Tramitar Orden</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnDeleteSupply">Eliminar insumo</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnAddSupply">Añadir insumo</sys:String>
-    <sys:String x:Key="OrderSupplier_BtnCancelar">Cancelar Orden</sys:String>
-   
+    <sys:String x:Key="RegOrderSupplier_Header">Crear Pedido a Proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Desc">Ingresa los datos del pedido a proveedor que se desea registrar.</sys:String>
+    <sys:String x:Key="EditOrderSupplier_Header">Editar Pedido a Proveedor</sys:String>
+    <sys:String x:Key="EditOrderSupplier_Desc">Modifica los insumos del pedido a proveedor que se desea actualizar.</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Info">Insumos del Proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_SupplierInfo">Información del Proveedor</sys:String>
+    <sys:String x:Key="RegOrderSupplier_OrderDetails">Detalles del Pedido</sys:String>
+    <sys:String x:Key="RegOrderSupplier_Supplier">Proveedor:</sys:String>
+    <sys:String x:Key="RegOrderSupplier_SelectSupplies">Selecciona los insumos deseados:</sys:String>
+    <sys:String x:Key="RegOrderSupplier_BtnConfirmOrder">Confirmar Pedido</sys:String>
+    <sys:String x:Key="RegOrderSupplier_BtnEditOrder">Actualizar Pedido</sys:String>
+    <sys:String x:Key="RegOrderSupplier_DialogTDialogTSelection">¿Cambiar selección?</sys:String>
+    <sys:String x:Key="RegOrderSupplier_DialogDDialogTSelection">¿Estás seguro de que deseas seleccionar otro proveedor? Se descartarán todos los elementos del pedido a proveedor actual.</sys:String>
+    <sys:String x:Key="RegOrderSupplier_DialogTSuccess">Pedido a Proveedor registrado</sys:String>
+    <sys:String x:Key="RegOrderSupplier_DialogDSuccess">La orden de compra ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+
+    <!--Supplies-->
+    <sys:String x:Key="CashRegister_Header">Caja Registradora</sys:String>
+    <sys:String x:Key="CashRegister_Desc">Realiza apertura y corte de caja, y visualiza las transacciones generadas durante el turno en Italia Pizza.</sys:String>
+    <sys:String x:Key="CashRegister_BtnOpenRegister">Abrir Caja</sys:String>
+    <sys:String x:Key="CashRegister_BtnRegisterOutflow">Registrar salida</sys:String>
+    <sys:String x:Key="CashRegister_TitleTable">Historial de Transacciones</sys:String>
+    <sys:String x:Key="CashRegister_TbOpeningDate">Fecha de apertura:</sys:String>
+    <sys:String x:Key="CashRegister_TbInitialBalance">Balance inicial:</sys:String>
+    <sys:String x:Key="CashRegister_CheckBConfirmOpening">Confirmar apertura de caja.</sys:String>
+    <sys:String x:Key="CashRegister_BtnOpening">Abrir caja</sys:String>
+    <sys:String x:Key="CashRegister_DialogTInvalidAmount">Monto inválido</sys:String>
+    <sys:String x:Key="CashRegister_DialogDInvalidAmount">Por favor, ingrese un monto válido y mayor o igual a 0 para abrir la caja.</sys:String>
+    <sys:String x:Key="CashRegister_DialogTSuccess">Caja abierta</sys:String>
+    <sys:String x:Key="CashRegister_DialogDSuccess">La caja ha sido abierta correctamente.</sys:String>
+    <sys:String x:Key="CashRegister_DialogTFail">Caja ya abierta</sys:String>
+    <sys:String x:Key="CashRegister_DialogDAlreadyOpen">Ya existe una caja abierta. No se puede abrir otra hasta realizar el corte.</sys:String>
+
     <!--Order-->
     <sys:String x:Key="OrderPage_BtnAddOrder">Añadir Orden</sys:String>
     <sys:String x:Key="OrderPage_BtnPayOrder">Pagar Orden</sys:String>
@@ -304,4 +352,17 @@
     <sys:String x:Key="RegRecipe_TbRecipeName">Nombre de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbRecipeDescription">Descripción de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbSupplyList">Lista de insumos</sys:String>
+
+    <!--Register Outflow Money-->
+    <sys:String x:Key="OutflowMoney_Header">Registrar Salida de Dinero.</sys:String>
+    <sys:String x:Key="OutflowMoney_Description">Descripción</sys:String>
+    <sys:String x:Key="OutflowMoney_Amount">Monto</sys:String>
+    <sys:String x:Key="OutflowMoney_RegisterOutflow">Registrar Salida</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogTSuccess">Salida registrada</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogDSuccess">La salida de dinero fue registrada correctamente en la caja.</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogTNoCashOpen">Caja no abierta</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogDNoCashOpen">Debe abrir una caja antes de registrar una salida de dinero.</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogTInsufficientFunds">Fondos insuficientes</sys:String>
+    <sys:String x:Key="OutflowMoney_DialogDInsufficientFunds">El monto ingresado excede el balance disponible en la caja.</sys:String>
+
 </ResourceDictionary>

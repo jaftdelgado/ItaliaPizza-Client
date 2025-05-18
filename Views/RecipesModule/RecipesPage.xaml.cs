@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace ItaliaPizzaClient.Views.RecepiesModule
 {
@@ -38,12 +39,8 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
                     Id = r.RecipeID,
                     Description = r.Description,
                     PreparationTime = r.PreparationTime,
-                    Product = r.Product == null ? null : new Product
-                    {
-                        ProductID = r.Product.Id,
-                        Name = r.Product.Name,
-                        Photo = r.Product.Photo
-                    }
+                    ProductID = r.ProductID,
+                    ProductName = r.ProductName,
                 })
                 .OrderBy(r => r.Id)
                 .ToList();
@@ -75,6 +72,7 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
             bool hasSelection = selected != null;
 
             RecipeDetailsPanel.Visibility = hasSelection ? Visibility.Visible : Visibility.Collapsed;
+
         }
 
         private void DisplayRecipeDetails(Recipe selected)
@@ -83,6 +81,21 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
                 return;
 
             UpdateRecipePanelVisibility(selected);
+
+            RecipeDescription.Text = selected.Description;
+
+            RecipePreparationTime.Inlines.Clear();
+            RecipePreparationTime.Inlines.Add(new Run { FontFamily = new System.Windows.Media.FontFamily("Segoe MDL2 Assets"), Text = "\uE823" });
+            RecipePreparationTime.Inlines.Add(new Run { Text = " " + selected.PreparationTime + " minutos" });
+            ProductRecipeTitle.Text = "Receta del producto:\n"+ selected.ProductName;
+        }
+
+        private void Click_BtnShowRecipe(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
+            if (mainWindow != null && recipesDataGrid.SelectedItem is Recipe selected)
+                mainWindow.NavigateToPage("Recipes_BtnEditRecipe", new RecipeRegister(selected));
         }
     }
 }

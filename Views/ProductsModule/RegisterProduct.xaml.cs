@@ -118,7 +118,6 @@ namespace ItaliaPizzaClient.Views
         private void HandleServiceException(MainManagerClient client, string errorType, Exception ex)
         {
             client?.Abort();
-            Console.WriteLine($"Error: {ex.Message}");
             MessageDialog.Show(errorType, $"Ocurrió un error: {ex.Message}", AlertType.ERROR);
         }
 
