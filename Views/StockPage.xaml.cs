@@ -19,7 +19,7 @@ namespace ItaliaPizzaClient.Views
 
         private void StockPage_Loaded(object sender, RoutedEventArgs e)
         {
-            //UpdateStockPanelVisibility(null);
+
             LoadSuppliesData();
         }
 
