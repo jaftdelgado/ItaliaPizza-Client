@@ -111,6 +111,9 @@
     <Compile Include="Views\UserControls\OpeningCash.xaml.cs">
       <DependentUpon>OpeningCash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\RegisterOutflowMoney.xaml.cs">
+      <DependentUpon>RegisterOutflowMoney.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\ProductCard.xaml.cs">
       <DependentUpon>ProductCard.xaml</DependentUpon>
     </Compile>
@@ -241,6 +244,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\OpeningCash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RegisterOutflowMoney.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
