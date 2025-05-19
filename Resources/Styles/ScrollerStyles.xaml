@@ -20,8 +20,7 @@
                                                         <Border Background="{TemplateBinding Background}" 
                                                                 CornerRadius="2"
                                                                 Width="4"
-                                                                Height="Auto"
-                                                                Margin="2 0"/>
+                                                                Height="Auto" />
                                                     </ControlTemplate>
                                                 </Setter.Value>
                                             </Setter>
@@ -63,8 +62,8 @@
                         <ScrollBar x:Name="PART_VerticalScrollBar"
                                    Grid.Column="1"
                                    Grid.Row="0"
-                                   Width="6"
-                                   Margin="2,4"
+                                   Width="0"
+                                   Margin="0,4"
                                    Orientation="Vertical"
                                    Minimum="0"
                                    Maximum="{TemplateBinding ScrollableHeight}"

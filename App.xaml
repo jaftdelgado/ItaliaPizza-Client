@@ -9,12 +9,12 @@
                 <ResourceDictionary Source="Properties/MergedResources.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/UIElementals.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Animations.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ScrollerStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/DataGridStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ButtonsStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/IconsStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/LabelsStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/TextBoxStyles.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/ScrollerStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
