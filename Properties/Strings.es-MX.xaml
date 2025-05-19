@@ -40,6 +40,7 @@
     <sys:String x:Key="Glb_Active">Activos</sys:String>
     <sys:String x:Key="Glb_ViewAll">Ver Todos</sys:String>
     <sys:String x:Key="Glb_Deleted">Eliminados</sys:String>
+    <sys:String x:Key="Glb_NoStock">Sin inventario</sys:String>
     <sys:String x:Key="Glb_GeneralInfo">Datos Generales</sys:String>
     <sys:String x:Key="Glb_NoSelected">Sin selección actual</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
@@ -97,6 +98,13 @@
     <sys:String x:Key="OrdSupplier_BtnStatusPending">Pendientes</sys:String>
     <sys:String x:Key="OrdSupplier_BtnStatusDelivered">Entregados</sys:String>
     <sys:String x:Key="OrdSupplier_BtnStatusCancelled">Cancelados</sys:String>
+    
+    <!--SignIn-->
+    <sys:String x:Key="SignIn_Header">Iniciar Sesión</sys:String>
+    <sys:String x:Key="SignIn_Desc">Ingresa tu nombre de usuario y contraseña para acceder al sistema de Italia Pizza.</sys:String>
+    <sys:String x:Key="SignIn_TbUsername">Nombre de usuario:</sys:String>
+    <sys:String x:Key="SignIn_TbPassword">Contraseña:</sys:String>
+    <sys:String x:Key="SignIn_BtnSignIn">Iniciar Sesión</sys:String>
     
     <!--Personal-->
     <sys:String x:Key="Personal_Header">Personal</sys:String>

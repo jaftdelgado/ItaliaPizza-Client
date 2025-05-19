@@ -35,8 +35,8 @@
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
-      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Services" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IMainManager_GetAllPersonals_InputMessage">
@@ -140,6 +140,18 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllSupplies_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSuppliesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSuppliesPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSuppliesPage" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllSuppliesPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllSuppliesPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesByRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesByRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetSuppliesByRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSuppliesByRecipeResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_AddSupply_InputMessage">
     <wsdl:part name="parameters" element="tns:AddSupply" />
@@ -260,6 +272,12 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterRecipe_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterRecipeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllRecipes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRecipes" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllRecipes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRecipesResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetRecipes_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRecipes" />
@@ -390,6 +408,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSupplies" message="tns:IMainManager_GetAllSupplies_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSuppliesResponse" message="tns:IMainManager_GetAllSupplies_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAllSuppliesPage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSuppliesPage" message="tns:IMainManager_GetAllSuppliesPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetAllSuppliesPageResponse" message="tns:IMainManager_GetAllSuppliesPage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesByRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesByRecipe" message="tns:IMainManager_GetSuppliesByRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesByRecipeResponse" message="tns:IMainManager_GetSuppliesByRecipe_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddSupply">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/AddSupply" message="tns:IMainManager_AddSupply_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/AddSupplyResponse" message="tns:IMainManager_AddSupply_OutputMessage" />
@@ -469,6 +495,10 @@
     <wsdl:operation name="RegisterRecipe">
       <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipe" message="tns:IMainManager_RegisterRecipe_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipeResponse" message="tns:IMainManager_RegisterRecipe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRecipes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/GetAllRecipes" message="tns:IMainManager_GetAllRecipes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/GetAllRecipesResponse" message="tns:IMainManager_GetAllRecipes_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetRecipes">
       <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/GetRecipes" message="tns:IMainManager_GetRecipes_InputMessage" />
@@ -667,6 +697,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllSuppliesPage">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetAllSuppliesPage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSuppliesByRecipe">
+      <soap12:operation soapAction="http://tempuri.org/ISupplyManager/GetSuppliesByRecipe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddSupply">
       <soap12:operation soapAction="http://tempuri.org/ISupplyManager/AddSupply" style="document" />
       <wsdl:input>
@@ -847,6 +895,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllRecipes">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/GetAllRecipes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRecipes">
       <soap12:operation soapAction="http://tempuri.org/IRecipeManager/GetRecipes" style="document" />
       <wsdl:input>
@@ -944,7 +1001,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
+          <Upn>CEBAGO\Cesar</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

@@ -28,7 +28,7 @@
 
                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
                             HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                    <TextBlock x:Name="lblRecipeTitle" Style="{StaticResource HeaderLabelStyle}"
                                Text="{DynamicResource RegRecipe_Header}"/>
                     <TextBlock Style="{StaticResource DescriptionLabelStyle}"
                                Text="{DynamicResource RegProduct_Desc}"/>
@@ -100,10 +100,28 @@
                                 </DataGridTextColumn.EditingElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Unidad" Binding="{Binding Supply.MeasureUnit}" IsReadOnly="True" Width="0.6*"/>
+                            <DataGridTemplateColumn x:Name="colDelete" Header="Eliminar" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button 
+                                            ToolTip="Eliminar insumo" 
+                                            Click="EliminarFila_Click" 
+                                            Tag="{Binding}" 
+                                            Padding="4"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            >
+                                            <Image Source="/Resources/Icons/delete-icon.png" Width="20" Height="20"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
-                <Button Grid.Row="2" Width="150" Content="Agregar insumo" Style="{DynamicResource PrimaryButtonStyle}" Click="Click_BtnAddSupply"/>
+                <Button x:Name="BtnAddSupply" Grid.Row="2" Width="150" Content="Agregar insumo" Style="{DynamicResource PrimaryButtonStyle}" Click="Click_BtnAddSupply"/>
 
             </Grid>
         </Grid>

@@ -26,10 +26,8 @@ namespace ItaliaPizzaClient.Utilities
             };
         }
 
-        public static void ValidatePriceInput(TextBox textBox)
+        public static void ValidatePriceInput(TextBox textBox, string pattern = @"^\d{0,3}(\.\d{0,2})?$", decimal max_monetary_Value = 999.99m)
         {
-            string pattern = $@"^\d{{0,3}}(\.\d{{0,2}})?$";
-
             textBox.PreviewTextInput += (sender, e) =>
             {
                 string currentText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
@@ -41,7 +39,7 @@ namespace ItaliaPizzaClient.Utilities
                     return;
                 }
 
-                if (decimal.TryParse(currentText, out decimal value) && value > Constants.MAX_MONETARY_VALUE)
+                if (decimal.TryParse(currentText, out decimal value) && value > max_monetary_Value)
                 {
                     e.Handled = true;
                     Animations.ShakeTextBox(textBox);
@@ -60,8 +58,8 @@ namespace ItaliaPizzaClient.Utilities
 
                 if (decimal.TryParse(rawText, out decimal value))
                 {
-                    if (value > Constants.MAX_MONETARY_VALUE)
-                        value = Constants.MAX_MONETARY_VALUE;
+                    if (value > max_monetary_Value)
+                        value = max_monetary_Value;
 
                     textBox.Text = string.Format(CultureInfo.InvariantCulture, "${0:N2}", value);
                 }

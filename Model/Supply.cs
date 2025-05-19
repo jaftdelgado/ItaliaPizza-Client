@@ -91,5 +91,23 @@ namespace ItaliaPizzaClient.Model
                 SupplierName = value;
             }
         }
+
+        public string FormattedStock
+        {
+            get
+            {
+                if (Stock == 0)
+                {
+                    return Application.Current.TryFindResource("Glb_NoStock") as string ?? "No stock";
+                }
+
+                var measureUnit = MeasureUnitModel.GetDefaultMeasureUnits()
+                    .Find(mu => mu.Id == MeasureUnit);
+
+                string abbreviation = measureUnit?.Abbreviation ?? "u";
+
+                return $"{Stock} {abbreviation}";
+            }
+        }
     }
 }
