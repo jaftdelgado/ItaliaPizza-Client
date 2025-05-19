@@ -320,6 +320,18 @@
     <sys:String x:Key="RegOrderSupplier_DialogDSuccess">La orden de compra ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogTEditSuccess">Pedido a Proveedor actualizado</sys:String>
     <sys:String x:Key="RegOrderSupplier_DialogDEditSuccess">La orden de compra ha sido actualizada correctamente y los cambios han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogTConfirmDelivery">Confirmar entrega</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogDConfirmDelivery">¿Estás seguro de que deseas marcar este pedido como entregado?</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogTDeliveredOrder">Pedido entregado</sys:String>
+    <sys:String x:Key="OrdSuppliers_DialogDDeliveredOrder">El pedido fue entregado correctamente.</sys:String>
+    <sys:String x:Key="OrdSuppliers_ErrorDelivery_Title">Error</sys:String>
+    <sys:String x:Key="OrdSuppliers_ErrorDelivery_Failed">No se pudo entregar el pedido.</sys:String>
+    <sys:String x:Key="OrdSuppliers_ErrorDelivery_InvalidStatus">El pedido no está en estado entregado.</sys:String>
+    <sys:String x:Key="OrdSuppliers_ErrorDelivery_NoCashRegister">No hay una caja abierta para registrar el egreso.</sys:String>
+    <sys:String x:Key="OrdSuppliers_ErrorDelivery_InsufficientFunds">Saldo insuficiente en caja.</sys:String>
+    <sys:String x:Key="OrdSuppliers_ErrorDelivery_TransactionFailed">No se pudo registrar la transacción.</sys:String>
+
+
 
     <!--CashRegister-->
     <sys:String x:Key="CashRegister_Header">Caja Registradora</sys:String>

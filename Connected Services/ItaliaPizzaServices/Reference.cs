@@ -2064,6 +2064,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterCashOut", ReplyAction="http://tempuri.org/IFinanceManager/RegisterCashOutResponse")]
         System.Threading.Tasks.Task<int> RegisterCashOutAsync(decimal amount, string description);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpense", ReplyAction="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpenseResponse")]
+        int RegisterSupplierOrderExpense(int supplierOrderID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpense", ReplyAction="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpenseResponse")]
+        System.Threading.Tasks.Task<int> RegisterSupplierOrderExpenseAsync(int supplierOrderID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders", ReplyAction="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrdersResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO[] GetAllSupplierOrders();
         
@@ -2444,6 +2450,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<int> RegisterCashOutAsync(decimal amount, string description) {
             return base.Channel.RegisterCashOutAsync(amount, description);
+        }
+        
+        public int RegisterSupplierOrderExpense(int supplierOrderID) {
+            return base.Channel.RegisterSupplierOrderExpense(supplierOrderID);
+        }
+        
+        public System.Threading.Tasks.Task<int> RegisterSupplierOrderExpenseAsync(int supplierOrderID) {
+            return base.Channel.RegisterSupplierOrderExpenseAsync(supplierOrderID);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO[] GetAllSupplierOrders() {

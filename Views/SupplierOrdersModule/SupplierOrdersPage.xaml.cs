@@ -106,22 +106,56 @@ namespace ItaliaPizzaClient.Views
                 if (client == null) return;
 
                 bool success = client.DeliverOrder(selected.SupplierOrderID);
-                if (!success) return;
-
-                var item = _allSupplierOrders.FirstOrDefault(p => p.SupplierOrderID == selected.SupplierOrderID);
-                if (item != null)
+                if (!success)
                 {
-                    item.Status = 1;
-                    item.Delivered = DateTime.Now;
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_Failed", AlertType.ERROR);
+                        item.Status = 1;
+                        item.Delivered = DateTime.Now;
+                    });
+                    return;
                 }
+
+                int result = client.RegisterSupplierOrderExpense(selected.SupplierOrderID);
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    MessageDialog.Show("OrdSuppliers_DialogTDeliveredOrder", "OrdSuppliers_DialogDDeliveredOrder", AlertType.SUCCESS);
+                    switch (result)
+                    {
+                        case 1:
+                            var item = _allSupplierOrders.FirstOrDefault(p => p.SupplierOrderID == selected.SupplierOrderID);
+                            if (item != null)
+                            {
+                                item.Status = 1;
+                                item.Delivered = DateTime.Now;
+                            }
+                            MessageDialog.Show("OrdSuppliers_DialogTDeliveredOrder", "OrdSuppliers_DialogDDeliveredOrder", AlertType.SUCCESS);
+                            SupplierOrderDetailsPanel.Visibility = Visibility.Collapsed;
+                            PaymentPanel.Visibility = Visibility.Collapsed;
+                            OperationsPanel.Visibility = Visibility.Visible;
+                            LoadSupplierOrdersData();
+                            break;
+
+                        case -1:
+                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InvalidStatus", AlertType.ERROR);
+                            break;
+
+                        case -2:
+                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_NoCashRegister", AlertType.ERROR);
+                            break;
+
+                        case -3:
+                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InsufficientFunds", AlertType.ERROR);
+                            break;
+
+                        default:
+                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.ERROR);
+                            break;
+                    }
                 });
             });
         }
-
         private async Task CancelSupplierOrder(SupplierOrder selected)
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
@@ -356,11 +390,20 @@ namespace ItaliaPizzaClient.Views
                 TbChange.Text = cambio >= 0 ? cambio.ToString("C2") : string.Empty;
                 BtnConfirm.IsEnabled = cambio >= 0;
             }
-            else
-            {
-                TbChange.Text = string.Empty;
-                BtnConfirm.IsEnabled = false;
-            }
+            
+        }
+        private void Clic_BtnConfirm(object sender, RoutedEventArgs e)
+        {
+            MessageDialog.ShowConfirm(
+                "OrdSuppliers_DialogTConfirmDelivery",
+                "OrdSuppliers_DialogDConfirmDelivery",  
+                async () =>
+                {
+                    if (SupplierOrdersDataGrid.SelectedItem is SupplierOrder selected)
+                    await DeliverSupplierOrder(selected);
+                },
+                "Glb_Confirm"
+            );
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
