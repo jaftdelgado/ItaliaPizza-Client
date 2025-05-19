@@ -580,5 +580,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\italiapizza-icon2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\balance-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

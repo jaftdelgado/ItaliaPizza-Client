@@ -20,7 +20,7 @@ namespace ItaliaPizzaClient.Views
             InitializeComponent();
             BtnPending.Tag = "Selected";
             Loaded += OrderSuppliersPage_Loaded;
-            InputUtilities.ValidatePriceInput(TbPayment);
+            InputUtilities.ValidatePriceInput(TbPayment, @"^\d{0,5}(\.\d{0,2})?$", 99999.999m);
         }
 
         private void OrderSuppliersPage_Loaded(object sender, RoutedEventArgs e)
@@ -112,7 +112,7 @@ namespace ItaliaPizzaClient.Views
                 if (item != null)
                 {
                     item.Status = 1;
-                    item.Delivered = System.DateTime.Now;
+                    item.Delivered = DateTime.Now;
                 }
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
@@ -350,7 +350,7 @@ namespace ItaliaPizzaClient.Views
         private void TbPayment_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (decimal.TryParse(TbOrderTotal.Text, System.Globalization.NumberStyles.Currency, null, out decimal total) &&
-                decimal.TryParse(TbPayment.Text, out decimal efectivo))
+                decimal.TryParse(TbPayment.Text, System.Globalization.NumberStyles.Currency, null, out decimal efectivo))
             {
                 decimal cambio = efectivo - total;
                 TbChange.Text = cambio >= 0 ? cambio.ToString("C2") : string.Empty;
@@ -362,7 +362,6 @@ namespace ItaliaPizzaClient.Views
                 BtnConfirm.IsEnabled = false;
             }
         }
-
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
