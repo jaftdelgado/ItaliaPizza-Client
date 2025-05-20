@@ -23,7 +23,7 @@ namespace ItaliaPizzaClient.Views
             LoadCurrentTransactionsData();
         }
 
-        private async void LoadCurrentTransactionsData()
+        public async void LoadCurrentTransactionsData()
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
             {
@@ -108,7 +108,7 @@ namespace ItaliaPizzaClient.Views
 
         private void Click_BtnRegisterOutflow(object sender, RoutedEventArgs e)
         {
-            UserControls.RegisterOutflowMoney.Show(sender as FrameworkElement);
+            UserControls.RegisterOutflowMoney.Show(sender as FrameworkElement, this);
         }
 
         private void Click_BtnCloseRegister(object sender, RoutedEventArgs e)

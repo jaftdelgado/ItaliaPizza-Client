@@ -270,6 +270,9 @@
     <sys:String x:Key="Suppliers_DialogDReactivateSupplier">¿Estás seguro de que deseas reactivar el proveedor seleccionado? Podrá ser asociado a insumos y pedidos de reabastecimiento nuevamente.</sys:String>
     <sys:String x:Key="Suppliers_DialogTReactivatedSupplier">Proveedor reactivado</sys:String>
     <sys:String x:Key="Suppliers_DialogDReactivatedSupplier">El proveedor fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de proveedores y órdenes.</sys:String>
+    <sys:String x:Key="Suppliers_DialogTUnableToDelete">Proveedor no eliminable</sys:String>
+    <sys:String x:Key="Suppliers_DialogDHasPendingOrders">Este proveedor tiene pedidos pendientes. Cancélalos antes de eliminarlo.</sys:String>
+
 
     <!-- RegisterSupplier-->
     <sys:String x:Key="RegSupplier_Header">Registrar Proveedor</sys:String>
