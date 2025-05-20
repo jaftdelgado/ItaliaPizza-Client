@@ -10,15 +10,13 @@ namespace ItaliaPizzaClient.Views.UserControls
     /// </summary>
     public partial class RegisterOutflowMoney : UserControl
     {
-        private CashRegisterPage _parentPage;
-        public RegisterOutflowMoney(CashRegisterPage parent)
+        public RegisterOutflowMoney()
         {
             InitializeComponent();
-            _parentPage = parent;
             InputUtilities.ValidatePriceInput(TbAmount);
-            InputUtilities.ValidateInput(TbDescription,Constants.GENERAL_TEXT_PATTERN,Constants.MAX_LENGTH_DESCRIPTION);
+            InputUtilities.ValidateInput(TbDescription, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_DESCRIPTION);
         }
-        
+
         public static void Show(FrameworkElement triggerButton)
         {
             var RegisterOutflowMoney = new RegisterOutflowMoney();
@@ -41,7 +39,7 @@ namespace ItaliaPizzaClient.Views.UserControls
             mainWindow.PopUpHost.Content = RegisterOutflowMoney;
             Canvas.SetLeft(mainWindow.PopUpHost, left);
             Canvas.SetTop(mainWindow.PopUpHost, top);
-            
+
             mainWindow.PopUpOverlay.Visibility = Visibility.Visible;
 
             Animations.BeginAnimation(RegisterOutflowMoney, "ShowBorderAnimation");
@@ -91,7 +89,6 @@ namespace ItaliaPizzaClient.Views.UserControls
                 case 1:
                     MessageDialog.Show("OutflowMoney_DialogTSuccess", "OutflowMoney_DialogDSuccess", AlertType.SUCCESS, () =>
                     {
-                        _parentPage?.LoadCurrentTransactionsData();
                         ClosePopup();
                     });
                     break;
