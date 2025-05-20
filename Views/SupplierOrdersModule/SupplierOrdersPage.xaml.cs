@@ -97,7 +97,6 @@ namespace ItaliaPizzaClient.Views
                 });
             });
         }
-
         private async Task DeliverSupplierOrder(SupplierOrder selected)
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
@@ -105,51 +104,51 @@ namespace ItaliaPizzaClient.Views
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                bool success = client.DeliverOrder(selected.SupplierOrderID);
-                if (!success)
-                {
-                    await Application.Current.Dispatcher.InvokeAsync(() =>
-                    {
-                        MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_Failed", AlertType.ERROR);
-                    });
-                    return;
-                }
-
-                int result = client.RegisterSupplierOrderExpense(selected.SupplierOrderID);
+                int result = await client.RegisterSupplierOrderExpenseAsync(selected.SupplierOrderID);
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    switch (result)
+                    if (result == 1)
                     {
-                        case 1:
-                            var item = _allSupplierOrders.FirstOrDefault(p => p.SupplierOrderID == selected.SupplierOrderID);
-                            if (item != null)
-                            {
-                                item.Status = 1;
-                                item.Delivered = DateTime.Now;
-                            }
-                            MessageDialog.Show("OrdSuppliers_DialogTDeliveredOrder", "OrdSuppliers_DialogDDeliveredOrder", AlertType.SUCCESS);
+                        bool success = client.DeliverOrder(selected.SupplierOrderID);
+                        if (!success)
+                        {
+                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_Failed", AlertType.ERROR);
+                            return;
+                        }
+
+                        var item = _allSupplierOrders.FirstOrDefault(p => p.SupplierOrderID == selected.SupplierOrderID);
+                        if (item != null)
+                        {
+                            item.Status = 1;
+                            item.Delivered = DateTime.Now;
+                        }
+
+                        MessageDialog.Show("OrdSuppliers_DialogTDeliveredOrder", "OrdSuppliers_DialogDDeliveredOrder", AlertType.SUCCESS, () =>
+                        {
                             SupplierOrderDetailsPanel.Visibility = Visibility.Collapsed;
                             PaymentPanel.Visibility = Visibility.Collapsed;
                             OperationsPanel.Visibility = Visibility.Visible;
                             LoadSupplierOrdersData();
-                            break;
-
-                        case -1:
-                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InvalidStatus", AlertType.ERROR);
-                            break;
-
-                        case -2:
-                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_NoCashRegister", AlertType.ERROR);
-                            break;
-
-                        case -3:
-                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InsufficientFunds", AlertType.ERROR);
-                            break;
-
-                        default:
-                            MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.ERROR);
-                            break;
+                        });
+                    }
+                    else
+                    {
+                        switch (result)
+                        {
+                            case -1:
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InsufficientFunds", AlertType.ERROR);
+                                break;
+                            case -2:
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_NoCashRegister", AlertType.ERROR);
+                                break;
+                            case -3:
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InvalidStatus", AlertType.ERROR);
+                                break;
+                            default:
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.ERROR);
+                                break;
+                        }
                     }
                 });
             });

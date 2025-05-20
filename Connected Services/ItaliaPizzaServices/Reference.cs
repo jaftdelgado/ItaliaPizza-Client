@@ -403,6 +403,9 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private bool IsActiveField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDeletableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -492,6 +495,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.IsActiveField.Equals(value) != true)) {
                     this.IsActiveField = value;
                     this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDeletable {
+            get {
+                return this.IsDeletableField;
+            }
+            set {
+                if ((this.IsDeletableField.Equals(value) != true)) {
+                    this.IsDeletableField = value;
+                    this.RaisePropertyChanged("IsDeletable");
                 }
             }
         }
@@ -2282,6 +2298,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/ReactivateSupplier", ReplyAction="http://tempuri.org/ISupplierManager/ReactivateSupplierResponse")]
         System.Threading.Tasks.Task<bool> ReactivateSupplierAsync(int supplierID);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/CanDeleteSupplier", ReplyAction="http://tempuri.org/ISupplierManager/CanDeleteSupplierResponse")]
+        bool CanDeleteSupplier(int supplierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/CanDeleteSupplier", ReplyAction="http://tempuri.org/ISupplierManager/CanDeleteSupplierResponse")]
+        System.Threading.Tasks.Task<bool> CanDeleteSupplierAsync(int supplierId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId);
         
@@ -2660,6 +2682,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> ReactivateSupplierAsync(int supplierID) {
             return base.Channel.ReactivateSupplierAsync(supplierID);
+        }
+        
+        public bool CanDeleteSupplier(int supplierId) {
+            return base.Channel.CanDeleteSupplier(supplierId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CanDeleteSupplierAsync(int supplierId) {
+            return base.Channel.CanDeleteSupplierAsync(supplierId);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId) {

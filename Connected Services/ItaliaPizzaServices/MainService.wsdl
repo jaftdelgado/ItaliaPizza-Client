@@ -123,6 +123,12 @@
   <wsdl:message name="IMainManager_ReactivateSupplier_OutputMessage">
     <wsdl:part name="parameters" element="tns:ReactivateSupplierResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_CanDeleteSupplier_InputMessage">
+    <wsdl:part name="parameters" element="tns:CanDeleteSupplier" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_CanDeleteSupplier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CanDeleteSupplierResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetSuppliesBySupplier_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSuppliesBySupplier" />
   </wsdl:message>
@@ -420,6 +426,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/ReactivateSupplier" message="tns:IMainManager_ReactivateSupplier_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/ReactivateSupplierResponse" message="tns:IMainManager_ReactivateSupplier_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CanDeleteSupplier">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISupplierManager/CanDeleteSupplier" message="tns:IMainManager_CanDeleteSupplier_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISupplierManager/CanDeleteSupplierResponse" message="tns:IMainManager_CanDeleteSupplier_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetSuppliesBySupplier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier" message="tns:IMainManager_GetSuppliesBySupplier_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse" message="tns:IMainManager_GetSuppliesBySupplier_OutputMessage" />
@@ -703,6 +713,15 @@
     </wsdl:operation>
     <wsdl:operation name="ReactivateSupplier">
       <soap12:operation soapAction="http://tempuri.org/ISupplierManager/ReactivateSupplier" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanDeleteSupplier">
+      <soap12:operation soapAction="http://tempuri.org/ISupplierManager/CanDeleteSupplier" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1077,7 +1096,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MATEBOOK-D15\jafet</Upn>
+          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

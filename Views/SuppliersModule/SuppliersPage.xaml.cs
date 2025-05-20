@@ -57,7 +57,6 @@ namespace ItaliaPizzaClient.Views.SuppliersModule
                 });
             });
         }
-
         private async Task DeleteSupplier(Supplier selected)
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
@@ -65,7 +64,19 @@ namespace ItaliaPizzaClient.Views.SuppliersModule
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                bool success = client.DeleteSupplier(selected.Id);
+                // ✅ Validar si puede eliminarse
+                bool canDelete = await client.CanDeleteSupplierAsync(selected.Id);
+                if (!canDelete)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        MessageDialog.Show("Suppliers_DialogTUnableToDelete", "Suppliers_DialogDHasPendingOrders", AlertType.WARNING);
+                    });
+                    return;
+                }
+
+                // ✅ Eliminar si pasa la validación
+                bool success = await client.DeleteSupplierAsync(selected.Id);
                 if (!success) return;
 
                 var item = _allSuppliers.FirstOrDefault(p => p.Id == selected.Id);
@@ -73,14 +84,12 @@ namespace ItaliaPizzaClient.Views.SuppliersModule
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    string selectedFilter = GetSelectedFilterButtonName();
-                    ApplyFilter(selectedFilter);
+                    ApplyFilter(GetSelectedFilterButtonName());
 
                     MessageDialog.Show("Suppliers_DialogTDeletedSupplier", "Suppliers_DialogDDeletedSupplier", AlertType.SUCCESS);
                 });
             });
         }
-
         private async Task ReactivateSupply(Supplier selected)
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
