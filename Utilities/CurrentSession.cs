@@ -15,7 +15,7 @@ namespace ItaliaPizzaClient.Utilities
             StartTime = DateTime.Now;
         }
 
-        public static void Logout()
+        public static void LogOut()
         {
             LoggedInUser = null;
             StartTime = DateTime.MinValue;

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ItaliaPizzaClient.Views.Dialogs;
+using System.Threading.Tasks;
 
 namespace ItaliaPizzaClient.Views.UserControls
 {
@@ -26,7 +27,7 @@ namespace ItaliaPizzaClient.Views.UserControls
 
             double controlHeight = userSettings.DesiredSize.Height;
 
-            double left = 10;
+            double left = 16;
             double top = relativePoint.Y + triggerButton.ActualHeight - controlHeight - 60; 
 
             Canvas.SetLeft(mainWindow.PopUpHost, left);
@@ -39,7 +40,6 @@ namespace ItaliaPizzaClient.Views.UserControls
             mainWindow.PopUpOverlay.MouseLeftButtonDown += PopUpOverlay_MouseLeftButtonDown;
         }
 
-
         private void LoadUserInfo()
         {
             var user = CurrentSession.LoggedInUser;
@@ -50,6 +50,39 @@ namespace ItaliaPizzaClient.Views.UserControls
 
                 ImageUtilities.SetImageSource(EmployeeProfilePic, user.ProfilePic, Constants.DEFAULT_PROFILE_PIC_PATH);
             }
+        }
+
+        private void NavigateToSignIn()
+        {
+            NavigationManager.Reset();
+
+            var signIn = new SignInWindow();
+            signIn.Show();
+
+            Application.Current.MainWindow.Close();
+        }
+
+
+        private async Task LogOut()
+        {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                int userId = CurrentSession.LoggedInUser.PersonalID;
+                int result = client.SignOut(userId);
+
+                if (result == 1)
+                {
+                    SessionManager.Stop();
+                    CurrentSession.LogOut();
+
+                    await Application.Current.Dispatcher.InvokeAsync(() => 
+                        MessageDialog.Show("SignOut_DialogTSignedOut", "SignOut_DialogDSignedOut", AlertType.SUCCESS, () => NavigateToSignIn())
+                );
+                }
+            });
         }
 
         private static void PopUpOverlay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -68,9 +101,9 @@ namespace ItaliaPizzaClient.Views.UserControls
                 "SignOut_DialogDSignOut",
                 async () =>
                 {
-
+                    await LogOut();
                 },
-                "Glb_Confirm"
+                "Glb_Accept"
             );
         }
     }

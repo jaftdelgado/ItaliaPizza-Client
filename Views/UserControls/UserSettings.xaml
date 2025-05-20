@@ -21,10 +21,10 @@
 
             <Border BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="0 0 0 0.5">
-                <StackPanel Margin="20 10">
+                <StackPanel Margin="20 16">
                     <Image Name="EmployeeProfilePic"
                            HorizontalAlignment="Center"
-                           Width="56" Height="56" Stretch="Fill"
+                           Width="60" Height="60" Stretch="Fill"
                            VerticalAlignment="Center"
                            RenderOptions.BitmapScalingMode="HighQuality" >
                         <Image.Clip>
@@ -47,10 +47,11 @@
             </Border>
 
             <StackPanel Grid.Row="1" Margin="8">
-                <Button Style="{DynamicResource MenuButtonStyle}"
-                        Content="Modificar Perfil"/>
+                <Button Style="{DynamicResource SettingButtonStyle}"
+                        Tag="/Resources/Icons/edit2-icon.png"
+                        Content="{DynamicResource Setting_EditProfile}"/>
                 <Button Style="{DynamicResource SignOutButtonStyle}"
-                        Content="{DynamicResource Glb_SignOut}"
+                        Content="{DynamicResource Setting_SignOut}"
                         Click="Click_BtnSignOut">
                     <Button.Tag>
                         <ResourceDictionary>

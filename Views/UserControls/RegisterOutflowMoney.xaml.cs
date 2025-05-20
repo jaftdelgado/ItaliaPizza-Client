@@ -5,9 +5,6 @@ using System.Windows.Controls;
 
 namespace ItaliaPizzaClient.Views.UserControls
 {
-    /// <summary>
-    /// Lógica de interacción para RegisterOutflowMoney.xaml
-    /// </summary>
     public partial class RegisterOutflowMoney : UserControl
     {
         public RegisterOutflowMoney()

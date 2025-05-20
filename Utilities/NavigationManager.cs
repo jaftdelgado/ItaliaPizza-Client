@@ -44,6 +44,11 @@ namespace ItaliaPizzaClient.Utilities
             }
         }
 
+        public static void Reset()
+        {
+            _instance = null;
+        }
+
         public class NavigationItem
         {
             public string Name { get; set; }
