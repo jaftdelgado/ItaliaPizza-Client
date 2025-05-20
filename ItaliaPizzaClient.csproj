@@ -120,7 +120,7 @@
     <Compile Include="Views\UserControls\ProductCard.xaml.cs">
       <DependentUpon>ProductCard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\SupplyCard.xaml.cs">
+    <Compile Include="Views\SupplierOrdersModule\SupplyCard.xaml.cs">
       <DependentUpon>SupplyCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Animations.cs" />
@@ -207,8 +207,11 @@
     <Compile Include="Views\TicketPage.xaml.cs">
       <DependentUpon>TicketPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\SupplyOrderDetail.xaml.cs">
+    <Compile Include="Views\SupplierOrdersModule\SupplyOrderDetail.xaml.cs">
       <DependentUpon>SupplyOrderDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UserSettings.xaml.cs">
+      <DependentUpon>UserSettings.xaml</DependentUpon>
     </Compile>
     <Page Include="Properties\MergedResources.xaml">
       <SubType>Designer</SubType>
@@ -227,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ScrollerStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\UserSettingsStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,7 +265,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\SupplyCard.xaml">
+    <Page Include="Views\SupplierOrdersModule\SupplyCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,7 +373,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\SupplyOrderDetail.xaml">
+    <Page Include="Views\SupplierOrdersModule\SupplyOrderDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UserSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -590,6 +601,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\balance-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\signout-hover-icon.png" />
+    <Resource Include="Resources\Icons\signout-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

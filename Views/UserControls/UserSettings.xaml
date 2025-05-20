@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="ItaliaPizzaClient.Views.UserControls.UserSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ItaliaPizzaClient.Views.UserControls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             MinWidth="200"
+             MinHeight="180"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+    <Border Background="{DynamicResource SecondaryButtonBrush}"
+            CornerRadius="14" BorderThickness="1"
+            BorderBrush="{DynamicResource BorderBrush}" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0 0 0 0.5">
+                <StackPanel Margin="20 10">
+                    <Image Name="EmployeeProfilePic"
+                           HorizontalAlignment="Center"
+                           Width="56" Height="56" Stretch="Fill"
+                           VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="HighQuality" >
+                        <Image.Clip>
+                            <EllipseGeometry RadiusX="28" RadiusY="28" Center="28,28"/>
+                        </Image.Clip>
+                    </Image>
+                    
+                    <TextBlock x:Name="EmployeerName"
+                               Text="Hola"
+                               Style="{StaticResource SubtitleLabelStyle}"
+                               HorizontalAlignment="Center" FontSize="12"
+                               Margin="0 10 0 0"/>
+                    <TextBlock x:Name="EmployeeRole"
+                               Text="Rol"
+                               Style="{StaticResource RegularLabelStyle}"
+                               HorizontalAlignment="Center" 
+                               Foreground="{StaticResource PrimaryButtonBrush}"/>
+                    
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Row="1" Margin="8">
+                <Button Style="{DynamicResource MenuButtonStyle}"
+                        Content="Modificar Perfil"/>
+                <Button Style="{DynamicResource SignOutButtonStyle}"
+                        Content="{DynamicResource Glb_SignOut}"
+                        Click="Click_BtnSignOut">
+                    <Button.Tag>
+                        <ResourceDictionary>
+                            <sys:String x:Key="IconPath">/Resources/Icons/signout-icon.png</sys:String>
+                            <sys:String x:Key="HoverIconPath">/Resources/Icons/signout-hover-icon.png</sys:String>
+                        </ResourceDictionary>
+                    </Button.Tag>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

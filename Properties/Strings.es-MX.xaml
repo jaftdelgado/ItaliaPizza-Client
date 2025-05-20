@@ -111,7 +111,11 @@
     <sys:String x:Key="SignIn_TbUsername">Nombre de usuario:</sys:String>
     <sys:String x:Key="SignIn_TbPassword">Contraseña:</sys:String>
     <sys:String x:Key="SignIn_BtnSignIn">Iniciar Sesión</sys:String>
-    
+    <sys:String x:Key="SignOut_DialogTSignOut">¿Cerrar Sesión?</sys:String>
+    <sys:String x:Key="SignOut_DialogDSignOut">¿Estás seguro de que deseas cerrar la sesión actual? La próxima vez que desees ingresar al sistema, deberás autenticarte nuevamente.</sys:String>
+    <sys:String x:Key="SignOut_DialogTDeletedEmployee">Empleado eliminado</sys:String>
+    <sys:String x:Key="SignOut_DialogDDeletedEmployee">El empleado fue marcado como eliminado correctamente. Puedes restaurarlo desde la vista de empleados eliminados.</sys:String>
+
     <!--Personal-->
     <sys:String x:Key="Personal_Header">Personal</sys:String>
     <sys:String x:Key="Personal_Desc">Visualiza, registra, modifica y elimina la plantilla de empleados de Italia Pizza.</sys:String>
