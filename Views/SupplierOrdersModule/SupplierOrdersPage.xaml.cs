@@ -9,7 +9,7 @@ using ItaliaPizzaClient.Views.Dialogs;
 using System.Threading.Tasks;
 using System;
 
-namespace ItaliaPizzaClient.Views
+namespace ItaliaPizzaClient.Views.SupplierOrdersModule
 {
     public partial class SupplierOrdersPage : Page
     {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ItaliaPizzaClient.Views
+namespace ItaliaPizzaClient.Views.SupplierOrdersModule
 {
     public partial class RegisterSupplierOrdersPage : Page
     {
@@ -94,17 +94,14 @@ namespace ItaliaPizzaClient.Views
 
             await Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                // Crear el proveedor seleccionado
                 var selectedSupplier = new Supplier
                 {
                     Id = editingOrder.SupplierID,
                     SupplierName = editingOrder.SupplierName
                 };
 
-                // Limpiar y cargar la colección observable
                 _suppliers.Clear();
 
-                // Agregar todos los proveedores de la categoría
                 foreach (var supplier in suppliers)
                 {
                     _suppliers.Add(supplier);
@@ -117,7 +114,6 @@ namespace ItaliaPizzaClient.Views
 
                 CbSuppliers.DisplayMemberPath = "SupplierName";
 
-                // Establecer el texto del TextBox
                 TbSupplier.Text = selectedSupplier.SupplierName;
 
                 SupplyCards.Clear();
@@ -428,7 +424,7 @@ namespace ItaliaPizzaClient.Views
                 if (detail != null)
                 {
                     detail.Quantity += 1;
-                    detail.Subtotal = detail.Price * detail.Quantity;
+                    detail.RefreshBinding();
                 }
             }
             else

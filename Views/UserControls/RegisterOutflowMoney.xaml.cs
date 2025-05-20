@@ -1,8 +1,5 @@
 ﻿using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
-using System;
-using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,44 +16,36 @@ namespace ItaliaPizzaClient.Views.UserControls
             InitializeComponent();
             _parentPage = parent;
             InputUtilities.ValidatePriceInput(TbAmount);
-            InputUtilities.ValidateInput(TbDescription, Constants.GENERAL_TEXT_PATTERN, Constants.MAX_LENGTH_DESCRIPTION);
+            InputUtilities.ValidateInput(TbDescription,Constants.GENERAL_TEXT_PATTERN,Constants.MAX_LENGTH_DESCRIPTION);
         }
-
-        public static void Show(FrameworkElement triggerButton, CashRegisterPage parentPage)
+        
+        public static void Show(FrameworkElement triggerButton)
         {
-            var control = new RegisterOutflowMoney(parentPage);
+            var RegisterOutflowMoney = new RegisterOutflowMoney();
 
-            var activeWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
-            if (activeWindow == null)
-                return;
-
-            var popupHost = activeWindow.FindName("PopUpHost") as ContentControl;
-            var popupOverlay = activeWindow.FindName("PopUpOverlay") as UIElement;
-
-            if (popupHost == null || popupOverlay == null)
-                return;
-
-            var popupContainer = popupHost.Parent as FrameworkElement;
-            if (popupContainer == null) return;
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            var popupContainer = mainWindow.PopUpHost.Parent as FrameworkElement;
 
             Point screenPos = triggerButton.PointToScreen(new Point(0, 0));
             Point containerPos = popupContainer.PointFromScreen(screenPos);
 
-            control.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            double popupWidth = control.DesiredSize.Width;
-            double left = activeWindow.ActualWidth - popupWidth - 20;
+            RegisterOutflowMoney.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            double popupWidth = RegisterOutflowMoney.DesiredSize.Width;
+            double popupHeight = RegisterOutflowMoney.DesiredSize.Height;
+
+            double left = mainWindow.ActualWidth - popupWidth - 20;
             if (left < 0) left = 0;
 
             double top = containerPos.Y + triggerButton.ActualHeight + 14;
 
-            popupHost.Content = control;
-            Canvas.SetLeft(popupHost, left);
-            Canvas.SetTop(popupHost, top);
-            popupOverlay.Visibility = Visibility.Visible;
+            mainWindow.PopUpHost.Content = RegisterOutflowMoney;
+            Canvas.SetLeft(mainWindow.PopUpHost, left);
+            Canvas.SetTop(mainWindow.PopUpHost, top);
+            
+            mainWindow.PopUpOverlay.Visibility = Visibility.Visible;
 
-            Animations.BeginAnimation(control, "ShowBorderAnimation");
+            Animations.BeginAnimation(RegisterOutflowMoney, "ShowBorderAnimation");
         }
-
         private async void Click_BtnAccept(object sender, RoutedEventArgs e)
         {
             bool hasError = false;
@@ -78,8 +67,8 @@ namespace ItaliaPizzaClient.Views.UserControls
 
             decimal amount = decimal.Parse(
                 TbAmount.Text,
-                NumberStyles.Currency,
-                CultureInfo.CurrentCulture
+                System.Globalization.NumberStyles.Currency,
+                System.Globalization.CultureInfo.CurrentCulture
             );
             string description = TbDescription.Text.Trim();
 
@@ -91,6 +80,7 @@ namespace ItaliaPizzaClient.Views.UserControls
             }
 
             int result = 0;
+
             await ServiceClientManager.ExecuteServerAction(async () =>
             {
                 result = await client.RegisterCashOutAsync(amount, description);
@@ -119,29 +109,15 @@ namespace ItaliaPizzaClient.Views.UserControls
                     break;
             }
         }
-
         private void Click_BtnCancel(object sender, RoutedEventArgs e)
         {
             ClosePopup();
         }
-
         private void ClosePopup()
         {
-            var activeWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
-            if (activeWindow == null)
-                return;
-
-            var popupHost = activeWindow.FindName("PopUpHost") as ContentControl;
-            var popupOverlay = activeWindow.FindName("PopUpOverlay") as UIElement;
-
-            if (popupHost == null || popupOverlay == null)
-                return;
-
-            if (popupHost.Content == this)
-            {
-                popupHost.Content = null;
-                popupOverlay.Visibility = Visibility.Collapsed;
-            }
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            mainWindow.PopUpOverlay.Visibility = Visibility.Collapsed;
+            mainWindow.PopUpHost.Content = null;
         }
 
         private void TbDescription_TextChanged(object sender, TextChangedEventArgs e)

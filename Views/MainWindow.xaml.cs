@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.UserControls;
 
 namespace ItaliaPizzaClient.Views
 {
@@ -90,6 +91,11 @@ namespace ItaliaPizzaClient.Views
             }
 
             e.Handled = true;
+        }
+
+        private void Click_BtnProfile(object sender, RoutedEventArgs e)
+        {
+            UserSettings.Show(sender as FrameworkElement);
         }
     }
 }

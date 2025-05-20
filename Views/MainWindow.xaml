@@ -64,7 +64,8 @@
 
                                         <StackPanel Grid.Row="2" Orientation="Vertical">
                                             <Border Margin="14 10">
-                                                <Button x:Name="BtnProfile" Style="{DynamicResource UserButtonStyle}"/>
+                                                <Button x:Name="BtnProfile" Style="{DynamicResource UserButtonStyle}"
+                                                        Click="Click_BtnProfile"/>
                                             </Border>
 
                                             <Border BorderBrush="{StaticResource SecondaryBrush}" 
