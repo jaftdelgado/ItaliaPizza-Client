@@ -111,8 +111,6 @@ namespace ItaliaPizzaClient.Views
                     await Application.Current.Dispatcher.InvokeAsync(() =>
                     {
                         MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_Failed", AlertType.ERROR);
-                        item.Status = 1;
-                        item.Delivered = DateTime.Now;
                     });
                     return;
                 }

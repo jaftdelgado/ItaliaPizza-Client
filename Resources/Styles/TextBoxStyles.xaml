@@ -164,50 +164,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="TransparentTextBoxStyle" TargetType="TextBox">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
-        <Setter Property="Padding" Value="2"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border x:Name="Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF8888FF"/>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF5555FF"/>
-                            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="Gray"/>
-                            <Setter Property="Foreground" Value="Gray"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="QuantityTextBoxStyle1" TargetType="TextBox">
-        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
-        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
-        <Setter Property="Padding" Value="5 2"/>
-    </Style>
-
     <Style x:Key="QuantityTextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
@@ -417,4 +373,163 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="UsernameStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="Height" Value="44"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="6,3"/>
+        <Setter Property="BorderThickness" Value="1 1 1 0.5"/>
+        <Setter Property="BorderBrush" Value="#D3D1DB"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="TextBoxBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="12 12 0 0"
+                    Padding="5">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Tag}" 
+                               Foreground="{StaticResource SecondaryBrush}"
+                               FontFamily="{StaticResource SFProSemiBold}"
+                               FontSize="10"
+                               VerticalAlignment="Top"
+                               Margin="8,2,5,0"/>
+
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                  VerticalAlignment="Bottom"
+                                  Margin="0,12,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="TextBoxBorder" Property="BorderBrush" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TextBoxBorder" Property="Opacity" Value="0.5"/>
+                            <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#808080"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="ShowPasswordStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="Height" Value="44"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="6,3"/>
+        <Setter Property="BorderThickness" Value="1 0.5 1 1"/>
+        <Setter Property="BorderBrush" Value="#D3D1DB"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="TextBoxBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="0 0 12 12"
+                    Padding="5">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Tag}" 
+                               Foreground="{StaticResource SecondaryBrush}"
+                               FontFamily="{StaticResource SFProSemiBold}"
+                               FontSize="10"
+                               VerticalAlignment="Top"
+                               Margin="8,2,5,0"/>
+
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                  VerticalAlignment="Bottom"
+                                  Margin="0,12,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="TextBoxBorder" Property="BorderBrush" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TextBoxBorder" Property="Opacity" Value="0.5"/>
+                            <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#808080"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="PasswordStyle" TargetType="PasswordBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="Height" Value="44"/>
+        <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="6,3"/>
+        <Setter Property="BorderThickness" Value="1 0.5 1 1"/>
+        <Setter Property="BorderBrush" Value="#D3D1DB"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="PasswordChar" Value="•"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="PasswordBoxBorder"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="0 0 12 12"
+                Padding="5">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Tag}" 
+                           Foreground="{StaticResource SecondaryBrush}"
+                           FontSize="10"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Top"
+                           Margin="8,2,12,0"/>
+                            <ScrollViewer x:Name="PART_ContentHost"
+                              VerticalAlignment="Bottom"
+                              Margin="0,12,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="PasswordBoxBorder" Property="BorderBrush" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PasswordBoxBorder" Property="Opacity" Value="0.5"/>
+                            <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#808080"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

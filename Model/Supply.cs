@@ -19,7 +19,7 @@ namespace ItaliaPizzaClient.Model
 
         public int? SupplierID { get; set; }
 
-        public decimal Stock { get; set; }
+        public decimal? Stock { get; set; }
 
         public byte[] SupplyPic { get; set; }
 

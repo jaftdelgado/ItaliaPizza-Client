@@ -42,6 +42,7 @@
     <sys:String x:Key="Glb_Deleted">Eliminados</sys:String>
     <sys:String x:Key="Glb_NoStock">Sin inventario</sys:String>
     <sys:String x:Key="Glb_GeneralInfo">Datos Generales</sys:String>
+    <sys:String x:Key="Glb_Transaction">Transacción</sys:String>
     <sys:String x:Key="Glb_NoSelected">Sin selección actual</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
     <sys:String x:Key="Glb_BtnSelectImage">Seleccionar foto</sys:String>
@@ -99,6 +100,11 @@
     <sys:String x:Key="OrdSupplier_BtnStatusDelivered">Entregados</sys:String>
     <sys:String x:Key="OrdSupplier_BtnStatusCancelled">Cancelados</sys:String>
     
+    <!--TransactionConcepts-->
+    <sys:String x:Key="TrConcept_OrderPayment">Pago de Comanda/Pedido a domiclio</sys:String>
+    <sys:String x:Key="TrConcept_ExtraExpend">Retiro de Caja</sys:String>
+    <sys:String x:Key="TrConcept_SupplierOrder">Reabastecimiento de Insumos</sys:String>
+
     <!--SignIn-->
     <sys:String x:Key="SignIn_Header">Iniciar Sesión</sys:String>
     <sys:String x:Key="SignIn_Desc">Ingresa tu nombre de usuario y contraseña para acceder al sistema de Italia Pizza.</sys:String>
@@ -331,14 +337,16 @@
     <sys:String x:Key="OrdSuppliers_ErrorDelivery_InsufficientFunds">Saldo insuficiente en caja.</sys:String>
     <sys:String x:Key="OrdSuppliers_ErrorDelivery_TransactionFailed">No se pudo registrar la transacción.</sys:String>
 
-
-
     <!--CashRegister-->
     <sys:String x:Key="CashRegister_Header">Caja Registradora</sys:String>
     <sys:String x:Key="CashRegister_Desc">Realiza apertura y corte de caja, y visualiza las transacciones generadas durante el turno en Italia Pizza.</sys:String>
     <sys:String x:Key="CashRegister_BtnOpenRegister">Abrir Caja</sys:String>
+    <sys:String x:Key="CashRegister_BtnCloseRegister">Cerrar caja</sys:String>
     <sys:String x:Key="CashRegister_BtnRegisterOutflow">Registrar salida</sys:String>
     <sys:String x:Key="CashRegister_TitleTable">Historial de Transacciones</sys:String>
+    <sys:String x:Key="CashRegister_TableHConcept">Concepto</sys:String>
+    <sys:String x:Key="CashRegister_TableHAmount">Monto</sys:String>
+    <sys:String x:Key="CashRegister_TableHDate">Fecha/Hora</sys:String>
     <sys:String x:Key="CashRegister_TbOpeningDate">Fecha de apertura:</sys:String>
     <sys:String x:Key="CashRegister_TbInitialBalance">Balance inicial:</sys:String>
     <sys:String x:Key="CashRegister_CheckBConfirmOpening">Confirmar apertura de caja.</sys:String>

@@ -1,6 +1,6 @@
 ﻿using ItaliaPizzaClient.Utilities;
 using System;
-using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -20,8 +20,8 @@ namespace ItaliaPizzaClient.Views.Dialogs
 
         public static void Show(string title, string description, AlertType alertType, Action onConfirm = null)
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow == null) return;
+            var activeWindow = GetActiveWindow();
+            if (activeWindow == null) return;
 
             var dialog = new MessageDialog
             {
@@ -33,28 +33,29 @@ namespace ItaliaPizzaClient.Views.Dialogs
             dialog.DialogDescription.Text = FindResourceString(description);
             dialog.ConfigureAlertType(alertType);
 
-            if (Application.Current.Dispatcher.CheckAccess())
+            Action showAction = () =>
             {
-                mainWindow.DialogHost.Content = dialog;
-                mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+                var dialogHost = activeWindow.FindName("DialogHost") as ContentControl;
+                var dialogOverlay = activeWindow.FindName("DialogOverlay") as Border;
+
+                if (dialogHost == null || dialogOverlay == null) return;
+
+                dialogHost.Content = dialog;
+                dialogOverlay.Visibility = Visibility.Visible;
                 Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
-            }
+            };
+
+            if (Application.Current.Dispatcher.CheckAccess())
+                showAction();
             else
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    mainWindow.DialogHost.Content = dialog;
-                    mainWindow.DialogOverlay.Visibility = Visibility.Visible;
-                    Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
-                });
-            }
+                Application.Current.Dispatcher.Invoke(showAction);
         }
 
         public static void ShowConfirm(string title, string description, Action onConfirm,
             string dangerButtonTextResourceKey = null)
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow == null) return;
+            var activeWindow = GetActiveWindow();
+            if (activeWindow == null) return;
 
             var dialog = new MessageDialog
             {
@@ -74,21 +75,22 @@ namespace ItaliaPizzaClient.Views.Dialogs
                 dialog.BtnAccept.Content = FindResourceString(dangerButtonTextResourceKey);
             }
 
-            if (Application.Current.Dispatcher.CheckAccess())
+            Action showAction = () =>
             {
-                mainWindow.DialogHost.Content = dialog;
-                mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+                var dialogHost = activeWindow.FindName("DialogHost") as ContentControl;
+                var dialogOverlay = activeWindow.FindName("DialogOverlay") as Border;
+
+                if (dialogHost == null || dialogOverlay == null) return;
+
+                dialogHost.Content = dialog;
+                dialogOverlay.Visibility = Visibility.Visible;
                 Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
-            }
+            };
+
+            if (Application.Current.Dispatcher.CheckAccess())
+                showAction();
             else
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    mainWindow.DialogHost.Content = dialog;
-                    mainWindow.DialogOverlay.Visibility = Visibility.Visible;
-                    Animations.BeginAnimation(dialog, "PopupFadeInAnimation");
-                });
-            }
+                Application.Current.Dispatcher.Invoke(showAction);
         }
 
         private static string FindResourceString(string resourceKey)
@@ -138,12 +140,25 @@ namespace ItaliaPizzaClient.Views.Dialogs
 
         private void CloseDialog()
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow != null)
+            var activeWindow = GetActiveWindow();
+            if (activeWindow != null)
             {
-                mainWindow.DialogHost.Content = null;
-                mainWindow.DialogOverlay.Visibility = Visibility.Collapsed;
+                var dialogHost = activeWindow.FindName("DialogHost") as ContentControl;
+                var dialogOverlay = activeWindow.FindName("DialogOverlay") as Border;
+
+                if (dialogHost != null && dialogOverlay != null)
+                {
+                    dialogHost.Content = null;
+                    dialogOverlay.Visibility = Visibility.Collapsed;
+                }
             }
+        }
+
+        private static Window GetActiveWindow()
+        {
+            return Application.Current.Windows
+                .OfType<Window>()
+                .FirstOrDefault(w => w.IsActive);
         }
     }
 

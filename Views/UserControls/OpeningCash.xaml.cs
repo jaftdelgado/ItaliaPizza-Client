@@ -1,6 +1,7 @@
 ﻿using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,7 @@ namespace ItaliaPizzaClient.Views.UserControls
         private void UpdateButtonState()
         {
             BtnAccept.IsEnabled = ConfirmOpenCashCheckBox.IsChecked == true &&
-                                !string.IsNullOrWhiteSpace(TbInitialBalance.Text);
+                                  !string.IsNullOrWhiteSpace(TbInitialBalance.Text);
         }
 
         private async void Click_BtnAccept(object sender, RoutedEventArgs e)
@@ -38,7 +39,12 @@ namespace ItaliaPizzaClient.Views.UserControls
 
         private async Task OpenCashRegister()
         {
-            decimal initialBalance = decimal.Parse(TbInitialBalance.Text, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.CurrentCulture);
+            if (!decimal.TryParse(TbInitialBalance.Text, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.CurrentCulture, out decimal initialBalance))
+            {
+                MessageDialog.Show("GlbDialogT_InvalidInput", "GlbDialogD_InvalidBalance", AlertType.WARNING);
+                return;
+            }
+
             var client = ServiceClientManager.Instance.Client;
             if (client == null)
             {
@@ -60,7 +66,6 @@ namespace ItaliaPizzaClient.Views.UserControls
         {
             if (success)
                 MessageDialog.Show("CashRegister_DialogTSuccess", "CashRegister_DialogDSuccess", AlertType.SUCCESS, ClosePopup);
-
             else
                 MessageDialog.Show("CashRegister_DialogTFail", "CashRegister_DialogDAlreadyOpen", AlertType.WARNING);
         }
@@ -69,8 +74,21 @@ namespace ItaliaPizzaClient.Views.UserControls
         {
             var openingCash = new OpeningCash();
 
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            var popupContainer = mainWindow.PopUpHost.Parent as FrameworkElement;
+            var activeWindow = Application.Current.Windows
+                .OfType<Window>()
+                .FirstOrDefault(w => w.IsActive);
+
+            if (activeWindow == null) return;
+
+            var popUpHost = activeWindow.FindName("PopUpHost") as ContentControl;
+            var popUpOverlay = activeWindow.FindName("PopUpOverlay") as UIElement;
+            var popupContainer = popUpHost?.Parent as FrameworkElement;
+
+            if (popUpHost == null || popUpOverlay == null || popupContainer == null)
+            {
+                MessageBox.Show("No se pudo encontrar el contenedor del popup.");
+                return;
+            }
 
             Point screenPos = triggerButton.PointToScreen(new Point(0, 0));
             Point containerPos = popupContainer.PointFromScreen(screenPos);
@@ -79,25 +97,33 @@ namespace ItaliaPizzaClient.Views.UserControls
             double popupWidth = openingCash.DesiredSize.Width;
             double popupHeight = openingCash.DesiredSize.Height;
 
-            double left = mainWindow.ActualWidth - popupWidth - 20;
+            double left = activeWindow.ActualWidth - popupWidth - 20;
             if (left < 0) left = 0;
 
             double top = containerPos.Y + triggerButton.ActualHeight + 14;
 
-            mainWindow.PopUpHost.Content = openingCash;
-            Canvas.SetLeft(mainWindow.PopUpHost, left);
-            Canvas.SetTop(mainWindow.PopUpHost, top);
+            popUpHost.Content = openingCash;
+            Canvas.SetLeft(popUpHost, left);
+            Canvas.SetTop(popUpHost, top);
 
-            mainWindow.PopUpOverlay.Visibility = Visibility.Visible;
+            popUpOverlay.Visibility = Visibility.Visible;
 
             Animations.BeginAnimation(openingCash, "ShowBorderAnimation");
         }
 
         private void ClosePopup()
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.PopUpOverlay.Visibility = Visibility.Collapsed;
-            mainWindow.PopUpHost.Content = null;
+            var activeWindow = Application.Current.Windows
+                .OfType<Window>()
+                .FirstOrDefault(w => w.IsActive);
+
+            if (activeWindow == null) return;
+
+            var popUpHost = activeWindow.FindName("PopUpHost") as ContentControl;
+            var popUpOverlay = activeWindow.FindName("PopUpOverlay") as UIElement;
+
+            if (popUpHost != null) popUpHost.Content = null;
+            if (popUpOverlay != null) popUpOverlay.Visibility = Visibility.Collapsed;
         }
 
         private void Click_BtnCancel(object sender, RoutedEventArgs e)

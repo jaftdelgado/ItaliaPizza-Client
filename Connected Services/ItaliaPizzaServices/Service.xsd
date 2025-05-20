@@ -51,7 +51,7 @@
       <xs:element minOccurs="0" name="MeasureUnit" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Stock" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Stock" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="SupplierID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="SupplierName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SupplyCategoryID" type="xs:int" />
@@ -74,6 +74,38 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductDTO" nillable="true" type="tns:ProductDTO" />
+  <xs:complexType name="ArrayOfTransactionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransactionDTO" nillable="true" type="tns:TransactionDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransactionDTO" nillable="true" type="tns:ArrayOfTransactionDTO" />
+  <xs:complexType name="TransactionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CashRegisterID" type="xs:int" />
+      <xs:element minOccurs="0" name="Concept" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FinancialFlow" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SupplierOrderID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TransactionID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionDTO" nillable="true" type="tns:TransactionDTO" />
+  <xs:complexType name="CashRegisterDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashRegisterID" type="xs:int" />
+      <xs:element minOccurs="0" name="CashierAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ClosingDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CurrentBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FinalBalance" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InitialBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OpeningDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CashRegisterDTO" nillable="true" type="tns:CashRegisterDTO" />
   <xs:complexType name="ArrayOfSupplierOrderDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplierOrderDTO" nillable="true" type="tns:SupplierOrderDTO" />

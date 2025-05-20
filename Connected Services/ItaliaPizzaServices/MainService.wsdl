@@ -201,11 +201,23 @@
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetCurrentTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentTransactions" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetCurrentTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentTransactionsResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrderPayment_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderPayment" />
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterOrderPayment_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterOrderPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetOpenCashRegisterInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOpenCashRegisterInfo" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetOpenCashRegisterInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOpenCashRegisterInfoResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_OpenCashRegister_InputMessage">
     <wsdl:part name="parameters" element="tns:OpenCashRegister" />
@@ -224,6 +236,12 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterSupplierOrderExpense_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterSupplierOrderExpenseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_HasOpenCashRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasOpenCashRegister" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_HasOpenCashRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasOpenCashRegisterResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllSupplierOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSupplierOrders" />
@@ -284,6 +302,12 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetRecipes_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRecipesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRecipeResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetCustomers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomers" />
@@ -448,9 +472,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetCurrentTransactions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/GetCurrentTransactions" message="tns:IMainManager_GetCurrentTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/GetCurrentTransactionsResponse" message="tns:IMainManager_GetCurrentTransactions_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RegisterOrderPayment">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPayment" message="tns:IMainManager_RegisterOrderPayment_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterOrderPaymentResponse" message="tns:IMainManager_RegisterOrderPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenCashRegisterInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/GetOpenCashRegisterInfo" message="tns:IMainManager_GetOpenCashRegisterInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/GetOpenCashRegisterInfoResponse" message="tns:IMainManager_GetOpenCashRegisterInfo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="OpenCashRegister">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/OpenCashRegister" message="tns:IMainManager_OpenCashRegister_InputMessage" />
@@ -463,6 +495,10 @@
     <wsdl:operation name="RegisterSupplierOrderExpense">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpense" message="tns:IMainManager_RegisterSupplierOrderExpense_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpenseResponse" message="tns:IMainManager_RegisterSupplierOrderExpense_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasOpenCashRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/HasOpenCashRegister" message="tns:IMainManager_HasOpenCashRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/HasOpenCashRegisterResponse" message="tns:IMainManager_HasOpenCashRegister_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllSupplierOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders" message="tns:IMainManager_GetAllSupplierOrders_InputMessage" />
@@ -503,6 +539,10 @@
     <wsdl:operation name="GetRecipes">
       <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/GetRecipes" message="tns:IMainManager_GetRecipes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/GetRecipesResponse" message="tns:IMainManager_GetRecipes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/UpdateRecipe" message="tns:IMainManager_UpdateRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/UpdateRecipeResponse" message="tns:IMainManager_UpdateRecipe_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/GetCustomers" message="tns:IMainManager_GetCustomers_InputMessage" />
@@ -787,8 +827,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCurrentTransactions">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/GetCurrentTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RegisterOrderPayment">
       <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterOrderPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenCashRegisterInfo">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/GetOpenCashRegisterInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -816,6 +874,15 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterSupplierOrderExpense">
       <soap12:operation soapAction="http://tempuri.org/IFinanceManager/RegisterSupplierOrderExpense" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasOpenCashRegister">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/HasOpenCashRegister" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -913,6 +980,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateRecipe">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/UpdateRecipe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <soap12:operation soapAction="http://tempuri.org/ICustomerManager/GetCustomers" style="document" />
       <wsdl:input>
@@ -1001,7 +1077,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>CEBAGO\Cesar</Upn>
+          <Upn>MATEBOOK-D15\jafet</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

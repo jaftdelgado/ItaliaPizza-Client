@@ -1,33 +1,74 @@
 ﻿using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ItaliaPizzaClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para SignInWindow.xaml
-    /// </summary>
     public partial class SignInWindow : Window
     {
         public SignInWindow()
         {
             InitializeComponent();
+            UpdateButtonState();
+            TbUsername.TextChanged += (s, e) => UpdateButtonState();
+            TbPassword.TextChanged += (s, e) => UpdateButtonState();
         }
 
-        private void Click_BtnSignIn(object sender, RoutedEventArgs e)
+        private void UpdateButtonState()
         {
+            BtnSignIn.IsEnabled = !string.IsNullOrWhiteSpace(TbUsername.Text) &&
+                                  !string.IsNullOrWhiteSpace(TbPassword.Text);
+        }
 
+        private void NavigateToMainWindow()
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
+
+        private async Task Login()
+        {
+            var user = TbUsername.Text;
+            var password = TbPassword.Text;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var hashedPassword = PasswordUtilities.HashPassword(password);
+
+                var personal = client.Login(user, hashedPassword);
+
+                if (personal == null)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        MessageDialog.Show("Error", "Credenciales incorrectas", AlertType.ERROR);
+                    });
+                    return;
+                }
+
+                CurrentSession.UserID = personal.PersonalID;
+                CurrentSession.Name = personal.FirstName;
+                CurrentSession.Surnames = personal.LastName;
+                CurrentSession.UserName = personal.Username;
+                CurrentSession.UserRole = personal.RoleID;
+
+                SessionManager.Start();
+
+                await Application.Current.Dispatcher.InvokeAsync(() => NavigateToMainWindow());
+            });
+        }
+
+
+        private async void Click_BtnSignIn(object sender, RoutedEventArgs e)
+        {
+            await Login();
         }
 
         private void Password_TextChanged(object sender, RoutedEventArgs e)
@@ -36,9 +77,7 @@ namespace ItaliaPizzaClient.Views
                 PbPassword.Password = textBox.Text;
             else if (sender is PasswordBox passwordBox && TbPassword.Text != passwordBox.Password)
                 TbPassword.Text = passwordBox.Password;
-
         }
-
 
         private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
         {
