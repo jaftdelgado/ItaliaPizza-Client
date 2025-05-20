@@ -14,8 +14,6 @@ namespace ItaliaPizzaClient.Views
         public MainWindow()
         {
             InitializeComponent();
-
-
             SideMenuManager.CurrentUserRole = GetCurrentUserRole();
 
             NavigationManager.Initialize(MainFrame, NavigationPanel, BtnBack);
@@ -28,8 +26,12 @@ namespace ItaliaPizzaClient.Views
 
 
             BtnBack.Click += BtnBack_Click;
-            Application.Current.MainWindow = this;
+            Loaded += MainWindow_Loaded;
+        }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = this;
         }
 
         public void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -59,18 +61,7 @@ namespace ItaliaPizzaClient.Views
             var nameBlock = BtnProfile.Template.FindName("PART_UserName", BtnProfile) as TextBlock;
             var roleBlock = BtnProfile.Template.FindName("PART_UserRole", BtnProfile) as TextBlock;
 
-            if (profileImage != null)
-            {
-                if (user.ProfilePic != null && user.ProfilePic.Length > 0)
-                {
-                    profileImage.Source = ImageUtilities.ConvertToImageSource(user.ProfilePic);
-                }
-                else
-                {
-                    profileImage.Source = new System.Windows.Media.Imaging.BitmapImage(
-                        new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Absolute));
-                }
-            }
+            ImageUtilities.SetImageSource(profileImage, user.ProfilePic, Constants.DEFAULT_PROFILE_PIC_PATH);
 
             if (nameBlock != null) nameBlock.Text = user.Username;
             if (roleBlock != null) roleBlock.Text = user.TranslatedRole;

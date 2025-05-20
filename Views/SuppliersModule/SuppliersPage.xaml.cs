@@ -64,7 +64,6 @@ namespace ItaliaPizzaClient.Views.SuppliersModule
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                // ✅ Validar si puede eliminarse
                 bool canDelete = await client.CanDeleteSupplierAsync(selected.Id);
                 if (!canDelete)
                 {
@@ -75,7 +74,6 @@ namespace ItaliaPizzaClient.Views.SuppliersModule
                     return;
                 }
 
-                // ✅ Eliminar si pasa la validación
                 bool success = await client.DeleteSupplierAsync(selected.Id);
                 if (!success) return;
 

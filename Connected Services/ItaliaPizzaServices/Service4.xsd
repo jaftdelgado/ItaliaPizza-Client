@@ -719,7 +719,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Login">
+  <xs:element name="SignIn">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
@@ -727,24 +727,38 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="LoginResponse">
+  <xs:element name="SignInResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="LoginResult" nillable="true" type="q35:PersonalDTO" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="SignInResult" nillable="true" type="q35:PersonalDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="updateActivity">
+  <xs:element name="UpdateActivity">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="personalID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="updateActivityResponse">
+  <xs:element name="UpdateActivityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="updateActivityResult" type="xs:int" />
+        <xs:element minOccurs="0" name="UpdateActivityResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignOut">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="personalID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignOutResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SignOutResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

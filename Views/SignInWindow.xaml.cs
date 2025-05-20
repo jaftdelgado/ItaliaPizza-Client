@@ -1,4 +1,5 @@
-﻿using ItaliaPizzaClient.Utilities;
+﻿using ItaliaPizzaClient.Model;
+using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using System;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace ItaliaPizzaClient.Views
                 if (client == null) return;
 
                 var hashedPassword = PasswordUtilities.HashPassword(password);
-                var dto = client.Login(user, hashedPassword);
+                var dto = client.SignIn(user, hashedPassword);
 
                 if (dto == null)
                 {
@@ -52,7 +53,7 @@ namespace ItaliaPizzaClient.Views
                     return;
                 }
 
-                var personal = new Model.Personal
+                var personal = new Personal
                 {
                     PersonalID = dto.PersonalID,
                     FirstName = dto.FirstName,
@@ -69,7 +70,7 @@ namespace ItaliaPizzaClient.Views
                     AddressID = dto.AddressID,
                     IsOnline = dto.IsOnline,
                     Address = dto.Address != null
-                        ? new Model.Address
+                        ? new Address
                         {
                             Id = dto.Address.Id,
                             AddressName = dto.Address.AddressName,
@@ -82,11 +83,11 @@ namespace ItaliaPizzaClient.Views
                 CurrentSession.SetUser(personal);
                 SessionManager.Start();
 
-                await Application.Current.Dispatcher.InvokeAsync(() => NavigateToMainWindow());
+                await Application.Current.Dispatcher.InvokeAsync(() => 
+                    MessageDialog.Show("SignOut_DialogTSignedIn", "SignOut_DialogDSignedIn", AlertType.SUCCESS, () => NavigateToMainWindow())
+                );
             });
         }
-
-
 
         private async void Click_BtnSignIn(object sender, RoutedEventArgs e)
         {

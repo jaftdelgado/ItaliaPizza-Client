@@ -62,7 +62,9 @@
     <sys:String x:Key="GlbDialogD_EmailFormat">El correo electrónico ingresado no es válido. Asegúrate dse que tenga el formato correcto (ejemplo@dominio.com) e inténtalo nuevamente.</sys:String>
     <sys:String x:Key="GlbDialogT_UnkownImageError">Error desconocido</sys:String>
     <sys:String x:Key="GlbDialogD_UnkownImageError">Ocurrió un error inesperado al procesar la imagen seleccionada. Por favor, verifica el archivo y vuelve a intentarlo.</sys:String>
-
+    <sys:String x:Key="Setting_SignOut">Cerrar Sesión</sys:String>
+    <sys:String x:Key="Setting_EditProfile">Modificar Perfil</sys:String>
+    
     <!--Supply Categories-->
     <sys:String x:Key="Supply_Dairy">Lácteos</sys:String>
     <sys:String x:Key="Supply_Meats">Carnes</sys:String>
@@ -111,10 +113,12 @@
     <sys:String x:Key="SignIn_TbUsername">Nombre de usuario:</sys:String>
     <sys:String x:Key="SignIn_TbPassword">Contraseña:</sys:String>
     <sys:String x:Key="SignIn_BtnSignIn">Iniciar Sesión</sys:String>
+    <sys:String x:Key="SignOut_DialogTSignedIn">Sesión iniciada</sys:String>
+    <sys:String x:Key="SignOut_DialogDSignedIn">La sesión fue iniciada correctamente. Ahora puedes acceder a todas las funcionalidades del sistema de Italia Pizza.</sys:String>
     <sys:String x:Key="SignOut_DialogTSignOut">¿Cerrar Sesión?</sys:String>
     <sys:String x:Key="SignOut_DialogDSignOut">¿Estás seguro de que deseas cerrar la sesión actual? La próxima vez que desees ingresar al sistema, deberás autenticarte nuevamente.</sys:String>
-    <sys:String x:Key="SignOut_DialogTDeletedEmployee">Empleado eliminado</sys:String>
-    <sys:String x:Key="SignOut_DialogDDeletedEmployee">El empleado fue marcado como eliminado correctamente. Puedes restaurarlo desde la vista de empleados eliminados.</sys:String>
+    <sys:String x:Key="SignOut_DialogTSignedOut">Sesión cerrada</sys:String>
+    <sys:String x:Key="SignOut_DialogDSignedOut">La sesión fue cerrada exitosamente. Esperamos verte pronto nuevamente en el sistema de Italia Pizza.</sys:String>
 
     <!--Personal-->
     <sys:String x:Key="Personal_Header">Personal</sys:String>

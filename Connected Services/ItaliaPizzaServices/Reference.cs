@@ -2526,17 +2526,23 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/ReactivateCustomer", ReplyAction="http://tempuri.org/ICustomerManager/ReactivateCustomerResponse")]
         System.Threading.Tasks.Task<bool> ReactivateCustomerAsync(int customerID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/Login", ReplyAction="http://tempuri.org/ISesionManager/LoginResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO Login(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignIn", ReplyAction="http://tempuri.org/ISessionManager/SignInResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO SignIn(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/Login", ReplyAction="http://tempuri.org/ISesionManager/LoginResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> LoginAsync(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignIn", ReplyAction="http://tempuri.org/ISessionManager/SignInResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> SignInAsync(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/updateActivity", ReplyAction="http://tempuri.org/ISesionManager/updateActivityResponse")]
-        int updateActivity(int personalID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/UpdateActivity", ReplyAction="http://tempuri.org/ISessionManager/UpdateActivityResponse")]
+        int UpdateActivity(int personalID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/updateActivity", ReplyAction="http://tempuri.org/ISesionManager/updateActivityResponse")]
-        System.Threading.Tasks.Task<int> updateActivityAsync(int personalID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/UpdateActivity", ReplyAction="http://tempuri.org/ISessionManager/UpdateActivityResponse")]
+        System.Threading.Tasks.Task<int> UpdateActivityAsync(int personalID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignOut", ReplyAction="http://tempuri.org/ISessionManager/SignOutResponse")]
+        int SignOut(int personalID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignOut", ReplyAction="http://tempuri.org/ISessionManager/SignOutResponse")]
+        System.Threading.Tasks.Task<int> SignOutAsync(int personalID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainManager/Ping", ReplyAction="http://tempuri.org/IMainManager/PingResponse")]
         bool Ping();
@@ -2988,20 +2994,28 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.ReactivateCustomerAsync(customerID);
         }
         
-        public ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO Login(string username, string password) {
-            return base.Channel.Login(username, password);
+        public ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO SignIn(string username, string password) {
+            return base.Channel.SignIn(username, password);
         }
         
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> LoginAsync(string username, string password) {
-            return base.Channel.LoginAsync(username, password);
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> SignInAsync(string username, string password) {
+            return base.Channel.SignInAsync(username, password);
         }
         
-        public int updateActivity(int personalID) {
-            return base.Channel.updateActivity(personalID);
+        public int UpdateActivity(int personalID) {
+            return base.Channel.UpdateActivity(personalID);
         }
         
-        public System.Threading.Tasks.Task<int> updateActivityAsync(int personalID) {
-            return base.Channel.updateActivityAsync(personalID);
+        public System.Threading.Tasks.Task<int> UpdateActivityAsync(int personalID) {
+            return base.Channel.UpdateActivityAsync(personalID);
+        }
+        
+        public int SignOut(int personalID) {
+            return base.Channel.SignOut(personalID);
+        }
+        
+        public System.Threading.Tasks.Task<int> SignOutAsync(int personalID) {
+            return base.Channel.SignOutAsync(personalID);
         }
         
         public bool Ping() {
