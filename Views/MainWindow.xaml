@@ -9,9 +9,9 @@
         Title="MainWindow"
         Height="720"
         Width="1080" MinWidth="920">
-    <Border Background="{StaticResource BackgroundBrush}" CornerRadius="12">
+    <Border Background="{StaticResource BackgroundBrush}">
         <Grid>
-            <Grid x:Name="RootGrid" Visibility="Visible">
+            <Grid x:Name="RootGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="241*"/>
                     <ColumnDefinition Width="839*"/>
@@ -24,8 +24,8 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Grid.Column="0" Background="#EDEDFE" 
-                            BorderBrush="{StaticResource SecondaryBrush}" 
-                            BorderThickness="0.5,0">
+                                BorderBrush="{StaticResource SecondaryBrush}" 
+                                BorderThickness="0.5,0">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="64"/>
@@ -66,7 +66,7 @@
                                             <Border Margin="14 10">
                                                 <Button x:Name="BtnProfile" Style="{DynamicResource UserButtonStyle}"/>
                                             </Border>
-                                            
+
                                             <Border BorderBrush="{StaticResource SecondaryBrush}" 
                                                     BorderThickness="0 0.5 0 0" >
                                                 <StackPanel Orientation="Horizontal" Margin="16 10" >
@@ -114,53 +114,6 @@
                         </Border>
                     </Grid>
                 </Border>
-
-
-            </Grid>
-            <Grid x:Name="LoginGrid" Visibility="Collapsed">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-                    <Image Source="/Resources/Icons/italiapizza-icon.png" 
-                           Width="100" Height="100" Margin="0,0,0,20" 
-                           RenderOptions.BitmapScalingMode="HighQuality"/>
-
-                    <TextBlock Text="Iniciar Sesión" 
-                               Style="{DynamicResource SubtitleLabelStyle}"
-                               FontSize="24"
-                               Margin="0,0,0,20"
-                               HorizontalAlignment="Center"/>
-
-                    <TextBox x:Name="txtUsuario" 
-                             Style="{DynamicResource TextBoxStyle}"
-                             Margin="0,0,0,10"
-                             Tag="Usuario"
-                             />
-
-                    <PasswordBox x:Name="txtPassword" 
-                                Style="{DynamicResource PasswordBoxStyle}"
-                                Margin="0,0,0,20"
-
-                                 Tag="Contraseña"
-                               />
-
-                    <Button x:Name="btnLogin" 
-                            Content="Ingresar" 
-                            Style="{DynamicResource PrimaryButtonStyle}"
-                            Height="45"
-                            FontSize="14"
-                            Click="BtnLogin_Click" Width="122"/>
-                </StackPanel>
-
-                <Border Grid.Column="1" Background="#EDEDFE">
-                    <Image Source="/Resources/Images/login-background.jpg"
-                           Stretch="UniformToFill"
-                           Opacity="0.8"/>
-                </Border>
-                
             </Grid>
 
             <Border x:Name="PopUpOverlay"

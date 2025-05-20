@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -16,26 +17,49 @@ namespace ItaliaPizzaClient.Views.Dialogs
 
         public static void Show()
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow == null) return;
+            Window activeWindow = GetActiveWindow();
+            if (activeWindow == null) return;
 
             if (_instance == null)
                 _instance = new LoadingDialog();
 
-            mainWindow.DialogHost.Content = _instance;
-            mainWindow.DialogOverlay.Visibility = Visibility.Visible;
+            var dialogHost = activeWindow.FindName("DialogHost") as ContentControl;
+            var dialogOverlay = activeWindow.FindName("DialogOverlay") as Border;
+
+            if (dialogHost == null || dialogOverlay == null) return;
+
+            dialogHost.Content = _instance;
+            dialogOverlay.Visibility = Visibility.Visible;
+
             StartLoadingAnimation();
         }
 
         public static void Close()
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            if (mainWindow == null) return;
+            Window activeWindow = GetActiveWindow();
+            if (activeWindow == null) return;
 
-            mainWindow.DialogHost.Content = null;
-            mainWindow.DialogOverlay.Visibility = Visibility.Collapsed;
+            var dialogHost = activeWindow.FindName("DialogHost") as ContentControl;
+            var dialogOverlay = activeWindow.FindName("DialogOverlay") as Border;
+
+            if (dialogHost == null || dialogOverlay == null) return;
+
+            dialogHost.Content = null;
+            dialogOverlay.Visibility = Visibility.Collapsed;
 
             _instance = null;
+        }
+
+        public static bool IsDialogVisible()
+        {
+            foreach (var window in Application.Current.Windows.OfType<Window>())
+            {
+                var dialogHost = window.FindName("DialogHost") as ContentControl;
+                if (dialogHost?.Content is LoadingDialog)
+                    return true;
+            }
+
+            return false;
         }
 
         private static void StartLoadingAnimation()
@@ -43,8 +67,14 @@ namespace ItaliaPizzaClient.Views.Dialogs
             if (_instance == null) return;
 
             Storyboard rotateStoryboard = (Storyboard)Application.Current.TryFindResource("RotateAnimation");
-            rotateStoryboard.Begin(_instance.LoadIcon, true);
+            rotateStoryboard?.Begin(_instance.LoadIcon, true);
         }
 
+        private static Window GetActiveWindow()
+        {
+            return Application.Current.Windows
+                .OfType<Window>()
+                .FirstOrDefault(w => w.IsActive);
+        }
     }
 }

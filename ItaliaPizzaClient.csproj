@@ -97,6 +97,8 @@
     <Compile Include="Model\Supply.cs" />
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\MeasureUnit.cs" />
+    <Compile Include="Model\Transaction.cs" />
+    <Compile Include="Utilities\FlowToColorConverter.cs" />
     <Compile Include="Views\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>
     </Compile>
@@ -387,6 +389,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.CashRegisterDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -415,6 +420,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\MainService.wsdl" />
