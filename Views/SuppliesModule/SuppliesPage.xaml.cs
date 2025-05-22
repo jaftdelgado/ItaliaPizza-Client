@@ -319,5 +319,10 @@ namespace ItaliaPizzaClient.Views
         {
             SearchSupplies();   
         }
+
+        private void Click_BtnRegisterWaste(object sender, RoutedEventArgs e)
+        {
+            UserControls.RegisterSupplyWaste.Show(sender as FrameworkElement);
+        }
     }
 }
