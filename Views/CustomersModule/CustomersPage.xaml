@@ -32,7 +32,7 @@
 
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,0,20,10"  
                     HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button x:Name="BtnNewSupply" Style="{DynamicResource PrimaryButtonStyle}"
+                    <Button x:Name="BtnNewCustomer" Style="{DynamicResource PrimaryButtonStyle}"
                     Content="{DynamicResource Customers_BtnNewCustomer}"
                     Click="Click_BtnNewCustomer" >
                         <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
@@ -57,8 +57,15 @@
 
                         <TextBox x:Name="SearchBox" Grid.Column="0" HorizontalAlignment="Left"
                          Style="{DynamicResource SecondarySearchBoxStyle}"
-                         Width="180"
+                         Width="230"
                          TextChanged="SearchBox_TextChanged"/>
+
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Height="42">
+                            <Button x:Name="BtnActive" Content="{DynamicResource Glb_Active}"
+                                    Click="Click_FilterButton" Style="{DynamicResource TableHeaderButtonStyle}"/>
+                            <Button x:Name="BtnDeleted" Margin="20, 0, 0, 0" Content="{DynamicResource Glb_Deleted}"
+                                    Click="Click_FilterButton" Style="{DynamicResource TableHeaderButtonStyle}"/>
+                        </StackPanel>
                     </Grid>
                 </Border>
 
@@ -84,7 +91,8 @@
                             <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
-                              x:Name="CustomerDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False">
+                              x:Name="CustomerDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False"
+                              IsReadOnly="True" SelectionChanged="CustomerDataGrid_SelectionChanged">
                                 <DataGrid.Columns>
                                     <!-- Nombre completo -->
                                     <DataGridTextColumn Header="nombre" Binding="{Binding FullName}" IsReadOnly="True" Width="*"/>
@@ -95,21 +103,67 @@
                                     <!-- Telefono -->
                                     <DataGridTextColumn Header="Telefono" Binding="{Binding PhoneNumber}" IsReadOnly="True" Width="0.5*"/>
 
-                                    </DataGrid.Columns>
+                                </DataGrid.Columns>
                             </DataGrid>
                         </Border>
+
+                        <StackPanel x:Name="NoMatchesMessage" Orientation="Vertical"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Visibility="Collapsed">
+                                <Image Source="/Resources/Icons/search-error-icon.png"
+                                    Width="64" Height="64"
+                                    RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <TextBlock Text="Sin coincidencias"
+                                    Style="{DynamicResource SubtitleLabelStyle}"
+                                    Margin="0, 6" TextAlignment="Center"/>
+                            <TextBlock Text="Prueba a buscar algo distinto"
+                                       TextAlignment="Center"
+                                       Style="{DynamicResource DescriptionLabelStyle}"/>
+                        </StackPanel>
                     </Grid>
 
                     <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5,0,0,0">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="6*"/>
-                                <RowDefinition Height="80"/>
-                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" x:Name="CustomerDetailsPanel"
+                                  Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="24,0">
-                            </StackPanel>
+                                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="24,0">
+                                    <TextBlock x:Name="CustomerName" FontSize="13"
+                                           Style="{DynamicResource SubtitleLabelStyle}"
+                                           Margin="0, 16, 0, 0"/>
+                                    <TextBlock x:Name="CustomerEmail" FontSize="13"
+                                               Style="{DynamicResource DescriptionLabelStyle}"/>
+                                    <TextBlock x:Name="CustomerAddress" FontSize="13"
+                                               Style="{DynamicResource DescriptionLabelStyle}"/>
+                                </StackPanel>
+
+                                <Border Grid.Row="1" BorderBrush="{DynamicResource SecondaryBrush}"
+                                        BorderThickness="0, 0.5, 0, 0">
+                                    <StackPanel VerticalAlignment="Center" Margin="20">
+                                        <Button x:Name="BtnEditCustomer" Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource Customers_BtnEditCustomer}" Margin="0, 0, 0, 6"
+                                                Click="Click_BtnEditCustomer">
+                                            <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                        </Button>
+                                        <Button x:Name="BtnDeleteCustomer" Style="{DynamicResource DangerButtonStyle}"
+                                                Content="{DynamicResource Customers_BtnDeleteCustomer}"
+                                                Click="Click_BtnDeleteCustomer">
+                                            <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                                        </Button>
+                                        <Button x:Name="BtnReactivateCustomer" Visibility="Collapsed"
+                                                Style="{DynamicResource PrimaryButtonStyle}"
+                                                Content="{DynamicResource Customers_BtnReactivateCustomer}"
+                                                Click="Click_BtnReactivateCustomer">
+                                            <Button.Tag>/Resources/Icons/reactivate-icon.png</Button.Tag>
+                                        </Button>
+                                    </StackPanel>
+                                    
+                                </Border>
+                            </Grid>
                         </Grid>
                     </Border>
                 </Grid>

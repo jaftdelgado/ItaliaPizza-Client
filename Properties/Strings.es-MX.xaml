@@ -220,11 +220,25 @@
     <sys:String x:Key="Customers_Header">Clientes</sys:String>
     <sys:String x:Key="Customers_Desc">Visualiza, registra, modifica y elimina los clientes de pedidos a domicilio de Italia Pizza.</sys:String>
     <sys:String x:Key="Customers_BtnNewCustomer">Nuevo Cliente</sys:String>
+    <sys:String x:Key="Customers_BtnDeleteCustomer">Eliminar cliente</sys:String>
+    <sys:String x:Key="Customers_BtnEditCustomer">Editar cliente</sys:String>
     <sys:String x:Key="Customers_TitleTable">Lista de Clientes</sys:String>
+    <sys:String x:Key="Customers_DialogTDeleteCustomer">¿Eliminar cliente?</sys:String>
+    <sys:String x:Key="Customers_DialogDDeleteCustomer">¿Estás seguro de que deseas eliminar al cliente seleccionado?</sys:String>
+    <sys:String x:Key="Customers_DialogTDeletedCustomer">Cliente eliminado</sys:String>
+    <sys:String x:Key="Customers_DialogDDeletedCustomer">El cliente fue marcado como eliminado correctamente.</sys:String>
+    <sys:String x:Key="Customers_BtnReactivateCustomer">Reactivar cliente</sys:String>
+    <sys:String x:Key="Customers_DialogTReactivateCustomer">¿Reactivar cliente?</sys:String>
+    <sys:String x:Key="Customers_DialogDReactivateCustomer">¿Estás seguro de que deseas reactivar al cliente seleccionado? Se reincorporará a la plantilla del personal y se actualizará su fecha de contratación.</sys:String>
+    <sys:String x:Key="Customers_DialogTReactivatedCustomer">Client reactivado</sys:String>
+    <sys:String x:Key="Customers_DialogDReactivatedCustomer">El cliente fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de clientes activos.</sys:String>
+
 
     <!--Register Customer-->
     <sys:String x:Key="RegCustomer_Header">Registrar cliente </sys:String>
     <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente que se desea registrar.</sys:String>
+    <sys:String x:Key="EditCustomer_Header">Editar cliente</sys:String>
+    <sys:String x:Key="EditCustomer_Desc">Modifica los datos del cliente que se desea actualizar.</sys:String>
     <sys:String x:Key="RegCostumer_CostumerInfo">Información del Cliente</sys:String>
     <sys:String x:Key="RegCostumer_PersonalInfo">Datos personales</sys:String>
     <sys:String x:Key="RegCostumer_AddressCostumer">Dirección del Cliente</sys:String>
@@ -233,6 +247,8 @@
     <sys:String x:Key="RegCostumer_BtnRegisterCostumer">Registrar Cliente</sys:String>
     <sys:String x:Key="RegCostumer_DialogTSuccess">Cliente registrado</sys:String>
     <sys:String x:Key="RegCostumer_DialogDSuccess">La información del cliente ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="RegCustomer_DialogTEditSuccess">Cliente actualizado</sys:String>
+    <sys:String x:Key="RegCustomer_DialogDEditSuccess">La información del cliente ha sido actualizada correctamente y los cambios han sido guardados con éxito.</sys:String>
 
     <!--Products-->
     <sys:String x:Key="Products_Header">Productos</sys:String>
@@ -431,4 +447,19 @@
     <sys:String x:Key="OutflowMoney_DialogDNoCashOpen">Debe abrir una caja antes de registrar una salida de dinero.</sys:String>
     <sys:String x:Key="OutflowMoney_DialogTInsufficientFunds">Fondos insuficientes</sys:String>
     <sys:String x:Key="OutflowMoney_DialogDInsufficientFunds">El monto ingresado excede el balance disponible en la caja.</sys:String>
+
+    <!--Register supply waste -->
+    <sys:String x:Key="Waste_Header">Registrar merma de producto</sys:String>
+    <sys:String x:Key="Waste_SupplyName">Insumo:</sys:String>
+    <sys:String x:Key="Waste_Quantity">Cantidad:</sys:String>
+    <sys:String x:Key="Waste_Register">Registrar merma</sys:String>
+    <sys:String x:Key="Waste_DialogTSuccess">Merma registrada</sys:String>
+    <sys:String x:Key="Waste_DialogDSuccess">Se ha registrado la merma al insumo seleccionado</sys:String>
+    <sys:String x:Key="Waste_DialogTNoSelection">Sin seleccion</sys:String>
+    <sys:String x:Key="Waste_DialogDNoSelection">No ha seleccionado el insumo para registar la merma</sys:String>
+    <sys:String x:Key="Waste_DialogTExceed">Exceso de merma</sys:String>
+    <sys:String x:Key="Waste_DialogDExceed">La cantidad de merma no puede superar a la cantidad en existencia del insumo seleccionado.</sys:String>
+    <sys:String x:Key="Waste_DialogTNoQuantity">Ingrese una cantidad</sys:String>
+    <sys:String x:Key="Waste_DialogDNoQuantity">Debe ingresar una cantidad mayor a 0 para registrar merma de un producto</sys:String>
+    
 </ResourceDictionary>

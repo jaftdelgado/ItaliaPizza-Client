@@ -24,9 +24,9 @@
 
                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
                     HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <TextBlock Style="{StaticResource HeaderLabelStyle}"
+                    <TextBlock x:Name="PageHeader" Style="{StaticResource HeaderLabelStyle}"
                        Text="{DynamicResource RegCustomer_Header}"/>
-                    <TextBlock Style="{StaticResource DescriptionLabelStyle}"
+                    <TextBlock x:Name="PageDescription" Style="{StaticResource DescriptionLabelStyle}"
                        Text="{DynamicResource RegCustomer_Desc}"/>
                 </StackPanel>
             </Grid>
@@ -154,6 +154,13 @@
                             Content="{DynamicResource RegCostumer_BtnRegisterCostumer}"
                             Click="Click_BtnRegisterCostumer">
                         <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                    </Button>
+                    <Button x:Name="BtnEditCustomer"
+                            Style="{DynamicResource PrimaryButtonStyle}"
+                            Content="{DynamicResource Customers_BtnEditCustomer}"
+                            Click="Click_BtnEditCustomer"
+                            Visibility="Collapsed">
+                        <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
                     </Button>
                 </StackPanel>
             </Border>

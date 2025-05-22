@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="ItaliaPizzaClient.Views.UserControls.RegisterSupplyWaste"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ItaliaPizzaClient.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="210" d:DesignWidth="280">
+    <Border Background="{DynamicResource SecondaryButtonBrush}" CornerRadius="14" BorderThickness="1"
+            BorderBrush="{DynamicResource BorderBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 0, 0, 0" Orientation="Vertical">
+                <TextBlock Text="{DynamicResource Waste_Header}"
+                           Style="{DynamicResource SubtitleLabelStyle}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="20, 10, 20, 0" Orientation="Vertical">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox x:Name="CbSupply" IsEditable="True" StaysOpenOnEdit="True" 
+                              Tag="{DynamicResource Waste_SupplyName}" DisplayMemberPath="Name"
+                              SelectedValuePath="Name" SelectionChanged="CbSupplyName_SelectionChanged"/>
+                    <TextBox x:Name="TbQuantity" Grid.Row="1" Style="{DynamicResource TextBoxStyle}"
+                             Tag="{DynamicResource Waste_Quantity}" Margin="0, 10, 0, 0"
+                             TextChanged="TbQuantity_TextChanged"/>
+                </Grid>
+            </StackPanel>
+
+            <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}" Margin="24, 0, 0, 0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="BtnCancel" Content="{DynamicResource Glb_Cancel}" Margin="30, 0"
+                            Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                            Click="Click_BtnCancel" Width="100"/>
+                    <Button x:Name="BtnAccept" Content="{DynamicResource Waste_Register}"
+                            Style="{DynamicResource PrimaryButtonNoIconStyle}"
+                            Click="Click_BtnAccept" Width="110" Margin="0, 0, 20, 0"/>
+                </StackPanel>
+                
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

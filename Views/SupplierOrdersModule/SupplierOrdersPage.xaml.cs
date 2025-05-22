@@ -97,6 +97,7 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
                 });
             });
         }
+        
         private async Task DeliverSupplierOrder(SupplierOrder selected)
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
@@ -137,13 +138,13 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
                         switch (result)
                         {
                             case -1:
-                                MessageDialog.Show("Error1", "Error1", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InvalidStatus", AlertType.ERROR);
                                 break;
                             case -2:
                                 MessageDialog.Show("Error2", "Error2", AlertType.ERROR);
                                 break;
                             case -3:
-                                MessageDialog.Show("Error3", "Error4", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InsufficientFunds", AlertType.ERROR);
                                 break;
                             default:
                                 MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.ERROR);
@@ -153,6 +154,7 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
                 });
             });
         }
+        
         private async Task CancelSupplierOrder(SupplierOrder selected)
         {
             await ServiceClientManager.ExecuteServerAction(async () =>

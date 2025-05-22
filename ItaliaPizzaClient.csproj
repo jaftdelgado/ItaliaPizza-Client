@@ -98,6 +98,7 @@
     <Compile Include="Model\SupplyCategory.cs" />
     <Compile Include="Model\MeasureUnit.cs" />
     <Compile Include="Model\Transaction.cs" />
+    <Compile Include="Model\WasteSupply.cs" />
     <Compile Include="Utilities\FlowToColorConverter.cs" />
     <Compile Include="Views\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>
@@ -212,6 +213,9 @@
     </Compile>
     <Compile Include="Views\SupplierOrdersModule\SupplyOrderDetail.xaml.cs">
       <DependentUpon>SupplyOrderDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\RegisterSupplyWaste.xaml.cs">
+      <DependentUpon>RegisterSupplyWaste.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\UserSettings.xaml.cs">
       <DependentUpon>UserSettings.xaml</DependentUpon>
@@ -381,6 +385,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SupplierOrdersModule\SupplyOrderDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RegisterSupplyWaste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
