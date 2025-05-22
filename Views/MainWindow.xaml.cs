@@ -39,9 +39,9 @@ namespace ItaliaPizzaClient.Views
             NavigationManager.Instance.GoBack();
         }
 
-        private string GetCurrentUserRole()
+        private int GetCurrentUserRole()
         {
-            return "Test";
+            return CurrentSession.LoggedInUser.RoleID;
         }
 
         private void LoadProfileImage()

@@ -361,6 +361,10 @@
     <sys:String x:Key="CashRegister_TbOpeningDate">Fecha de apertura:</sys:String>
     <sys:String x:Key="CashRegister_TbInitialBalance">Balance inicial:</sys:String>
     <sys:String x:Key="CashRegister_CheckBConfirmOpening">Confirmar apertura de caja.</sys:String>
+    <sys:String x:Key="CashRegister_TbCashBalance">Balance de Caja:</sys:String>
+    <sys:String x:Key="CashRegister_TbCashierAmount">Monto Contado:</sys:String>
+    <sys:String x:Key="CashRegister_TbDiference">Diferencia:</sys:String>
+    <sys:String x:Key="CashRegister_CheckBConfirmClosing">Confirmar cierre de caja.</sys:String>
     <sys:String x:Key="CashRegister_BtnOpening">Abrir caja</sys:String>
     <sys:String x:Key="CashRegister_DialogTInvalidAmount">Monto inválido</sys:String>
     <sys:String x:Key="CashRegister_DialogDInvalidAmount">Por favor, ingrese un monto válido y mayor o igual a 0 para abrir la caja.</sys:String>

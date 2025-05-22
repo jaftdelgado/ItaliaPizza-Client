@@ -2406,6 +2406,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/OpenCashRegister", ReplyAction="http://tempuri.org/IFinanceManager/OpenCashRegisterResponse")]
         System.Threading.Tasks.Task<bool> OpenCashRegisterAsync(decimal initialAmount);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/CloseCashRegister", ReplyAction="http://tempuri.org/IFinanceManager/CloseCashRegisterResponse")]
+        bool CloseCashRegister(decimal cashierAmount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/CloseCashRegister", ReplyAction="http://tempuri.org/IFinanceManager/CloseCashRegisterResponse")]
+        System.Threading.Tasks.Task<bool> CloseCashRegisterAsync(decimal cashierAmount);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterCashOut", ReplyAction="http://tempuri.org/IFinanceManager/RegisterCashOutResponse")]
         int RegisterCashOut(decimal amount, string description);
         
@@ -2832,6 +2838,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> OpenCashRegisterAsync(decimal initialAmount) {
             return base.Channel.OpenCashRegisterAsync(initialAmount);
+        }
+        
+        public bool CloseCashRegister(decimal cashierAmount) {
+            return base.Channel.CloseCashRegister(cashierAmount);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CloseCashRegisterAsync(decimal cashierAmount) {
+            return base.Channel.CloseCashRegisterAsync(cashierAmount);
         }
         
         public int RegisterCashOut(decimal amount, string description) {
