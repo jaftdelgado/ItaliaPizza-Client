@@ -448,6 +448,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CloseCashRegister">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cashierAmount" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseCashRegisterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CloseCashRegisterResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RegisterCashOut">
     <xs:complexType>
       <xs:sequence>

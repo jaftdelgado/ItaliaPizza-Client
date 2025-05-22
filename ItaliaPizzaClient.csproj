@@ -112,6 +112,9 @@
     <Compile Include="Views\StockPage.xaml.cs">
       <DependentUpon>StockPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ClosingCash.xaml.cs">
+      <DependentUpon>ClosingCash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\OpeningCash.xaml.cs">
       <DependentUpon>OpeningCash.xaml</DependentUpon>
     </Compile>
@@ -254,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StockPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ClosingCash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
