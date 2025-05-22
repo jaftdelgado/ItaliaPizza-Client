@@ -443,4 +443,19 @@
     <sys:String x:Key="OutflowMoney_DialogDNoCashOpen">Debe abrir una caja antes de registrar una salida de dinero.</sys:String>
     <sys:String x:Key="OutflowMoney_DialogTInsufficientFunds">Fondos insuficientes</sys:String>
     <sys:String x:Key="OutflowMoney_DialogDInsufficientFunds">El monto ingresado excede el balance disponible en la caja.</sys:String>
+
+    <!--Register supply waste -->
+    <sys:String x:Key="Waste_Header">Registrar merma de producto</sys:String>
+    <sys:String x:Key="Waste_SupplyName">Insumo:</sys:String>
+    <sys:String x:Key="Waste_Quantity">Cantidad:</sys:String>
+    <sys:String x:Key="Waste_Register">Registrar merma</sys:String>
+    <sys:String x:Key="Waste_DialogTSuccess">Merma registrada</sys:String>
+    <sys:String x:Key="Waste_DialogDSuccess">Se ha registrado la merma al insumo seleccionado</sys:String>
+    <sys:String x:Key="Waste_DialogTNoSelection">Sin seleccion</sys:String>
+    <sys:String x:Key="Waste_DialogDNoSelection">No ha seleccionado el insumo para registar la merma</sys:String>
+    <sys:String x:Key="Waste_DialogTExceed">Exceso de merma</sys:String>
+    <sys:String x:Key="Waste_DialogDExceed">La cantidad de merma no puede superar a la cantidad en existencia del insumo seleccionado.</sys:String>
+    <sys:String x:Key="Waste_DialogTNoQuantity">Ingrese una cantidad</sys:String>
+    <sys:String x:Key="Waste_DialogDNoQuantity">Debe ingresar una cantidad mayor a 0 para registrar merma de un producto</sys:String>
+    
 </ResourceDictionary>
