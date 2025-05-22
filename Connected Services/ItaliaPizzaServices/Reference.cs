@@ -2544,6 +2544,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignOut", ReplyAction="http://tempuri.org/ISessionManager/SignOutResponse")]
         System.Threading.Tasks.Task<int> SignOutAsync(int personalID);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWasteManager/RegisterSupplyLoss", ReplyAction="http://tempuri.org/IWasteManager/RegisterSupplyLossResponse")]
+        bool RegisterSupplyLoss(ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO supplyDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWasteManager/RegisterSupplyLoss", ReplyAction="http://tempuri.org/IWasteManager/RegisterSupplyLossResponse")]
+        System.Threading.Tasks.Task<bool> RegisterSupplyLossAsync(ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO supplyDTO);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainManager/Ping", ReplyAction="http://tempuri.org/IMainManager/PingResponse")]
         bool Ping();
         
@@ -3016,6 +3022,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<int> SignOutAsync(int personalID) {
             return base.Channel.SignOutAsync(personalID);
+        }
+        
+        public bool RegisterSupplyLoss(ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO supplyDTO) {
+            return base.Channel.RegisterSupplyLoss(supplyDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterSupplyLossAsync(ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO supplyDTO) {
+            return base.Channel.RegisterSupplyLossAsync(supplyDTO);
         }
         
         public bool Ping() {

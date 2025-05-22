@@ -369,6 +369,12 @@
   <wsdl:message name="IMainManager_SignOut_OutputMessage">
     <wsdl:part name="parameters" element="tns:SignOutResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterSupplyLoss_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterSupplyLoss" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_RegisterSupplyLoss_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterSupplyLossResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
   </wsdl:message>
@@ -595,6 +601,10 @@
     <wsdl:operation name="SignOut">
       <wsdl:input wsaw:Action="http://tempuri.org/ISessionManager/SignOut" message="tns:IMainManager_SignOut_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISessionManager/SignOutResponse" message="tns:IMainManager_SignOut_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterSupplyLoss">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWasteManager/RegisterSupplyLoss" message="tns:IMainManager_RegisterSupplyLoss_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWasteManager/RegisterSupplyLossResponse" message="tns:IMainManager_RegisterSupplyLoss_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainManager/Ping" message="tns:IMainManager_Ping_InputMessage" />
@@ -1099,6 +1109,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RegisterSupplyLoss">
+      <soap12:operation soapAction="http://tempuri.org/IWasteManager/RegisterSupplyLoss" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Ping">
       <soap12:operation soapAction="http://tempuri.org/IMainManager/Ping" style="document" />
       <wsdl:input>
@@ -1115,7 +1134,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>MATEBOOK-D15\jafet</Upn>
+          <Upn>_3776_\abrah</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
