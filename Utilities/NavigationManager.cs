@@ -44,6 +44,11 @@ namespace ItaliaPizzaClient.Utilities
             }
         }
 
+        public static void Reset()
+        {
+            _instance = null;
+        }
+
         public class NavigationItem
         {
             public string Name { get; set; }
@@ -150,17 +155,6 @@ namespace ItaliaPizzaClient.Utilities
         private void UpdateButtonStates()
         {
             btnBack.IsEnabled = currentIndex > 0;
-        }
-
-        public static bool HasChanges(List<TextBox> textFields, List<ComboBox> comboBoxes)
-        {
-            foreach (TextBox field in textFields)
-                if (field != null && !string.IsNullOrWhiteSpace(field.Text)) return true;
-
-            foreach (ComboBox comboBox in comboBoxes)
-                if (comboBox != null && comboBox.SelectedIndex > 0) return true;
-
-            return false;
         }
     }
 }

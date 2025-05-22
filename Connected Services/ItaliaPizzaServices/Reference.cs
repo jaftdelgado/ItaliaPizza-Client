@@ -403,6 +403,9 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private bool IsActiveField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDeletableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -492,6 +495,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.IsActiveField.Equals(value) != true)) {
                     this.IsActiveField = value;
                     this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDeletable {
+            get {
+                return this.IsDeletableField;
+            }
+            set {
+                if ((this.IsDeletableField.Equals(value) != true)) {
+                    this.IsDeletableField = value;
+                    this.RaisePropertyChanged("IsDeletable");
                 }
             }
         }
@@ -2282,6 +2298,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/ReactivateSupplier", ReplyAction="http://tempuri.org/ISupplierManager/ReactivateSupplierResponse")]
         System.Threading.Tasks.Task<bool> ReactivateSupplierAsync(int supplierID);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/CanDeleteSupplier", ReplyAction="http://tempuri.org/ISupplierManager/CanDeleteSupplierResponse")]
+        bool CanDeleteSupplier(int supplierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierManager/CanDeleteSupplier", ReplyAction="http://tempuri.org/ISupplierManager/CanDeleteSupplierResponse")]
+        System.Threading.Tasks.Task<bool> CanDeleteSupplierAsync(int supplierId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplyManager/GetSuppliesBySupplier", ReplyAction="http://tempuri.org/ISupplyManager/GetSuppliesBySupplierResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId);
         
@@ -2504,17 +2526,23 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/ReactivateCustomer", ReplyAction="http://tempuri.org/ICustomerManager/ReactivateCustomerResponse")]
         System.Threading.Tasks.Task<bool> ReactivateCustomerAsync(int customerID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/Login", ReplyAction="http://tempuri.org/ISesionManager/LoginResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO Login(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignIn", ReplyAction="http://tempuri.org/ISessionManager/SignInResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO SignIn(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/Login", ReplyAction="http://tempuri.org/ISesionManager/LoginResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> LoginAsync(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignIn", ReplyAction="http://tempuri.org/ISessionManager/SignInResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> SignInAsync(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/updateActivity", ReplyAction="http://tempuri.org/ISesionManager/updateActivityResponse")]
-        int updateActivity(int personalID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/UpdateActivity", ReplyAction="http://tempuri.org/ISessionManager/UpdateActivityResponse")]
+        int UpdateActivity(int personalID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISesionManager/updateActivity", ReplyAction="http://tempuri.org/ISesionManager/updateActivityResponse")]
-        System.Threading.Tasks.Task<int> updateActivityAsync(int personalID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/UpdateActivity", ReplyAction="http://tempuri.org/ISessionManager/UpdateActivityResponse")]
+        System.Threading.Tasks.Task<int> UpdateActivityAsync(int personalID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignOut", ReplyAction="http://tempuri.org/ISessionManager/SignOutResponse")]
+        int SignOut(int personalID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignOut", ReplyAction="http://tempuri.org/ISessionManager/SignOutResponse")]
+        System.Threading.Tasks.Task<int> SignOutAsync(int personalID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainManager/Ping", ReplyAction="http://tempuri.org/IMainManager/PingResponse")]
         bool Ping();
@@ -2660,6 +2688,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> ReactivateSupplierAsync(int supplierID) {
             return base.Channel.ReactivateSupplierAsync(supplierID);
+        }
+        
+        public bool CanDeleteSupplier(int supplierId) {
+            return base.Channel.CanDeleteSupplier(supplierId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CanDeleteSupplierAsync(int supplierId) {
+            return base.Channel.CanDeleteSupplierAsync(supplierId);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplyDTO[] GetSuppliesBySupplier(int supplierId) {
@@ -2958,20 +2994,28 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.ReactivateCustomerAsync(customerID);
         }
         
-        public ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO Login(string username, string password) {
-            return base.Channel.Login(username, password);
+        public ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO SignIn(string username, string password) {
+            return base.Channel.SignIn(username, password);
         }
         
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> LoginAsync(string username, string password) {
-            return base.Channel.LoginAsync(username, password);
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO> SignInAsync(string username, string password) {
+            return base.Channel.SignInAsync(username, password);
         }
         
-        public int updateActivity(int personalID) {
-            return base.Channel.updateActivity(personalID);
+        public int UpdateActivity(int personalID) {
+            return base.Channel.UpdateActivity(personalID);
         }
         
-        public System.Threading.Tasks.Task<int> updateActivityAsync(int personalID) {
-            return base.Channel.updateActivityAsync(personalID);
+        public System.Threading.Tasks.Task<int> UpdateActivityAsync(int personalID) {
+            return base.Channel.UpdateActivityAsync(personalID);
+        }
+        
+        public int SignOut(int personalID) {
+            return base.Channel.SignOut(personalID);
+        }
+        
+        public System.Threading.Tasks.Task<int> SignOutAsync(int personalID) {
+            return base.Channel.SignOutAsync(personalID);
         }
         
         public bool Ping() {

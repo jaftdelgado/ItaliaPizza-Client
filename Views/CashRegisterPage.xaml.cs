@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace ItaliaPizzaClient.Views
 {
@@ -24,7 +23,7 @@ namespace ItaliaPizzaClient.Views
             LoadCurrentTransactionsData();
         }
 
-        private async void LoadCurrentTransactionsData()
+        public async void LoadCurrentTransactionsData()
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
             {

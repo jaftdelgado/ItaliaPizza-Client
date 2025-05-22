@@ -307,9 +307,9 @@
 
                             <Grid Width="30" Height="30" Grid.Column="0">
                                 <Ellipse />
-                                <Image Source="/Resources/Images/default-profile-pic.png" 
-                                        Stretch="Fill"
-                                        RenderOptions.BitmapScalingMode="HighQuality" >
+                                <Image x:Name="PART_ProfileImage"
+                                       Source="/Resources/Images/default-profile-pic.png" 
+                                       Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality" >
                                     <Image.Clip>
                                         <EllipseGeometry Center="15 15" RadiusX="15" RadiusY="15"/>
                                     </Image.Clip>
@@ -317,10 +317,10 @@
                             </Grid>
 
                             <StackPanel Grid.Column="1" Margin="8 0" VerticalAlignment="Center">
-                                <TextBlock Text="Jafeth Delgado" 
+                                <TextBlock x:Name="PART_UserName" 
                                        FontFamily="{StaticResource SFProMedium}"
                                        Style="{DynamicResource RegularLabelStyle}" />
-                                <TextBlock Text="Administrador" 
+                                <TextBlock x:Name="PART_UserRole" 
                                        FontSize="11"
                                        Style="{DynamicResource DescriptionLabelStyle}"/>
                             </StackPanel>

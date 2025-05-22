@@ -1,4 +1,5 @@
-﻿using ItaliaPizzaClient.Utilities;
+﻿using ItaliaPizzaClient.Model;
+using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using System;
 using System.Threading.Tasks;
@@ -19,8 +20,8 @@ namespace ItaliaPizzaClient.Views
 
         private void UpdateButtonState()
         {
-            BtnSignIn.IsEnabled = !string.IsNullOrWhiteSpace(TbUsername.Text) &&
-                                  !string.IsNullOrWhiteSpace(TbPassword.Text);
+            BtnSignIn.IsEnabled = !string.IsNullOrWhiteSpace(TbUsername.Text) && 
+                !string.IsNullOrWhiteSpace(TbPassword.Text);
         }
 
         private void NavigateToMainWindow()
@@ -41,10 +42,9 @@ namespace ItaliaPizzaClient.Views
                 if (client == null) return;
 
                 var hashedPassword = PasswordUtilities.HashPassword(password);
+                var dto = client.SignIn(user, hashedPassword);
 
-                var personal = client.Login(user, hashedPassword);
-
-                if (personal == null)
+                if (dto == null)
                 {
                     await Application.Current.Dispatcher.InvokeAsync(() =>
                     {
@@ -53,18 +53,41 @@ namespace ItaliaPizzaClient.Views
                     return;
                 }
 
-                CurrentSession.UserID = personal.PersonalID;
-                CurrentSession.Name = personal.FirstName;
-                CurrentSession.Surnames = personal.LastName;
-                CurrentSession.UserName = personal.Username;
-                CurrentSession.UserRole = personal.RoleID;
+                var personal = new Personal
+                {
+                    PersonalID = dto.PersonalID,
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    RFC = dto.RFC,
+                    EmailAddress = dto.EmailAddress,
+                    PhoneNumber = dto.PhoneNumber,
+                    Username = dto.Username,
+                    Password = dto.Password,
+                    ProfilePic = dto.ProfilePic,
+                    HireDate = dto.HireDate,
+                    IsActive = dto.IsActive,
+                    RoleID = dto.RoleID,
+                    AddressID = dto.AddressID,
+                    IsOnline = dto.IsOnline,
+                    Address = dto.Address != null
+                        ? new Address
+                        {
+                            Id = dto.Address.Id,
+                            AddressName = dto.Address.AddressName,
+                            ZipCode = dto.Address.ZipCode,
+                            City = dto.Address.City
+                        }
+                        : null
+                };
 
+                CurrentSession.SetUser(personal);
                 SessionManager.Start();
 
-                await Application.Current.Dispatcher.InvokeAsync(() => NavigateToMainWindow());
+                await Application.Current.Dispatcher.InvokeAsync(() => 
+                    MessageDialog.Show("SignOut_DialogTSignedIn", "SignOut_DialogDSignedIn", AlertType.SUCCESS, () => NavigateToMainWindow())
+                );
             });
         }
-
 
         private async void Click_BtnSignIn(object sender, RoutedEventArgs e)
         {

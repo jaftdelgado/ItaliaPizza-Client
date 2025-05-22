@@ -9,7 +9,7 @@ using System.Windows.Media;
 using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 
-namespace ItaliaPizzaClient.Views.UserControls
+namespace ItaliaPizzaClient.Views.SupplierOrdersModule
 {
     public partial class SupplyOrderDetail : UserControl
     {
