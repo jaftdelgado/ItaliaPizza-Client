@@ -137,16 +137,16 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
                         switch (result)
                         {
                             case -1:
-                                MessageDialog.Show("Error1", "Error1", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InvalidStatus", AlertType.WARNING);
                                 break;
                             case -2:
-                                MessageDialog.Show("Error2", "Error2", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_NoCashRegister", AlertType.WARNING);
                                 break;
                             case -3:
-                                MessageDialog.Show("Error3", "Error4", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InsufficientFunds", AlertType.WARNING);
                                 break;
                             default:
-                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.WARNING);
                                 break;
                         }
                     }
