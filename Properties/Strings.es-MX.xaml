@@ -233,7 +233,6 @@
     <sys:String x:Key="Customers_DialogTReactivatedCustomer">Client reactivado</sys:String>
     <sys:String x:Key="Customers_DialogDReactivatedCustomer">El cliente fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de clientes activos.</sys:String>
 
-
     <!--Register Customer-->
     <sys:String x:Key="RegCustomer_Header">Registrar cliente </sys:String>
     <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente que se desea registrar.</sys:String>
