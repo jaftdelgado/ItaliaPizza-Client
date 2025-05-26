@@ -65,8 +65,6 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             {
                 var newRecipeItem = new RecipeSupplyItem
                 {
-                    Supply = selectedSupply,
-                    Quantity = 0 
                 };
                 if(!_listaPrincipal.Any(s => s.Supply.Id == selectedSupply.Id))
                 {

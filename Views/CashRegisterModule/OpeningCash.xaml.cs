@@ -2,26 +2,15 @@
 using ItaliaPizzaClient.Views.Dialogs;
 using System;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace ItaliaPizzaClient.Views.UserControls
+namespace ItaliaPizzaClient.Views.CashRegisterModule
 {
-    /// <summary>
-    /// Lógica de interacción para ClosingCash.xaml
-    /// </summary>
-    public partial class ClosingCash : UserControl
+    public partial class OpeningCash : UserControl
     {
-        public ClosingCash()
+        public OpeningCash()
         {
             InitializeComponent();
             InitializeOpeningDate();

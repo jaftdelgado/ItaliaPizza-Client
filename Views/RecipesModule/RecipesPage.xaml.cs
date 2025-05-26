@@ -37,10 +37,8 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
                 var list = dtoList.Select(r => new Recipe
                 {
                     Id = r.RecipeID,
-                    Description = r.Description,
                     PreparationTime = r.PreparationTime,
                     ProductID = r.ProductID,
-                    ProductName = r.ProductName,
                 })
                 .OrderBy(r => r.Id)
                 .ToList();
@@ -82,20 +80,15 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
 
             UpdateRecipePanelVisibility(selected);
 
-            RecipeDescription.Text = selected.Description;
+            
 
             RecipePreparationTime.Inlines.Clear();
             RecipePreparationTime.Inlines.Add(new Run { FontFamily = new System.Windows.Media.FontFamily("Segoe MDL2 Assets"), Text = "\uE823" });
             RecipePreparationTime.Inlines.Add(new Run { Text = " " + selected.PreparationTime + " minutos" });
-            ProductRecipeTitle.Text = "Receta del producto:\n"+ selected.ProductName;
         }
 
         private void Click_BtnShowRecipe(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-
-            if (mainWindow != null && recipesDataGrid.SelectedItem is Recipe selected)
-                mainWindow.NavigateToPage("Recipes_BtnEditRecipe", new RecipeRegister(selected));
         }
     }
 }

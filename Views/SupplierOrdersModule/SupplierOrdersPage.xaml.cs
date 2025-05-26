@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ItaliaPizzaClient.Utilities;
-using ItaliaPizzaClient.Views.UserControls;
 using ItaliaPizzaClient.Views.Dialogs;
 using System.Threading.Tasks;
 using System;
@@ -21,6 +20,8 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
             BtnPending.Tag = "Selected";
             Loaded += OrderSuppliersPage_Loaded;
             InputUtilities.ValidatePriceInput(TbPayment, @"^\d{0,5}(\.\d{0,2})?$", 99999.999m);
+
+            if (CurrentSession.LoggedInUser.RoleID != 1) BtnNewOrderSupplier.Visibility = Visibility.Collapsed;
         }
 
         private void OrderSuppliersPage_Loaded(object sender, RoutedEventArgs e)
@@ -138,16 +139,16 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
                         switch (result)
                         {
                             case -1:
-                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InvalidStatus", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InvalidStatus", AlertType.WARNING);
                                 break;
                             case -2:
-                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_NoCashRegister", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_NoCashRegister", AlertType.WARNING);
                                 break;
                             case -3:
-                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InsufficientFunds", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_InsufficientFunds", AlertType.WARNING);
                                 break;
                             default:
-                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.ERROR);
+                                MessageDialog.Show("OrdSuppliers_ErrorDelivery_Title", "OrdSuppliers_ErrorDelivery_TransactionFailed", AlertType.WARNING);
                                 break;
                         }
                     }

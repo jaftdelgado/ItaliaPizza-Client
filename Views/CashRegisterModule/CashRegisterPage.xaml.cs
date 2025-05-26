@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ItaliaPizzaClient.Views
+namespace ItaliaPizzaClient.Views.CashRegisterModule
 {
     public partial class CashRegisterPage : Page
     {
@@ -103,12 +103,12 @@ namespace ItaliaPizzaClient.Views
 
         private void Click_BtnOpenRegister(object sender, RoutedEventArgs e)
         {
-            UserControls.OpeningCash.Show(sender as FrameworkElement);
+            OpeningCash.Show(sender as FrameworkElement);
         }
 
         private void Click_BtnRegisterOutflow(object sender, RoutedEventArgs e)
         {
-            UserControls.RegisterOutflowMoney.Show(sender as FrameworkElement, this);
+            RegisterOutflowMoney.Show(sender as FrameworkElement, this);
         }
 
         private void Click_BtnCloseRegister(object sender, RoutedEventArgs e)

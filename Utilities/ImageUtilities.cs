@@ -174,13 +174,6 @@ namespace ItaliaPizzaClient.Utilities
 
             long imageSizeInKb = compressedImageBytes.Length / 1024;
 
-            MessageBox.Show(
-                $"La imagen procesada pesa {imageSizeInKb} KB.",
-                "Información de Imagen",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information
-            );
-
             if (!IsImageSizeValid(compressedImageBytes))
             {
                 throw new InvalidOperationException("The processed image exceeds the maximum allowed size.");

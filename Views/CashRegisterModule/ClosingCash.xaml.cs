@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ItaliaPizzaClient.Views.UserControls
+namespace ItaliaPizzaClient.Views.CashRegisterModule
 {
-    public partial class OpeningCash : UserControl
+    public partial class ClosingCash : UserControl
     {
-        public OpeningCash()
+        public ClosingCash()
         {
             InitializeComponent();
             InitializeOpeningDate();

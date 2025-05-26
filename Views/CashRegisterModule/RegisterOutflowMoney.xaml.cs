@@ -3,7 +3,7 @@ using ItaliaPizzaClient.Views.Dialogs;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ItaliaPizzaClient.Views.UserControls
+namespace ItaliaPizzaClient.Views.CashRegisterModule
 {
     public partial class RegisterOutflowMoney : UserControl
     {
