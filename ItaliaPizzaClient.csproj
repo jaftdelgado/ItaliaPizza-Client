@@ -90,8 +90,8 @@
     <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\Personal.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductCategory.cs" />
     <Compile Include="Model\Recipe.cs" />
-    <Compile Include="Model\RecipeSupplyItem.cs" />
     <Compile Include="Model\SupplierOrder.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\Supply.cs" />
@@ -100,11 +100,23 @@
     <Compile Include="Model\Transaction.cs" />
     <Compile Include="Model\WasteSupply.cs" />
     <Compile Include="Utilities\FlowToColorConverter.cs" />
-    <Compile Include="Views\CashRegisterPage.xaml.cs">
+    <Compile Include="Views\CashRegisterModule\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrdersModule\RegisterOrderPage.xaml.cs">
       <DependentUpon>RegisterOrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductsModule\RegisterProductPage.xaml.cs">
+      <DependentUpon>RegisterProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\IngredientDetail.xaml.cs">
+      <DependentUpon>IngredientDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\RecipeStepControl.xaml.cs">
+      <DependentUpon>RecipeStepControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\RegisterRecipePage.xaml.cs">
+      <DependentUpon>RegisterRecipePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignInWindow.xaml.cs">
       <DependentUpon>SignInWindow.xaml</DependentUpon>
@@ -112,13 +124,13 @@
     <Compile Include="Views\StockPage.xaml.cs">
       <DependentUpon>StockPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\ClosingCash.xaml.cs">
+    <Compile Include="Views\CashRegisterModule\ClosingCash.xaml.cs">
       <DependentUpon>ClosingCash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\OpeningCash.xaml.cs">
+    <Compile Include="Views\CashRegisterModule\OpeningCash.xaml.cs">
       <DependentUpon>OpeningCash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\RegisterOutflowMoney.xaml.cs">
+    <Compile Include="Views\CashRegisterModule\RegisterOutflowMoney.xaml.cs">
       <DependentUpon>RegisterOutflowMoney.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ProductCard.xaml.cs">
@@ -166,9 +178,6 @@
     <Compile Include="Views\RecipesModule\RecipesPage.xaml.cs">
       <DependentUpon>RecipesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RecipesModule\RecipeRegister.xaml.cs">
-      <DependentUpon>RecipeRegister.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RecipesModule\SuppliesList.xaml.cs">
       <DependentUpon>SuppliesList.xaml</DependentUpon>
     </Compile>
@@ -186,9 +195,6 @@
     </Compile>
     <Compile Include="Views\CustomersModule\RegisterCustomerPage.xaml.cs">
       <DependentUpon>RegisterCustomerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProductsModule\RegisterProduct.xaml.cs">
-      <DependentUpon>RegisterProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonalModule\RegisterEmployeePage.xaml.cs">
       <DependentUpon>RegisterEmployeePage.xaml</DependentUpon>
@@ -217,6 +223,9 @@
     <Compile Include="Views\UserControls\RegisterSupplyWaste.xaml.cs">
       <DependentUpon>RegisterSupplyWaste.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\SelectSupply.xaml.cs">
+      <DependentUpon>SelectSupply.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\UserSettings.xaml.cs">
       <DependentUpon>UserSettings.xaml</DependentUpon>
     </Compile>
@@ -244,11 +253,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CashRegisterPage.xaml">
+    <Page Include="Views\CashRegisterModule\CashRegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrdersModule\RegisterOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductsModule\RegisterProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\IngredientDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\RecipeStepControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\RegisterRecipePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,15 +285,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\ClosingCash.xaml">
+    <Page Include="Views\CashRegisterModule\ClosingCash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\OpeningCash.xaml">
+    <Page Include="Views\CashRegisterModule\OpeningCash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\RegisterOutflowMoney.xaml">
+    <Page Include="Views\CashRegisterModule\RegisterOutflowMoney.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -324,10 +349,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RecipesModule\RecipeRegister.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\RecipesModule\SuppliesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -349,10 +370,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CustomersModule\RegisterCustomerPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProductsModule\RegisterProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -389,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\RegisterSupplyWaste.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\SelectSupply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -620,6 +641,13 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\signout-hover-icon.png" />
     <Resource Include="Resources\Icons\signout-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\inflow-icon.png" />
+    <Resource Include="Resources\Icons\outflow-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\default-product-pic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

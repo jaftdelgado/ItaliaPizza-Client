@@ -164,6 +164,51 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="CleanTextAreaStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="FontFamily" Value="SF Pro Display"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="6 4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="TextAreaBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="12"
+                    Padding="5">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="TextAreaBorder" Property="BorderBrush" Value="{StaticResource PrimaryButtonBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="TextAreaBorder" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#808080"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="QuantityTextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>

@@ -9,6 +9,8 @@ using ItaliaPizzaClient.Views.SuppliersModule;
 using ItaliaPizzaClient.Views.OrdersModule;
 using ItaliaPizzaClient.Views.RecepiesModule;
 using ItaliaPizzaClient.Views.SupplierOrdersModule;
+using ItaliaPizzaClient.Views.CashRegisterModule;
+using ItaliaPizzaClient.Views.ProductsModule;
 
 namespace ItaliaPizzaClient.Utilities
 {

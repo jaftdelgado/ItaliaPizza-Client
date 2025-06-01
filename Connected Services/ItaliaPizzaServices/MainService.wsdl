@@ -207,6 +207,36 @@
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProducts" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivateProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivateProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivateProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsProductDeletable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsProductDeletable" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsProductDeletable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsProductDeletableResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetCurrentTransactions_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentTransactions" />
   </wsdl:message>
@@ -499,6 +529,26 @@
     <wsdl:operation name="AddProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/GetAllProducts" message="tns:IMainManager_GetAllProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/GetAllProductsResponse" message="tns:IMainManager_GetAllProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/UpdateProduct" message="tns:IMainManager_UpdateProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/UpdateProductResponse" message="tns:IMainManager_UpdateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/DeleteProduct" message="tns:IMainManager_DeleteProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/DeleteProductResponse" message="tns:IMainManager_DeleteProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReactivateProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/ReactivateProduct" message="tns:IMainManager_ReactivateProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/ReactivateProductResponse" message="tns:IMainManager_ReactivateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsProductDeletable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/IsProductDeletable" message="tns:IMainManager_IsProductDeletable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/IsProductDeletableResponse" message="tns:IMainManager_IsProductDeletable_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCurrentTransactions">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/GetCurrentTransactions" message="tns:IMainManager_GetCurrentTransactions_InputMessage" />
@@ -876,6 +926,51 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllProducts">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/GetAllProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/UpdateProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/DeleteProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReactivateProduct">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/ReactivateProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsProductDeletable">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/IsProductDeletable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCurrentTransactions">
       <soap12:operation soapAction="http://tempuri.org/IFinanceManager/GetCurrentTransactions" style="document" />
       <wsdl:input>
@@ -1153,7 +1248,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>_3776_\abrah</Upn>
+          <Upn>MATEBOOK-D15\jafet</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

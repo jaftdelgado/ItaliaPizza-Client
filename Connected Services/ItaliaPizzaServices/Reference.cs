@@ -920,34 +920,37 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CategoryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CodeField;
+        private System.Nullable<int> CategoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private bool IsActiveField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsPreparedField;
+        private bool IsDeletableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> IsPreparedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] PhotoField;
+        private System.Nullable<decimal> PriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal PriceField;
+        private string ProductCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusField;
+        private int ProductIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SupplierIDField;
+        private byte[] ProductPicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> SupplyIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -960,27 +963,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Category {
+        public System.Nullable<int> Category {
             get {
                 return this.CategoryField;
             }
             set {
-                if ((object.ReferenceEquals(this.CategoryField, value) != true)) {
+                if ((this.CategoryField.Equals(value) != true)) {
                     this.CategoryField = value;
                     this.RaisePropertyChanged("Category");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
                 }
             }
         }
@@ -999,20 +989,33 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public bool IsActive {
             get {
-                return this.IdField;
+                return this.IsActiveField;
             }
             set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
+                if ((this.IsActiveField.Equals(value) != true)) {
+                    this.IsActiveField = value;
+                    this.RaisePropertyChanged("IsActive");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPrepared {
+        public bool IsDeletable {
+            get {
+                return this.IsDeletableField;
+            }
+            set {
+                if ((this.IsDeletableField.Equals(value) != true)) {
+                    this.IsDeletableField = value;
+                    this.RaisePropertyChanged("IsDeletable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> IsPrepared {
             get {
                 return this.IsPreparedField;
             }
@@ -1038,20 +1041,7 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Photo {
-            get {
-                return this.PhotoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhotoField, value) != true)) {
-                    this.PhotoField = value;
-                    this.RaisePropertyChanged("Photo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Price {
+        public System.Nullable<decimal> Price {
             get {
                 return this.PriceField;
             }
@@ -1064,27 +1054,53 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Status {
+        public string ProductCode {
             get {
-                return this.StatusField;
+                return this.ProductCodeField;
             }
             set {
-                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
+                if ((object.ReferenceEquals(this.ProductCodeField, value) != true)) {
+                    this.ProductCodeField = value;
+                    this.RaisePropertyChanged("ProductCode");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SupplierID {
+        public int ProductID {
             get {
-                return this.SupplierIDField;
+                return this.ProductIDField;
             }
             set {
-                if ((this.SupplierIDField.Equals(value) != true)) {
-                    this.SupplierIDField = value;
-                    this.RaisePropertyChanged("SupplierID");
+                if ((this.ProductIDField.Equals(value) != true)) {
+                    this.ProductIDField = value;
+                    this.RaisePropertyChanged("ProductID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ProductPic {
+            get {
+                return this.ProductPicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProductPicField, value) != true)) {
+                    this.ProductPicField = value;
+                    this.RaisePropertyChanged("ProductPic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> SupplyID {
+            get {
+                return this.SupplyIDField;
+            }
+            set {
+                if ((this.SupplyIDField.Equals(value) != true)) {
+                    this.SupplyIDField = value;
+                    this.RaisePropertyChanged("SupplyID");
                 }
             }
         }
@@ -2377,10 +2393,40 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         System.Threading.Tasks.Task<bool> IsSupplyDeletableAsync(int supplyId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/AddProduct", ReplyAction="http://tempuri.org/IProductManager/AddProductResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
+        int AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/AddProduct", ReplyAction="http://tempuri.org/IProductManager/AddProductResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO> AddProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
+        System.Threading.Tasks.Task<int> AddProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/GetAllProducts", ReplyAction="http://tempuri.org/IProductManager/GetAllProductsResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetAllProducts(bool activeOnly);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/GetAllProducts", ReplyAction="http://tempuri.org/IProductManager/GetAllProductsResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[]> GetAllProductsAsync(bool activeOnly);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/UpdateProduct", ReplyAction="http://tempuri.org/IProductManager/UpdateProductResponse")]
+        bool UpdateProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/UpdateProduct", ReplyAction="http://tempuri.org/IProductManager/UpdateProductResponse")]
+        System.Threading.Tasks.Task<bool> UpdateProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/DeleteProduct", ReplyAction="http://tempuri.org/IProductManager/DeleteProductResponse")]
+        bool DeleteProduct(int productId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/DeleteProduct", ReplyAction="http://tempuri.org/IProductManager/DeleteProductResponse")]
+        System.Threading.Tasks.Task<bool> DeleteProductAsync(int productId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/ReactivateProduct", ReplyAction="http://tempuri.org/IProductManager/ReactivateProductResponse")]
+        bool ReactivateProduct(int productId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/ReactivateProduct", ReplyAction="http://tempuri.org/IProductManager/ReactivateProductResponse")]
+        System.Threading.Tasks.Task<bool> ReactivateProductAsync(int productId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/IsProductDeletable", ReplyAction="http://tempuri.org/IProductManager/IsProductDeletableResponse")]
+        bool IsProductDeletable(int productId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductManager/IsProductDeletable", ReplyAction="http://tempuri.org/IProductManager/IsProductDeletableResponse")]
+        System.Threading.Tasks.Task<bool> IsProductDeletableAsync(int productId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/GetCurrentTransactions", ReplyAction="http://tempuri.org/IFinanceManager/GetCurrentTransactionsResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO[] GetCurrentTransactions();
@@ -2806,12 +2852,52 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.IsSupplyDeletableAsync(supplyId);
         }
         
-        public ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
+        public int AddProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
             return base.Channel.AddProduct(productDTO);
         }
         
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO> AddProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
+        public System.Threading.Tasks.Task<int> AddProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
             return base.Channel.AddProductAsync(productDTO);
+        }
+        
+        public ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetAllProducts(bool activeOnly) {
+            return base.Channel.GetAllProducts(activeOnly);
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[]> GetAllProductsAsync(bool activeOnly) {
+            return base.Channel.GetAllProductsAsync(activeOnly);
+        }
+        
+        public bool UpdateProduct(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
+            return base.Channel.UpdateProduct(productDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateProductAsync(ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO productDTO) {
+            return base.Channel.UpdateProductAsync(productDTO);
+        }
+        
+        public bool DeleteProduct(int productId) {
+            return base.Channel.DeleteProduct(productId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteProductAsync(int productId) {
+            return base.Channel.DeleteProductAsync(productId);
+        }
+        
+        public bool ReactivateProduct(int productId) {
+            return base.Channel.ReactivateProduct(productId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ReactivateProductAsync(int productId) {
+            return base.Channel.ReactivateProductAsync(productId);
+        }
+        
+        public bool IsProductDeletable(int productId) {
+            return base.Channel.IsProductDeletable(productId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsProductDeletableAsync(int productId) {
+            return base.Channel.IsProductDeletableAsync(productId);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO[] GetCurrentTransactions() {
