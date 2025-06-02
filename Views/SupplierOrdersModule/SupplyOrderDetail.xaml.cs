@@ -245,10 +245,8 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
         private void EnableEditMode(bool enable)
         {
             TbQuantity.IsEnabled = enable;
-            if (enable)
-            {
-                TbQuantity.Focus();
-            }
+
+            if (enable) TbQuantity.Focus();
 
             BtnConfirm.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
             BtnDelete.Visibility = BtnEdit.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;

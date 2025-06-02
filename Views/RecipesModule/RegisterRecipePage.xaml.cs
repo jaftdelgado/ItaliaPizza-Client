@@ -4,6 +4,7 @@ using ItaliaPizzaClient.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,10 +13,18 @@ namespace ItaliaPizzaClient.Views.RecipesModule
     public partial class RegisterRecipePage : Page
     {
         private int _stepCounter = 1;
+
         private List<RecipeStep> _steps = new List<RecipeStep>();
+        
         private List<RecipeSupplyItem> _ingredients = new List<RecipeSupplyItem>();
+        
         private List<Supply> _allSupplies = new List<Supply>();
+        
         private Product _associatedProduct;
+        
+        public event Action<Recipe> RecipeAssociated;
+
+        private Recipe _loadedRecipe;
 
         public RegisterRecipePage()
         {
@@ -32,12 +41,63 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             Loaded += RegisterRecipePage_Loaded;
         }
 
-        private void RegisterRecipePage_Loaded(object sender, RoutedEventArgs e)
+        public RegisterRecipePage(Product product, Recipe recipe) : this(product)
         {
-            LoadSuppliesData();
+            _loadedRecipe = recipe;
         }
 
-        private async void LoadSuppliesData()
+        private async void RegisterRecipePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadSuppliesData();
+
+            if (_loadedRecipe != null)
+            {
+                LoadRecipeData(_loadedRecipe);
+            }
+        }
+        private void LoadRecipeData(Recipe recipe)
+        {
+            if (recipe == null) return;
+
+            TbPreparationTime.Text = recipe.PreparationTime.ToString();
+
+            _steps.Clear();
+            StepsContainer.Children.Clear();
+            foreach (var step in recipe.Steps.OrderBy(s => s.StepNumber))
+            {
+                var stepControl = new RecipeStepControl
+                {
+                    StepNumber = step.StepNumber,
+                    Instruction = step.Instruction
+                };
+                StepsContainer.Children.Add(stepControl);
+                _steps.Add(new RecipeStep { StepNumber = step.StepNumber, Instruction = step.Instruction });
+            }
+
+            _stepCounter = recipe.Steps.Max(s => s.StepNumber) + 1;
+
+            _ingredients.Clear();
+
+            foreach (var supply in recipe.Supplies)
+            {
+                var matchingSupply = _allSupplies.FirstOrDefault(s => s.Id == supply.SupplyID);
+                if (matchingSupply != null)
+                {
+                    var ingredient = new RecipeSupplyItem
+                    {
+                        SupplyID = supply.SupplyID,
+                        UseQuantity = supply.UseQuantity,
+                        Supply = matchingSupply
+                    };
+
+                    _ingredients.Add(ingredient);
+                }
+            }
+
+            DisplayIngredients(); 
+        }
+
+        private async Task LoadSuppliesData()
         {
             await ServiceClientManager.ExecuteServerAction(async () =>
             {
@@ -152,7 +212,7 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         private void DisplayIngredients()
         {
-            IngredientsContainer.Children.Clear();
+            IngredientsContainer.Items.Clear(); // Cambiado de Children a Items
 
             foreach (var item in _ingredients)
             {
@@ -166,7 +226,13 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
                 ImageUtilities.SetImageSource(ingredientDetail.IngredientPic, item.Supply.SupplyPic, Constants.DEFAULT_SUPPLY_PIC_PATH);
 
-                IngredientsContainer.Children.Add(ingredientDetail);
+                ingredientDetail.QuantityChanged += (s, newQuantity) =>
+                {
+                    item.UseQuantity = newQuantity;
+                    UpdateButtonState();
+                };
+
+                IngredientsContainer.Items.Add(ingredientDetail); // Cambiado de Children a Items
             }
         }
 
@@ -211,7 +277,16 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         private void Click_BtnAssociateRecipe(object sender, RoutedEventArgs e)
         {
+            var recipe = new Recipe
+            {
+                Product = _associatedProduct,
+                ProductID = _associatedProduct.ProductID,
+                Steps = _steps,
+                Supplies = _ingredients
+            };
 
+            RecipeAssociated?.Invoke(recipe);
+            NavigationManager.Instance.GoBack();
         }
 
         private void Click_BtnCancel(object sender, RoutedEventArgs e)

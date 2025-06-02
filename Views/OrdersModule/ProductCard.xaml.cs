@@ -1,11 +1,10 @@
 ﻿using ItaliaPizzaClient.Utilities;
-using ItaliaPizzaClient.Views.SupplierOrdersModule;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace ItaliaPizzaClient.Views.UserControls
+namespace ItaliaPizzaClient.Views.OrdersModule
 {
     public partial class ProductCard : UserControl
     {
@@ -16,28 +15,28 @@ namespace ItaliaPizzaClient.Views.UserControls
             InitializeComponent();
         }
 
-        public static readonly DependencyProperty SupplyNameProperty =
-            DependencyProperty.Register(nameof(SupplyName), typeof(string), typeof(SupplyCard), new PropertyMetadata(""));
+        public static readonly DependencyProperty ProductNameProperty =
+            DependencyProperty.Register(nameof(ProductName), typeof(string), typeof(ProductCard), new PropertyMetadata(""));
 
-        public static readonly DependencyProperty StockTextProperty =
-            DependencyProperty.Register(nameof(StockText), typeof(string), typeof(SupplyCard), new PropertyMetadata(""));
+        public static readonly DependencyProperty ProductCodeProperty =
+            DependencyProperty.Register(nameof(ProductCode), typeof(string), typeof(ProductCard), new PropertyMetadata(""));
 
         public static readonly DependencyProperty PriceTextProperty =
-            DependencyProperty.Register(nameof(PriceText), typeof(string), typeof(SupplyCard), new PropertyMetadata(""));
+            DependencyProperty.Register(nameof(PriceText), typeof(string), typeof(ProductCard), new PropertyMetadata(""));
 
         public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register(nameof(ImageSource), typeof(ImageSource), typeof(SupplyCard), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(ImageSource), typeof(ImageSource), typeof(ProductCard), new PropertyMetadata(null));
 
-        public string SupplyName
+        public string ProductName
         {
-            get => (string)GetValue(SupplyNameProperty);
-            set => SetValue(SupplyNameProperty, value);
+            get => (string)GetValue(ProductNameProperty);
+            set => SetValue(ProductNameProperty, value);
         }
 
-        public string StockText
+        public string ProductCode
         {
-            get => (string)GetValue(StockTextProperty);
-            set => SetValue(StockTextProperty, value);
+            get => (string)GetValue(ProductCodeProperty);
+            set => SetValue(ProductCodeProperty, value);
         }
 
         public string PriceText
@@ -59,6 +58,5 @@ namespace ItaliaPizzaClient.Views.UserControls
                 CardClicked?.Invoke(this, new RoutedEventArgs());
             });
         }
-
     }
 }

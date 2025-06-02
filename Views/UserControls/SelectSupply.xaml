@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             Height="320" Width="300">
+             Height="320" Width="280">
     <Border Background="{DynamicResource SecondaryButtonBrush}"
             CornerRadius="14" BorderThickness="1"
             BorderBrush="{DynamicResource BorderBrush}" >
@@ -15,32 +15,45 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0">
-                <StackPanel Margin="20">
+            <Border Grid.Row="0"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0 0 0 1">
+                <StackPanel Margin="20 15">
                     <TextBlock Text="Seleccionar Insumos"
                                Style="{StaticResource SubtitleLabelStyle}"/>
                     <TextBox x:Name="TbSearch" 
                              Margin="0 10 0 0"
+                             Background="{StaticResource BackgroundBrush}"
                              Style="{StaticResource SecondarySearchBoxStyle}"
                              TextChanged="TxtSearch_TextChanged"/>
                 </StackPanel>
             </Border>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="SupplyContainer" ItemsSource="{Binding SupplyCards}">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                          Style="{StaticResource ScrollViewerStyle}">
+                <ItemsControl x:Name="SupplyContainer" 
+                              ItemsSource="{Binding SupplyCards}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="10 2"
+                            <Border Margin="20 2"
                                     Padding="4">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
+                                    <CheckBox Grid.Column="0" 
+                                              IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                              Style="{StaticResource CheckBoxStyle}"
+                                              VerticalAlignment="Center"
+                                              Checked="CheckBox_Checked"
+                                              Unchecked="CheckBox_Unchecked"/>
                                     <Image Source="{Binding ImageSource}"
                                            Width="40" Height="40"
+                                           Margin="8 0 0 0"
+                                           Grid.Column="1"
                                            Stretch="UniformToFill"
                                            RenderOptions.BitmapScalingMode="HighQuality">
                                         <Image.Clip>
@@ -48,18 +61,14 @@
                                         </Image.Clip>
                                     </Image>
 
-                                    <StackPanel Grid.Column="1" Margin="10 0">
+                                    <StackPanel Grid.Column="2" Margin="10 0">
                                         <TextBlock Text="{Binding SupplyName}"
                                                    Style="{StaticResource RegularLabelStyle}"/>
                                         <TextBlock Text="{Binding Category}"
                                                    Style="{StaticResource DescriptionLabelStyle}"/>
                                     </StackPanel>
 
-                                    <CheckBox Grid.Column="2" 
-                                              IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                              VerticalAlignment="Center"
-                                              Checked="CheckBox_Checked"
-                                              Unchecked="CheckBox_Unchecked"/>
+                                    
                                 </Grid>
                             </Border>
                         </DataTemplate>

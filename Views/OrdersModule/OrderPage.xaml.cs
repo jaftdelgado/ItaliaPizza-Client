@@ -1,35 +1,10 @@
-﻿using ItaliaPizzaClient.ItaliaPizzaServices;
-using ItaliaPizzaClient.Utilities;
-using ItaliaPizzaClient.Views.Dialogs;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 
 namespace ItaliaPizzaClient.Views.OrdersModule
 {
-    /// <summary>
-    /// Lógica de interacción para OrderPage.xaml
-    /// </summary>
     public partial class OrderPage : Page
     {
-        private ObservableCollection<OrderSummaryDTO> deliveredOrders;
-
         public OrderPage()
         {
             InitializeComponent();
@@ -166,7 +141,8 @@ namespace ItaliaPizzaClient.Views.OrdersModule
         }*/
         private void Clic_BtnNewOrder(object sender, RoutedEventArgs e)
         {
-
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+                mainWindow.NavigateToPage("RegOrder_Header", new RegisterOrderPage());
         }
 
         private void Clic_BtnCancelOrder(object sender, RoutedEventArgs e)

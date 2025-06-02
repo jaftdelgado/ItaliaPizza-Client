@@ -88,6 +88,7 @@
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\EmployeeRole.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Personal.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductCategory.cs" />
@@ -102,6 +103,12 @@
     <Compile Include="Utilities\FlowToColorConverter.cs" />
     <Compile Include="Views\CashRegisterModule\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersModule\ProductCard.xaml.cs">
+      <DependentUpon>ProductCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersModule\ProductOrderDetail.xaml.cs">
+      <DependentUpon>ProductOrderDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrdersModule\RegisterOrderPage.xaml.cs">
       <DependentUpon>RegisterOrderPage.xaml</DependentUpon>
@@ -132,9 +139,6 @@
     </Compile>
     <Compile Include="Views\CashRegisterModule\RegisterOutflowMoney.xaml.cs">
       <DependentUpon>RegisterOutflowMoney.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\ProductCard.xaml.cs">
-      <DependentUpon>ProductCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SupplierOrdersModule\SupplyCard.xaml.cs">
       <DependentUpon>SupplyCard.xaml</DependentUpon>
@@ -257,6 +261,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OrdersModule\ProductCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrdersModule\ProductOrderDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\OrdersModule\RegisterOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -294,10 +306,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CashRegisterModule\RegisterOutflowMoney.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserControls\ProductCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -454,9 +462,6 @@
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -486,9 +491,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\Service4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ItaliaPizzaServices\Service5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

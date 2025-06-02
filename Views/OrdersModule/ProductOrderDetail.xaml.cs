@@ -1,21 +1,20 @@
-﻿using ItaliaPizzaClient.Model;
-using ItaliaPizzaClient.Utilities;
-using System;
+﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.ComponentModel;
+using ItaliaPizzaClient.Utilities;
 
-namespace ItaliaPizzaClient.Views.RecipesModule
+namespace ItaliaPizzaClient.Views.OrdersModule
 {
-    public partial class IngredientDetail : UserControl
+    public partial class ProductOrderDetail : UserControl, INotifyPropertyChanged
     {
-        private decimal _originalQuantity;
+        private int _originalQuantity;
 
-        public IngredientDetail()
+        public ProductOrderDetail()
         {
             InitializeComponent();
             DataContext = this;
@@ -25,41 +24,40 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             UpdateReadOnlyState();
         }
 
-        public static readonly DependencyProperty IngredientNameProperty =
-            DependencyProperty.Register(nameof(IngredientName), typeof(string), typeof(IngredientDetail), new PropertyMetadata(""));
+        public static readonly DependencyProperty ProductNameProperty =
+            DependencyProperty.Register(nameof(ProductName), typeof(string), typeof(ProductOrderDetail), new PropertyMetadata(""));
 
-        public static readonly DependencyProperty UnitProperty =
-            DependencyProperty.Register(nameof(Unit), typeof(string), typeof(IngredientDetail), new PropertyMetadata(""));
+        public static readonly DependencyProperty PriceProperty =
+            DependencyProperty.Register(nameof(Price), typeof(decimal), typeof(ProductOrderDetail), new PropertyMetadata(0m));
 
         public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register(nameof(ImageSource), typeof(ImageSource), typeof(IngredientDetail), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(ImageSource), typeof(ImageSource), typeof(ProductOrderDetail), new PropertyMetadata(null));
 
         public static readonly DependencyProperty QuantityProperty =
-            DependencyProperty.Register(nameof(Quantity), typeof(decimal), typeof(IngredientDetail),
-                new FrameworkPropertyMetadata(1m, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnQuantityChanged));
+            DependencyProperty.Register(nameof(Quantity), typeof(int), typeof(ProductOrderDetail),
+                new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnQuantityChanged));
 
-        public static readonly DependencyProperty MeasureUnitIdProperty =
-            DependencyProperty.Register(nameof(MeasureUnitId), typeof(int), typeof(IngredientDetail),
-                new PropertyMetadata(0, OnMeasureUnitIdChanged));
+        public static readonly DependencyProperty SubtotalProperty =
+            DependencyProperty.Register(nameof(Subtotal), typeof(decimal), typeof(ProductOrderDetail), new PropertyMetadata(0m));
 
         public static readonly DependencyProperty IsReadOnlyProperty =
-            DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(IngredientDetail), new PropertyMetadata(false, OnIsReadOnlyChanged));
+            DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(ProductOrderDetail), new PropertyMetadata(false, OnIsReadOnlyChanged));
 
-        public string IngredientName
+        public string ProductName
         {
-            get => (string)GetValue(IngredientNameProperty);
-            set => SetValue(IngredientNameProperty, value);
+            get => (string)GetValue(ProductNameProperty);
+            set => SetValue(ProductNameProperty, value);
         }
 
-        public string Unit
+        public decimal Price
         {
-            get => (string)GetValue(UnitProperty);
-            set => SetValue(UnitProperty, value);
+            get => (decimal)GetValue(PriceProperty);
+            set => SetValue(PriceProperty, value);
         }
 
-        public decimal Quantity
+        public int Quantity
         {
-            get => (decimal)GetValue(QuantityProperty);
+            get => (int)GetValue(QuantityProperty);
             set
             {
                 SetValue(QuantityProperty, value);
@@ -67,10 +65,10 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             }
         }
 
-        public int MeasureUnitId
+        public decimal Subtotal
         {
-            get => (int)GetValue(MeasureUnitIdProperty);
-            set => SetValue(MeasureUnitIdProperty, value);
+            get => (decimal)GetValue(SubtotalProperty);
+            set => SetValue(SubtotalProperty, value);
         }
 
         public ImageSource ImageSource
@@ -87,42 +85,38 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         public string QuantityText
         {
-            get => $"x {Quantity:0.00} {Unit}";
+            get => $"x {Quantity}";
             set
             {
-                if (decimal.TryParse(value, NumberStyles.Number,
-                    CultureInfo.InvariantCulture, out var parsed) && parsed != 0)
+                if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsed) && parsed > 0)
+                {
                     Quantity = parsed;
+                }
                 else
+                {
                     Quantity = _originalQuantity;
+                }
             }
         }
 
-        public event EventHandler<decimal> QuantityChanged;
+        public event EventHandler<int> QuantityChanged;
         public event EventHandler DeleteClicked;
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private static void OnQuantityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (IngredientDetail)d;
-            if (e.NewValue is decimal newQty)
+            var control = (ProductOrderDetail)d;
+            if (e.NewValue is int newQty)
             {
+                control.Subtotal = control.Price * newQty;
                 control.QuantityChanged?.Invoke(control, newQty);
                 control.OnPropertyChanged(nameof(QuantityText));
             }
         }
 
-        private static void OnMeasureUnitIdChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var control = (IngredientDetail)d;
-            var id = (int)e.NewValue;
-            control.Unit = MeasureUnit.GetDefaultMeasureUnits().FirstOrDefault(mu => mu.Id == id)?.Abbreviation ?? "u";
-            control.OnPropertyChanged(nameof(QuantityText));
-        }
-
         private static void OnIsReadOnlyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((IngredientDetail)d).UpdateReadOnlyState();
+            ((ProductOrderDetail)d).UpdateReadOnlyState();
         }
 
         private void UpdateReadOnlyState()
@@ -131,20 +125,24 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             TbQuantity.IsReadOnly = isReadOnly;
             TbQuantity.IsHitTestVisible = !isReadOnly;
             BtnDelete.Visibility = BtnEdit.Visibility = isReadOnly ? Visibility.Collapsed : Visibility.Visible;
+            ProductTitle.FontSize = isReadOnly ? 13 : 14;
         }
 
         private void QuantityTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (!IsReadOnly)
             {
-                TbQuantity.Text = Quantity.ToString("0.###", CultureInfo.InvariantCulture);
+                TbQuantity.Text = Quantity.ToString(CultureInfo.InvariantCulture);
                 TbQuantity.SelectAll();
             }
         }
 
         private void QuantityTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!IsReadOnly) ConfirmQuantityChange();
+            if (!IsReadOnly)
+            {
+                ConfirmQuantityChange();
+            }
         }
 
         private void Click_BtnDelete(object sender, RoutedEventArgs e) => DeleteClicked?.Invoke(this, EventArgs.Empty);
@@ -194,14 +192,13 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         private void ConfirmQuantityChange()
         {
-            if (!decimal.TryParse(TbQuantity.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out var val) || val == 0)
+            if (!int.TryParse(TbQuantity.Text.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var val) || val <= 0)
             {
                 Quantity = _originalQuantity;
             }
             else
             {
                 if (val > 999) val = 999;
-                if (IsIntegerOnlyUnit()) val = Math.Floor(val);
                 Quantity = val;
             }
 
@@ -212,21 +209,15 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         private bool IsValidQuantityInput(string input)
         {
-            string pattern = IsIntegerOnlyUnit() ? @"^\d{0,4}$" : @"^\d{0,4}(\.\d{0,2})?$";
-            return Regex.IsMatch(input, pattern) &&
-                   (!decimal.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out var val) || val <= 9999) &&
-                   (!IsIntegerOnlyUnit() || !input.Contains('.'));
+            return Regex.IsMatch(input, @"^\d{0,3}$") &&
+                   (!int.TryParse(input, NumberStyles.Integer, CultureInfo.InvariantCulture, out var val) || val <= 999);
         }
-
-        private bool IsIntegerOnlyUnit() => MeasureUnitId == 3;
 
         private void EnableEditMode(bool enable)
         {
             TbQuantity.IsEnabled = enable;
-            if (enable)
-            {
-                TbQuantity.Focus();
-            }
+
+            if (enable) TbQuantity.Focus();
 
             BtnConfirm.Visibility = enable ? Visibility.Visible : Visibility.Collapsed;
             BtnDelete.Visibility = BtnEdit.Visibility = enable ? Visibility.Collapsed : Visibility.Visible;
@@ -263,7 +254,16 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             return false;
         }
 
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        public void SetOriginalQuantity(int quantity) => _originalQuantity = quantity;
+
+        public void RefreshBinding()
+        {
+            TbQuantity.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
