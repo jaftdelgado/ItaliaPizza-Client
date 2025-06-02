@@ -10,7 +10,8 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
 {
     public partial class OpeningCash : UserControl
     {
-        public OpeningCash()
+        private CashRegisterPage _parentPage;
+        public OpeningCash(CashRegisterPage parent)
         {
             InitializeComponent();
             InitializeOpeningDate();
@@ -19,6 +20,7 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
             ConfirmOpenCashCheckBox.Unchecked += (s, e) => UpdateButtonState();
             TbInitialBalance.TextChanged += (s, e) => UpdateButtonState();
             InputUtilities.ValidatePriceInput(TbInitialBalance, @"^\d{0,4}(\.\d{0,2})?$", 99999.999m);
+            _parentPage = parent;
         }
 
         private void InitializeOpeningDate()
@@ -65,14 +67,21 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
         private void HandleOpenCashResult(bool success)
         {
             if (success)
-                MessageDialog.Show("CashRegister_DialogTSuccess", "CashRegister_DialogDSuccess", AlertType.SUCCESS, ClosePopup);
+            {
+                MessageDialog.Show("CashRegister_DialogTSuccess", "CashRegister_DialogDSuccess", AlertType.SUCCESS, () =>
+                {
+                    _parentPage?.LoadCurrentTransactionsData();
+                    ClosePopup();
+                });
+            }
             else
+            {
                 MessageDialog.Show("CashRegister_DialogTFail", "CashRegister_DialogDAlreadyOpen", AlertType.WARNING);
+            }
         }
-
-        public static void Show(FrameworkElement triggerButton)
+        public static void Show(FrameworkElement triggerButton, CashRegisterPage parentPage)
         {
-            var openingCash = new OpeningCash();
+            var openingCash = new OpeningCash(parentPage);
 
             var activeWindow = Application.Current.Windows
                 .OfType<Window>()
