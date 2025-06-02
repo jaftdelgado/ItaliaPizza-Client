@@ -39,13 +39,14 @@
                     <TextBox x:Name="TbCashBalance"
                              Grid.Row="0" Grid.ColumnSpan="2"
                              Style="{DynamicResource TextBoxStyle}"
-                             Tag="{DynamicResource CashRegister_TbCashBalance}" />
-                    <TextBox x:Name="TxbDateOpening" 
+                             Tag="{DynamicResource CashRegister_TbCashBalance}"
+                             IsEnabled="False"/>
+                    <TextBox x:Name="TxbDifferenceBalance" 
                              Grid.Column="0" Grid.Row="1"
                              Style="{DynamicResource TextBoxStyle}" 
                              Tag="{DynamicResource CashRegister_TbDiference}"
                              IsEnabled="False" Margin="0 8 10 0" />
-                    <TextBox x:Name="TbInitialBalance"
+                    <TextBox x:Name="TbDifference"
                              Grid.Column="1" Grid.Row="1"
                              Style="{DynamicResource TextBoxStyle}"
                              Tag="{DynamicResource CashRegister_TbDiference}"
@@ -69,10 +70,11 @@
                             Click="Click_BtnCancel"
                             Width="90"/>
                     <Button x:Name="BtnAccept"
-                            Content="{DynamicResource CashRegister_BtnOpening}"
+                            Content="Cerrar Caja"
                             Style="{DynamicResource PrimaryButtonNoIconStyle}"
                             Click="Click_BtnAccept" 
-                            Width="90" />
+                            Width="90" 
+                            IsEnabled="False"/>
                 </StackPanel>
             </Border>
         </Grid>

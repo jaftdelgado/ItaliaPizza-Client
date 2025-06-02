@@ -103,7 +103,7 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
 
         private void Click_BtnOpenRegister(object sender, RoutedEventArgs e)
         {
-            OpeningCash.Show(sender as FrameworkElement);
+            OpeningCash.Show(sender as FrameworkElement, this);
         }
 
         private void Click_BtnRegisterOutflow(object sender, RoutedEventArgs e)
@@ -113,7 +113,7 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
 
         private void Click_BtnCloseRegister(object sender, RoutedEventArgs e)
         {
-
+            ClosingCash.Show(sender as FrameworkElement, this);
         }
     }
 }

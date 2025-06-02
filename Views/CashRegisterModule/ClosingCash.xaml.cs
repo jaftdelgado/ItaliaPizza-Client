@@ -10,69 +10,85 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
 {
     public partial class ClosingCash : UserControl
     {
-        public ClosingCash()
+        private decimal _currentBalance = 0m;
+        private bool _isUpdatingText = false;
+        private CashRegisterPage _parentPage;
+
+        public ClosingCash(CashRegisterPage parent)
         {
             InitializeComponent();
-            InitializeOpeningDate();
+            TbCashBalance.Text = string.Empty;
             UpdateButtonState();
             ConfirmOpenCashCheckBox.Checked += (s, e) => UpdateButtonState();
             ConfirmOpenCashCheckBox.Unchecked += (s, e) => UpdateButtonState();
-            TbInitialBalance.TextChanged += (s, e) => UpdateButtonState();
-            InputUtilities.ValidatePriceInput(TbInitialBalance, @"^\d{0,4}(\.\d{0,2})?$", 99999.999m);
+            TbDifference.TextChanged += (s, e) => UpdateButtonState();
+            TbDifference.TextChanged += TbDifference_TextChanged;
+            InputUtilities.ValidatePriceInput(TbDifference, @"^\d{0,4}(\.\d{0,2})?$", 99999.999m);
+            LoadCashRegisterBalance();
+            _parentPage = parent;
         }
-
-        private void InitializeOpeningDate()
+        private async void LoadCashRegisterBalance()
         {
-            TxbDateOpening.Text = DateTime.Now.ToString("dd/MM/yyyy");
-        }
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                var cashRegisterInfo = client?.GetOpenCashRegisterInfo();
 
+                if (cashRegisterInfo != null)
+                {
+                    _currentBalance = cashRegisterInfo.CurrentBalance;
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        TbCashBalance.Text = _currentBalance.ToString("C");
+                    });
+                }
+            });
+        }
         private void UpdateButtonState()
         {
             BtnAccept.IsEnabled = ConfirmOpenCashCheckBox.IsChecked == true &&
-                                  !string.IsNullOrWhiteSpace(TbInitialBalance.Text);
+                                  !string.IsNullOrWhiteSpace(TbDifference.Text);
         }
-
         private async void Click_BtnAccept(object sender, RoutedEventArgs e)
         {
-            await OpenCashRegister();
-        }
-
-        private async Task OpenCashRegister()
-        {
-            if (!decimal.TryParse(TbInitialBalance.Text, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.CurrentCulture, out decimal initialBalance))
+            if (!(ConfirmOpenCashCheckBox.IsChecked ?? false))
             {
-                MessageDialog.Show("GlbDialogT_InvalidInput", "GlbDialogD_InvalidBalance", AlertType.WARNING);
+                MessageDialog.Show("Advertencia", "Debe confirmar el cierre de caja.", AlertType.WARNING);
                 return;
             }
 
-            var client = ServiceClientManager.Instance.Client;
-            if (client == null)
+            if (!decimal.TryParse(TbDifference.Text, System.Globalization.NumberStyles.Currency,
+                                  System.Globalization.CultureInfo.CurrentCulture, out decimal cashierAmount))
             {
-                MessageDialog.Show("GlbDialogT_NoConnection", "GlbDialogD_NoConnection", AlertType.ERROR);
+                MessageDialog.Show("Error", "Ingrese un monto válido en caja.", AlertType.ERROR);
                 return;
             }
-
-            bool success = false;
 
             await ServiceClientManager.ExecuteServerAction(async () =>
             {
-                success = await client.OpenCashRegisterAsync(initialBalance);
+                var client = ServiceClientManager.Instance.Client;
+                bool result = client.CloseCashRegister(cashierAmount);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    if (result)
+                    {
+                        MessageDialog.Show("Éxito", "Caja cerrada correctamente.", AlertType.SUCCESS, () =>
+                        {
+                            _parentPage?.LoadCurrentTransactionsData();
+                            ClosePopup();
+                        });
+                    }
+                    else
+                    {
+                        MessageDialog.Show("Error", "No hay caja abierta para cerrar.", AlertType.ERROR);
+                    }
+                });
             });
-
-            HandleOpenCashResult(success);
         }
-
-        private void HandleOpenCashResult(bool success)
+        public static void Show(FrameworkElement triggerButton, CashRegisterPage parentPage)
         {
-            if (success)
-                MessageDialog.Show("CashRegister_DialogTSuccess", "CashRegister_DialogDSuccess", AlertType.SUCCESS, ClosePopup);
-            else
-                MessageDialog.Show("CashRegister_DialogTFail", "CashRegister_DialogDAlreadyOpen", AlertType.WARNING);
-        }
-
-        public static void Show(FrameworkElement triggerButton)
-        {
-            var openingCash = new OpeningCash();
+            var closingCash = new ClosingCash(parentPage);
 
             var activeWindow = Application.Current.Windows
                 .OfType<Window>()
@@ -93,22 +109,22 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
             Point screenPos = triggerButton.PointToScreen(new Point(0, 0));
             Point containerPos = popupContainer.PointFromScreen(screenPos);
 
-            openingCash.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            double popupWidth = openingCash.DesiredSize.Width;
-            double popupHeight = openingCash.DesiredSize.Height;
+            closingCash.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            double popupWidth = closingCash.DesiredSize.Width;
+            double popupHeight = closingCash.DesiredSize.Height;
 
             double left = activeWindow.ActualWidth - popupWidth - 20;
             if (left < 0) left = 0;
 
             double top = containerPos.Y + triggerButton.ActualHeight + 14;
 
-            popUpHost.Content = openingCash;
+            popUpHost.Content = closingCash;
             Canvas.SetLeft(popUpHost, left);
             Canvas.SetTop(popUpHost, top);
 
             popUpOverlay.Visibility = Visibility.Visible;
 
-            Animations.BeginAnimation(openingCash, "ShowBorderAnimation");
+            Animations.BeginAnimation(closingCash, "ShowBorderAnimation");
         }
 
         private void ClosePopup()
@@ -129,6 +145,25 @@ namespace ItaliaPizzaClient.Views.CashRegisterModule
         private void Click_BtnCancel(object sender, RoutedEventArgs e)
         {
             ClosePopup();
+        }
+        private void TbDifference_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_isUpdatingText) return;
+
+            if (decimal.TryParse(TbDifference.Text, System.Globalization.NumberStyles.Currency,
+                                 System.Globalization.CultureInfo.CurrentCulture, out decimal userAmount))
+            {
+                decimal difference = userAmount - _currentBalance;
+
+                _isUpdatingText = true;
+
+                TxbDifferenceBalance.Text = difference.ToString("C");
+                _isUpdatingText = false;
+            }
+            else
+            {
+                TxbDifferenceBalance.Text = string.Empty;
+            }
         }
     }
 }
