@@ -86,7 +86,6 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             }
         }
 
-
         private ProductCard CreateProductCard(Product product)
         {
             var card = new ProductCard
