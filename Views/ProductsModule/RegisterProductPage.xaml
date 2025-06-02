@@ -185,6 +185,25 @@
                                         Click="Click_BtnAddRecipe">
                                     <Button.Tag>/Resources/Icons/redirect-icon.png</Button.Tag>
                                 </Button>
+
+                                <StackPanel x:Name="ManageRecipesButtons"
+                                            Orientation="Horizontal"
+                                            Margin="10 0 0 0"
+                                            Visibility="Collapsed">
+                                    <Button x:Name="BtnDeleteRecipe" 
+                                            Style="{DynamicResource DangerButtonStyle}"
+                                            Content="{DynamicResource Glb_Delete}"
+                                            Click="Click_BtnDeleteRecipe">
+                                        <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
+                                    </Button>
+                                    <Button x:Name="BtnEditRecipe" 
+                                            Style="{DynamicResource PrimaryButtonStyle}"
+                                            Content="{DynamicResource Glb_Edit}"
+                                            Click="Click_BtnEditRecipe"
+                                            Margin="10 0 0 0">
+                                        <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                    </Button>
+                                </StackPanel>
                                 
                                 <Button x:Name="BtnSelectSupply" 
                                         Style="{DynamicResource PrimaryButtonStyle}"

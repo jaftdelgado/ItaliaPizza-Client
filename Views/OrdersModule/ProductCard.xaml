@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="ItaliaPizzaClient.Views.UserControls.ProductCard"
+﻿<UserControl x:Class="ItaliaPizzaClient.Views.OrdersModule.ProductCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
              d:DesignHeight="160" d:DesignWidth="160">
 
@@ -38,7 +38,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <Image Grid.Row="0" x:Name="SupplyPic"
+                <Image Grid.Row="0" x:Name="ProductPic"
                        Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType=UserControl}}"
                        Width="70" Height="70" Stretch="Fill"
                        HorizontalAlignment="Left"
@@ -49,11 +49,11 @@
                     </Image.Clip>
                 </Image>
 
-                <TextBlock Text="{Binding SupplyName, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                <TextBlock Text="{Binding ProductName, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                            Margin="0 8 0 0"
                            FontSize="13" TextTrimming="CharacterEllipsis"
                            Style="{DynamicResource SubtitleLabelStyle}" />
-                <TextBlock Text="{Binding StockText, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                <TextBlock Text="{Binding ProductCode, RelativeSource={RelativeSource AncestorType=UserControl}}"
                            FontSize="11"
                            Style="{DynamicResource DescriptionLabelStyle}" />
             </StackPanel>
@@ -61,7 +61,6 @@
             <Grid Grid.Row="1" VerticalAlignment="Bottom">
                 <TextBlock Text="{Binding PriceText, RelativeSource={RelativeSource AncestorType=UserControl}}"
                            Style="{DynamicResource RegularLabelStyle}"
-                           Foreground="{StaticResource PrimaryButtonBrush}"
                            FontSize="13"/>
             </Grid>
         </Grid>

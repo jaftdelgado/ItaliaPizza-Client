@@ -45,9 +45,31 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                     ProductCode = p.ProductCode,
                     IsActive = p.IsActive,
                     SupplyID = p.SupplyID,
-                    IsDeletable = p.IsDeletable
-                })
-                .OrderBy(p => p.Category).ToList();
+                    IsDeletable = p.IsDeletable,
+                    RecipeID = p.RecipeID,
+
+                    Recipe = p.Recipe == null ? null : new Recipe
+                    {
+                        Id = p.Recipe.RecipeID,
+                        PreparationTime = p.Recipe.PreparationTime,
+                        Steps = p.Recipe.Steps?.Select(rs => new RecipeStep
+                        {
+                            Id = rs.RecipeStepID,
+                            RecipeID = rs.RecipeID,
+                            StepNumber = rs.StepNumber,
+                            Instruction = rs.Instruction
+                        }).OrderBy(rs => rs.StepNumber).ToList() ?? new List<RecipeStep>(),
+
+                        Supplies = p.Recipe.Supplies?.Select(rsp => new RecipeSupplyItem
+                        {
+                            Id = rsp.RecipeSupplyID,
+                            RecipeID = rsp.RecipeID,
+                            SupplyID = rsp.SupplyID,
+                            UseQuantity = rsp.UseQuantity
+                        }).ToList() ?? new List<RecipeSupplyItem>()
+                    }
+                }).OrderBy(p => p.Category).ToList();
+
 
                 _allProducts = list;
 

@@ -337,6 +337,50 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ProductCardButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{StaticResource SecondaryButtonBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="8"
+                        Margin="6">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Imagen del producto -->
+                            <Image x:Name="PART_Image"
+                               Width="42" Height="42"
+                               Margin="4"
+                               Stretch="UniformToFill"
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                                <Image.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,42,42"/>
+                                </Image.Clip>
+                            </Image>
+
+                            <!-- Nombre y categoría -->
+                            <StackPanel Grid.Column="1" Margin="10 0" VerticalAlignment="Center">
+                                <TextBlock x:Name="PART_Name"
+                                       FontFamily="{StaticResource SFProMedium}"
+                                       FontSize="13"
+                                       TextTrimming="CharacterEllipsis"/>
+                                <TextBlock x:Name="PART_Category"
+                                       FontSize="11"
+                                       Foreground="{StaticResource SecondaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="MenuButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontFamily" Value="{StaticResource SFProRegular}"/>

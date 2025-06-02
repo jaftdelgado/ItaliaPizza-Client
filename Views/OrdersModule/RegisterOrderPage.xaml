@@ -48,15 +48,15 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0" Orientation="Horizontal">
-                    <TextBlock Text="{DynamicResource RegOrderSupplier_Info}"
+                    <TextBlock Text="{DynamicResource RegOrder_Products}"
                            Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
                 <Grid Grid.Row="1" Margin="0 12 0 0">
                     <StackPanel HorizontalAlignment="Stretch">
-                        <Border BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0 0 0 0.5">
+                        <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1">
                             <StackPanel Margin="20 0 20 16">
-                                <TextBlock Text="{DynamicResource RegOrderSupplier_SupplierInfo}"
+                                <TextBlock Text="{DynamicResource RegOrder_CustomerInfo}"
                                        Style="{DynamicResource DescriptionLabelStyle}"
                                        Margin="0 0 0 8"/>
                                 <StackPanel Orientation="Horizontal">
@@ -124,8 +124,8 @@
                     <StackPanel x:Name="OrderDetailsPanel" Grid.Row="1" Margin="20"/>
 
                     <Border Grid.Row="2"
-                        BorderBrush="{StaticResource SecondaryBrush}"
-                        BorderThickness="0 0.5 0 0">
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="0 1 0 0">
                         <StackPanel Margin="20 14 20 26" >
                             <TextBlock Text="{DynamicResource RegOrder_OrderSummary}" 
                                        Margin="0 0 0 10"
@@ -136,9 +136,9 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0"
-                                       Text="Proveedor:"
-                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="Responsible"
+                                           Grid.Column="0"
+                                           Style="{DynamicResource DescriptionLabelStyle}" />
                                 <TextBlock x:Name="TbSupplier"
                                        Grid.Column="1" HorizontalAlignment="Right"
                                        Text="-"

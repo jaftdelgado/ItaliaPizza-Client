@@ -423,14 +423,20 @@
     <!--RegisterOrder-->
     <sys:String x:Key="RegOrder_Header">Registrar Comanda</sys:String>
     <sys:String x:Key="RegOrder_Desc">Ingresa los datos del pedido en sucursal que se desea registrar.</sys:String>
+    <sys:String x:Key="RegDeliveryOrder_Header">Registrar Pedido a Domicilio</sys:String>
+    <sys:String x:Key="RegDeliveryOrder_Desc">Ingresa los datos del pedido a domicilio que se desea registrar.</sys:String>
     <sys:String x:Key="EditOrder_Header">Editar Comanda</sys:String>
     <sys:String x:Key="EditOrder_Desc">Modifica los datos del insumo que se desea actualizar.</sys:String>
     <sys:String x:Key="RegOrder_OrderInfo">Información de la Comanda</sys:String>
     <sys:String x:Key="RegOrder_TbTableNumber">Núm. de Mesa:</sys:String>
     <sys:String x:Key="RegOrder_CbCustomers">Cliente:</sys:String>
     <sys:String x:Key="RegOrder_CbDelivery">Repartidor(a):</sys:String>
+    <sys:String x:Key="RegOrder_Waiter">Mesero(a):</sys:String>
+    <sys:String x:Key="RegOrder_Cashier">Cajero(a):</sys:String>
     <sys:String x:Key="RegOrder_OrderDetails">Detalles de la Orden:</sys:String>
     <sys:String x:Key="RegOrder_OrderSummary">Resumen de la Orden:</sys:String>
+    <sys:String x:Key="RegOrder_Products">Productos Ofrecidos</sys:String>
+    <sys:String x:Key="RegOrder_CustomerInfo">Detalles del Servicio</sys:String>
     
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>
@@ -442,16 +448,19 @@
     <sys:String x:Key="Recipes_BtnAddRecipe">Agregar receta</sys:String>
 
     <!--Register Recipe-->
-    <sys:String x:Key="RegRecipe_Header">Registrar Receta</sys:String>
-    <sys:String x:Key="RegRecipe_Desc">Ingresa los datos de la receta que se desea registrar.</sys:String>
+    <sys:String x:Key="RegRecipe_Header">Agregar Receta</sys:String>
+    <sys:String x:Key="RegRecipe_Desc">Ingresa los datos de la receta que se desea agregar.</sys:String>
     <sys:String x:Key="RegRecipe_RecipeInfo">Información de la Receta</sys:String>
     <sys:String x:Key="RegRecipe_PreparationInfo">Información de Preparación</sys:String>
     <sys:String x:Key="RegRecipe_PreparationSteps">Instrucciones de Preparación</sys:String>
+    <sys:String x:Key="RegRecipe_Ingredients">Lista de Ingredientes</sys:String>
     <sys:String x:Key="RegRecipe_TbRecipeName">Nombre de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbPreparationTime">Tiempo de Preparación:</sys:String>
-    <sys:String x:Key="RegRecipe_TbRecipeDescription">Descripción de la receta</sys:String>
     <sys:String x:Key="RegRecipe_TbSupplyList">Lista de insumos</sys:String>
     <sys:String x:Key="RegRecipe_BtnAddStep">Añadir Paso</sys:String>
+    <sys:String x:Key="RegRecipe_BtnAddIngredient">Añadir Ingrediente</sys:String>
+    <sys:String x:Key="RegRecipe_BtnAddRecipe">Agregar Receta</sys:String>
+    <sys:String x:Key="RegRecipe_BtnEditRecipe">Actualizar Receta</sys:String>
     <sys:String x:Key="RegRecipe_DialogTSelectSupply">Seleccionar Insumo</sys:String>
 
     <!--Stock-->

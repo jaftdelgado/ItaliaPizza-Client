@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace ItaliaPizzaClient.Model
+﻿namespace ItaliaPizzaClient.Model
 {
     public class Product
     {
@@ -25,6 +23,10 @@ namespace ItaliaPizzaClient.Model
         public int? SupplyID { get; set; }
 
         public bool IsDeletable { get; set; }
+
+        public int? RecipeID { get; set; } 
+
+        public Recipe Recipe { get; set; }
 
         public string FormattedPrice
         {
