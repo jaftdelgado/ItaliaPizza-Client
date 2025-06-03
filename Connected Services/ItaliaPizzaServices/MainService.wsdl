@@ -44,6 +44,12 @@
   <wsdl:message name="IMainManager_GetAllPersonals_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllPersonalsResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveryDrivers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDrivers" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveryDrivers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDriversResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_AddPersonal_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPersonal" />
   </wsdl:message>
@@ -326,6 +332,12 @@
   <wsdl:message name="IMainManager_GetOrderItemsByOrderID_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOrderItemsByOrderIDResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_AddLocalOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddLocalOrder" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddLocalOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddLocalOrderResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetProductsWithRecipe_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProductsWithRecipe" />
   </wsdl:message>
@@ -420,6 +432,10 @@
     <wsdl:operation name="GetAllPersonals">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/GetAllPersonals" message="tns:IMainManager_GetAllPersonals_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/GetAllPersonalsResponse" message="tns:IMainManager_GetAllPersonals_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryDrivers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/GetDeliveryDrivers" message="tns:IMainManager_GetDeliveryDrivers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/GetDeliveryDriversResponse" message="tns:IMainManager_GetDeliveryDrivers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddPersonal">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonal" message="tns:IMainManager_AddPersonal_InputMessage" />
@@ -609,6 +625,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" message="tns:IMainManager_GetOrderItemsByOrderID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderIDResponse" message="tns:IMainManager_GetOrderItemsByOrderID_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddLocalOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/AddLocalOrder" message="tns:IMainManager_AddLocalOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/AddLocalOrderResponse" message="tns:IMainManager_AddLocalOrder_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetProductsWithRecipe">
       <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipe" message="tns:IMainManager_GetProductsWithRecipe_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipeResponse" message="tns:IMainManager_GetProductsWithRecipe_OutputMessage" />
@@ -675,6 +695,15 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetAllPersonals">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/GetAllPersonals" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryDrivers">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/GetDeliveryDrivers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1098,6 +1127,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetOrderItemsByOrderID">
       <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLocalOrder">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/AddLocalOrder" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

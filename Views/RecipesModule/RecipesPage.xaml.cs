@@ -31,10 +31,10 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                var dtoList = client.GetAllProducts(false); // Obtener todos los productos activos
+                var dtoList = client.GetAllProducts(false);
 
                 var list = dtoList
-                    .Where(p => p.Recipe != null) // Solo con receta
+                    .Where(p => p.Recipe != null)
                     .Select(p => new Product
                     {
                         ProductID = p.ProductID,
@@ -92,11 +92,7 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
                 var button = new Button
                 {
                     Style = (Style)FindResource("ProductCardButtonStyle"),
-                    Tag = product, // Contiene toda la info necesaria
-                    Margin = new Thickness(10),
-                    Padding = new Thickness(0),
-                    MinWidth = 180,
-                    MinHeight = 200,
+                    Margin = new Thickness(20, 5, 20, 5),
                     Cursor = Cursors.Hand
                 };
 
