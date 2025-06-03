@@ -68,15 +68,18 @@
                                     <StackPanel x:Name="DeliveryFields"
                                                 Orientation="Horizontal">
                                         <ComboBox x:Name="CbCustomers"
-                                                  Grid.Column="0"
-                                                  Width="180"
+                                                  Width="150"
                                                   Style="{DynamicResource ComboBoxStyle}"
-                                                  Tag="{DynamicResource RegOrder_CbCustomers}" />
+                                                  Tag="{DynamicResource RegOrder_CbCustomers}"
+                                                  DisplayMemberPath="FullName"
+                                                  SelectionChanged="CbCustomers_SelectionChanged"/>
                                         <ComboBox x:Name="CbDelivery"
-                                                  Grid.Column="1"
-                                                  Style="{DynamicResource ComboBoxStyle}"
+                                                  Width="180"
+                                                  Margin="10 0 0 0"
                                                   Tag="{DynamicResource RegOrder_CbDelivery}"
-                                                  Width="180" Margin="10 0 0 0"/>
+                                                  Style="{DynamicResource ComboBoxStyle}"
+                                                  DisplayMemberPath="FullName"
+                                                  SelectionChanged="CbDelivery_SelectionChanged"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
@@ -166,7 +169,8 @@
                                        Style="{DynamicResource RegularLabelStyle}"/>
                             </Grid>
                             
-                            <Grid Margin="0 4 0 0">
+                            <Grid Margin="0 4 0 0"
+                                  x:Name="TablePanel">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -176,6 +180,22 @@
                                        Text="{DynamicResource RegOrder_TbTableNumber}"
                                        Style="{DynamicResource DescriptionLabelStyle}" />
                                 <TextBlock x:Name="TableNumber"
+                                       Grid.Column="1" HorizontalAlignment="Right"
+                                       Text="-"
+                                       Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid x:Name="CustomerPanel"
+                                  Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                       Text="{DynamicResource RegOrder_CbCustomers}"
+                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="CustomerName"
                                        Grid.Column="1" HorizontalAlignment="Right"
                                        Text="-"
                                        Style="{DynamicResource RegularLabelStyle}"/>
@@ -195,6 +215,24 @@
                                        Grid.Column="1" HorizontalAlignment="Right"
                                        Text="-"
                                        Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid x:Name="AddressPanel"
+                                  Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{DynamicResource RegOrder_Address}"
+                                           VerticalAlignment="Top"
+                                           Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="Address"
+                                           Grid.Column="1" HorizontalAlignment="Stretch"
+                                           Text="-" TextAlignment="Right"
+                                           TextWrapping="Wrap"
+                                           Style="{DynamicResource RegularLabelStyle}"/>
                             </Grid>
 
                             <Grid Margin="0 8 0 0">
@@ -229,13 +267,13 @@
                 <Button x:Name="BtnConfirmLocalOrder"
                         Style="{DynamicResource PrimaryButtonStyle}"
                         Content="{DynamicResource RegOrder_BtnConfirmLocalOrder}"
-                        Click="Click_BtnConfirmOrder">
+                        Click="Click_BtnConfirmLocalOrder">
                     <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                 </Button>
                 <Button x:Name="BtnConfirmDeliveryOrder"
                         Style="{DynamicResource PrimaryButtonStyle}"
                         Content="{DynamicResource RegOrder_BtnConfirmDeliveryOrder}"
-                        Click="Click_BtnConfirmOrder"
+                        Click="Click_BtnConfirmDeliveryOrder"
                         Visibility="Collapsed">
                     <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                 </Button>

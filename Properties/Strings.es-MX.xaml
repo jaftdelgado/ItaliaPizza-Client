@@ -433,13 +433,18 @@
     <sys:String x:Key="RegOrder_CbDelivery">Repartidor(a):</sys:String>
     <sys:String x:Key="RegOrder_Waiter">Mesero(a):</sys:String>
     <sys:String x:Key="RegOrder_Cashier">Cajero(a):</sys:String>
+    <sys:String x:Key="RegOrder_Address">Entrega:</sys:String>
     <sys:String x:Key="RegOrder_OrderDetails">Detalles de la Orden:</sys:String>
     <sys:String x:Key="RegOrder_OrderSummary">Resumen de la Orden:</sys:String>
     <sys:String x:Key="RegOrder_Products">Productos Ofrecidos</sys:String>
     <sys:String x:Key="RegOrder_CustomerInfo">Detalles del Servicio</sys:String>
     <sys:String x:Key="RegOrder_BtnConfirmLocalOrder">Confirmar Comanda</sys:String>
     <sys:String x:Key="RegOrder_BtnConfirmDeliveryOrder">Confirmar Pedido</sys:String>
-    
+    <sys:String x:Key="RegLocalOrder_DialogTSuccess">Comanda registrada</sys:String>
+    <sys:String x:Key="RegLocalOrder_DialogDSuccess">La orden en sucursal se registró correctamente y aparecerá en cocina para marcarla como en preparación, con posibilidad de editarla antes.</sys:String>
+    <sys:String x:Key="RegDeliverOrder_DialogTSuccess">Pedido a domiclio registrado</sys:String>
+    <sys:String x:Key="RegDeliverOrder_DialogDSuccess">El pedido a domicilio se registró correctamente y aparecerá en cocina para marcarla como en preparación, con posibilidad de editarla antes.</sys:String>
+
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>
     <sys:String x:Key="Recipes_Desc">Visualiza, registra, modifica y elimina recetas utilizadas por Italia Pizza.</sys:String>
