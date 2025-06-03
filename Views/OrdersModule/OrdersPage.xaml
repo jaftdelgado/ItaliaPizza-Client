@@ -152,7 +152,8 @@
                     <Border Grid.Column="1" 
                             BorderBrush="{StaticResource BorderBrush}" 
                             BorderThickness="1 0 0 0">
-                        <Grid x:Name="OrderDetailsPanel" >
+                        <Grid x:Name="OrderDetailsPanel"
+                              Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>

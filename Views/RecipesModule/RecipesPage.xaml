@@ -36,8 +36,8 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3.5*"/>
-                <ColumnDefinition Width="6.5*"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
@@ -59,18 +59,146 @@
                     BorderBrush="{DynamicResource BorderBrush}" 
                     BorderThickness="1 0 0 0" >
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="36"/>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="6*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <Border Grid.Column="0" 
+            BorderBrush="{DynamicResource BorderBrush}" 
+            BorderThickness="0 0 1 0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0">
+                                    <StackPanel Grid.Row="0" 
+                            Margin="20 16"
+                            Orientation="Vertical"
+                            VerticalAlignment="Bottom">
+                                        <TextBlock x:Name="ProductName"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="ProductCategory"
+                                   Style="{DynamicResource RegularLabelStyle}"/>
+                                            <TextBlock x:Name="ProductCode"
+                                   Style="{DynamicResource DescriptionLabelStyle}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <Grid Margin="20 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Name="ProductPic"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Width="70" Height="70" 
+                           Stretch="Fill"
+                           Source="/Resources/Images/default-product-pic.png"
+                           VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                                            <Image.Clip>
+                                                <RectangleGeometry Rect="0 0 70 70" RadiusX="12" RadiusY="12"/>
+                                            </Image.Clip>
+                                        </Image>
+
+                                        <StackPanel Grid.Column="1"
+                                Margin="10 6 0 10">
+                                            <TextBlock Style="{DynamicResource RegularLabelStyle}"
+                                   Text="{DynamicResource Glb_Description}"
+                                   FontSize="10" FontFamily="{StaticResource SFProSemiBold}"/>
+                                            <TextBlock x:Name="ProductDescription"
+                                   Style="{DynamicResource DescriptionLabelStyle}"
+                                   TextWrapping="Wrap" 
+                                   HorizontalAlignment="Stretch"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Border BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="0 0 0 1" Margin="20 0">
+                                        <Grid Margin="0 14">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{DynamicResource RegRecipe_Ingredients}"
+                                   Style="{DynamicResource DescriptionLabelStyle}"
+                                   VerticalAlignment="Center"/>
+                                            
+                                        </Grid>
+                                    </Border>
+
+                                    <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Style="{StaticResource ScrollViewerStyle}">
+                                        <ItemsControl x:Name="IngredientsContainer">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Vertical"
+                                            Margin="20 0"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="36"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0">
+                                <TextBlock Text="{DynamicResource RegRecipe_PreparationInfo}"
+                       Style="{DynamicResource SubtitleLabelStyle}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20 12 20 10">
+                                <TextBlock Text="{DynamicResource RegRecipe_PreparationSteps}"
+                       Style="{DynamicResource DescriptionLabelStyle}" 
+                       Margin="0 0 0 8"/>
+                                
+                            </StackPanel>
+
+                            <Border Grid.Row="2"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0 1 0 0">
+                                <ScrollViewer Grid.Column="0"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          Style="{StaticResource ScrollViewerStyle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="7*" MaxWidth="640"/>
+                                            <ColumnDefinition Width="*" MinWidth="0"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel x:Name="StepsContainer"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Border>
+                        </Grid>
+
+                    </Grid>
                 </Grid>
             </Border>
-
-
         </Grid>
-
-        
     </Grid>
 </Page>

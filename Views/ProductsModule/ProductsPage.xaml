@@ -199,7 +199,8 @@
                                 </Border>
                             </StackPanel>
 
-                            <Border Grid.Row="2"
+                            <Border x:Name="ManagePanel"
+                                    Grid.Row="2"
                                     BorderBrush="{DynamicResource BorderBrush}"
                                     BorderThickness="0 1 0 0" >
                                 <Grid Margin="20" >
