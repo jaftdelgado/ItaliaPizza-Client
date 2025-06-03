@@ -2896,10 +2896,10 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO[]> GetCurrentTransactionsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterOrderPayment", ReplyAction="http://tempuri.org/IFinanceManager/RegisterOrderPaymentResponse")]
-        bool RegisterOrderPayment(int orderId);
+        int RegisterOrderPayment(int orderId, decimal efectivo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/RegisterOrderPayment", ReplyAction="http://tempuri.org/IFinanceManager/RegisterOrderPaymentResponse")]
-        System.Threading.Tasks.Task<bool> RegisterOrderPaymentAsync(int orderId);
+        System.Threading.Tasks.Task<int> RegisterOrderPaymentAsync(int orderId, decimal efectivo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/GetOpenCashRegisterInfo", ReplyAction="http://tempuri.org/IFinanceManager/GetOpenCashRegisterInfoResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.CashRegisterDTO GetOpenCashRegisterInfo();
@@ -2990,6 +2990,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/AddDeliveryOrder", ReplyAction="http://tempuri.org/IOrderManager/AddDeliveryOrderResponse")]
         System.Threading.Tasks.Task<int> AddDeliveryOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO, ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO deliveryDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/UpdateOrder", ReplyAction="http://tempuri.org/IOrderManager/UpdateOrderResponse")]
+        bool UpdateOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/UpdateOrder", ReplyAction="http://tempuri.org/IOrderManager/UpdateOrderResponse")]
+        System.Threading.Tasks.Task<bool> UpdateOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipe", ReplyAction="http://tempuri.org/IRecipeManager/GetProductsWithRecipeResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetProductsWithRecipe(bool includeSteps);
@@ -3395,12 +3401,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.GetCurrentTransactionsAsync();
         }
         
-        public bool RegisterOrderPayment(int orderId) {
-            return base.Channel.RegisterOrderPayment(orderId);
+        public int RegisterOrderPayment(int orderId, decimal efectivo) {
+            return base.Channel.RegisterOrderPayment(orderId, efectivo);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterOrderPaymentAsync(int orderId) {
-            return base.Channel.RegisterOrderPaymentAsync(orderId);
+        public System.Threading.Tasks.Task<int> RegisterOrderPaymentAsync(int orderId, decimal efectivo) {
+            return base.Channel.RegisterOrderPaymentAsync(orderId, efectivo);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.CashRegisterDTO GetOpenCashRegisterInfo() {
@@ -3521,6 +3527,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<int> AddDeliveryOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO, ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO deliveryDTO) {
             return base.Channel.AddDeliveryOrderAsync(orderDTO, deliveryDTO);
+        }
+        
+        public bool UpdateOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO) {
+            return base.Channel.UpdateOrder(orderDTO);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO) {
+            return base.Channel.UpdateOrderAsync(orderDTO);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetProductsWithRecipe(bool includeSteps) {

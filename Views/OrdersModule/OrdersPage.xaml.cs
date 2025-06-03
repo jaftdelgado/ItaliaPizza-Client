@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
         public OrdersPage()
         {
             InitializeComponent();
-
+            InputUtilities.ValidatePriceInput(TbPayment, @"^\d{0,5}(\.\d{0,2})?$", 99999.999m);
             Loaded += OrdersPage_Loaded;
 
             if(CurrentUserRoleId == 5) BtnNewOrder.Visibility = Visibility.Collapsed; 
@@ -487,7 +488,11 @@ namespace ItaliaPizzaClient.Views.OrdersModule
 
         private void Click_BtnEditOrder(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            var orderToEdit = OrdersDataGrid.SelectedItem as Order;
 
+            if (mainWindow != null && orderToEdit != null)
+                mainWindow.NavigateToPage("EditOrder_Header", new RegisterOrderPage(orderToEdit));
         }
 
         private void SupplierOrdersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -497,7 +502,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             else UpdateOrderPanelVisibility(null);
         }
 
-        private void Click_BtnPayOrder(object sender, RoutedEventArgs e)
+        private async void Click_BtnPayOrder(object sender, RoutedEventArgs e)
         {
             if (OrdersDataGrid.SelectedItem is Order selected)
             {
@@ -506,11 +511,92 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                 TbOrderTotal.Text = $"${selected.Total:F2}";
             }
         }
+        private async void Click_BtnConfirm(Object sender, RoutedEventArgs e)
+        {
+            if (OrdersDataGrid.SelectedItem is Order selectedOrder)
+            {
+                await PayOrder(selectedOrder);
+            }
+        }
         
         private void Click_BtnCancelPayment(object sender, RoutedEventArgs e)
         {
             PaymentPanel.Visibility = Visibility.Collapsed;
             PaymentCashier.Visibility = Visibility.Visible;
+        }
+        private async Task PayOrder(Order selected)
+        {
+            if (selected == null) return;
+
+            if (!decimal.TryParse(TbPayment.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal cash))
+            {
+                MessageDialog.Show("Ord_Error_Title", "Ord_Error_InvalidAmount", AlertType.WARNING);
+                return;
+            }
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                int result = await client.RegisterOrderPaymentAsync(selected.OrderID, cash);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    switch (result)
+                    {
+                        case 1:
+                            MessageDialog.Show("Ord_Success_Title", "Ord_Success_PaymentRegistered", AlertType.SUCCESS, () =>
+                            {
+                                selected.Status = 6; // Estado: Pagada
+                                BtnConfirm.IsEnabled = false;
+                                TbPayment.Text = "";
+                                TbChange.Text = "";
+                                TicketExporter.ExportTicketToPDF(
+                                    orderId: selected.OrderID,
+                                    total: selected.Total ?? 0m,
+                                    cash: cash,
+                                    change: cash - (selected.Total ?? 0m),
+                                    productNames: selected.Items.Select(i => i.Name).ToList()
+                                );
+
+                                RefreshOrders();
+                            });
+                            break;
+                        case -1:
+                            MessageDialog.Show("Ord_Error_Title", "Ord_Error_InvalidOrderStatus", AlertType.WARNING);
+                            break;
+                        case -2:
+                            MessageDialog.Show("Ord_Error_Title", "Ord_Error_NoCashRegister", AlertType.WARNING);
+                            break;
+                        case -3:
+                            MessageDialog.Show("Ord_Error_Title", "Ord_Error_NotEnoughCashForChange", AlertType.WARNING);
+                            break;
+                        default:
+                            MessageDialog.Show("Ord_Error_Title", "Ord_Error_PaymentFailed", AlertType.ERROR);
+                            break;
+                    }
+                });
+            });
+        }
+
+        private void TbPayment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (decimal.TryParse(TbOrderTotal.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal total) &&
+                decimal.TryParse(TbPayment.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal cash))
+            {
+                decimal change = cash - total;
+                if (change >= 0)
+                {
+                    TbChange.Text = change.ToString("C2");
+                    BtnConfirm.IsEnabled = true;
+                }
+                else
+                {
+                    TbChange.Text = string.Empty;
+                    BtnConfirm.IsEnabled = false;
+                }
+            }
         }
     }
 }

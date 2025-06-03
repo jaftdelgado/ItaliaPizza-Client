@@ -384,11 +384,11 @@ namespace ItaliaPizzaClient.Views.SupplierOrdersModule
         private void TbPayment_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (decimal.TryParse(TbOrderTotal.Text, System.Globalization.NumberStyles.Currency, null, out decimal total) &&
-                decimal.TryParse(TbPayment.Text, System.Globalization.NumberStyles.Currency, null, out decimal efectivo))
+                decimal.TryParse(TbPayment.Text, System.Globalization.NumberStyles.Currency, null, out decimal cash))
             {
-                decimal cambio = efectivo - total;
-                TbChange.Text = cambio >= 0 ? cambio.ToString("C2") : string.Empty;
-                BtnConfirm.IsEnabled = cambio >= 0;
+                decimal chage = cash - total;
+                TbChange.Text = chage >= 0 ? chage.ToString("C2") : string.Empty;
+                BtnConfirm.IsEnabled = chage >= 0;
             }
             
         }

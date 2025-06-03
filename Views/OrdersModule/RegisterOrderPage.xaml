@@ -280,7 +280,8 @@
                 <Button x:Name="BtnEditOrder" 
                     Style="{DynamicResource PrimaryButtonStyle}"
                     Content="{DynamicResource RegOrderSupplier_BtnEditOrder}"
-                    Visibility="Collapsed" >
+                    Visibility="Collapsed" 
+                    Click="Click_BtnEditOrder">
                     <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
                 </Button>
             </StackPanel>
