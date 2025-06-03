@@ -61,17 +61,23 @@
                                        Margin="0 0 0 8"/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox x:Name="TbTableNumber"
-                                             Width="160"
+                                             Width="120"
                                              Style="{DynamicResource TextBoxStyle}"
-                                             Tag="{DynamicResource RegOrder_TbTableNumber}" />
-                                    <ComboBox x:Name="CbCustomers"
-                                          Width="160"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          Tag="{DynamicResource RegOrder_CbCustomers}" />
-                                    <ComboBox x:Name="CbDelivery"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          Tag="{DynamicResource RegOrder_CbDelivery}"
-                                          Width="190" Margin="10 0 0 0"/>
+                                             Tag="{DynamicResource RegOrder_TbTableNumber}" 
+                                             LostFocus="TbTableNumber_LostFocus" />
+                                    <StackPanel x:Name="DeliveryFields"
+                                                Orientation="Horizontal">
+                                        <ComboBox x:Name="CbCustomers"
+                                                  Grid.Column="0"
+                                                  Width="180"
+                                                  Style="{DynamicResource ComboBoxStyle}"
+                                                  Tag="{DynamicResource RegOrder_CbCustomers}" />
+                                        <ComboBox x:Name="CbDelivery"
+                                                  Grid.Column="1"
+                                                  Style="{DynamicResource ComboBoxStyle}"
+                                                  Tag="{DynamicResource RegOrder_CbDelivery}"
+                                                  Width="180" Margin="10 0 0 0"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -139,7 +145,7 @@
                                 <TextBlock x:Name="Responsible"
                                            Grid.Column="0"
                                            Style="{DynamicResource DescriptionLabelStyle}" />
-                                <TextBlock x:Name="TbSupplier"
+                                <TextBlock x:Name="ResponsibleName"
                                        Grid.Column="1" HorizontalAlignment="Right"
                                        Text="-"
                                        Style="{DynamicResource RegularLabelStyle}"/>
@@ -155,6 +161,37 @@
                                        Text="Fecha:"
                                        Style="{DynamicResource DescriptionLabelStyle}" />
                                 <TextBlock x:Name="OrderDate"
+                                       Grid.Column="1" HorizontalAlignment="Right"
+                                       Text="-"
+                                       Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                       Text="{DynamicResource RegOrder_TbTableNumber}"
+                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="TableNumber"
+                                       Grid.Column="1" HorizontalAlignment="Right"
+                                       Text="-"
+                                       Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid x:Name="DeliveryPanel"
+                                  Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                       Text="{DynamicResource RegOrder_CbDelivery}"
+                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="DeliveryPersonal"
                                        Grid.Column="1" HorizontalAlignment="Right"
                                        Text="-"
                                        Style="{DynamicResource RegularLabelStyle}"/>
@@ -189,10 +226,17 @@
                     Style="{DynamicResource SecondaryButtonNoIconStyle}"
                     Content="{DynamicResource Glb_Cancel}"
                     Margin="0 0 10 0"/>
-                <Button x:Name="BtnConfirmOrder"
-                    Style="{DynamicResource PrimaryButtonStyle}"
-                    Content="{DynamicResource RegOrderSupplier_BtnConfirmOrder}"
-                    Click="Click_BtnConfirmOrder">
+                <Button x:Name="BtnConfirmLocalOrder"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Content="{DynamicResource RegOrder_BtnConfirmLocalOrder}"
+                        Click="Click_BtnConfirmOrder">
+                    <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                </Button>
+                <Button x:Name="BtnConfirmDeliveryOrder"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Content="{DynamicResource RegOrder_BtnConfirmDeliveryOrder}"
+                        Click="Click_BtnConfirmOrder"
+                        Visibility="Collapsed">
                     <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                 </Button>
                 <Button x:Name="BtnEditOrder" 

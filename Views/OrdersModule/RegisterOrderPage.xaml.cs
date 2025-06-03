@@ -1,5 +1,7 @@
-﻿using ItaliaPizzaClient.Model;
+﻿using ItaliaPizzaClient.ItaliaPizzaServices;
+using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +15,10 @@ namespace ItaliaPizzaClient.Views.OrdersModule
     public partial class RegisterOrderPage : Page
     {
         private ObservableCollection<ProductCard> _productCards = new ObservableCollection<ProductCard>();
+
         private List<OrderedProduct> _orderedProducts = new List<OrderedProduct>();
+
         private List<Customer> _customers = new List<Customer>();
-        private int _selectedTableNumber = 0;
-        private string _selectedDeliveryOption = "";
 
         public RegisterOrderPage()
         {
@@ -24,12 +26,22 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             LoadInitialData();
             OrderDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
             ConfigureInterfaceForMode(CurrentSession.LoggedInUser.RoleID);
+            ResponsibleName.Text = CurrentSession.LoggedInUser.FullName;
+
+            TbTableNumber.TextChanged += (_, __) => UpdateConfirmButtonState();
+            UpdateConfirmButtonState();
         }
 
         private async void LoadInitialData()
         {
             await LoadProducts();
+
+            if (CurrentSession.LoggedInUser.RoleID == 3)
+            {
+                await LoadDeliveryDrivers();
+            }
         }
+
 
         private async Task LoadProducts()
         {
@@ -70,6 +82,58 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             });
         }
 
+        private async Task LoadDeliveryDrivers()
+        {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var drivers = await client.GetDeliveryDriversAsync();
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    CbDelivery.ItemsSource = drivers.Select(d => new ComboBoxItem
+                    {
+                        Content = $"{d.FirstName} {d.LastName}",
+                        Tag = d.PersonalID
+                    }).ToList();
+                });
+            });
+        }
+
+        private async Task RegisterLocalOrder()
+        {
+            var orderDto = new OrderDTO
+            {
+                TableNumber = TbTableNumber.Text?.Trim(),
+                PersonalID = CurrentSession.LoggedInUser.PersonalID,
+                Total = _orderedProducts.Sum(o => o.Quantity * (o.Product.Price ?? 0)),
+                Items = _orderedProducts.Select(o => new ProductOrderDTO
+                {
+                    ProductID = o.Product.ProductID,
+                    Quantity = o.Quantity
+                }).ToArray()
+            };
+
+            bool success = false;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var result = await client.AddLocalOrderAsync(orderDto);
+                success = result > 0;
+            });
+
+            if (success)
+            {
+                MessageDialog.Show("RegOrder_DialogTSuccess", "RegOrder_DialogDSuccess", AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
+            }
+        }
+
         private void ConfigureInterfaceForMode(int role)
         {
             if (role == 3) // Cajero
@@ -77,12 +141,22 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                 PageHeader.SetResourceReference(TextBlock.TextProperty, "RegDeliveryOrder_Header");
                 PageDescription.SetResourceReference(TextBlock.TextProperty, "RegDeliveryOrder_Desc");
                 Responsible.SetResourceReference(TextBlock.TextProperty, "RegOrder_Cashier");
+                DeliveryFields.Visibility = Visibility.Visible;
+                TbTableNumber.Visibility = Visibility.Collapsed;
+
+                BtnConfirmLocalOrder.Visibility = Visibility.Collapsed;
+                BtnConfirmDeliveryOrder.Visibility = Visibility.Visible;
             }
             else if (role == 4) // Mesero
             {
                 PageHeader.SetResourceReference(TextBlock.TextProperty, "RegOrder_Header");
                 PageDescription.SetResourceReference(TextBlock.TextProperty, "RegOrder_Desc");
                 Responsible.SetResourceReference(TextBlock.TextProperty, "RegOrder_Waiter");
+                DeliveryFields.Visibility = Visibility.Collapsed;
+                TbTableNumber.Visibility = Visibility.Visible;
+
+                BtnConfirmLocalOrder.Visibility = Visibility.Visible;
+                BtnConfirmDeliveryOrder.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -138,6 +212,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             }
 
             UpdateTotal();
+            UpdateConfirmButtonState();
         }
 
         private ProductOrderDetail AddProductOrderDetail(OrderedProduct orderedProduct)
@@ -156,6 +231,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             {
                 orderedProduct.Quantity = newQuantity;
                 UpdateTotal();
+                UpdateConfirmButtonState();
             };
 
             ImageUtilities.SetImageSource(detail.ProductPic, orderedProduct.Product.ProductPic, Constants.DEFAULT_PRODUCT_PIC_PATH);
@@ -170,6 +246,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                 OrderDetailsPanel.Children.Remove(detail);
                 _orderedProducts.Remove(orderedProduct);
                 UpdateTotal();
+                UpdateConfirmButtonState();
             });
         }
 
@@ -179,9 +256,32 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             TbTotal.Text = total.ToString("C");
         }
 
-        private void Click_BtnConfirmOrder(object sender, RoutedEventArgs e)
+        private void UpdateConfirmButtonState()
         {
+            bool hasProducts = _orderedProducts.Any();
+            bool hasTableNumber = !string.IsNullOrWhiteSpace(TbTableNumber.Text);
 
+            if (CurrentSession.LoggedInUser.RoleID == 4)
+            {
+                BtnConfirmLocalOrder.IsEnabled = hasProducts && hasTableNumber;
+            }
+            else 
+            {
+                BtnConfirmDeliveryOrder.IsEnabled = hasProducts;
+            }
         }
+
+        private async void Click_BtnConfirmOrder(object sender, RoutedEventArgs e)
+        {
+            await RegisterLocalOrder();
+        }
+
+        private void TbTableNumber_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TableNumber.Text = string.IsNullOrWhiteSpace(TbTableNumber.Text)
+                ? "-"
+                : TbTableNumber.Text.Trim();
+        }
+
     }
 }

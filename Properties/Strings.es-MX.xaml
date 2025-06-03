@@ -437,6 +437,8 @@
     <sys:String x:Key="RegOrder_OrderSummary">Resumen de la Orden:</sys:String>
     <sys:String x:Key="RegOrder_Products">Productos Ofrecidos</sys:String>
     <sys:String x:Key="RegOrder_CustomerInfo">Detalles del Servicio</sys:String>
+    <sys:String x:Key="RegOrder_BtnConfirmLocalOrder">Confirmar Comanda</sys:String>
+    <sys:String x:Key="RegOrder_BtnConfirmDeliveryOrder">Confirmar Pedido</sys:String>
     
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>
