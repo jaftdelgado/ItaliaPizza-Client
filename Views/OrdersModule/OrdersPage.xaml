@@ -80,8 +80,7 @@
                                  Grid.Column="1"
                                  HorizontalAlignment="Right"
                                  Style="{DynamicResource SecondarySearchBoxStyle}"
-                                 Width="160"
-                                 TextChanged="SearchBox_TextChanged" />
+                                 Width="160" />
                     </Grid>
                 </Border>
 
@@ -117,8 +116,8 @@
                                       Style="{DynamicResource DataGridStyle1}"
                                       SelectionChanged="SupplierOrdersDataGrid_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="{DynamicResource Orders_TableHOrderNum}"
-                                                        Binding="{Binding FormattedOrderID}" Width="2.4*"
+                                    <DataGridTextColumn Header="{DynamicResource Orders_Order}"
+                                                        Binding="{Binding FormattedOrderID}" Width="2*"
                                                         FontFamily="{StaticResource SFMonoRegular}"
                                                         CellStyle="{StaticResource DataGridCellStyle0}">
                                         <DataGridTextColumn.HeaderStyle>
@@ -126,7 +125,7 @@
                                         </DataGridTextColumn.HeaderStyle>
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHCustomer}" 
-                                                        Binding="{Binding OrderClientInfo}" Width="3.5*"/>
+                                                        Binding="{Binding OrderClientInfo}" Width="3.8*"/>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHStatus}" 
                                                         Binding="{Binding StatusName}" Width="2*"/>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHDateTime}" 
@@ -153,8 +152,7 @@
                     <Border Grid.Column="1" 
                             BorderBrush="{StaticResource BorderBrush}" 
                             BorderThickness="1 0 0 0">
-                        <Grid x:Name="OrderDetailsPanel"
-                              Visibility="Collapsed" >
+                        <Grid x:Name="OrderDetailsPanel" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>
@@ -176,14 +174,36 @@
                                         BorderThickness="0 0 0 1"
                                         BorderBrush="{StaticResource BorderBrush}">
                                     <StackPanel Margin="20 10 20 12">
-                                        <TextBlock x:Name="SupplierName" FontSize="13"
-                                                   Style="{DynamicResource SubtitleLabelStyle}" />
-                                        <TextBlock x:Name="OrderStatus" Margin="0 2 0 0"
-                                                   Style="{DynamicResource RegularLabelStyle}"
-                                                   Foreground="{StaticResource PrimaryButtonBrush}" />
-                                        <TextBlock x:Name="OrderFolio" Margin="0 4 0 0"
-                                                   FontFamily="{StaticResource SFMonoRegular}"
-                                                   Style="{DynamicResource DescriptionLabelStyle}" />
+                                        <Grid Margin="0 0 0 8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel>
+                                                <TextBlock Style="{StaticResource RegularLabelStyle}"
+                                                           FontSize="10" FontFamily="{StaticResource SFProBold}"
+                                                           Text="ORD."/>
+                                                <TextBlock x:Name="OrderNum"
+                                                           FontFamily="{StaticResource SFMonoRegular}"
+                                                           FontSize="20"
+                                                           Style="{StaticResource DescriptionLabelStyle}"/>
+                                            </StackPanel>
+                                            
+                                            <StackPanel x:Name="TablePanel"
+                                                        Grid.Column="1">
+                                                <TextBlock Style="{StaticResource RegularLabelStyle}"
+                                                           FontSize="10" FontFamily="{StaticResource SFProBold}"
+                                                           Text="MESA"
+                                                           TextAlignment="Right"/>
+                                                <TextBlock x:Name="TableNumber"
+                                                           TextAlignment="Right"
+                                                           FontFamily="{StaticResource SFMonoRegular}"
+                                                           FontSize="20"
+                                                           Style="{StaticResource DescriptionLabelStyle}"/>
+                                            </StackPanel>
+                                        </Grid>
+
                                         <StackPanel Orientation="Horizontal" Margin="0 6 0 0">
                                             <Image Source="/Resources/Icons/calendar-icon.png" 
                                                    Style="{StaticResource IconViewStyle}" />
@@ -193,17 +213,6 @@
                                             <TextBlock x:Name="OrderedDate" 
                                                        Style="{DynamicResource DescriptionLabelStyle}" />
                                         </StackPanel>
-
-                                        <StackPanel x:Name="DeliveredPanel" Orientation="Horizontal" Margin="0 6 0 0">
-                                            <Image Source="/Resources/Icons/calendar-icon.png" 
-                                                   Style="{StaticResource IconViewStyle}" />
-                                            <TextBlock Text="{DynamicResource OrdSuppliers_DetailsDeliveredDate}"
-                                                       Style="{DynamicResource DescriptionLabelStyle}" 
-                                                       Margin="0 0 4 0" />
-                                            <TextBlock x:Name="DeliveredDate" 
-                                                       Style="{DynamicResource DescriptionLabelStyle}" />
-                                        </StackPanel>
-
                                     </StackPanel>
                                 </Border>
 
@@ -218,133 +227,237 @@
                             <Border x:Name="ButtonsPanel" Grid.Row="2" BorderBrush="{DynamicResource BorderBrush}"
                                     BorderThickness="0 1 0 0">
                                 <Grid>
-                                    <StackPanel x:Name="PaymentPanel"
-                                                Margin="20" 
-                                                Visibility="Collapsed">
-                                        <ContentControl Grid.Row="0" Margin="0 0 0 14" 
-                                                        VerticalAlignment="Bottom"
-                                                        Style="{StaticResource TagStyle}" 
-                                                        Content="{DynamicResource Orders_PayOrder}" />
-                                        <Grid Margin="0 0 0 10">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                    <Grid x:Name="CookButtonsPanel"
+                                          Margin="20"
+                                          Visibility="Collapsed">
+                                        <StackPanel x:Name="CookTakenButtons">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="1"
-                                                       Text="Total:" VerticalAlignment="Bottom"
-                                                       Style="{DynamicResource DescriptionLabelStyle}" />
-                                            <TextBlock x:Name="TbOrderTotal" Grid.Row="1"
-                                                       Grid.Column="1" HorizontalAlignment="Right"
-                                                       Style="{DynamicResource SubtitleLabelStyle}"
-                                                       FontFamily="{StaticResource SFProSemiBold}"/>
-                                        </Grid>
+                                                <Button Grid.Column="0"
+                                                        Margin="0 0 5 0"
+                                                        Style="{DynamicResource DangerButtonStyle}"
+                                                        Content="{DynamicResource Glb_Cancel}"
+                                                        Click="Click_BtnCancelOrder">
+                                                    <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
+                                                </Button>
 
-                                        <Grid Margin="0 10 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                                <Button Margin="5 0 0 0"
+                                                        Style="{DynamicResource PrimaryButtonStyle}"
+                                                        Content="{DynamicResource Orders_BtnStart}"
+                                                        Grid.Column="1"
+                                                        Click="Click_BtnStartPreparing">
+                                                    <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                                </Button>
+                                            </Grid>
+                                        </StackPanel>
 
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
-                                            </Grid.RowDefinitions>
-
-                                            <TextBox x:Name="TbPayment"
-                                                     Grid.Column="0" Grid.Row="1"
-                                                     Style="{DynamicResource TextBoxStyle}" 
-                                                     Tag="Efectivo:" Margin="0 0 5 0"/>
-
-                                            <TextBox x:Name="TbChange"
-                                                     Grid.Column="1" Grid.Row="1"
-                                                     Style="{DynamicResource TextBoxStyle}" 
-                                                     Tag="Cambio:" Margin="5 0 0 0"
-                                                     IsReadOnly="True" 
-                                                     IsEnabled="False"/>
-                                        </Grid>
-
-                                        <Grid Margin="0 28 0 0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Button x:Name="BtnCancel" Grid.Column="0"
-                                                    Style="{DynamicResource SecondaryButtonNoIconStyle}"
-                                                    Content="{DynamicResource Glb_Cancel}"
-                                                    Margin="0 0 5 0" />
-                                            <Button x:Name="BtnConfirm" Grid.Column="1"
-                                                    Style="{DynamicResource PrimaryButtonStyle}"
-                                                    Content="{DynamicResource Glb_Confirm}"
-                                                    Margin="5 0 0 0" IsEnabled="False">
-                                                <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
-                                            </Button>
-
-                                        </Grid>
-                                    </StackPanel>
-
-                                    <StackPanel x:Name="StatusPendingPanel"
-                                                Margin="20">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Button x:Name="BtnCancelOrder" Grid.Column="0"
-                                                    Margin="0 0 5 0"
-                                                    Style="{DynamicResource DangerButtonStyle}"
-                                                    Content="{DynamicResource Glb_Cancel}" 
-                                                    Click="Click_BtnCancelOrder" >
-                                                <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
-                                            </Button>
-
-                                            <Button x:Name="BtnEdit" Grid.Column="1"
-                                                    Margin="5 0 0 0"
-                                                    Style="{DynamicResource PrimaryButtonStyle}"
-                                                    Content="{DynamicResource Glb_Edit}"
-                                                    Click="Click_BtnEditOrder" >
-                                                <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                            </Button>
-                                        </Grid>
-                                    </StackPanel>
-                                    
-                                    <StackPanel x:Name="StatusCookPanel"
-                                                Margin="20"
-                                                Visibility="Collapsed">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Button x:Name="BtnCancelCook" Grid.Column="0"
-                                                    Margin="0 0 5 0"
-                                                    Style="{DynamicResource DangerButtonStyle}"
-                                                    Content="{DynamicResource Glb_Cancel}" 
-                                                    Click="Click_BtnCancelOrder" >
-                                                <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
-                                            </Button>
-
-                                            <Button x:Name="BtnPrepared" 
-                                                    Margin="5 0 0 0"
-                                                    Style="{DynamicResource PrimaryButtonStyle}"
-                                                    Content="{DynamicResource Orders_BtnPrepared}"
-                                                    Grid.Column="1" >
-                                                <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
-                                            </Button>
-                                            
-                                            <Button x:Name="BtnStart" 
-                                                    Margin="5 0 0 0"
-                                                    Style="{DynamicResource PrimaryButtonStyle}"
-                                                    Content="{DynamicResource Orders_BtnStart}"
-                                                    Grid.Column="1"
+                                        <StackPanel x:Name="CookPreparingButtons"
                                                     Visibility="Collapsed">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button Grid.Column="0"
+                                                        Margin="0 0 5 0"
+                                                        Style="{DynamicResource DangerButtonStyle}"
+                                                        Content="{DynamicResource Glb_Cancel}"
+                                                        Click="Click_BtnCancelOrder">
+                                                    <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
+                                                </Button>
+
+                                                <Button Margin="5 0 0 0"
+                                                        Style="{DynamicResource PrimaryButtonStyle}"
+                                                        Content="{DynamicResource Orders_BtnPrepared}"
+                                                        Grid.Column="1"
+                                                        Click="Click_BtnMarkReady">
+                                                    <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                                </Button>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Grid x:Name="WaiterButtonsPanel"
+                                          Margin="20"
+                                          Visibility="Collapsed">
+                                        <StackPanel x:Name="WaiterTakenButtons">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button Grid.Column="0"
+                                                        Margin="0 0 5 0"
+                                                        Style="{DynamicResource DangerButtonStyle}"
+                                                        Content="{DynamicResource Glb_Cancel}"
+                                                        Click="Click_BtnWaiterCancelOrder">
+                                                    <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
+                                                </Button>
+
+                                                <Button Margin="5 0 0 0"
+                                                        Style="{DynamicResource PrimaryButtonStyle}"
+                                                        Content="{DynamicResource Glb_Edit}"
+                                                        Grid.Column="1"
+                                                        Click="Click_BtnEditOrder">
+                                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                                </Button>
+                                            </Grid>
+                                        </StackPanel>
+
+                                        <StackPanel x:Name="WaiterPreparedButtons">
+                                            <Button Style="{DynamicResource PrimaryButtonStyle}"
+                                                    Content="{DynamicResource Orders_BtnMarkDelivered}"
+                                                    Click="Click_BtnMarkDelivered">
                                                 <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
                                             </Button>
-                                        </Grid>
-                                    </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Grid x:Name="CashierButtonsPanel"
+                                          Margin="20"
+                                          Visibility="Collapsed">
+                                        <StackPanel x:Name="CashierTakenButtons"
+                                                    Visibility="Collapsed">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button Grid.Column="0"
+                                                        Margin="0 0 5 0"
+                                                        Style="{DynamicResource DangerButtonStyle}"
+                                                        Content="{DynamicResource Glb_Cancel}"
+                                                        Click="Click_BtnCashierCancelOrder">
+                                                    <Button.Tag>/Resources/Icons/discard-hover-icon.png</Button.Tag>
+                                                </Button>
+
+                                                <Button Margin="5 0 0 0"
+                                                        Style="{DynamicResource PrimaryButtonStyle}"
+                                                        Content="{DynamicResource Glb_Edit}"
+                                                        Grid.Column="1"
+                                                        Click="Click_BtnEditOrder">
+                                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                                </Button>
+                                            </Grid>
+                                        </StackPanel>
+
+                                        <StackPanel x:Name="CashierPreparedButtons"
+                                                    Visibility="Collapsed">
+                                            <Button Style="{DynamicResource PrimaryButtonStyle}"
+                                                    Content="{DynamicResource Orders_BtnMarkShipped}"
+                                                    Click="Click_BtnMarkAsShipped">
+                                                <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                            </Button>
+                                        </StackPanel>
+
+                                        <StackPanel x:Name="PaymentPanel"
+                                                    Visibility="Collapsed">
+                                            <ContentControl Grid.Row="0" Margin="0 0 0 14"
+                                                            VerticalAlignment="Bottom"
+                                                            Style="{StaticResource TagStyle}" 
+                                                            Content="{DynamicResource Orders_PayOrder}" />
+                                            <Grid Margin="0 0 0 10">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0" Grid.Row="1"
+                                                           Text="Total:" VerticalAlignment="Bottom"
+                                                           Style="{DynamicResource DescriptionLabelStyle}" />
+                                                <TextBlock x:Name="TbOrderTotal" Grid.Row="1"
+                                                           Grid.Column="1" HorizontalAlignment="Right"
+                                                           Style="{DynamicResource SubtitleLabelStyle}"
+                                                           FontFamily="{StaticResource SFProSemiBold}"/>
+                                            </Grid>
+
+                                            <Grid Margin="0 10 0 0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+
+                                                <TextBox x:Name="TbPayment"
+                                                         Grid.Column="0" Grid.Row="1"
+                                                         Style="{DynamicResource TextBoxStyle}" 
+                                                         Tag="Efectivo:" Margin="0 0 5 0"/>
+                                                <TextBox x:Name="TbChange"
+                                                         Grid.Column="1" Grid.Row="1"
+                                                         Style="{DynamicResource TextBoxStyle}" 
+                                                         Tag="Cambio:" Margin="5 0 0 0"
+                                                         IsReadOnly="True" 
+                                                         IsEnabled="False"/>
+                                            </Grid>
+
+                                            <Grid Margin="0 28 0 0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button x:Name="BtnCancel" Grid.Column="0"
+                                                        Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                                                        Content="{DynamicResource Glb_Cancel}"
+                                                        Margin="0 0 5 0"
+                                                        Click="Click_BtnCancelPayment"/>
+                                                <Button x:Name="BtnConfirm" Grid.Column="1"
+                                                        Style="{DynamicResource PrimaryButtonStyle}"
+                                                        Content="{DynamicResource Glb_Confirm}"
+                                                        Margin="5 0 0 0" IsEnabled="False">
+                                                    <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                                </Button>
+
+                                            </Grid>
+                                        </StackPanel>
+
+                                        <StackPanel x:Name="PaymentCashier"
+                                                    Visibility="Collapsed">
+                                            <Button Style="{DynamicResource PrimaryButtonStyle}"
+                                                    Content="Pagar Orden"
+                                                    Click="Click_BtnPayOrder" >
+                                                <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
+                                            </Button>
+                                        </StackPanel>
+                                        
+                                        <StackPanel x:Name="CashierDeliveredButtons"
+                                                    Visibility="Collapsed">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button Grid.Column="0"
+                                                        Margin="0 0 5 0"
+                                                        Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                                                        Content="{DynamicResource Orders_BtnNotDelivered}"
+                                                        Click="Click_BtnMarkNotDelivered">
+                                                </Button>
+
+                                                <Button Margin="5 0 0 0"
+                                                        Style="{DynamicResource PrimaryButtonStyle}"
+                                                        Content="{DynamicResource Orders_BtnDelivered}"
+                                                        Grid.Column="1"
+                                                        Click="Click_BtnCashierMarkDelivered">
+                                                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                                                </Button>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
+                                    
+                                    
                                 </Grid>
                             </Border>
                         </Grid>

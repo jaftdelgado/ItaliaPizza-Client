@@ -2973,6 +2973,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/GetOrders", ReplyAction="http://tempuri.org/IOrderManager/GetOrdersResponse")]
         System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO[]> GetOrdersAsync(int[] statusList, bool includeLocal, bool includeDelivery);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/ChangeOrderStatus", ReplyAction="http://tempuri.org/IOrderManager/ChangeOrderStatusResponse")]
+        bool ChangeOrderStatus(int orderId, int newStatus, int roleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/ChangeOrderStatus", ReplyAction="http://tempuri.org/IOrderManager/ChangeOrderStatusResponse")]
+        System.Threading.Tasks.Task<bool> ChangeOrderStatusAsync(int orderId, int newStatus, int roleId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/AddLocalOrder", ReplyAction="http://tempuri.org/IOrderManager/AddLocalOrderResponse")]
         int AddLocalOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO);
         
@@ -3491,6 +3497,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO[]> GetOrdersAsync(int[] statusList, bool includeLocal, bool includeDelivery) {
             return base.Channel.GetOrdersAsync(statusList, includeLocal, includeDelivery);
+        }
+        
+        public bool ChangeOrderStatus(int orderId, int newStatus, int roleId) {
+            return base.Channel.ChangeOrderStatus(orderId, newStatus, roleId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ChangeOrderStatusAsync(int orderId, int newStatus, int roleId) {
+            return base.Channel.ChangeOrderStatusAsync(orderId, newStatus, roleId);
         }
         
         public int AddLocalOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO) {

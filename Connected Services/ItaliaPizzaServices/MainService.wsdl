@@ -326,6 +326,12 @@
   <wsdl:message name="IMainManager_GetOrders_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOrdersResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_ChangeOrderStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeOrderStatus" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ChangeOrderStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeOrderStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_AddLocalOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:AddLocalOrder" />
   </wsdl:message>
@@ -626,6 +632,10 @@
     <wsdl:operation name="GetOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetOrders" message="tns:IMainManager_GetOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetOrdersResponse" message="tns:IMainManager_GetOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/ChangeOrderStatus" message="tns:IMainManager_ChangeOrderStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/ChangeOrderStatusResponse" message="tns:IMainManager_ChangeOrderStatus_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddLocalOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/AddLocalOrder" message="tns:IMainManager_AddLocalOrder_InputMessage" />
@@ -1128,6 +1138,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetOrders">
       <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderStatus">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/ChangeOrderStatus" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

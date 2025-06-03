@@ -230,8 +230,18 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             TbQuantity.PreviewTextInput += QuantityTextBox_PreviewTextInput;
             DataObject.AddPastingHandler(TbQuantity, OnPaste);
 
-            Loaded += (s, e) => Application.Current.MainWindow.PreviewMouseDown += HandleGlobalClick;
-            Unloaded += (s, e) => Application.Current.MainWindow.PreviewMouseDown -= HandleGlobalClick;
+            Loaded += (s, e) => {
+                if (Application.Current?.MainWindow != null)
+                {
+                    Application.Current.MainWindow.PreviewMouseDown += HandleGlobalClick;
+                }
+            };
+            Unloaded += (s, e) => {
+                if (Application.Current?.MainWindow != null)
+                {
+                    Application.Current.MainWindow.PreviewMouseDown -= HandleGlobalClick;
+                }
+            };
         }
 
         private void HandleGlobalClick(object sender, MouseButtonEventArgs e)

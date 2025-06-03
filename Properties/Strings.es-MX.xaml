@@ -442,6 +442,10 @@
     <sys:String x:Key="Orders_StartPreparation">Iniciar Preparación</sys:String>
     <sys:String x:Key="Orders_BtnStart">Preparar</sys:String>
     <sys:String x:Key="Orders_BtnPrepared">Preparado</sys:String>
+    <sys:String x:Key="Orders_BtnMarkShipped">Marcar como Enviado</sys:String>
+    <sys:String x:Key="Orders_BtnMarkDelivered">Marcar como Entregado</sys:String>
+    <sys:String x:Key="Orders_BtnNotDelivered">No entregado</sys:String>
+    <sys:String x:Key="Orders_BtnDelivered">Entregado</sys:String>
     <sys:String x:Key="Orders_Order">Orden</sys:String>
     <sys:String x:Key="Orders_PayOrder">Pagar orden</sys:String>
     <sys:String x:Key="Orders_TitleTable">Lista de Órdenes</sys:String>
