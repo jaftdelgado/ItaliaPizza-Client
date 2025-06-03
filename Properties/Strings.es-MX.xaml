@@ -458,4 +458,29 @@
     <sys:String x:Key="Waste_DialogTNoQuantity">Ingrese una cantidad</sys:String>
     <sys:String x:Key="Waste_DialogDNoQuantity">Debe ingresar una cantidad mayor a 0 para registrar merma de un producto</sys:String>
     
+    <!-- Sales report -->
+    <sys:String x:Key="SalesReport_Header"> Generar reporte de ventas</sys:String>
+    <sys:String x:Key="SalesReport_Desc"> Genera un reporte de pruebas de un rango de fecha determinado</sys:String>
+    <sys:String x:Key="SalesReport_startDate">Fecha de inicio:</sys:String>
+    <sys:String x:Key="SalesReport_endDate">Fecha de fin:</sys:String>
+    <sys:String x:Key="SalesReport_tablePreview">Vista previa</sys:String>
+    <sys:String x:Key="SalesReport_btnGenerateReport">Generar reporte</sys:String>
+    <sys:String x:Key="SalesReport_DialogTNoDate">Seleccione una fecha</sys:String>
+    <sys:String x:Key="SalesReport_DialogDNoDate">Debe seleccionar por lo menos una fecha</sys:String>
+    <sys:String x:Key="SalesReport_DialogTNoRecords">Sin registros</sys:String>
+    <sys:String x:Key="SalesReport_DialogDNoRecords">Intente con otra(s) fecha(s)</sys:String>
+    <sys:String x:Key="SalesReport_DialogTConfirm">¿Esta seguro?</sys:String>
+    <sys:String x:Key="SalesReport_DialogDConfirm">Se generara un reporte de las fechas establecidas</sys:String>
+    <sys:String x:Key="SalesReport_DialogTSuccess">Se ha generado el reporte de ventas</sys:String>
+    <sys:String x:Key="SalesReport_DialogTFailure">No se ha podido generar el reporte</sys:String>
+    <sys:String x:Key="SalesReport_DialogTToday">La fecha de inicio no puede ser superior a hoy</sys:String>
+    <sys:String x:Key="SalesReport_DialogDToday">Selecciona una fecha valida</sys:String>
+    <sys:String x:Key="SalesReport_DialogTEndStart">Fecha invalida</sys:String>
+    <sys:String x:Key="SalesReport_DialogDEndStart">La fecha de inicio no puede ser posterior a la de fin</sys:String>
+    <sys:String x:Key="SalesReport_DialogTStartEnd">Fecha invalida</sys:String>
+    <sys:String x:Key="SalesReport_DialogDStartEnd">La fecha de fin no puede ser anterior a la de inicio</sys:String>
+    <sys:String x:Key="SalesReport_ClosingAmount">Saldo final:</sys:String>
+    <sys:String x:Key="SalesReport_InitialAmount">Saldo inicial:</sys:String>
+    <sys:String x:Key="SalesReport_CashRegisterID">Caja:</sys:String>
+    
 </ResourceDictionary>

@@ -106,6 +106,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CashRegisterDTO" nillable="true" type="tns:CashRegisterDTO" />
+  <xs:complexType name="ArrayOfCashRegisterDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CashRegisterDTO" nillable="true" type="tns:CashRegisterDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCashRegisterDTO" nillable="true" type="tns:ArrayOfCashRegisterDTO" />
   <xs:complexType name="ArrayOfSupplierOrderDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SupplierOrderDTO" nillable="true" type="tns:SupplierOrderDTO" />

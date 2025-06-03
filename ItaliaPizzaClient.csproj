@@ -106,6 +106,9 @@
     <Compile Include="Views\OrdersModule\RegisterOrderPage.xaml.cs">
       <DependentUpon>RegisterOrderPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SalesReportPage.xaml.cs">
+      <DependentUpon>SalesReportPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SignInWindow.xaml.cs">
       <DependentUpon>SignInWindow.xaml</DependentUpon>
     </Compile>
@@ -246,6 +249,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrdersModule\RegisterOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SalesReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

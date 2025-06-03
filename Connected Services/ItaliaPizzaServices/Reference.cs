@@ -2424,6 +2424,18 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/HasOpenCashRegister", ReplyAction="http://tempuri.org/IFinanceManager/HasOpenCashRegisterResponse")]
         System.Threading.Tasks.Task<bool> HasOpenCashRegisterAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/GetTransactionsByDate", ReplyAction="http://tempuri.org/IFinanceManager/GetTransactionsByDateResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO[] GetTransactionsByDate(System.DateTime startDate, System.DateTime endDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/GetTransactionsByDate", ReplyAction="http://tempuri.org/IFinanceManager/GetTransactionsByDateResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO[]> GetTransactionsByDateAsync(System.DateTime startDate, System.DateTime endDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/GetCashRegisterByDate", ReplyAction="http://tempuri.org/IFinanceManager/GetCashRegisterByDateResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.CashRegisterDTO[] GetCashRegisterByDate(System.DateTime startDate, System.DateTime endDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFinanceManager/GetCashRegisterByDate", ReplyAction="http://tempuri.org/IFinanceManager/GetCashRegisterByDateResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.CashRegisterDTO[]> GetCashRegisterByDateAsync(System.DateTime startDate, System.DateTime endDate);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders", ReplyAction="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrdersResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO[] GetAllSupplierOrders();
         
@@ -2862,6 +2874,22 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> HasOpenCashRegisterAsync() {
             return base.Channel.HasOpenCashRegisterAsync();
+        }
+        
+        public ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO[] GetTransactionsByDate(System.DateTime startDate, System.DateTime endDate) {
+            return base.Channel.GetTransactionsByDate(startDate, endDate);
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.TransactionDTO[]> GetTransactionsByDateAsync(System.DateTime startDate, System.DateTime endDate) {
+            return base.Channel.GetTransactionsByDateAsync(startDate, endDate);
+        }
+        
+        public ItaliaPizzaClient.ItaliaPizzaServices.CashRegisterDTO[] GetCashRegisterByDate(System.DateTime startDate, System.DateTime endDate) {
+            return base.Channel.GetCashRegisterByDate(startDate, endDate);
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.CashRegisterDTO[]> GetCashRegisterByDateAsync(System.DateTime startDate, System.DateTime endDate) {
+            return base.Channel.GetCashRegisterByDateAsync(startDate, endDate);
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.SupplierOrderDTO[] GetAllSupplierOrders() {

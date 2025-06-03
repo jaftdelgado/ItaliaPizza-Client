@@ -183,7 +183,8 @@ namespace ItaliaPizzaClient.Utilities
                     Order = 12,
                     AllowedRoles = new List<string> { "Admin", "Test" },
                     IconPath = "/Resources/Icons/reports-icon.png",
-                    HoverIconPath = "/Resources/Icons/reports-hover-icon.png"
+                    HoverIconPath = "/Resources/Icons/reports-hover-icon.png",
+                    PageInstance = new SalesReportPage()
                 }
             };
 

@@ -249,6 +249,18 @@
   <wsdl:message name="IMainManager_HasOpenCashRegister_OutputMessage">
     <wsdl:part name="parameters" element="tns:HasOpenCashRegisterResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetTransactionsByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionsByDate" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetTransactionsByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionsByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetCashRegisterByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashRegisterByDate" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetCashRegisterByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCashRegisterByDateResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetAllSupplierOrders_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSupplierOrders" />
   </wsdl:message>
@@ -521,6 +533,14 @@
     <wsdl:operation name="HasOpenCashRegister">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/HasOpenCashRegister" message="tns:IMainManager_HasOpenCashRegister_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/HasOpenCashRegisterResponse" message="tns:IMainManager_HasOpenCashRegister_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/GetTransactionsByDate" message="tns:IMainManager_GetTransactionsByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/GetTransactionsByDateResponse" message="tns:IMainManager_GetTransactionsByDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashRegisterByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/GetCashRegisterByDate" message="tns:IMainManager_GetCashRegisterByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/GetCashRegisterByDateResponse" message="tns:IMainManager_GetCashRegisterByDate_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllSupplierOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/GetAllSupplierOrders" message="tns:IMainManager_GetAllSupplierOrders_InputMessage" />
@@ -922,6 +942,24 @@
     </wsdl:operation>
     <wsdl:operation name="HasOpenCashRegister">
       <soap12:operation soapAction="http://tempuri.org/IFinanceManager/HasOpenCashRegister" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionsByDate">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/GetTransactionsByDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashRegisterByDate">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/GetCashRegisterByDate" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
