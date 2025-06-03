@@ -18,6 +18,12 @@ namespace ItaliaPizzaClient.Views.ProductsModule
         {
             InitializeComponent();
             BtnActive.Tag = "Selected";
+            if (CurrentSession.LoggedInUser.RoleID != 1)
+            {
+                ManagePanel.Visibility = Visibility.Collapsed;
+                BtnNewProduct.Visibility = Visibility.Collapsed;
+            }
+            
             Loaded += ProductsPage_Loaded;
         }
 

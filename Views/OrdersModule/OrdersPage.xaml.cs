@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using ItaliaPizzaClient.ItaliaPizzaServices;
 using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
@@ -25,7 +24,8 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             InputUtilities.ValidatePriceInput(TbPayment, @"^\d{0,5}(\.\d{0,2})?$", 99999.999m);
             Loaded += OrdersPage_Loaded;
 
-            if(CurrentUserRoleId == 5) BtnNewOrder.Visibility = Visibility.Collapsed; 
+            if(CurrentUserRoleId == 5)
+                BtnNewOrder.Visibility = Visibility.Collapsed; 
         }
 
         private async void OrdersPage_Loaded(object sender, RoutedEventArgs e)
@@ -328,12 +328,14 @@ namespace ItaliaPizzaClient.Views.OrdersModule
 
             CookTakenButtons.Visibility = Visibility.Collapsed;
             CookPreparingButtons.Visibility = Visibility.Collapsed;
+
             WaiterTakenButtons.Visibility = Visibility.Collapsed;
             WaiterPreparedButtons.Visibility = Visibility.Collapsed;
 
             CashierTakenButtons.Visibility = Visibility.Collapsed;
             CashierPreparedButtons.Visibility = Visibility.Collapsed;
             CashierDeliveredButtons.Visibility = Visibility.Collapsed;
+            PaymentCashier.Visibility = Visibility.Collapsed;
             PaymentPanel.Visibility = Visibility.Collapsed;
 
             //ROL: Cook
@@ -502,7 +504,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             else UpdateOrderPanelVisibility(null);
         }
 
-        private async void Click_BtnPayOrder(object sender, RoutedEventArgs e)
+        private void Click_BtnPayOrder(object sender, RoutedEventArgs e)
         {
             if (OrdersDataGrid.SelectedItem is Order selected)
             {

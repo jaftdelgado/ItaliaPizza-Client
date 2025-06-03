@@ -128,15 +128,42 @@ namespace ItaliaPizzaClient.Views.RecepiesModule
         {
             if (sender is Button button && button.Tag is Product product)
             {
-                MessageBox.Show(
-                    $"Producto: {product.Name}\nPasos: {product.Recipe.Steps.Count}\nTiempo: {product.Recipe.PreparationTime} min",
-                    "Receta seleccionada",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information
-                );
+                // Mostrar información del producto
+                ProductName.Text = product.Name;
+                ProductCategory.Text = product.CategoryName;
+                ProductCode.Text = $" | {product.ProductCode}";
+                ProductDescription.Text = product.Description;
 
-                // Aquí puedes abrir RegisterRecipePage en modo edición con los datos cargados
+                // Imagen del producto
+                ProductPic.Source = ImageUtilities.ConvertToImageSource(product.ProductPic);
+
+                // Cargar ingredientes
+                IngredientsContainer.Items.Clear();
+                foreach (var ingredient in product.Recipe.Supplies)
+                {
+                    var item = new TextBlock
+                    {
+                        Style = (Style)FindResource("RegularLabelStyle"),
+                        Margin = new Thickness(0, 4, 0, 4)
+                    };
+                    IngredientsContainer.Items.Add(item);
+                }
+
+                // Cargar pasos
+                StepsContainer.Children.Clear();
+                foreach (var step in product.Recipe.Steps)
+                {
+                    var stepText = new TextBlock
+                    {
+                        Text = $"{step.StepNumber}. {step.Instruction}",
+                        TextWrapping = TextWrapping.Wrap,
+                        Style = (Style)FindResource("DescriptionLabelStyle"),
+                        Margin = new Thickness(0, 4, 0, 4)
+                    };
+                    StepsContainer.Children.Add(stepText);
+                }
             }
         }
+
     }
 }
