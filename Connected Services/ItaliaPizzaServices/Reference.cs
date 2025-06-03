@@ -2055,160 +2055,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderSummaryDTO", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrderSummaryDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime OrderDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int OrderIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO[] ProductsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal TotalField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime OrderDate {
-            get {
-                return this.OrderDateField;
-            }
-            set {
-                if ((this.OrderDateField.Equals(value) != true)) {
-                    this.OrderDateField = value;
-                    this.RaisePropertyChanged("OrderDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int OrderID {
-            get {
-                return this.OrderIDField;
-            }
-            set {
-                if ((this.OrderIDField.Equals(value) != true)) {
-                    this.OrderIDField = value;
-                    this.RaisePropertyChanged("OrderID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO[] Products {
-            get {
-                return this.ProductsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProductsField, value) != true)) {
-                    this.ProductsField = value;
-                    this.RaisePropertyChanged("Products");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Total {
-            get {
-                return this.TotalField;
-            }
-            set {
-                if ((this.TotalField.Equals(value) != true)) {
-                    this.TotalField = value;
-                    this.RaisePropertyChanged("Total");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderItemSummaryDTO", Namespace="http://schemas.datacontract.org/2004/07/")]
-    [System.SerializableAttribute()]
-    public partial class OrderItemSummaryDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ProductField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int QuantityField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Product {
-            get {
-                return this.ProductField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProductField, value) != true)) {
-                    this.ProductField = value;
-                    this.RaisePropertyChanged("Product");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Quantity {
-            get {
-                return this.QuantityField;
-            }
-            set {
-                if ((this.QuantityField.Equals(value) != true)) {
-                    this.QuantityField = value;
-                    this.RaisePropertyChanged("Quantity");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OrderDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
     [System.SerializableAttribute()]
     public partial class OrderDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2217,10 +2063,16 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AttendedByNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> CustomerIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> DeliveryIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO DeliveryInfoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<bool> IsDeliveryField;
@@ -2257,6 +2109,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AttendedByName {
+            get {
+                return this.AttendedByNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AttendedByNameField, value) != true)) {
+                    this.AttendedByNameField = value;
+                    this.RaisePropertyChanged("AttendedByName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<int> CustomerID {
             get {
                 return this.CustomerIDField;
@@ -2278,6 +2143,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.DeliveryIDField.Equals(value) != true)) {
                     this.DeliveryIDField = value;
                     this.RaisePropertyChanged("DeliveryID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO DeliveryInfo {
+            get {
+                return this.DeliveryInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeliveryInfoField, value) != true)) {
+                    this.DeliveryInfoField = value;
+                    this.RaisePropertyChanged("DeliveryInfo");
                 }
             }
         }
@@ -2398,67 +2276,6 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ProductOrderDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
-    [System.SerializableAttribute()]
-    public partial class ProductOrderDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ProductIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int QuantityField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProductID {
-            get {
-                return this.ProductIDField;
-            }
-            set {
-                if ((this.ProductIDField.Equals(value) != true)) {
-                    this.ProductIDField = value;
-                    this.RaisePropertyChanged("ProductID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Quantity {
-            get {
-                return this.QuantityField;
-            }
-            set {
-                if ((this.QuantityField.Equals(value) != true)) {
-                    this.QuantityField = value;
-                    this.RaisePropertyChanged("Quantity");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DeliveryDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
     [System.SerializableAttribute()]
     public partial class DeliveryDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2470,7 +2287,16 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         private int AddressIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CustomerAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CustomerFullNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int DeliveryDriverIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeliveryDriverNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int DeliveryIDField;
@@ -2499,6 +2325,32 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustomerAddress {
+            get {
+                return this.CustomerAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CustomerAddressField, value) != true)) {
+                    this.CustomerAddressField = value;
+                    this.RaisePropertyChanged("CustomerAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CustomerFullName {
+            get {
+                return this.CustomerFullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CustomerFullNameField, value) != true)) {
+                    this.CustomerFullNameField = value;
+                    this.RaisePropertyChanged("CustomerFullName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int DeliveryDriverID {
             get {
                 return this.DeliveryDriverIDField;
@@ -2512,6 +2364,19 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeliveryDriverName {
+            get {
+                return this.DeliveryDriverNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeliveryDriverNameField, value) != true)) {
+                    this.DeliveryDriverNameField = value;
+                    this.RaisePropertyChanged("DeliveryDriverName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int DeliveryID {
             get {
                 return this.DeliveryIDField;
@@ -2520,6 +2385,115 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
                 if ((this.DeliveryIDField.Equals(value) != true)) {
                     this.DeliveryIDField = value;
                     this.RaisePropertyChanged("DeliveryID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProductOrderDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
+    [System.SerializableAttribute()]
+    public partial class ProductOrderDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProductIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ProductPicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> QuantityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProductID {
+            get {
+                return this.ProductIDField;
+            }
+            set {
+                if ((this.ProductIDField.Equals(value) != true)) {
+                    this.ProductIDField = value;
+                    this.RaisePropertyChanged("ProductID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ProductPic {
+            get {
+                return this.ProductPicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProductPicField, value) != true)) {
+                    this.ProductPicField = value;
+                    this.RaisePropertyChanged("ProductPic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
                 }
             }
         }
@@ -2993,17 +2967,11 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder", ReplyAction="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrderResponse")]
         System.Threading.Tasks.Task<bool> CancelSupplierOrderAsync(int supplierOrderID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/GetDeliveredOrders", ReplyAction="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO[] GetDeliveredOrders();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/GetOrders", ReplyAction="http://tempuri.org/IOrderManager/GetOrdersResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO[] GetOrders(int[] statusList, bool includeLocal, bool includeDelivery);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/GetDeliveredOrders", ReplyAction="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO[]> GetDeliveredOrdersAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID", ReplyAction="http://tempuri.org/IOrderManager/GetOrderItemsByOrderIDResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO[] GetOrderItemsByOrderID(int orderID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID", ReplyAction="http://tempuri.org/IOrderManager/GetOrderItemsByOrderIDResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO[]> GetOrderItemsByOrderIDAsync(int orderID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/GetOrders", ReplyAction="http://tempuri.org/IOrderManager/GetOrdersResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO[]> GetOrdersAsync(int[] statusList, bool includeLocal, bool includeDelivery);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/AddLocalOrder", ReplyAction="http://tempuri.org/IOrderManager/AddLocalOrderResponse")]
         int AddLocalOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO);
@@ -3517,20 +3485,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.CancelSupplierOrderAsync(supplierOrderID);
         }
         
-        public ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO[] GetDeliveredOrders() {
-            return base.Channel.GetDeliveredOrders();
+        public ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO[] GetOrders(int[] statusList, bool includeLocal, bool includeDelivery) {
+            return base.Channel.GetOrders(statusList, includeLocal, includeDelivery);
         }
         
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO[]> GetDeliveredOrdersAsync() {
-            return base.Channel.GetDeliveredOrdersAsync();
-        }
-        
-        public ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO[] GetOrderItemsByOrderID(int orderID) {
-            return base.Channel.GetOrderItemsByOrderID(orderID);
-        }
-        
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO[]> GetOrderItemsByOrderIDAsync(int orderID) {
-            return base.Channel.GetOrderItemsByOrderIDAsync(orderID);
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO[]> GetOrdersAsync(int[] statusList, bool includeLocal, bool includeDelivery) {
+            return base.Channel.GetOrdersAsync(statusList, includeLocal, includeDelivery);
         }
         
         public int AddLocalOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO) {

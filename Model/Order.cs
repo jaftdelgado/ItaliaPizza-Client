@@ -18,56 +18,63 @@ namespace ItaliaPizzaClient.Model
 
         public string FormattedTotal => $"{Total:C}";
 
-        public string Status { get; set; }
-
         public bool? IsDelivery { get; set; }
 
         public int? PersonalID { get; set; }
 
-        public int? IDDelivery { get; set; }
+        public string AttendedByName { get; set; }
 
-        public int? IDState { get; set; }
+        public int? DeliveryID { get; set; }
+
+        public int Status { get; set; }
+
+        public string TableNumber { get; set; }
 
         public List<OrderedProduct> Items { get; set; }
 
-        public string StatusDescription
+        public Delivery DeliveryInfo { get; set; }
+
+        public string StatusName
         {
             get
             {
-                var resources = Application.Current.Resources;
-
-                if (Status == null) return "Desconocido";
-
-                switch (Status.ToLower())
-                {
-                    case "pending":
-                        return resources["Order_StatusPending"] as string;
-                    case "completed":
-                        return resources["Order_StatusCompleted"] as string;
-                    case "cancelled":
-                        return resources["Order_StatusCancelled"] as string;
-                    default:
-                        return "Desconocido";
-                }
+                var status = OrderStatus.GetDefaultOrderStatuses().Find(s => s.Id == Status);
+                return status?.Name ?? "Desconocido";
             }
         }
     }
 
     public class OrderedProduct
     {
-        public Product Product { get; set; }
+        public int ProductID { get; set; }
 
         public int Quantity { get; set; }
 
-        public decimal? TotalPrice => (Product?.Price ?? 0) * Quantity;
+        public string Name { get; set; }
+
+        public decimal? Price { get; set; }
+
+        public byte[] ProductPic { get; set; }
+
+        public decimal TotalPrice => (Price ?? 0) * Quantity;
 
         public string FormattedTotal => $"{TotalPrice:C}";
 
-        public string ProductName => Product?.Name;
+        public Product Product { get; set; }
+    }
 
-        public byte[] ProductPic => Product?.ProductPic;
+    public class Delivery
+    {
+        public int DeliveryID { get; set; }
 
-        public decimal UnitPrice => Product?.Price ?? 0;
+        public int AddressID { get; set; }
 
+        public int DeliveryDriverID { get; set; }
+
+        public string CustomerFullName { get; set; }
+
+        public string CustomerAddress { get; set; }
+
+        public string DeliveryDriverName { get; set; }
     }
 }

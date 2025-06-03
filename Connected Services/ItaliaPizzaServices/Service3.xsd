@@ -20,32 +20,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SupplierDTO" nillable="true" type="tns:SupplierDTO" />
-  <xs:complexType name="ArrayOfOrderSummaryDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderSummaryDTO" nillable="true" type="tns:OrderSummaryDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOrderSummaryDTO" nillable="true" type="tns:ArrayOfOrderSummaryDTO" />
-  <xs:complexType name="OrderSummaryDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
-      <xs:element minOccurs="0" name="Products" nillable="true" type="tns:ArrayOfOrderItemSummaryDTO" />
-      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OrderSummaryDTO" nillable="true" type="tns:OrderSummaryDTO" />
-  <xs:complexType name="ArrayOfOrderItemSummaryDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItemSummaryDTO" nillable="true" type="tns:OrderItemSummaryDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOrderItemSummaryDTO" nillable="true" type="tns:ArrayOfOrderItemSummaryDTO" />
-  <xs:complexType name="OrderItemSummaryDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Product" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OrderItemSummaryDTO" nillable="true" type="tns:OrderItemSummaryDTO" />
 </xs:schema>

@@ -320,17 +320,11 @@
   <wsdl:message name="IMainManager_CancelSupplierOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:CancelSupplierOrderResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetDeliveredOrders_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDeliveredOrders" />
+  <wsdl:message name="IMainManager_GetOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrders" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetDeliveredOrders_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDeliveredOrdersResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetOrderItemsByOrderID_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrderItemsByOrderID" />
-  </wsdl:message>
-  <wsdl:message name="IMainManager_GetOrderItemsByOrderID_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrderItemsByOrderIDResponse" />
+  <wsdl:message name="IMainManager_GetOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_AddLocalOrder_InputMessage">
     <wsdl:part name="parameters" element="tns:AddLocalOrder" />
@@ -629,13 +623,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder" message="tns:IMainManager_CancelSupplierOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrderResponse" message="tns:IMainManager_CancelSupplierOrder_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetDeliveredOrders">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse" message="tns:IMainManager_GetDeliveredOrders_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetOrderItemsByOrderID">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" message="tns:IMainManager_GetOrderItemsByOrderID_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderIDResponse" message="tns:IMainManager_GetOrderItemsByOrderID_OutputMessage" />
+    <wsdl:operation name="GetOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetOrders" message="tns:IMainManager_GetOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetOrdersResponse" message="tns:IMainManager_GetOrders_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddLocalOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/AddLocalOrder" message="tns:IMainManager_AddLocalOrder_InputMessage" />
@@ -1136,17 +1126,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDeliveredOrders">
-      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetOrderItemsByOrderID">
-      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" style="document" />
+    <wsdl:operation name="GetOrders">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetOrders" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

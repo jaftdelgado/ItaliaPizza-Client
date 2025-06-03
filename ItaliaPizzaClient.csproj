@@ -125,6 +125,7 @@
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderStatus.cs" />
     <Compile Include="Model\Personal.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductCategory.cs" />
@@ -140,6 +141,9 @@
     <Compile Include="Utilities\ReportUtils.cs" />
     <Compile Include="Views\CashRegisterModule\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersModule\OrdersPage.xaml.cs">
+      <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrdersModule\ProductCard.xaml.cs">
       <DependentUpon>ProductCard.xaml</DependentUpon>
@@ -295,6 +299,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CashRegisterModule\CashRegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrdersModule\OrdersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -490,10 +498,7 @@
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDriverDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO.datasource">

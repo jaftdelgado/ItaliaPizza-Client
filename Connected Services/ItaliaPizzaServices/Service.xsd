@@ -209,10 +209,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SupplierOrderDTO.OrderItemDTO" nillable="true" type="tns:SupplierOrderDTO.OrderItemDTO" />
+  <xs:complexType name="ArrayOfOrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderDTO" nillable="true" type="tns:OrderDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderDTO" nillable="true" type="tns:ArrayOfOrderDTO" />
   <xs:complexType name="OrderDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AttendedByName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="DeliveryID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryInfo" nillable="true" type="tns:DeliveryDTO" />
       <xs:element minOccurs="0" name="IsDelivery" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfProductOrderDTO" />
       <xs:element minOccurs="0" name="OrderDate" nillable="true" type="xs:dateTime" />
@@ -224,6 +232,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderDTO" nillable="true" type="tns:OrderDTO" />
+  <xs:complexType name="DeliveryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressID" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerFullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeliveryDriverID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryDriverName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeliveryID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeliveryDTO" nillable="true" type="tns:DeliveryDTO" />
   <xs:complexType name="ArrayOfProductOrderDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductOrderDTO" nillable="true" type="tns:ProductOrderDTO" />
@@ -232,19 +251,14 @@
   <xs:element name="ArrayOfProductOrderDTO" nillable="true" type="tns:ArrayOfProductOrderDTO" />
   <xs:complexType name="ProductOrderDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="ProductID" type="xs:int" />
-      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductPic" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Quantity" nillable="true" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductOrderDTO" nillable="true" type="tns:ProductOrderDTO" />
-  <xs:complexType name="DeliveryDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AddressID" type="xs:int" />
-      <xs:element minOccurs="0" name="DeliveryDriverID" type="xs:int" />
-      <xs:element minOccurs="0" name="DeliveryID" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DeliveryDTO" nillable="true" type="tns:DeliveryDTO" />
   <xs:complexType name="ArrayOfCustomerDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerDTO" nillable="true" type="tns:CustomerDTO" />

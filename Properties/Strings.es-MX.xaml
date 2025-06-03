@@ -17,7 +17,7 @@
     <sys:String x:Key="Glb_Change">Cambiar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
-    <sys:String x:Key="Glb_Orders">Comandas</sys:String>
+    <sys:String x:Key="Glb_Orders">Órdenes</sys:String>
     <sys:String x:Key="Glb_Supplies">Insumos</sys:String>
     <sys:String x:Key="Glb_Products">Productos</sys:String>
     <sys:String x:Key="Glb_Recipes">Recetas</sys:String>
@@ -94,7 +94,17 @@
     <sys:String x:Key="MeasureUA_Kilograms">kg</sys:String>
     <sys:String x:Key="MeasureUA_Liters">L</sys:String>
     <sys:String x:Key="MeasureUA_Pieces">pza</sys:String>
-
+    
+    <!-- Order Statuses -->
+    <sys:String x:Key="OrdStatus_Canceled">Cancelada</sys:String>
+    <sys:String x:Key="OrdStatus_Taken">Tomada</sys:String>
+    <sys:String x:Key="OrdStatus_Preparing">En preparación</sys:String>
+    <sys:String x:Key="OrdStatus_Prepared">Preparado</sys:String>
+    <sys:String x:Key="OrdStatus_Sent">Enviada</sys:String>
+    <sys:String x:Key="OrdStatus_Delivered">Entregada</sys:String>
+    <sys:String x:Key="OrdStatus_Paid">Pagada</sys:String>
+    <sys:String x:Key="OrdStatus_NotDelivered">No entregada</sys:String>
+    
     <!--EmployeeRoles-->
     <sys:String x:Key="EmployeeRole_Admin">Administrador</sys:String>
     <sys:String x:Key="EmployeeRole_Manager">Gerente</sys:String>
@@ -425,12 +435,20 @@
     <sys:String x:Key="CashRegister_DialogDAlreadyOpen">Ya existe una caja abierta. No se puede abrir otra hasta realizar el corte.</sys:String>
 
     <!--Order-->
-    <sys:String x:Key="OrderPage_BtnAddOrder">Añadir Orden</sys:String>
-    <sys:String x:Key="OrderPage_BtnPayOrder">Pagar Orden</sys:String>
-    <sys:String x:Key="OrderPage_BtnCancelOrder">Cancelar Orden</sys:String>
-    <sys:String x:Key="Order_TitleTable">Lista de Ordenes</sys:String>
-    <sys:String x:Key="Orders_Header">Ordenes de Comensales</sys:String>
-    <sys:String x:Key="Orders_Desc">Visualiza, paga y cancela Ordenes de Comensales de Italia Pizza.</sys:String>
+    <sys:String x:Key="Orders_Header">Órdenes</sys:String>
+    <sys:String x:Key="Orders_Desc">Visualiza, paga y modifica las órdenes de los clientes de Italia Pizza.</sys:String>
+    <sys:String x:Key="Orders_BtnNewOrder">Nueva Orden</sys:String>
+    <sys:String x:Key="Orders_BtnPayOrder">Pagar Orden</sys:String>
+    <sys:String x:Key="Orders_StartPreparation">Iniciar Preparación</sys:String>
+    <sys:String x:Key="Orders_BtnStart">Preparar</sys:String>
+    <sys:String x:Key="Orders_BtnPrepared">Preparado</sys:String>
+    <sys:String x:Key="Orders_Order">Orden</sys:String>
+    <sys:String x:Key="Orders_PayOrder">Pagar orden</sys:String>
+    <sys:String x:Key="Orders_TitleTable">Lista de Órdenes</sys:String>
+    <sys:String x:Key="Orders_TableHOrderNum">Núm. de Orden</sys:String>
+    <sys:String x:Key="Orders_TableHCustomer">Cliente/Mesa</sys:String>
+    <sys:String x:Key="Orders_TableHStatus">Estado</sys:String>
+    <sys:String x:Key="Orders_TableHDateTime">Fecha/Hora</sys:String>
 
     <!--RegisterOrder-->
     <sys:String x:Key="RegOrder_Header">Registrar Comanda</sys:String>

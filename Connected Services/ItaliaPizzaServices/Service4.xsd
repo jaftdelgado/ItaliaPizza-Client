@@ -652,29 +652,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDeliveredOrders">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetDeliveredOrdersResponse">
+  <xs:element name="GetOrders">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetDeliveredOrdersResult" nillable="true" type="q26:ArrayOfOrderSummaryDTO" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="statusList" nillable="true" type="q26:ArrayOfint" />
+        <xs:element minOccurs="0" name="includeLocal" type="xs:boolean" />
+        <xs:element minOccurs="0" name="includeDelivery" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrderItemsByOrderID">
+  <xs:element name="GetOrdersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="orderID" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrderItemsByOrderIDResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetOrderItemsByOrderIDResult" nillable="true" type="q27:ArrayOfOrderItemSummaryDTO" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetOrdersResult" nillable="true" type="q27:ArrayOfOrderDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

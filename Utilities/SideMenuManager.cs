@@ -105,7 +105,7 @@ namespace ItaliaPizzaClient.Utilities
                     AllowedRoles = new List<int> { 3, 4, 5 },
                     IconPath = "/Resources/Icons/orders-icon.png",
                     HoverIconPath = "/Resources/Icons/orders-hover-icon.png",
-                    PageInstance = new OrderPage()
+                    PageInstance = new OrdersPage()
                 },
                 new MenuButton
                 {
@@ -165,7 +165,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Clients",
                     Order = 10,
-                    AllowedRoles = new List<int> { 2 },
+                    AllowedRoles = new List<int> { 3 },
                     IconPath = "/Resources/Icons/clients-icon.png",
                     HoverIconPath = "/Resources/Icons/clients-hover-icon.png",
                     PageInstance = new CustomersPage()

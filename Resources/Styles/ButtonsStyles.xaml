@@ -100,7 +100,7 @@
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
                         Width="20" Height="20" Margin="0 0 6 0"/>
                             <TextBlock Text="{TemplateBinding Content}" 
-                                   Foreground="{StaticResource SecondaryBrush}" 
+                                   Foreground="{StaticResource PrimaryBrush}" 
                                    VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
