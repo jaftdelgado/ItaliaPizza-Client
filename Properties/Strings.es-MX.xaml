@@ -269,6 +269,18 @@
     <sys:String x:Key="Products_TableHUnitPrice">Precio Unitario</sys:String>
     <sys:String x:Key="Products_BtnDeleteProduct">Eliminar producto</sys:String>
     <sys:String x:Key="Products_BtnEditProduct">Editar producto</sys:String>
+    <sys:String x:Key="Products_BtnReactivateProduct">Reactivar producto</sys:String>
+    <sys:String x:Key="Products_DialogTDeleteProduct">¿Eliminar producto?</sys:String>
+    <sys:String x:Key="Products_DialogDDeleteProduct">¿Estás seguro de que deseas eliminar el producto seleccionado? La eliminación es reversible y podrás restaurarlo más tarde si lo necesitas.</sys:String>
+    <sys:String x:Key="Products_DialogTDeletedProduct">Producto eliminado</sys:String>
+    <sys:String x:Key="Products_DialogDDeletedProduct">El producto fue marcado como eliminado correctamente. Puedes restaurarlo desde la vista de productos eliminados.</sys:String>
+    <sys:String x:Key="Products_DialogTReactivateProduct">¿Reactivar producto?</sys:String>
+    <sys:String x:Key="Products_DialogDReactivateProduct">¿Estás seguro de que deseas reactivar el producto seleccionado? Podrá ser asociado a insumos y pedidos de reabastecimiento nuevamente.</sys:String>
+    <sys:String x:Key="Products_DialogTReactivatedProduct">Producto reactivado</sys:String>
+    <sys:String x:Key="Products_DialogDReactivatedProduct">El producto fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de productos y órdenes.</sys:String>
+    <sys:String x:Key="Products_DialogTUnableToDelete">Producto no eliminable</sys:String>
+    <sys:String x:Key="Products_DialogDHasPendingOrders">Este producto tiene pedidos pendientes. Cancélalos antes de eliminarlo.</sys:String>
+    
 
     <!--Register Product-->
     <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>
