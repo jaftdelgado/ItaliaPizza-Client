@@ -124,7 +124,7 @@
                                         </DataGridTextColumn.HeaderStyle>
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHCustomer}" 
-                                                        Binding="{Binding SupplierName}" Width="3.5*"/>
+                                                        Binding="{Binding OrderClientInfo}" Width="3.5*"/>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHStatus}" 
                                                         Binding="{Binding StatusName}" Width="2*"/>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHDateTime}" 

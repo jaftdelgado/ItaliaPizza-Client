@@ -42,6 +42,17 @@ namespace ItaliaPizzaClient.Model
                 return status?.Name ?? "Desconocido";
             }
         }
+
+        public string OrderClientInfo
+        {
+            get
+            {
+                if (IsDelivery == true)
+                    return DeliveryInfo?.CustomerFullName ?? "Cliente no especificado";
+                else
+                    return $"Mesa: {TableNumber ?? "N/A"}";
+            }
+        }
     }
 
     public class OrderedProduct
