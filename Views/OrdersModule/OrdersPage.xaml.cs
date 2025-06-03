@@ -79,6 +79,44 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             });
         }
 
+        private void DisplayOrderDetails(Order selected)
+        {
+            if (selected == null) return;
+
+            UpdateOrderPanelVisibility(selected);
+
+        }
+
+        private void ShowOrderDetails(List<OrderedProduct> orderedProducts)
+        {
+            OrderedProductsDetailsPanel.Children.Clear();
+
+            foreach (var item in orderedProducts)
+            {
+                var detail = new ProductOrderDetail
+                {
+                    ProductName = item.Name,
+                    Price = item.Price ?? 0,
+                    Quantity = item.Quantity,
+                    Margin = new Thickness(0, 0, 0, 6),
+                    IsReadOnly = true
+                };
+
+                detail.Subtotal = item.TotalPrice;
+
+                ImageUtilities.SetImageSource(detail.ProductPic, item.ProductPic, Constants.DEFAULT_SUPPLY_PIC_PATH);
+
+                OrderedProductsDetailsPanel.Children.Add(detail);
+            }
+        }
+
+        private void UpdateOrderPanelVisibility(Order selected)
+        {
+            bool hasSelection = selected != null;
+
+            OrderDetailsPanel.Visibility = hasSelection ? Visibility.Visible : Visibility.Collapsed;
+        }
+
         private void Click_BtnNewOrder(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow is MainWindow mainWindow)
@@ -104,5 +142,17 @@ namespace ItaliaPizzaClient.Views.OrdersModule
         {
 
         }
+
+        private void SupplierOrdersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (OrdersDataGrid.SelectedItem is Order selected)
+            {
+                DisplayOrderDetails(selected);
+                ShowOrderDetails(selected.Items);
+            }
+            else
+                UpdateOrderPanelVisibility(null);
+        }
+
     }
 }

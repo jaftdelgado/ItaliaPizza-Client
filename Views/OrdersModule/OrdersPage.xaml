@@ -114,10 +114,12 @@
                                       RowStyle="{DynamicResource DataGridRowStyle1}"
                                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
                                       CellStyle="{DynamicResource DataGridCellStyle1}"
-                                      Style="{DynamicResource DataGridStyle1}" >
+                                      Style="{DynamicResource DataGridStyle1}"
+                                      SelectionChanged="SupplierOrdersDataGrid_SelectionChanged">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHOrderNum}"
-                                                        Binding="{Binding OrderFolio}" Width="2.4*" 
+                                                        Binding="{Binding FormattedOrderID}" Width="2.4*"
+                                                        FontFamily="{StaticResource SFMonoRegular}"
                                                         CellStyle="{StaticResource DataGridCellStyle0}">
                                         <DataGridTextColumn.HeaderStyle>
                                             <StaticResource ResourceKey="DataGridColumnHeaderStyle0"/>
@@ -128,7 +130,7 @@
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHStatus}" 
                                                         Binding="{Binding StatusName}" Width="2*"/>
                                     <DataGridTextColumn Header="{DynamicResource Orders_TableHDateTime}" 
-                                                        Binding="{Binding OrderedDateFormatted}" Width="2.3*"/>
+                                                        Binding="{Binding OrderDateFormatted}" Width="2.3*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
@@ -151,8 +153,8 @@
                     <Border Grid.Column="1" 
                             BorderBrush="{StaticResource BorderBrush}" 
                             BorderThickness="1 0 0 0">
-                        <Grid x:Name="SupplierOrderDetailsPanel"
-                              Visibility="Visible" >
+                        <Grid x:Name="OrderDetailsPanel"
+                              Visibility="Collapsed" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="*"/>
@@ -208,7 +210,7 @@
                                 <ScrollViewer Grid.Row="1"
                                               VerticalScrollBarVisibility="Auto"
                                               Style="{StaticResource ScrollViewerStyle}" >
-                                    <StackPanel x:Name="OrderDetailsPanel" Margin="20 0"/>
+                                    <StackPanel x:Name="OrderedProductsDetailsPanel" Margin="20 0"/>
                                 </ScrollViewer>
 
                             </Grid>

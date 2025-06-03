@@ -50,9 +50,12 @@ namespace ItaliaPizzaClient.Model
                 if (IsDelivery == true)
                     return DeliveryInfo?.CustomerFullName ?? "Cliente no especificado";
                 else
-                    return $"Mesa: {TableNumber ?? "N/A"}";
+                    return $"Mesa {TableNumber ?? "N/A"}";
             }
         }
+
+        public string FormattedOrderID => $"#{OrderID:000}";
+
     }
 
     public class OrderedProduct
