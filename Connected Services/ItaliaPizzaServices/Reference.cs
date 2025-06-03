@@ -2459,6 +2459,83 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeliveryDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
+    [System.SerializableAttribute()]
+    public partial class DeliveryDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AddressIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DeliveryDriverIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DeliveryIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AddressID {
+            get {
+                return this.AddressIDField;
+            }
+            set {
+                if ((this.AddressIDField.Equals(value) != true)) {
+                    this.AddressIDField = value;
+                    this.RaisePropertyChanged("AddressID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeliveryDriverID {
+            get {
+                return this.DeliveryDriverIDField;
+            }
+            set {
+                if ((this.DeliveryDriverIDField.Equals(value) != true)) {
+                    this.DeliveryDriverIDField = value;
+                    this.RaisePropertyChanged("DeliveryDriverID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeliveryID {
+            get {
+                return this.DeliveryIDField;
+            }
+            set {
+                if ((this.DeliveryIDField.Equals(value) != true)) {
+                    this.DeliveryIDField = value;
+                    this.RaisePropertyChanged("DeliveryID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CustomerDTO", Namespace="http://schemas.datacontract.org/2004/07/Services.Dtos")]
     [System.SerializableAttribute()]
     public partial class CustomerDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2934,11 +3011,17 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/AddLocalOrder", ReplyAction="http://tempuri.org/IOrderManager/AddLocalOrderResponse")]
         System.Threading.Tasks.Task<int> AddLocalOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipe", ReplyAction="http://tempuri.org/IRecipeManager/GetProductsWithRecipeResponse")]
-        ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetProductsWithRecipe();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/AddDeliveryOrder", ReplyAction="http://tempuri.org/IOrderManager/AddDeliveryOrderResponse")]
+        int AddDeliveryOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO, ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO deliveryDTO);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderManager/AddDeliveryOrder", ReplyAction="http://tempuri.org/IOrderManager/AddDeliveryOrderResponse")]
+        System.Threading.Tasks.Task<int> AddDeliveryOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO, ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO deliveryDTO);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipe", ReplyAction="http://tempuri.org/IRecipeManager/GetProductsWithRecipeResponse")]
-        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[]> GetProductsWithRecipeAsync();
+        ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetProductsWithRecipe(bool includeSteps);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipe", ReplyAction="http://tempuri.org/IRecipeManager/GetProductsWithRecipeResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[]> GetProductsWithRecipeAsync(bool includeSteps);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRecipeManager/AddRecipe", ReplyAction="http://tempuri.org/IRecipeManager/AddRecipeResponse")]
         int AddRecipe(ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO recipeDTO);
@@ -2993,6 +3076,12 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/ReactivateCustomer", ReplyAction="http://tempuri.org/ICustomerManager/ReactivateCustomerResponse")]
         System.Threading.Tasks.Task<bool> ReactivateCustomerAsync(int customerID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/GetActiveCustomers", ReplyAction="http://tempuri.org/ICustomerManager/GetActiveCustomersResponse")]
+        ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[] GetActiveCustomers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerManager/GetActiveCustomers", ReplyAction="http://tempuri.org/ICustomerManager/GetActiveCustomersResponse")]
+        System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[]> GetActiveCustomersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISessionManager/SignIn", ReplyAction="http://tempuri.org/ISessionManager/SignInResponse")]
         ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO SignIn(string username, string password);
@@ -3452,12 +3541,20 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
             return base.Channel.AddLocalOrderAsync(orderDTO);
         }
         
-        public ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetProductsWithRecipe() {
-            return base.Channel.GetProductsWithRecipe();
+        public int AddDeliveryOrder(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO, ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO deliveryDTO) {
+            return base.Channel.AddDeliveryOrder(orderDTO, deliveryDTO);
         }
         
-        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[]> GetProductsWithRecipeAsync() {
-            return base.Channel.GetProductsWithRecipeAsync();
+        public System.Threading.Tasks.Task<int> AddDeliveryOrderAsync(ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO orderDTO, ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDTO deliveryDTO) {
+            return base.Channel.AddDeliveryOrderAsync(orderDTO, deliveryDTO);
+        }
+        
+        public ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[] GetProductsWithRecipe(bool includeSteps) {
+            return base.Channel.GetProductsWithRecipe(includeSteps);
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO[]> GetProductsWithRecipeAsync(bool includeSteps) {
+            return base.Channel.GetProductsWithRecipeAsync(includeSteps);
         }
         
         public int AddRecipe(ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO recipeDTO) {
@@ -3530,6 +3627,14 @@ namespace ItaliaPizzaClient.ItaliaPizzaServices {
         
         public System.Threading.Tasks.Task<bool> ReactivateCustomerAsync(int customerID) {
             return base.Channel.ReactivateCustomerAsync(customerID);
+        }
+        
+        public ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[] GetActiveCustomers() {
+            return base.Channel.GetActiveCustomers();
+        }
+        
+        public System.Threading.Tasks.Task<ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO[]> GetActiveCustomersAsync() {
+            return base.Channel.GetActiveCustomersAsync();
         }
         
         public ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO SignIn(string username, string password) {

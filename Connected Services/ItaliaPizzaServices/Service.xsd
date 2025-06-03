@@ -237,6 +237,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProductOrderDTO" nillable="true" type="tns:ProductOrderDTO" />
+  <xs:complexType name="DeliveryDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryDriverID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeliveryID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeliveryDTO" nillable="true" type="tns:DeliveryDTO" />
   <xs:complexType name="ArrayOfCustomerDTO">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerDTO" nillable="true" type="tns:CustomerDTO" />

@@ -20,6 +20,10 @@ namespace ItaliaPizzaClient.Views.OrdersModule
 
         private List<Customer> _customers = new List<Customer>();
 
+        private Customer _selectedCustomer;
+
+        private int? _selectedDriverID;
+
         public RegisterOrderPage()
         {
             InitializeComponent();
@@ -39,9 +43,9 @@ namespace ItaliaPizzaClient.Views.OrdersModule
             if (CurrentSession.LoggedInUser.RoleID == 3)
             {
                 await LoadDeliveryDrivers();
+                await LoadCustomers();
             }
         }
-
 
         private async Task LoadProducts()
         {
@@ -50,7 +54,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                var products = client.GetProductsWithRecipe()
+                var products = client.GetProductsWithRecipe(false)
                     .Select(p => new Product
                     {
                         ProductID = p.ProductID,
@@ -65,10 +69,7 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                             Id = p.Recipe.RecipeID,
                             PreparationTime = p.Recipe.PreparationTime
                         }
-                    })
-                    .Where(p => p.IsActive)
-                    .OrderBy(p => p.Category)
-                    .ToList();
+                    }).Where(p => p.IsActive).OrderBy(p => p.Category).ToList();
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
@@ -78,6 +79,41 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                         _productCards.Add(CreateProductCard(product));
                     }
                     ButtonsPanel.ItemsSource = _productCards;
+                });
+            });
+        }
+
+        private async Task LoadCustomers()
+        {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var customerDtos = await client.GetActiveCustomersAsync();
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    _customers = customerDtos.Select(c => new Customer
+                    {
+                        CustomerID = c.CustomerID,
+                        FirstName = c.FirstName,
+                        LastName = c.LastName,
+                        EmailAddress = c.EmailAddress,
+                        PhoneNumber = c.PhoneNumber,
+                        RegDate = c.RegDate,
+                        IsActive = c.IsActive,
+                        AddressID = c.AddressID,
+                        Address = c.Address == null ? null : new Address
+                        {
+                            Id = c.Address.Id,
+                            AddressName = c.Address.AddressName,
+                            ZipCode = c.Address.ZipCode,
+                            City = c.Address.City
+                        }
+                    }).ToList();
+
+                    CbCustomers.ItemsSource = _customers;
                 });
             });
         }
@@ -129,7 +165,45 @@ namespace ItaliaPizzaClient.Views.OrdersModule
 
             if (success)
             {
-                MessageDialog.Show("RegOrder_DialogTSuccess", "RegOrder_DialogDSuccess", AlertType.SUCCESS,
+                MessageDialog.Show("RegLocalOrder_DialogTSuccess", "RegLocalOrder_DialogDSuccess", AlertType.SUCCESS,
+                    () => NavigationManager.Instance.GoBack());
+            }
+        }
+
+        private async Task RegisterDeliveryOrder()
+        {
+            var orderDto = new OrderDTO
+            {
+                CustomerID = _selectedCustomer.CustomerID,
+                PersonalID = CurrentSession.LoggedInUser.PersonalID,
+                Total = _orderedProducts.Sum(o => o.Quantity * (o.Product.Price ?? 0)),
+                Items = _orderedProducts.Select(o => new ProductOrderDTO
+                {
+                    ProductID = o.Product.ProductID,
+                    Quantity = o.Quantity
+                }).ToArray()
+            };
+
+            var deliveryDto = new DeliveryDTO
+            {
+                AddressID = _selectedCustomer.AddressID,
+                DeliveryDriverID = _selectedDriverID.Value
+            };
+
+            bool success = false;
+
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var result = await client.AddDeliveryOrderAsync(orderDto, deliveryDto);
+                success = result > 0;
+            });
+
+            if (success)
+            {
+                MessageDialog.Show("RegDeliverOrder_DialogTSuccess", "RegDeliverOrder_DialogDSuccess", AlertType.SUCCESS,
                     () => NavigationManager.Instance.GoBack());
             }
         }
@@ -143,6 +217,9 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                 Responsible.SetResourceReference(TextBlock.TextProperty, "RegOrder_Cashier");
                 DeliveryFields.Visibility = Visibility.Visible;
                 TbTableNumber.Visibility = Visibility.Collapsed;
+                TablePanel.Visibility = Visibility.Collapsed;
+                AddressPanel.Visibility = Visibility.Visible;
+                DeliveryPanel.Visibility = Visibility.Visible;
 
                 BtnConfirmLocalOrder.Visibility = Visibility.Collapsed;
                 BtnConfirmDeliveryOrder.Visibility = Visibility.Visible;
@@ -154,6 +231,9 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                 Responsible.SetResourceReference(TextBlock.TextProperty, "RegOrder_Waiter");
                 DeliveryFields.Visibility = Visibility.Collapsed;
                 TbTableNumber.Visibility = Visibility.Visible;
+                TablePanel.Visibility = Visibility.Visible;
+                AddressPanel.Visibility = Visibility.Collapsed;
+                DeliveryPanel.Visibility = Visibility.Collapsed;
 
                 BtnConfirmLocalOrder.Visibility = Visibility.Visible;
                 BtnConfirmDeliveryOrder.Visibility = Visibility.Collapsed;
@@ -260,18 +340,15 @@ namespace ItaliaPizzaClient.Views.OrdersModule
         {
             bool hasProducts = _orderedProducts.Any();
             bool hasTableNumber = !string.IsNullOrWhiteSpace(TbTableNumber.Text);
+            bool hasCustomer = _selectedCustomer != null;
+            bool hasDriver = _selectedDriverID != null;
 
-            if (CurrentSession.LoggedInUser.RoleID == 4)
-            {
-                BtnConfirmLocalOrder.IsEnabled = hasProducts && hasTableNumber;
-            }
-            else 
-            {
-                BtnConfirmDeliveryOrder.IsEnabled = hasProducts;
-            }
+            if (CurrentSession.LoggedInUser.RoleID == 4) BtnConfirmLocalOrder.IsEnabled = hasProducts && hasTableNumber;
+            
+            else BtnConfirmDeliveryOrder.IsEnabled = hasProducts && hasCustomer && hasDriver;
         }
 
-        private async void Click_BtnConfirmOrder(object sender, RoutedEventArgs e)
+        private async void Click_BtnConfirmLocalOrder(object sender, RoutedEventArgs e)
         {
             await RegisterLocalOrder();
         }
@@ -283,5 +360,45 @@ namespace ItaliaPizzaClient.Views.OrdersModule
                 : TbTableNumber.Text.Trim();
         }
 
+        private void CbCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _selectedCustomer = CbCustomers.SelectedItem as Customer;
+
+            if (_selectedCustomer != null)
+            {
+                CustomerName.Text = _selectedCustomer.FullName;
+
+                Address.Text = _selectedCustomer.Address != null
+                    ? _selectedCustomer.FullAddress
+                    : "-";
+            }
+            else
+            {
+                CustomerName.Text = "-";
+                Address.Text = "-";
+            }
+            UpdateConfirmButtonState();
+        }
+
+        private void CbDelivery_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CbDelivery.SelectedItem is ComboBoxItem selectedItem)
+            {
+                _selectedDriverID = selectedItem.Tag as int?;
+                DeliveryPersonal.Text = selectedItem.Content?.ToString() ?? "-";
+            }
+            else
+            {
+                _selectedDriverID = null;
+                DeliveryPersonal.Text = "-";
+            }
+
+            UpdateConfirmButtonState();
+        }
+
+        private async void Click_BtnConfirmDeliveryOrder(object sender, RoutedEventArgs e)
+        {
+            await RegisterDeliveryOrder();
+        }
     }
 }

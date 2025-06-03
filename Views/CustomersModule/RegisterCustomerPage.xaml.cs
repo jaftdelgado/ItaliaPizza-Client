@@ -10,13 +10,9 @@ using System.Windows.Controls;
 
 namespace ItaliaPizzaClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para RegisterCustomerPage.xaml
-    /// </summary>
     public partial class RegisterCustomerPage : Page
     {
         private Customer _editingCustomer;
-        private bool _isActive = false;
         private bool _isEditMode;
         public RegisterCustomerPage()
         {
