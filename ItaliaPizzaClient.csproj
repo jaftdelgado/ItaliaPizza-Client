@@ -138,6 +138,7 @@
     <Compile Include="Model\Transaction.cs" />
     <Compile Include="Model\WasteSupply.cs" />
     <Compile Include="Utilities\FlowToColorConverter.cs" />
+    <Compile Include="Utilities\TicketExporter.cs" />
     <Compile Include="Utilities\ReportUtils.cs" />
     <Compile Include="Views\CashRegisterModule\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>

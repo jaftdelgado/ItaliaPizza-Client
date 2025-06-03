@@ -392,7 +392,8 @@
                                                 <TextBox x:Name="TbPayment"
                                                          Grid.Column="0" Grid.Row="1"
                                                          Style="{DynamicResource TextBoxStyle}" 
-                                                         Tag="Efectivo:" Margin="0 0 5 0"/>
+                                                         Tag="Efectivo:" Margin="0 0 5 0"
+                                                         TextChanged="TbPayment_TextChanged" />
                                                 <TextBox x:Name="TbChange"
                                                          Grid.Column="1" Grid.Row="1"
                                                          Style="{DynamicResource TextBoxStyle}" 
@@ -415,7 +416,8 @@
                                                 <Button x:Name="BtnConfirm" Grid.Column="1"
                                                         Style="{DynamicResource PrimaryButtonStyle}"
                                                         Content="{DynamicResource Glb_Confirm}"
-                                                        Margin="5 0 0 0" IsEnabled="False">
+                                                        Margin="5 0 0 0" IsEnabled="False"
+                                                        Click="Click_BtnConfirm">
                                                     <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
                                                 </Button>
 
@@ -430,7 +432,7 @@
                                                 <Button.Tag>/Resources/Icons/check-icon.png</Button.Tag>
                                             </Button>
                                         </StackPanel>
-                                        
+
                                         <StackPanel x:Name="CashierDeliveredButtons"
                                                     Visibility="Collapsed">
                                             <Grid>
@@ -456,8 +458,6 @@
                                             </Grid>
                                         </StackPanel>
                                     </Grid>
-                                    
-                                    
                                 </Grid>
                             </Border>
                         </Grid>

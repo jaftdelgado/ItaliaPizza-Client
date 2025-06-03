@@ -453,6 +453,16 @@
     <sys:String x:Key="Orders_TableHCustomer">Cliente/Mesa</sys:String>
     <sys:String x:Key="Orders_TableHStatus">Estado</sys:String>
     <sys:String x:Key="Orders_TableHDateTime">Fecha/Hora</sys:String>
+    <sys:String x:Key="Ord_Error_Title">Error al registrar pago</sys:String>
+    <sys:String x:Key="Ord_Error_InvalidAmount">Monto ingresado no válido.</sys:String>
+    <sys:String x:Key="Ord_Error_InvalidOrderStatus">La orden no se encuentra en estado entregado.</sys:String>
+    <sys:String x:Key="Ord_Error_NoCashRegister">No hay una caja abierta actualmente.</sys:String>
+    <sys:String x:Key="Ord_Error_NotEnoughCashForChange">No hay suficiente dinero en caja para entregar el cambio.</sys:String>
+    <sys:String x:Key="Ord_Error_PaymentFailed">Ocurrió un error al registrar el pago.</sys:String>
+
+    <sys:String x:Key="Ord_Success_Title">Pago exitoso</sys:String>
+    <sys:String x:Key="Ord_Success_PaymentRegistered">El pago se registró correctamente.</sys:String>
+
 
     <!--RegisterOrder-->
     <sys:String x:Key="RegOrder_Header">Registrar Comanda</sys:String>
@@ -478,6 +488,8 @@
     <sys:String x:Key="RegLocalOrder_DialogDSuccess">La orden en sucursal se registró correctamente y aparecerá en cocina para marcarla como en preparación, con posibilidad de editarla antes.</sys:String>
     <sys:String x:Key="RegDeliverOrder_DialogTSuccess">Pedido a domiclio registrado</sys:String>
     <sys:String x:Key="RegDeliverOrder_DialogDSuccess">El pedido a domicilio se registró correctamente y aparecerá en cocina para marcarla como en preparación, con posibilidad de editarla antes.</sys:String>
+    <sys:String x:Key="EditDeliveryOrder_Header">Editar Pedido a Domicilio</sys:String>
+    <sys:String x:Key="EditDeliveryOrder_Desc">Modifica los datos del pedido a domicilio existente.</sys:String>
 
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>
