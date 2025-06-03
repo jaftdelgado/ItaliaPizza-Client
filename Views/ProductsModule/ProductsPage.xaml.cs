@@ -1,7 +1,10 @@
 ﻿using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
+using ItaliaPizzaClient.Views.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -175,6 +178,12 @@ namespace ItaliaPizzaClient.Views.ProductsModule
             ProductCode.Text = selected.ProductCode;
             ProductCategory.Text = selected.CategoryName;
             ProductDescription.Text = selected.Description;
+
+            BtnDeleted.Visibility = selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
+            BtnEditProduct.Visibility = selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
+            BtnReactivateProduct.Visibility = selected.IsActive ? Visibility.Collapsed : Visibility.Visible;
+            BtnDeleteProduct.IsEnabled = selected.IsDeletable && selected.IsActive;
+            BtnDeleteProduct.Visibility = selected.IsActive ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private string GetSelectedFilterButtonName()
@@ -219,8 +228,9 @@ namespace ItaliaPizzaClient.Views.ProductsModule
 
         private void Click_FilterButton(object sender, RoutedEventArgs e)
         {
-
+            if (sender is Button button) ApplyFilter(button.Name);
         }
+
 
         private void Click_BtnEditProduct(object sender, RoutedEventArgs e)
         {
@@ -231,14 +241,87 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                 mainWindow.NavigateToPage("EditProduct_Header", new RegisterProductPage(productToEdit));
         }
 
-        private void Click_BtnDeleteSupply(object sender, RoutedEventArgs e)
+        private void Click_BtnDeleteProduct(object sender, RoutedEventArgs e)
         {
-
+            MessageDialog.ShowConfirm(
+                "Products_DialogTDeleteProduct", "Products_DialogDDeleteProduct",
+                async () =>
+                {
+                    if (ProductsDataGrid.SelectedItem is Product selected)
+                        await DeleteProduct(selected);
+                },
+                "Glb_Delete"
+            );
         }
 
-        private void Click_BtnReactivateSupply(object sender, RoutedEventArgs e)
+        private async Task DeleteProduct(Product selected)
         {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+                bool canDelete = client.IsProductDeletable(selected.ProductID);
+                if (!canDelete)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        MessageDialog.Show("Products_DialogTUnableToDelete", "Products_DialogDUnableToDelete", AlertType.WARNING);
+                    });
+                    return;
+                }
+                bool success = client.DeleteProduct(selected.ProductID);
+                if (!success) return;
+                var item = _allProducts.FirstOrDefault(p => p.ProductID == selected.ProductID);
+                if (item != null) item.IsActive = false;
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    string selectedFilter = GetSelectedFilterButtonName();
+                    ApplyFilter(selectedFilter);
+                    MessageDialog.Show(
+                        "Products_DialogTDeletedProduct",
+                        "Products_DialogDDeletedProduct",
+                        AlertType.SUCCESS
+                    );
+                });
+            });
+        }
 
+        private void Click_BtnReactivateProduct(object sender, RoutedEventArgs e)
+        {
+            MessageDialog.ShowConfirm(
+                "Products_DialogTReactivateProduct", "Products_DialogDReactivateProduct",
+                async () =>
+                {
+                    if (ProductsDataGrid.SelectedItem is Product selected)
+                        await ReactivateProduct(selected);
+                }
+            );
+        }
+
+        private async Task ReactivateProduct(Product selected)
+        {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                bool result = client.ReactivateProduct(selected.ProductID);
+                if (!result) return;
+
+                var item = _allProducts.FirstOrDefault(p => p.ProductID == selected.ProductID);
+                if (item != null) item.IsActive = true;
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    if (!_allProducts.Any(p => !p.IsActive))
+                        ApplyFilter("BtnActive");
+                    else
+                        ApplyFilter(GetSelectedFilterButtonName());
+
+                    DisplayProductDetails(selected);
+                    MessageDialog.Show("Products_DialogTReactivatedProduct", "Products_DialogDReactivatedProduct", AlertType.SUCCESS);
+                });
+            });
         }
     }
 }

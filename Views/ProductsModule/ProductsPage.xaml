@@ -208,20 +208,20 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Button x:Name="BtnReactivateSupply" 
+                                    <Button x:Name="BtnReactivateProduct" 
                                             Grid.ColumnSpan="2"
                                             Visibility="Collapsed"
                     Style="{DynamicResource PrimaryButtonStyle}"
-                    Content="{DynamicResource Supplies_BtnReactivateSupply}"
-                    Click="Click_BtnReactivateSupply" >
+                    Content="{DynamicResource Products_BtnReactivateProduct}"
+                    Click="Click_BtnReactivateProduct" >
                                         <Button.Tag>/Resources/Icons/reactivate-icon.png</Button.Tag>
                                     </Button>
 
-                                    <Button x:Name="BtnDeleteSupply" Grid.Column="0"
+                                    <Button x:Name="BtnDeleteProduct" Grid.Column="0"
                     Margin="0 0 5 0"
                     Style="{DynamicResource DangerButtonStyle}"
                     Content="{DynamicResource Glb_Delete}" 
-                    Click="Click_BtnDeleteSupply" >
+                    Click="Click_BtnDeleteProduct" >
                                         <Button.Tag>/Resources/Icons/delete-icon.png</Button.Tag>
                                     </Button>
 
