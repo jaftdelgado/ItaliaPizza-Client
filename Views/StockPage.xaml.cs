@@ -138,6 +138,11 @@ namespace ItaliaPizzaClient.Views
                     ReportUtils.ExportarReporteInventario(_allSupplies, saveFileDialog.FileName);
                     MessageDialog.Show("Reporte exportado exitosamente.", "El reporte de inventarios se exportó con exito", AlertType.SUCCESS);
                 }
+                catch (TypeInitializationException ex)
+                {
+                    MessageDialog.Show("Error al generar el reporte: " , "Error", AlertType.ERROR);
+
+                }
                 catch (Exception ex)
                 {
                     MessageDialog.Show("Error al exportar el reporte: " + ex.Message, "Error", AlertType.ERROR);
