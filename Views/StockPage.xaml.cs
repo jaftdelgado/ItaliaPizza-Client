@@ -140,13 +140,11 @@ namespace ItaliaPizzaClient.Views
                 }
                 catch (TypeInitializationException ex)
                 {
-                    MessageBox.Show($"Error: {ex.Message}\nInner: {ex.InnerException?.Message}");
-                    Console.WriteLine($"Error: {ex.Message}\nInner: {ex.InnerException?.Message}");
+                    MessageDialog.Show("Error al generar el reporte: " , "Error", AlertType.ERROR);
 
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al generar reporte" + ex.Message);
                     MessageDialog.Show("Error al exportar el reporte: " + ex.Message, "Error", AlertType.ERROR);
                 }
             }
