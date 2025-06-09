@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace ItaliaPizzaClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para SalesReportPage.xaml
-    /// </summary>
     public partial class SalesReportPage : Page
     {
         private List<CashRegisterDTO> _reportData = new List<CashRegisterDTO>();
@@ -45,7 +42,7 @@ namespace ItaliaPizzaClient.Views
                 var client = ServiceClientManager.Instance.Client;
                 if (client == null) return;
 
-                var dtoList = client.GetCashRegisterByDate(start, end); // This must match your WCF/server method
+                var dtoList = client.GetCashRegisterByDate(start, end);
 
                 var reportList = dtoList.Select(c => new CashRegisterDTO
                 {
@@ -112,6 +109,7 @@ namespace ItaliaPizzaClient.Views
 
         private void BtnGenerateReport_Click(object sender, RoutedEventArgs e)
         {
+            /*
             var data = ReportDetailsDataGrid.ItemsSource as IEnumerable<CashRegisterDTO>;
             if (data == null || !data.Any())
             {
@@ -126,6 +124,7 @@ namespace ItaliaPizzaClient.Views
             {
                 printDialog.PrintVisual(printPage, "Sales Report");
             }
+            */
         }
     }
 }
