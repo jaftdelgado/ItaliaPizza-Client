@@ -15,8 +15,8 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="0,0,0,0.5"
-                BorderBrush="{StaticResource SecondaryBrush}">
+        <Border Grid.Row="0" BorderThickness="0 0 0 1"
+                BorderBrush="{StaticResource BorderBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -47,14 +47,17 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0" Orientation="Horizontal">
+                <StackPanel Grid.Row="0" 
+                            VerticalAlignment="Bottom" 
+                            Margin="20 0" 
+                            Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource RegOrderSupplier_Info}"
                                Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
                 <Grid Grid.Row="1" Margin="0 12 0 0">
                     <StackPanel HorizontalAlignment="Stretch">
-                        <Border BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0 0 0 0.5">
+                        <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1">
                             <StackPanel Margin="20 0 20 16">
                                 <TextBlock Text="{DynamicResource RegOrderSupplier_SupplierInfo}"
                                            Style="{DynamicResource DescriptionLabelStyle}"
@@ -104,8 +107,8 @@
             </Grid>
 
             <Border Grid.Column="1" 
-                    BorderBrush="{DynamicResource SecondaryBrush}" 
-                    BorderThickness="0.5 0 0 0" >
+                    BorderBrush="{DynamicResource BorderBrush}" 
+                    BorderThickness="1 0 0 0" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="36"/>
@@ -121,8 +124,8 @@
                     <StackPanel x:Name="OrderDetailsPanel" Grid.Row="1" Margin="20"/>
 
                     <Border Grid.Row="2"
-                            BorderBrush="{StaticResource SecondaryBrush}"
-                            BorderThickness="0 0.5 0 0">
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="0 1 0 0">
                         <StackPanel Margin="20 14 20 26" >
                             <TextBlock Text="Total" Margin="0 0 0 8"
                                         Style="{DynamicResource SubtitleLabelStyle}"/>
@@ -178,8 +181,9 @@
 
         </Grid>
 
-        <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
-                BorderThickness="0,0.5,0,0">
+        <Border Grid.Row="2" 
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="0 1 0 0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
                 <Button x:Name="BtnCancel" 
                         Style="{DynamicResource SecondaryButtonNoIconStyle}"

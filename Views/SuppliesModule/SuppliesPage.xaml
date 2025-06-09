@@ -34,11 +34,12 @@
                             HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button x:Name="BtnNewSupply" Style="{DynamicResource PrimaryButtonStyle}"
                             Content="{DynamicResource Supplies_BtnNewSupply}"
-                            Click="Click_BtnNewSupply"  Margin="0, 0, 10, 0">
+                            Click="Click_BtnNewSupply">
                         <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                     </Button>
                     <Button x:Name="BtnRegisterSupplyWaste" Style="{DynamicResource PrimaryButtonNoIconStyle}"
-                            Content="{DynamicResource Stock_BtnRegisterWaste}" Click="Click_BtnRegisterWaste"/>
+                            Content="{DynamicResource Stock_BtnRegisterWaste}" Click="Click_BtnRegisterWaste"
+                            Visibility="Collapsed"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -142,11 +143,11 @@
                         </Grid>
                     </Grid>
 
-                    <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" 
-                            BorderThickness="0.5 0 0 0">
+                    <Border Grid.Column="1" BorderBrush="{StaticResource BorderBrush}" 
+                            BorderThickness="1 0 0 0">
                         <Grid>
                             <Grid Grid.Row="0" x:Name="SupplyDetailsPanel"
-                                  Visibility="Visible">
+                                  Visibility="Collapsed">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
                                     <RowDefinition Height="*"/>

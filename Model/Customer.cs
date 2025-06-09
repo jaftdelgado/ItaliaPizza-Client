@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ItaliaPizzaClient.Model
 {
@@ -18,7 +13,12 @@ namespace ItaliaPizzaClient.Model
         public bool IsActive { get; set; }
         public int AddressID { get; set; }
         public Address Address { get; set; }
-        public byte[] ProfilePic { get; set; }
+
+        public override string ToString()
+        {
+            return FullName;
+        }
+
 
         public string FullName => $"{LastName}, {FirstName}";
 

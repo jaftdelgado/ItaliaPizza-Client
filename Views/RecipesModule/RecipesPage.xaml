@@ -3,135 +3,202 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ItaliaPizzaClient.Views.RecepiesModule"
+      xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RecipesPage">
+      Title="RegisterSupplierOrdersPage">
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="0, 0, 0, 0.5" BorderBrush="{StaticResource SecondaryBrush}">
+        <Border Grid.Row="0" BorderThickness="0 0 0 1"
+                BorderBrush="{StaticResource BorderBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20, 0, 0, 10"
-                            HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <TextBlock Style="{StaticResource HeaderLabelStyle}" Text="{DynamicResource Recipes_Header}"/>
-                    <TextBlock Style="{StaticResource DescriptionLabelStyle}" Text="{DynamicResource Recipes_Desc}"/>
-                </StackPanel>
-
-                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20, 0, 0, 10"
-                            HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <Button x:Name="BtnNewRecipe" Style="{DynamicResource PrimaryButtonStyle}"
-                            Content="{DynamicResource Recipes_BtnAddRecipe}" Click="Clic_BtnNewRecipe">
-                        <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
-                    </Button>
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20,0,0,10" 
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock x:Name="PageHeader" 
+                               Style="{StaticResource HeaderLabelStyle}"
+                               Text="{DynamicResource Recipes_Header}" />
+                    <TextBlock x:Name="PageDescription"
+                               Style="{StaticResource DescriptionLabelStyle}"
+                               Text="{DynamicResource Recipes_Desc}"/>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Border Grid.Row="1">
-            <Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="36"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0, 0, 0, 0.5">
-                    <Grid Margin="20, 0" VerticalAlignment="Center">
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Padding="10"
+                              Style="{StaticResource ScrollViewerStyle}">
+                    <StackPanel x:Name="ProductsContainer"/>
+                </ScrollViewer>
+            </Grid>
+
+            <Border Grid.Column="1" 
+                    BorderBrush="{DynamicResource BorderBrush}" 
+                    BorderThickness="1 0 0 0" >
+                <Grid>
+                    <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="6*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" HorizontalAlignment="Left"
-                                 Style="{DynamicResource SecondarySearchBoxStyle}"
-                                 Width="180"/>
-                    </Grid>
-                </Border>
+                        <Border Grid.Column="0" 
+            BorderBrush="{DynamicResource BorderBrush}" 
+            BorderThickness="0 0 1 0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="300"/>
-                    </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Row="0">
+                                    <StackPanel Grid.Row="0" 
+                            Margin="20 16"
+                            Orientation="Vertical"
+                            VerticalAlignment="Bottom">
+                                        <TextBlock x:Name="ProductName"
+                               Style="{DynamicResource SubtitleLabelStyle}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="ProductCategory"
+                                   Style="{DynamicResource RegularLabelStyle}"/>
+                                            <TextBlock x:Name="ProductCode"
+                                   Style="{DynamicResource DescriptionLabelStyle}"/>
+                                        </StackPanel>
+                                    </StackPanel>
 
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                                    <Grid Margin="20 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20, 4">
-                            <TextBlock Text="{DynamicResource Recipes_TitleTable}"
-                                       Style="{DynamicResource SubtitleLabelStyle}"/>
-                        </StackPanel>
-                        
-                        <!-- Tabla de recetas -->
-                        <Border Grid.Row="1" Padding="8">
-                            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}"
-                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
-                                      CellStyle="{DynamicResource DataGridCellStyle1}"
-                                      x:Name="recipesDataGrid" Style="{DynamicResource DataGridStyle1}" AutoGenerateColumns="False"
-                                      SelectionChanged="recipesDataGrid_SelectionChanged">
-                                <DataGrid.Columns>
-                                    <!-- Número -->
-                                    <DataGridTextColumn Header="Tiempo preparacion" Binding="{Binding PreparationTime}" IsReadOnly="True" Width="0.5*"/>
+                                        <Image Name="ProductPic"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Width="70" Height="70" 
+                           Stretch="Fill"
+                           Source="/Resources/Images/default-product-pic.png"
+                           VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="HighQuality">
+                                            <Image.Clip>
+                                                <RectangleGeometry Rect="0 0 70 70" RadiusX="12" RadiusY="12"/>
+                                            </Image.Clip>
+                                        </Image>
 
-                                    <!-- Titulo -->
-                                    <DataGridTextColumn Header="Titulo" Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                        <StackPanel Grid.Column="1"
+                                Margin="10 6 0 10">
+                                            <TextBlock Style="{DynamicResource RegularLabelStyle}"
+                                   Text="{DynamicResource Glb_Description}"
+                                   FontSize="10" FontFamily="{StaticResource SFProSemiBold}"/>
+                                            <TextBlock x:Name="ProductDescription"
+                                   Style="{DynamicResource DescriptionLabelStyle}"
+                                   TextWrapping="Wrap" 
+                                   HorizontalAlignment="Stretch"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Border BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="0 0 0 1" Margin="20 0">
+                                        <Grid Margin="0 14">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{DynamicResource RegRecipe_Ingredients}"
+                                   Style="{DynamicResource DescriptionLabelStyle}"
+                                   VerticalAlignment="Center"/>
+                                            
+                                        </Grid>
+                                    </Border>
+
+                                    <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Style="{StaticResource ScrollViewerStyle}">
+                                        <ItemsControl x:Name="IngredientsContainer">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Vertical"
+                                            Margin="20 0"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Grid>
                         </Border>
-                    </Grid>
 
-                    <Border Grid.Column="1" BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0.5, 0, 0, 0">
-                        <Grid Grid.Row="0" x:Name="RecipeDetailsPanel" >
+                        <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="36"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-
-                            <StackPanel VerticalAlignment="Center" Grid.Row="0" Orientation="Vertical" Margin="24, 10">
-                                <TextBlock x:Name="ProductRecipeTitle" Text="Pizza de pepperoni"
-                                    Style="{DynamicResource SubtitleLabelStyle}"/>
-                                <TextBlock x:Name="RecipeDescription" Text="Ejemplo de descripcion e ingredientes..." 
-                                    Margin="0, 10"
-                                    TextWrapping="Wrap"
-                                    Style="{DynamicResource DescriptionLabelStyle}"/>
-                                <TextBlock x:Name="RecipePreparationTime"
-                                    Margin="0,10"
-                                    TextWrapping="Wrap"
-                                    Style="{DynamicResource SubtitleLabelStyle}">
-                                    <Run FontFamily="Segoe MDL2 Assets" Text="&#xE823;" />
-                                    <Run Text=" 140 minutos" />
-                                </TextBlock>
+                            <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0">
+                                <TextBlock Text="{DynamicResource RegRecipe_PreparationInfo}"
+                       Style="{DynamicResource SubtitleLabelStyle}"/>
                             </StackPanel>
 
-                            <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
-                                        BorderThickness="0 0.5 0 0">
-                                <StackPanel VerticalAlignment="Center" Margin="20">
-                                    <Button x:Name="BtnShowRecipe" 
-                                                Style="{DynamicResource PrimaryButtonStyle}"
-                                                Content="Mostrar receta completa" Margin="0 0 0 6" 
-                                                Click="Click_BtnShowRecipe">
-                                        <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                                    </Button>
-                                </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20 12 20 10">
+                                <TextBlock Text="{DynamicResource RegRecipe_PreparationSteps}"
+                       Style="{DynamicResource DescriptionLabelStyle}" 
+                       Margin="0 0 0 8"/>
+                                
+                            </StackPanel>
+
+                            <Border Grid.Row="2"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0 1 0 0">
+                                <ScrollViewer Grid.Column="0"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          Style="{StaticResource ScrollViewerStyle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="7*" MaxWidth="640"/>
+                                            <ColumnDefinition Width="*" MinWidth="0"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel x:Name="StepsContainer"/>
+                                    </Grid>
+                                </ScrollViewer>
                             </Border>
                         </Grid>
-                    </Border>
+
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Border>
-        
+            </Border>
+        </Grid>
     </Grid>
 </Page>

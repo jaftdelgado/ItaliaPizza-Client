@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="ItaliaPizzaClient.Views.UserControls.SelectSupply"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Height="320" Width="280">
+    <Border Background="{DynamicResource SecondaryButtonBrush}"
+            CornerRadius="14" BorderThickness="1"
+            BorderBrush="{DynamicResource BorderBrush}" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0 0 0 1">
+                <StackPanel Margin="20 15">
+                    <TextBlock Text="{DynamicResource RegRecipe_DialogTSelectSupply}"
+                               Style="{StaticResource SubtitleLabelStyle}"/>
+                    <TextBox x:Name="TbSearch" 
+                             Margin="0 10 0 0"
+                             Background="{StaticResource BackgroundBrush}"
+                             Style="{StaticResource SecondarySearchBoxStyle}"
+                             TextChanged="TxtSearch_TextChanged"/>
+                </StackPanel>
+            </Border>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                          Style="{StaticResource ScrollViewerStyle}">
+                <ItemsControl x:Name="SupplyContainer" 
+                              ItemsSource="{Binding SupplyCards}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="20 2"
+                                    Padding="4">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <CheckBox Grid.Column="0" 
+                                              IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                              Style="{StaticResource CheckBoxStyle}"
+                                              VerticalAlignment="Center"
+                                              Checked="CheckBox_Checked"
+                                              Unchecked="CheckBox_Unchecked"/>
+                                    <Image Source="{Binding ImageSource}"
+                                           Width="40" Height="40"
+                                           Margin="8 0 0 0"
+                                           Grid.Column="1"
+                                           Stretch="UniformToFill"
+                                           RenderOptions.BitmapScalingMode="HighQuality">
+                                        <Image.Clip>
+                                            <RectangleGeometry Rect="0 0 40 40" RadiusX="8" RadiusY="8"/>
+                                        </Image.Clip>
+                                    </Image>
+
+                                    <StackPanel Grid.Column="2" Margin="10 0">
+                                        <TextBlock Text="{Binding SupplyName}"
+                                                   Style="{StaticResource RegularLabelStyle}"/>
+                                        <TextBlock Text="{Binding Category}"
+                                                   Style="{StaticResource DescriptionLabelStyle}"/>
+                                    </StackPanel>
+
+                                    
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Border Grid.Row="2" BorderBrush="{DynamicResource BorderBrush}" 
+                    BorderThickness="0 1 0 0" Padding="14">
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

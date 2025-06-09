@@ -35,8 +35,7 @@
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
       <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
-      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
-      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IMainManager_GetAllPersonals_InputMessage">
@@ -44,6 +43,12 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_GetAllPersonals_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllPersonalsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveryDrivers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDrivers" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetDeliveryDrivers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDriversResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_AddPersonal_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPersonal" />
@@ -207,6 +212,36 @@
   <wsdl:message name="IMainManager_AddProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddProductResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProducts" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetAllProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_UpdateProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivateProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivateProduct" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_ReactivateProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReactivateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsProductDeletable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsProductDeletable" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_IsProductDeletable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsProductDeletableResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_GetCurrentTransactions_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentTransactions" />
   </wsdl:message>
@@ -230,6 +265,12 @@
   </wsdl:message>
   <wsdl:message name="IMainManager_OpenCashRegister_OutputMessage">
     <wsdl:part name="parameters" element="tns:OpenCashRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_CloseCashRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:CloseCashRegister" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_CloseCashRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CloseCashRegisterResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_RegisterCashOut_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterCashOut" />
@@ -291,41 +332,59 @@
   <wsdl:message name="IMainManager_CancelSupplierOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:CancelSupplierOrderResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetDeliveredOrders_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDeliveredOrders" />
+  <wsdl:message name="IMainManager_GetOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrders" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetDeliveredOrders_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDeliveredOrdersResponse" />
+  <wsdl:message name="IMainManager_GetOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdersResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetOrderItemsByOrderID_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrderItemsByOrderID" />
+  <wsdl:message name="IMainManager_ChangeOrderStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeOrderStatus" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetOrderItemsByOrderID_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrderItemsByOrderIDResponse" />
+  <wsdl:message name="IMainManager_ChangeOrderStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeOrderStatusResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterRecipe_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterRecipe" />
+  <wsdl:message name="IMainManager_AddLocalOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddLocalOrder" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_RegisterRecipe_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterRecipeResponse" />
+  <wsdl:message name="IMainManager_AddLocalOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddLocalOrderResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetAllRecipes_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllRecipes" />
+  <wsdl:message name="IMainManager_AddDeliveryOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDeliveryOrder" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetAllRecipes_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllRecipesResponse" />
+  <wsdl:message name="IMainManager_AddDeliveryOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDeliveryOrderResponse" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetRecipes_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetRecipes" />
+  <wsdl:message name="IMainManager_UpdateOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrder" />
   </wsdl:message>
-  <wsdl:message name="IMainManager_GetRecipes_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetRecipesResponse" />
+  <wsdl:message name="IMainManager_UpdateOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetProductsWithRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductsWithRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetProductsWithRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductsWithRecipeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_AddRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecipeResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_UpdateRecipe_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateRecipe" />
   </wsdl:message>
   <wsdl:message name="IMainManager_UpdateRecipe_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateRecipeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteRecipe_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRecipe" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_DeleteRecipe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRecipeResponse" />
   </wsdl:message>
   <wsdl:message name="IMainManager_GetCustomers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomers" />
@@ -363,6 +422,12 @@
   <wsdl:message name="IMainManager_ReactivateCustomer_OutputMessage">
     <wsdl:part name="parameters" element="tns:ReactivateCustomerResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainManager_GetActiveCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActiveCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IMainManager_GetActiveCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActiveCustomersResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainManager_SignIn_InputMessage">
     <wsdl:part name="parameters" element="tns:SignIn" />
   </wsdl:message>
@@ -397,6 +462,10 @@
     <wsdl:operation name="GetAllPersonals">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/GetAllPersonals" message="tns:IMainManager_GetAllPersonals_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/GetAllPersonalsResponse" message="tns:IMainManager_GetAllPersonals_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryDrivers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/GetDeliveryDrivers" message="tns:IMainManager_GetDeliveryDrivers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPersonalManager/GetDeliveryDriversResponse" message="tns:IMainManager_GetDeliveryDrivers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddPersonal">
       <wsdl:input wsaw:Action="http://tempuri.org/IPersonalManager/AddPersonal" message="tns:IMainManager_AddPersonal_InputMessage" />
@@ -506,6 +575,26 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/AddProduct" message="tns:IMainManager_AddProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/AddProductResponse" message="tns:IMainManager_AddProduct_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAllProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/GetAllProducts" message="tns:IMainManager_GetAllProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/GetAllProductsResponse" message="tns:IMainManager_GetAllProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/UpdateProduct" message="tns:IMainManager_UpdateProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/UpdateProductResponse" message="tns:IMainManager_UpdateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/DeleteProduct" message="tns:IMainManager_DeleteProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/DeleteProductResponse" message="tns:IMainManager_DeleteProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReactivateProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/ReactivateProduct" message="tns:IMainManager_ReactivateProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/ReactivateProductResponse" message="tns:IMainManager_ReactivateProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsProductDeletable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductManager/IsProductDeletable" message="tns:IMainManager_IsProductDeletable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductManager/IsProductDeletableResponse" message="tns:IMainManager_IsProductDeletable_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCurrentTransactions">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/GetCurrentTransactions" message="tns:IMainManager_GetCurrentTransactions_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/GetCurrentTransactionsResponse" message="tns:IMainManager_GetCurrentTransactions_OutputMessage" />
@@ -521,6 +610,10 @@
     <wsdl:operation name="OpenCashRegister">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/OpenCashRegister" message="tns:IMainManager_OpenCashRegister_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/OpenCashRegisterResponse" message="tns:IMainManager_OpenCashRegister_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseCashRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/CloseCashRegister" message="tns:IMainManager_CloseCashRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFinanceManager/CloseCashRegisterResponse" message="tns:IMainManager_CloseCashRegister_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RegisterCashOut">
       <wsdl:input wsaw:Action="http://tempuri.org/IFinanceManager/RegisterCashOut" message="tns:IMainManager_RegisterCashOut_InputMessage" />
@@ -562,29 +655,41 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrder" message="tns:IMainManager_CancelSupplierOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISupplierOrderManager/CancelSupplierOrderResponse" message="tns:IMainManager_CancelSupplierOrder_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetDeliveredOrders">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrders" message="tns:IMainManager_GetDeliveredOrders_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetDeliveredOrdersResponse" message="tns:IMainManager_GetDeliveredOrders_OutputMessage" />
+    <wsdl:operation name="GetOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetOrders" message="tns:IMainManager_GetOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetOrdersResponse" message="tns:IMainManager_GetOrders_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetOrderItemsByOrderID">
-      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" message="tns:IMainManager_GetOrderItemsByOrderID_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/GetOrderItemsByOrderIDResponse" message="tns:IMainManager_GetOrderItemsByOrderID_OutputMessage" />
+    <wsdl:operation name="ChangeOrderStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/ChangeOrderStatus" message="tns:IMainManager_ChangeOrderStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/ChangeOrderStatusResponse" message="tns:IMainManager_ChangeOrderStatus_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RegisterRecipe">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipe" message="tns:IMainManager_RegisterRecipe_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/RegisterRecipeResponse" message="tns:IMainManager_RegisterRecipe_OutputMessage" />
+    <wsdl:operation name="AddLocalOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/AddLocalOrder" message="tns:IMainManager_AddLocalOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/AddLocalOrderResponse" message="tns:IMainManager_AddLocalOrder_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllRecipes">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/GetAllRecipes" message="tns:IMainManager_GetAllRecipes_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/GetAllRecipesResponse" message="tns:IMainManager_GetAllRecipes_OutputMessage" />
+    <wsdl:operation name="AddDeliveryOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/AddDeliveryOrder" message="tns:IMainManager_AddDeliveryOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/AddDeliveryOrderResponse" message="tns:IMainManager_AddDeliveryOrder_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetRecipes">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/GetRecipes" message="tns:IMainManager_GetRecipes_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/GetRecipesResponse" message="tns:IMainManager_GetRecipes_OutputMessage" />
+    <wsdl:operation name="UpdateOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderManager/UpdateOrder" message="tns:IMainManager_UpdateOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderManager/UpdateOrderResponse" message="tns:IMainManager_UpdateOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsWithRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipe" message="tns:IMainManager_GetProductsWithRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/GetProductsWithRecipeResponse" message="tns:IMainManager_GetProductsWithRecipe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/AddRecipe" message="tns:IMainManager_AddRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/AddRecipeResponse" message="tns:IMainManager_AddRecipe_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateRecipe">
       <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/UpdateRecipe" message="tns:IMainManager_UpdateRecipe_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/UpdateRecipeResponse" message="tns:IMainManager_UpdateRecipe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecipe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRecipeManager/DeleteRecipe" message="tns:IMainManager_DeleteRecipe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRecipeManager/DeleteRecipeResponse" message="tns:IMainManager_DeleteRecipe_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/GetCustomers" message="tns:IMainManager_GetCustomers_InputMessage" />
@@ -609,6 +714,10 @@
     <wsdl:operation name="ReactivateCustomer">
       <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/ReactivateCustomer" message="tns:IMainManager_ReactivateCustomer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/ReactivateCustomerResponse" message="tns:IMainManager_ReactivateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICustomerManager/GetActiveCustomers" message="tns:IMainManager_GetActiveCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICustomerManager/GetActiveCustomersResponse" message="tns:IMainManager_GetActiveCustomers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SignIn">
       <wsdl:input wsaw:Action="http://tempuri.org/ISessionManager/SignIn" message="tns:IMainManager_SignIn_InputMessage" />
@@ -636,6 +745,15 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetAllPersonals">
       <soap12:operation soapAction="http://tempuri.org/IPersonalManager/GetAllPersonals" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryDrivers">
+      <soap12:operation soapAction="http://tempuri.org/IPersonalManager/GetDeliveryDrivers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -886,6 +1004,51 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllProducts">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/GetAllProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/UpdateProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/DeleteProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReactivateProduct">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/ReactivateProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsProductDeletable">
+      <soap12:operation soapAction="http://tempuri.org/IProductManager/IsProductDeletable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCurrentTransactions">
       <soap12:operation soapAction="http://tempuri.org/IFinanceManager/GetCurrentTransactions" style="document" />
       <wsdl:input>
@@ -915,6 +1078,15 @@
     </wsdl:operation>
     <wsdl:operation name="OpenCashRegister">
       <soap12:operation soapAction="http://tempuri.org/IFinanceManager/OpenCashRegister" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseCashRegister">
+      <soap12:operation soapAction="http://tempuri.org/IFinanceManager/CloseCashRegister" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1012,8 +1184,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDeliveredOrders">
-      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetDeliveredOrders" style="document" />
+    <wsdl:operation name="GetOrders">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetOrders" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1021,8 +1193,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetOrderItemsByOrderID">
-      <soap12:operation soapAction="http://tempuri.org/IOrderManager/GetOrderItemsByOrderID" style="document" />
+    <wsdl:operation name="ChangeOrderStatus">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/ChangeOrderStatus" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1030,8 +1202,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterRecipe">
-      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/RegisterRecipe" style="document" />
+    <wsdl:operation name="AddLocalOrder">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/AddLocalOrder" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1039,8 +1211,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllRecipes">
-      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/GetAllRecipes" style="document" />
+    <wsdl:operation name="AddDeliveryOrder">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/AddDeliveryOrder" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1048,8 +1220,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetRecipes">
-      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/GetRecipes" style="document" />
+    <wsdl:operation name="UpdateOrder">
+      <soap12:operation soapAction="http://tempuri.org/IOrderManager/UpdateOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsWithRecipe">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/GetProductsWithRecipe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipe">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/AddRecipe" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1059,6 +1249,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateRecipe">
       <soap12:operation soapAction="http://tempuri.org/IRecipeManager/UpdateRecipe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecipe">
+      <soap12:operation soapAction="http://tempuri.org/IRecipeManager/DeleteRecipe" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1120,6 +1319,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetActiveCustomers">
+      <soap12:operation soapAction="http://tempuri.org/ICustomerManager/GetActiveCustomers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SignIn">
       <soap12:operation soapAction="http://tempuri.org/ISessionManager/SignIn" style="document" />
       <wsdl:input>
@@ -1172,7 +1380,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>_3776_\abrah</Upn>
+          <Upn>DESKTOP-HKQ7CK7\Kaleb</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

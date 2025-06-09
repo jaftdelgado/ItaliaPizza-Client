@@ -100,7 +100,7 @@
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}" 
                         Width="20" Height="20" Margin="0 0 6 0"/>
                             <TextBlock Text="{TemplateBinding Content}" 
-                                   Foreground="{StaticResource SecondaryBrush}" 
+                                   Foreground="{StaticResource PrimaryBrush}" 
                                    VerticalAlignment="Center" />
                         </StackPanel>
                     </Border>
@@ -332,6 +332,66 @@
                             </Viewbox>
                         </Grid>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ProductCardButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="6"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Imagen del producto -->
+                            <Image x:Name="PART_Image"
+                               Width="38" 
+                               Height="38"
+                               Margin="4"
+                               Stretch="UniformToFill"
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                                <Image.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,38,38"/>
+                                </Image.Clip>
+                            </Image>
+
+                            <!-- Nombre y categoría -->
+                            <StackPanel Grid.Column="1" 
+                                    Margin="10 0" 
+                                    VerticalAlignment="Center">
+                                <TextBlock x:Name="PART_Name"
+                                       FontFamily="{StaticResource SFProMedium}"
+                                       FontSize="13"
+                                       TextTrimming="CharacterEllipsis"
+                                       Foreground="{TemplateBinding Foreground}"/>
+                                <TextBlock x:Name="PART_Category"
+                                       FontFamily="{StaticResource SFProMedium}"
+                                       FontSize="11"
+                                       Foreground="{StaticResource SecondaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource SecondaryButtonBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

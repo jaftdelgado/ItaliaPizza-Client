@@ -39,15 +39,9 @@ namespace ItaliaPizzaClient.Views
             NavigationManager.Instance.GoBack();
         }
 
-        private string GetCurrentUserRole()
+        private int GetCurrentUserRole()
         {
-            return "Test";
-        }
-
-        private void LoadProfileImage()
-        {
-            BtnProfile.Tag = new System.Windows.Media.Imaging.BitmapImage(
-                new Uri(Constants.DEFAULT_PROFILE_PIC_PATH, UriKind.Absolute));
+            return CurrentSession.LoggedInUser.RoleID;
         }
 
         private void ConfigureUserProfileButton()

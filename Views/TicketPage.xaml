@@ -56,8 +56,44 @@
 
 
 
-                    <TextBlock x:Name="TxtTotalItems" Text="TOTAL DE PRODUCTOS                            0" FontWeight="Bold"/>
-                    <TextBlock x:Name="TxtTotal" Text="TOTAL:                                                       0.00" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <StackPanel Margin="0,10,0,10">
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="TOTAL DE PRODUCTOS" Grid.Column="0" FontWeight="Bold" />
+                            <TextBlock x:Name="TxtTotalItems" Text="0" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" />
+                        </Grid>
+
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="EFECTIVO:" Grid.Column="0" FontWeight="Bold" />
+                            <TextBlock x:Name="TxtCash" Text="0.00" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" />
+                        </Grid>
+
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="TOTAL:" Grid.Column="0" FontWeight="Bold" />
+                            <TextBlock x:Name="TxtTotal" Text="0.00" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" />
+                        </Grid>
+
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="CAMBIO:" Grid.Column="0" FontWeight="Bold" />
+                            <TextBlock x:Name="TxtChange" Text="0.00" Grid.Column="1" FontWeight="Bold" TextAlignment="Right" />
+                        </Grid>
+                    </StackPanel>
+
 
                     <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="12">
                         Italia Pizza, S.A. de C.V. en su carácter de

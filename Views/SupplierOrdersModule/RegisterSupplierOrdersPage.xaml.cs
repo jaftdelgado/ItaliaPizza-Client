@@ -2,7 +2,6 @@
 using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
-using ItaliaPizzaClient.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -9,6 +9,8 @@ using ItaliaPizzaClient.Views.SuppliersModule;
 using ItaliaPizzaClient.Views.OrdersModule;
 using ItaliaPizzaClient.Views.RecepiesModule;
 using ItaliaPizzaClient.Views.SupplierOrdersModule;
+using ItaliaPizzaClient.Views.CashRegisterModule;
+using ItaliaPizzaClient.Views.ProductsModule;
 
 namespace ItaliaPizzaClient.Utilities
 {
@@ -44,12 +46,12 @@ namespace ItaliaPizzaClient.Utilities
             set => SetValue(HoverIconPathProperty, value);
         }
 
-        public List<string> AllowedRoles { get; set; }
+        public List<int> AllowedRoles { get; set; }
         public int Order { get; set; }
         public string ResourceName { get; set; }
         public Page PageInstance { get; set; }
 
-        public bool CanAccess(string role) => AllowedRoles.Contains(role);
+        public bool CanAccess(int role) => AllowedRoles.Contains(role);
 
         private void FindName()
         {
@@ -66,7 +68,7 @@ namespace ItaliaPizzaClient.Utilities
 
     public class SideMenuManager
     {
-        public static string CurrentUserRole;
+        public static int CurrentUserRole;
         private NavigationManager navigationManager;
         private Button lastSelectedButton;
 
@@ -75,14 +77,14 @@ namespace ItaliaPizzaClient.Utilities
             this.navigationManager = navigationManager;
         }
 
-        public static List<MenuButton> GetButtonsForRole(string role)
+        public static List<MenuButton> GetButtonsForRole(int role)
         {
             var buttons = new List<MenuButton>
             {
                 new MenuButton {
                     ResourceName = "Glb_Principal",
                     Order = 1,
-                    AllowedRoles = new List<string> { "Admin", "Manager", "Cashier", "Waiter", "Cook", "Test" },
+                    AllowedRoles = new List<int> { 1, 2, 3, 4, 5, 6},
                     IconPath = "/Resources/Icons/home-icon.png",
                     HoverIconPath = "/Resources/Icons/home-hover-icon.png",
                     PageInstance = new PrincipalPage()
@@ -91,7 +93,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Personal",
                     Order = 2,
-                    AllowedRoles = new List<string> { "Admin", "Test" },
+                    AllowedRoles = new List<int> { 1 },
                     IconPath = "/Resources/Icons/personal-icon.png",
                     HoverIconPath = "/Resources/Icons/personal-hover-icon.png",
                     PageInstance = new PersonalPage()
@@ -100,16 +102,16 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Orders",
                     Order = 2,
-                    AllowedRoles = new List<string> { "Cashier", "Waiter", "Cook", "Test" },
+                    AllowedRoles = new List<int> { 3, 4, 5 },
                     IconPath = "/Resources/Icons/orders-icon.png",
                     HoverIconPath = "/Resources/Icons/orders-hover-icon.png",
-                    PageInstance = new OrderPage()
+                    PageInstance = new OrdersPage()
                 },
                 new MenuButton
                 {
                     ResourceName = "Glb_Products",
                     Order = 3,
-                    AllowedRoles = new List<string> { "Admin", "Cashier", "Waiter", "Cook", "Test" },
+                    AllowedRoles = new List<int> { 1, 3, 4, 5 },
                     IconPath = "/Resources/Icons/products-icon.png",
                     HoverIconPath = "/Resources/Icons/products-hover-icon.png",
                     PageInstance = new ProductsPage()
@@ -118,7 +120,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Recipes",
                     Order = 4,
-                    AllowedRoles = new List<string> { "Admin", "Cook", "Test" },
+                    AllowedRoles = new List<int> { 1, 5 },
                     IconPath = "/Resources/Icons/recipes-icon.png",
                     HoverIconPath = "/Resources/Icons/recipes-hover-icon.png",
                     PageInstance = new RecipesPage()
@@ -127,7 +129,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Supplies",
                     Order = 5,
-                    AllowedRoles = new List<string> { "Admin", "Manager", "Test" },
+                    AllowedRoles = new List<int> { 1, 2 },
                     IconPath = "/Resources/Icons/supplies-icon.png",
                     HoverIconPath = "/Resources/Icons/supplies-hover-icon.png",
                     PageInstance = new SuppliesPage()
@@ -136,7 +138,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Stock",
                     Order = 6,
-                    AllowedRoles = new List<string> { "Admin", "Manager", "Test" },
+                    AllowedRoles = new List<int> { 1, 2 },
                     IconPath = "/Resources/Icons/stock-icon.png",
                     HoverIconPath = "/Resources/Icons/stock-hover-icon.png",
                     PageInstance = new StockPage()
@@ -145,7 +147,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Suppliers",
                     Order = 7,
-                    AllowedRoles = new List<string> { "Admin", "Manager", "Cashier", "Test" },
+                    AllowedRoles = new List<int> { 1, 2, 3 },
                     IconPath = "/Resources/Icons/suppliers-icon.png",
                     HoverIconPath = "/Resources/Icons/suppliers-hover-icon.png",
                     PageInstance = new SuppliersPage()
@@ -154,7 +156,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_CashRegister",
                     Order = 2,
-                    AllowedRoles = new List<string> { "Manager", "Cashier", "Test" },
+                    AllowedRoles = new List<int> { 2, 3 },
                     IconPath = "/Resources/Icons/cashregister-icon.png",
                     HoverIconPath = "/Resources/Icons/cashregister-hover-icon.png",
                     PageInstance = new CashRegisterPage()
@@ -163,7 +165,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Clients",
                     Order = 10,
-                    AllowedRoles = new List<string> { "Cashier", "Test" },
+                    AllowedRoles = new List<int> { 3 },
                     IconPath = "/Resources/Icons/clients-icon.png",
                     HoverIconPath = "/Resources/Icons/clients-hover-icon.png",
                     PageInstance = new CustomersPage()
@@ -172,7 +174,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_SupplierOrders",
                     Order = 11,
-                    AllowedRoles = new List<string> { "Admin", "Manager", "Cashier", "Test" },
+                    AllowedRoles = new List<int> { 1, 2, 3 },
                     IconPath = "/Resources/Icons/supplyorders-icon.png",
                     HoverIconPath = "/Resources/Icons/supplyorders-hover-icon.png",
                     PageInstance = new SupplierOrdersPage()
@@ -181,7 +183,7 @@ namespace ItaliaPizzaClient.Utilities
                 {
                     ResourceName = "Glb_Reports",
                     Order = 12,
-                    AllowedRoles = new List<string> { "Admin", "Test" },
+                    AllowedRoles = new List<int> { 1 },
                     IconPath = "/Resources/Icons/reports-icon.png",
                     HoverIconPath = "/Resources/Icons/reports-hover-icon.png",
                     PageInstance = new SalesReportPage()
@@ -230,7 +232,6 @@ namespace ItaliaPizzaClient.Utilities
                 stackPanel.Children.Add(button);
             }
         }
-
 
         private bool IsCurrentModule(MenuButton buttonInfo)
         {

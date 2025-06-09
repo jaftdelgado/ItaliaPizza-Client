@@ -48,30 +48,39 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0" Orientation="Horizontal">
-                    <TextBlock Text="{DynamicResource RegOrderSupplier_Info}"
+                    <TextBlock Text="{DynamicResource RegOrder_Products}"
                            Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
                 <Grid Grid.Row="1" Margin="0 12 0 0">
                     <StackPanel HorizontalAlignment="Stretch">
-                        <Border BorderBrush="{StaticResource SecondaryBrush}" BorderThickness="0 0 0 0.5">
+                        <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1">
                             <StackPanel Margin="20 0 20 16">
-                                <TextBlock Text="{DynamicResource RegOrderSupplier_SupplierInfo}"
+                                <TextBlock Text="{DynamicResource RegOrder_CustomerInfo}"
                                        Style="{DynamicResource DescriptionLabelStyle}"
                                        Margin="0 0 0 8"/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox x:Name="TbTableNumber"
-                                             Width="160"
+                                             Width="120"
                                              Style="{DynamicResource TextBoxStyle}"
-                                             Tag="{DynamicResource RegOrder_TbTableNumber}" />
-                                    <ComboBox x:Name="CbCustomers"
-                                          Width="160"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          Tag="{DynamicResource RegOrder_CbCustomers}" />
-                                    <ComboBox x:Name="CbDelivery"
-                                          Style="{DynamicResource ComboBoxStyle}"
-                                          Tag="{DynamicResource RegOrder_CbDelivery}"
-                                          Width="190" Margin="10 0 0 0"/>
+                                             Tag="{DynamicResource RegOrder_TbTableNumber}" 
+                                             LostFocus="TbTableNumber_LostFocus" />
+                                    <StackPanel x:Name="DeliveryFields"
+                                                Orientation="Horizontal">
+                                        <ComboBox x:Name="CbCustomers"
+                                                  Width="150"
+                                                  Style="{DynamicResource ComboBoxStyle}"
+                                                  Tag="{DynamicResource RegOrder_CbCustomers}"
+                                                  DisplayMemberPath="FullName"
+                                                  SelectionChanged="CbCustomers_SelectionChanged"/>
+                                        <ComboBox x:Name="CbDelivery"
+                                                  Width="180"
+                                                  Margin="10 0 0 0"
+                                                  Tag="{DynamicResource RegOrder_CbDelivery}"
+                                                  Style="{DynamicResource ComboBoxStyle}"
+                                                  DisplayMemberPath="FullName"
+                                                  SelectionChanged="CbDelivery_SelectionChanged"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -124,8 +133,8 @@
                     <StackPanel x:Name="OrderDetailsPanel" Grid.Row="1" Margin="20"/>
 
                     <Border Grid.Row="2"
-                        BorderBrush="{StaticResource SecondaryBrush}"
-                        BorderThickness="0 0.5 0 0">
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="0 1 0 0">
                         <StackPanel Margin="20 14 20 26" >
                             <TextBlock Text="{DynamicResource RegOrder_OrderSummary}" 
                                        Margin="0 0 0 10"
@@ -136,10 +145,10 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0"
-                                       Text="Proveedor:"
-                                       Style="{DynamicResource DescriptionLabelStyle}" />
-                                <TextBlock x:Name="TbSupplier"
+                                <TextBlock x:Name="Responsible"
+                                           Grid.Column="0"
+                                           Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="ResponsibleName"
                                        Grid.Column="1" HorizontalAlignment="Right"
                                        Text="-"
                                        Style="{DynamicResource RegularLabelStyle}"/>
@@ -158,6 +167,72 @@
                                        Grid.Column="1" HorizontalAlignment="Right"
                                        Text="-"
                                        Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid Margin="0 4 0 0"
+                                  x:Name="TablePanel">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                       Text="{DynamicResource RegOrder_TbTableNumber}"
+                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="TableNumber"
+                                       Grid.Column="1" HorizontalAlignment="Right"
+                                       Text="-"
+                                       Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid x:Name="CustomerPanel"
+                                  Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                       Text="{DynamicResource RegOrder_CbCustomers}"
+                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="CustomerName"
+                                       Grid.Column="1" HorizontalAlignment="Right"
+                                       Text="-"
+                                       Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid x:Name="DeliveryPanel"
+                                  Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                       Text="{DynamicResource RegOrder_CbDelivery}"
+                                       Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="DeliveryPersonal"
+                                       Grid.Column="1" HorizontalAlignment="Right"
+                                       Text="-"
+                                       Style="{DynamicResource RegularLabelStyle}"/>
+                            </Grid>
+                            
+                            <Grid x:Name="AddressPanel"
+                                  Margin="0 4 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{DynamicResource RegOrder_Address}"
+                                           VerticalAlignment="Top"
+                                           Style="{DynamicResource DescriptionLabelStyle}" />
+                                <TextBlock x:Name="Address"
+                                           Grid.Column="1" HorizontalAlignment="Stretch"
+                                           Text="-" TextAlignment="Right"
+                                           TextWrapping="Wrap"
+                                           Style="{DynamicResource RegularLabelStyle}"/>
                             </Grid>
 
                             <Grid Margin="0 8 0 0">
@@ -189,16 +264,24 @@
                     Style="{DynamicResource SecondaryButtonNoIconStyle}"
                     Content="{DynamicResource Glb_Cancel}"
                     Margin="0 0 10 0"/>
-                <Button x:Name="BtnConfirmOrder"
-                    Style="{DynamicResource PrimaryButtonStyle}"
-                    Content="{DynamicResource RegOrderSupplier_BtnConfirmOrder}"
-                    Click="Click_BtnConfirmOrder">
+                <Button x:Name="BtnConfirmLocalOrder"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Content="{DynamicResource RegOrder_BtnConfirmLocalOrder}"
+                        Click="Click_BtnConfirmLocalOrder">
+                    <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                </Button>
+                <Button x:Name="BtnConfirmDeliveryOrder"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Content="{DynamicResource RegOrder_BtnConfirmDeliveryOrder}"
+                        Click="Click_BtnConfirmDeliveryOrder"
+                        Visibility="Collapsed">
                     <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
                 </Button>
                 <Button x:Name="BtnEditOrder" 
                     Style="{DynamicResource PrimaryButtonStyle}"
                     Content="{DynamicResource RegOrderSupplier_BtnEditOrder}"
-                    Visibility="Collapsed" >
+                    Visibility="Collapsed" 
+                    Click="Click_BtnEditOrder">
                     <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
                 </Button>
             </StackPanel>

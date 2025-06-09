@@ -10,12 +10,14 @@
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="68"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="0 0 0 0.5"
-                BorderBrush="{StaticResource SecondaryBrush}">
+        <Border Grid.Row="0" 
+                BorderThickness="0 0 0 1"
+                BorderBrush="{StaticResource BorderBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="6*"/>
@@ -39,7 +41,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" BorderBrush="{DynamicResource SecondaryBrush}" BorderThickness="0,0,0.5,0">
+            <Border Grid.Column="0" 
+                    BorderBrush="{DynamicResource BorderBrush}" 
+                    BorderThickness="0 0 1 0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
                             Margin="0,24" Width="200">
 
@@ -83,7 +87,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="36"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" VerticalAlignment="Bottom" Margin="20 0">
@@ -91,7 +94,7 @@
                                Style="{DynamicResource SubtitleLabelStyle}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20,12,0,0">
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20 12 0 0">
                     <TextBlock Text="Datos generales"
                                Style="{DynamicResource DescriptionLabelStyle}" Margin="0,0,0,8"/>
                     <Grid>
@@ -196,32 +199,34 @@
                         </Grid>
                     </Grid>
                 </StackPanel>
-
-                <Border Grid.Row="2" BorderBrush="{DynamicResource SecondaryBrush}"
-                        BorderThickness="0,0.5,0,0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
-                        <Button x:Name="BtnCancel" Style="{DynamicResource SecondaryButtonNoIconStyle}"
-                                Content="{DynamicResource Glb_Cancel}"
-                                Margin="0,0,10,0"
-                                Click="Click_BtnCancel"/>
-                        <Button x:Name="BtnRegisterSupply" 
-                                Style="{DynamicResource PrimaryButtonStyle}"
-                                Content="{DynamicResource RegSupply_BtnRegisterSupply}"
-                                Click="Click_BtnRegisterSupply">
-                            <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
-                        </Button>
-                        <Button x:Name="BtnEditSupply" 
-                                Style="{DynamicResource PrimaryButtonStyle}"
-                                Content="{DynamicResource RegSupply_BtnEditSupply}"
-                                Click="Click_BtnEditSupply"
-                                Visibility="Collapsed">
-                            <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
-                        </Button>
-                    </StackPanel>
-                </Border>
-
             </Grid>
-
         </Grid>
+
+        <Border Grid.Row="2" 
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="0 1 0 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20,0" VerticalAlignment="Center">
+                <Button x:Name="BtnCancel"
+                        Style="{DynamicResource SecondaryButtonNoIconStyle}"
+                        Content="{DynamicResource Glb_Cancel}"
+                        Margin="0 0 10 0"
+                        Click="Click_BtnCancel"/>
+                
+                <Button x:Name="BtnRegisterSupply"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Content="{DynamicResource RegSupply_BtnRegisterSupply}"
+                        Click="Click_BtnRegisterSupply">
+                    <Button.Tag>/Resources/Icons/add-icon.png</Button.Tag>
+                </Button>
+                
+                <Button x:Name="BtnEditSupply" 
+                Style="{DynamicResource PrimaryButtonStyle}"
+                Content="{DynamicResource RegSupply_BtnEditSupply}"
+                Click="Click_BtnEditSupply"
+                Visibility="Collapsed">
+                    <Button.Tag>/Resources/Icons/edit-icon.png</Button.Tag>
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

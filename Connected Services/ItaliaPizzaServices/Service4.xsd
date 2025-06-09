@@ -2,8 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Services.Dtos" />
   <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/" />
-  <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Services" />
-  <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:8082/Service?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetAllPersonals">
     <xs:complexType>
       <xs:sequence />
@@ -16,10 +15,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetDeliveryDrivers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDeliveryDriversResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetDeliveryDriversResult" nillable="true" type="q2:ArrayOfDeliveryDriverDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddPersonal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="personalDTO" nillable="true" type="q2:PersonalDTO" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="personalDTO" nillable="true" type="q3:PersonalDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -33,7 +44,7 @@
   <xs:element name="UpdatePersonal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="personalDTO" nillable="true" type="q3:PersonalDTO" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="personalDTO" nillable="true" type="q4:PersonalDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -122,7 +133,7 @@
   <xs:element name="GetAllSuppliersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetAllSuppliersResult" nillable="true" type="q4:ArrayOfSupplierDTO" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetAllSuppliersResult" nillable="true" type="q5:ArrayOfSupplierDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -136,14 +147,14 @@
   <xs:element name="GetSuppliersByCategoryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetSuppliersByCategoryResult" nillable="true" type="q5:ArrayOfSupplierDTO" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetSuppliersByCategoryResult" nillable="true" type="q6:ArrayOfSupplierDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddSupplier">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="supplierDTO" nillable="true" type="q6:SupplierDTO" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="supplierDTO" nillable="true" type="q7:SupplierDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -157,7 +168,7 @@
   <xs:element name="UpdateSupplier">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="supplierDTO" nillable="true" type="q7:SupplierDTO" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="supplierDTO" nillable="true" type="q8:SupplierDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -220,7 +231,7 @@
   <xs:element name="GetSuppliesBySupplierResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetSuppliesBySupplierResult" nillable="true" type="q8:ArrayOfSupplyDTO" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetSuppliesBySupplierResult" nillable="true" type="q9:ArrayOfSupplyDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -235,7 +246,7 @@
   <xs:element name="GetSuppliesAvailableByCategoryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetSuppliesAvailableByCategoryResult" nillable="true" type="q9:ArrayOfSupplyDTO" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetSuppliesAvailableByCategoryResult" nillable="true" type="q10:ArrayOfSupplyDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -249,7 +260,7 @@
   <xs:element name="GetAllSuppliesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetAllSuppliesResult" nillable="true" type="q10:ArrayOfSupplyDTO" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetAllSuppliesResult" nillable="true" type="q11:ArrayOfSupplyDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -264,7 +275,7 @@
   <xs:element name="GetAllSuppliesPageResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetAllSuppliesPageResult" nillable="true" type="q11:ArrayOfSupplyDTO" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetAllSuppliesPageResult" nillable="true" type="q12:ArrayOfSupplyDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -278,14 +289,14 @@
   <xs:element name="GetSuppliesByRecipeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="GetSuppliesByRecipeResult" nillable="true" type="q12:ArrayOfRecipeSupplyDTO" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetSuppliesByRecipeResult" nillable="true" type="q13:ArrayOfRecipeSupplyDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddSupply">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="supplyDTO" nillable="true" type="q13:SupplyDTO" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="supplyDTO" nillable="true" type="q14:SupplyDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -299,7 +310,7 @@
   <xs:element name="UpdateSupply">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="supplyDTO" nillable="true" type="q14:SupplyDTO" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="supplyDTO" nillable="true" type="q15:SupplyDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -341,7 +352,7 @@
   <xs:element name="AssignSupplierToSupply">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="supplyIds" nillable="true" type="q15:ArrayOfint" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="supplyIds" nillable="true" type="q16:ArrayOfint" />
         <xs:element minOccurs="0" name="supplierId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -356,7 +367,7 @@
   <xs:element name="UnassignSupplierFromSupply">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="supplyIds" nillable="true" type="q16:ArrayOfint" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="supplyIds" nillable="true" type="q17:ArrayOfint" />
         <xs:element minOccurs="0" name="supplierId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -385,14 +396,84 @@
   <xs:element name="AddProduct">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="productDTO" nillable="true" type="q17:ProductDTO" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="productDTO" nillable="true" type="q18:ProductDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddProductResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="AddProductResult" nillable="true" type="q18:ProductDTO" />
+        <xs:element minOccurs="0" name="AddProductResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllProducts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeOnly" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllProductsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetAllProductsResult" nillable="true" type="q19:ArrayOfProductDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateProduct">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="productDTO" nillable="true" type="q20:ProductDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateProductResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateProductResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteProduct">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="productId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteProductResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteProductResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReactivateProduct">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="productId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReactivateProductResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ReactivateProductResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsProductDeletable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="productId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsProductDeletableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsProductDeletableResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -404,7 +485,7 @@
   <xs:element name="GetCurrentTransactionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetCurrentTransactionsResult" nillable="true" type="q19:ArrayOfTransactionDTO" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetCurrentTransactionsResult" nillable="true" type="q21:ArrayOfTransactionDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -412,13 +493,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="orderId" type="xs:int" />
+        <xs:element minOccurs="0" name="efectivo" type="xs:decimal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterOrderPaymentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="RegisterOrderPaymentResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RegisterOrderPaymentResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -430,7 +512,7 @@
   <xs:element name="GetOpenCashRegisterInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetOpenCashRegisterInfoResult" nillable="true" type="q20:CashRegisterDTO" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetOpenCashRegisterInfoResult" nillable="true" type="q22:CashRegisterDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -445,6 +527,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="OpenCashRegisterResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseCashRegister">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cashierAmount" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseCashRegisterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CloseCashRegisterResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -587,83 +683,160 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDeliveredOrders">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetDeliveredOrdersResponse">
+  <xs:element name="GetOrders">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetDeliveredOrdersResult" nillable="true" type="q26:ArrayOfOrderSummaryDTO" />
+=======
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="statusList" nillable="true" type="q26:ArrayOfint" />
+        <xs:element minOccurs="0" name="includeLocal" type="xs:boolean" />
+        <xs:element minOccurs="0" name="includeDelivery" type="xs:boolean" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrderItemsByOrderID">
+  <xs:element name="GetOrdersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="orderID" type="xs:int" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetOrdersResult" nillable="true" type="q27:ArrayOfOrderDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrderItemsByOrderIDResponse">
+  <xs:element name="ChangeOrderStatus">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetOrderItemsByOrderIDResult" nillable="true" type="q27:ArrayOfOrderItemSummaryDTO" />
+=======
+        <xs:element minOccurs="0" name="orderId" type="xs:int" />
+        <xs:element minOccurs="0" name="newStatus" type="xs:int" />
+        <xs:element minOccurs="0" name="roleId" type="xs:int" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RegisterRecipe">
+  <xs:element name="ChangeOrderStatusResponse">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="recipeDTO" nillable="true" type="q28:RecipeDTO" />
         <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="supplies" nillable="true" type="q29:ArrayOfRecipeSupplyDTO" />
+=======
+        <xs:element minOccurs="0" name="ChangeOrderStatusResult" type="xs:boolean" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RegisterRecipeResponse">
+  <xs:element name="AddLocalOrder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="RegisterRecipeResult" type="xs:int" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="orderDTO" nillable="true" type="q28:OrderDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllRecipes">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllRecipesResponse">
+  <xs:element name="AddLocalOrderResponse">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="GetAllRecipesResult" nillable="true" type="q30:ArrayOfRecipeDTO" />
+=======
+        <xs:element minOccurs="0" name="AddLocalOrderResult" type="xs:int" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetRecipes">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetRecipesResponse">
+  <xs:element name="AddDeliveryOrder">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="GetRecipesResult" nillable="true" type="q31:ArrayOfRecipeDTO" />
+=======
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="orderDTO" nillable="true" type="q29:OrderDTO" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="deliveryDTO" nillable="true" type="q30:DeliveryDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddDeliveryOrderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddDeliveryOrderResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="orderDTO" nillable="true" type="q31:OrderDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOrderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateOrderResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductsWithRecipe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="includeSteps" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductsWithRecipeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetProductsWithRecipeResult" nillable="true" type="q32:ArrayOfProductDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddRecipe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="recipeDTO" nillable="true" type="q33:RecipeDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddRecipeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddRecipeResult" type="xs:int" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateRecipe">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="recipeDTO" nillable="true" type="q32:RecipeDTO" />
         <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="supplies" nillable="true" type="q33:ArrayOfRecipeSupplyDTO" />
+=======
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="recipeDTO" nillable="true" type="q34:RecipeDTO" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateRecipeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateRecipeResult" type="xs:int" />
+        <xs:element minOccurs="0" name="UpdateRecipeResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRecipe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="recipeId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRecipeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteRecipeResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -675,14 +848,22 @@
   <xs:element name="GetCustomersResponse">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetCustomersResult" nillable="true" type="q34:ArrayOfCustomerDTO" />
+=======
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetCustomersResult" nillable="true" type="q35:ArrayOfCustomerDTO" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddCustomer">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="customerDTO" nillable="true" type="q35:CustomerDTO" />
+=======
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="customerDTO" nillable="true" type="q36:CustomerDTO" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -710,7 +891,11 @@
   <xs:element name="UpdateCustomer">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="customerDTO" nillable="true" type="q36:CustomerDTO" />
+=======
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="customerDTO" nillable="true" type="q37:CustomerDTO" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -749,6 +934,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetActiveCustomers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetActiveCustomersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="GetActiveCustomersResult" nillable="true" type="q38:ArrayOfCustomerDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SignIn">
     <xs:complexType>
       <xs:sequence>
@@ -760,7 +957,11 @@
   <xs:element name="SignInResponse">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="SignInResult" nillable="true" type="q37:PersonalDTO" />
+=======
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="SignInResult" nillable="true" type="q39:PersonalDTO" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -795,7 +996,11 @@
   <xs:element name="RegisterSupplyLoss">
     <xs:complexType>
       <xs:sequence>
+<<<<<<< HEAD
         <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="supplyDTO" nillable="true" type="q38:SupplyDTO" />
+=======
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Services.Dtos" minOccurs="0" name="supplyDTO" nillable="true" type="q40:SupplyDTO" />
+>>>>>>> 67a359225d08533cebf0734b274988540f31cb7f
       </xs:sequence>
     </xs:complexType>
   </xs:element>

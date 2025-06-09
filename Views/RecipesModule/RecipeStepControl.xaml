@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ItaliaPizzaClient.Views.RecipesModule.RecipeStepControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto" >
+
+    <Grid HorizontalAlignment="Stretch" Margin="0 10 0 10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="StepNumberText" 
+                   Text="{Binding StepNumber, RelativeSource={RelativeSource AncestorType=UserControl}, StringFormat={}{0}.}"
+                   Style="{StaticResource SubtitleLabelStyle}"
+                   FontSize="13"
+                   TextAlignment="Left"
+                   Margin="20,8,10,0"/>
+
+        <TextBox Grid.Column="1"
+                 Text="{Binding Instruction, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource CleanTextAreaStyle}"
+                 TextChanged="InstructionTextBox_TextChanged"/>
+
+        <Button Grid.Column="2"
+                Style="{StaticResource DeleteButtonStyle}"
+                Click="DeleteButton_Click"/>
+    </Grid>
+</UserControl>

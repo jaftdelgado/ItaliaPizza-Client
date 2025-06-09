@@ -3,6 +3,7 @@
     public static class Constants
     {
         public static readonly string DEFAULT_PROFILE_PIC_PATH = "pack://application:,,,/Resources/Images/default-profile-pic.png";
+        public static readonly string DEFAULT_PRODUCT_PIC_PATH = "pack://application:,,,/Resources/Images/default-product-pic.png";
         public static readonly string DEFAULT_SUPPLY_PIC_PATH = "pack://application:,,,/Resources/Images/default-supply-pic.png";
 
         public static readonly long MAX_IMAGE_SIZE = 5 * 1024 * 1024;

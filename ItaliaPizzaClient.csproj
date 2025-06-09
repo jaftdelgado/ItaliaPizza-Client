@@ -47,6 +47,42 @@
     <Reference Include="MahApps.Metro.IconPacks.Material, Version=5.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>packages\MahApps.Metro.IconPacks.Material.5.1.0\lib\net47\MahApps.Metro.IconPacks.Material.dll</HintPath>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-GDI.6.2.0\lib\net462\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-GDI.6.2.0\lib\net462\MigraDoc.Rendering-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-GDI.6.2.0\lib\net462\MigraDoc.RtfRendering-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.BarCodes-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.BarCodes-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.Charting-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Cryptography, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Quality-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.Quality-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Shared, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Snippets-gdi, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.Snippets-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.System, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.System.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.WPFonts, Version=6.2.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-GDI.6.2.0\lib\net462\PdfSharp.WPFonts.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero2, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\PresentationFramework.Aero2.1.0.1\lib\PresentationFramework.Aero2.dll</HintPath>
     </Reference>
@@ -88,10 +124,12 @@
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\EmployeeRole.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderStatus.cs" />
     <Compile Include="Model\Personal.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductCategory.cs" />
     <Compile Include="Model\Recipe.cs" />
-    <Compile Include="Model\RecipeSupplyItem.cs" />
     <Compile Include="Model\SupplierOrder.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\Supply.cs" />
@@ -100,11 +138,34 @@
     <Compile Include="Model\Transaction.cs" />
     <Compile Include="Model\WasteSupply.cs" />
     <Compile Include="Utilities\FlowToColorConverter.cs" />
-    <Compile Include="Views\CashRegisterPage.xaml.cs">
+    <Compile Include="Utilities\TicketExporter.cs" />
+    <Compile Include="Utilities\ReportUtils.cs" />
+    <Compile Include="Views\CashRegisterModule\CashRegisterPage.xaml.cs">
       <DependentUpon>CashRegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersModule\OrdersPage.xaml.cs">
+      <DependentUpon>OrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersModule\ProductCard.xaml.cs">
+      <DependentUpon>ProductCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersModule\ProductOrderDetail.xaml.cs">
+      <DependentUpon>ProductOrderDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrdersModule\RegisterOrderPage.xaml.cs">
       <DependentUpon>RegisterOrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductsModule\RegisterProductPage.xaml.cs">
+      <DependentUpon>RegisterProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\IngredientDetail.xaml.cs">
+      <DependentUpon>IngredientDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\RecipeStepControl.xaml.cs">
+      <DependentUpon>RecipeStepControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecipesModule\RegisterRecipePage.xaml.cs">
+      <DependentUpon>RegisterRecipePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SalesReportPage.xaml.cs">
       <DependentUpon>SalesReportPage.xaml</DependentUpon>
@@ -115,14 +176,14 @@
     <Compile Include="Views\StockPage.xaml.cs">
       <DependentUpon>StockPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\OpeningCash.xaml.cs">
+    <Compile Include="Views\CashRegisterModule\ClosingCash.xaml.cs">
+      <DependentUpon>ClosingCash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CashRegisterModule\OpeningCash.xaml.cs">
       <DependentUpon>OpeningCash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\RegisterOutflowMoney.xaml.cs">
+    <Compile Include="Views\CashRegisterModule\RegisterOutflowMoney.xaml.cs">
       <DependentUpon>RegisterOutflowMoney.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\ProductCard.xaml.cs">
-      <DependentUpon>ProductCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SupplierOrdersModule\SupplyCard.xaml.cs">
       <DependentUpon>SupplyCard.xaml</DependentUpon>
@@ -160,14 +221,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\OrdersModule\OrderPage.xaml.cs">
-      <DependentUpon>OrderPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RecipesModule\RecipesPage.xaml.cs">
       <DependentUpon>RecipesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RecipesModule\RecipeRegister.xaml.cs">
-      <DependentUpon>RecipeRegister.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipesModule\SuppliesList.xaml.cs">
       <DependentUpon>SuppliesList.xaml</DependentUpon>
@@ -186,9 +241,6 @@
     </Compile>
     <Compile Include="Views\CustomersModule\RegisterCustomerPage.xaml.cs">
       <DependentUpon>RegisterCustomerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProductsModule\RegisterProduct.xaml.cs">
-      <DependentUpon>RegisterProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonalModule\RegisterEmployeePage.xaml.cs">
       <DependentUpon>RegisterEmployeePage.xaml</DependentUpon>
@@ -217,6 +269,9 @@
     <Compile Include="Views\UserControls\RegisterSupplyWaste.xaml.cs">
       <DependentUpon>RegisterSupplyWaste.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\SelectSupply.xaml.cs">
+      <DependentUpon>SelectSupply.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\UserSettings.xaml.cs">
       <DependentUpon>UserSettings.xaml</DependentUpon>
     </Compile>
@@ -244,11 +299,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CashRegisterPage.xaml">
+    <Page Include="Views\CashRegisterModule\CashRegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrdersModule\OrdersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrdersModule\ProductCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrdersModule\ProductOrderDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrdersModule\RegisterOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductsModule\RegisterProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\IngredientDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\RecipeStepControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecipesModule\RegisterRecipePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,15 +347,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\OpeningCash.xaml">
+    <Page Include="Views\CashRegisterModule\ClosingCash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\RegisterOutflowMoney.xaml">
+    <Page Include="Views\CashRegisterModule\OpeningCash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\ProductCard.xaml">
+    <Page Include="Views\CashRegisterModule\RegisterOutflowMoney.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -316,15 +399,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OrdersModule\OrderPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\RecipesModule\RecipesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RecipesModule\RecipeRegister.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,10 +424,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CustomersModule\RegisterCustomerPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProductsModule\RegisterProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -392,6 +463,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\SelectSupply.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\UserSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -421,19 +496,16 @@
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.CustomerDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderItemSummaryDTO.datasource">
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.DeliveryDriverDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderSummaryDTO.datasource">
+    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.OrderDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.PersonalDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.ProductDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.RecipeDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\ItaliaPizzaClient.ItaliaPizzaServices.RecipeSupplyDTO.datasource">
@@ -465,9 +537,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ItaliaPizzaServices\Service4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ItaliaPizzaServices\Service5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -620,6 +689,18 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\signout-hover-icon.png" />
     <Resource Include="Resources\Icons\signout-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\inflow-icon.png" />
+    <Resource Include="Resources\Icons\outflow-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\default-product-pic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Icons\italiapizza-icon2Build.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

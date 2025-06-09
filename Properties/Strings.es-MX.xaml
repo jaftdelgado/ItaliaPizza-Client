@@ -17,7 +17,7 @@
     <sys:String x:Key="Glb_Change">Cambiar</sys:String>
     <sys:String x:Key="Glb_Principal">Principal</sys:String>
     <sys:String x:Key="Glb_Personal">Personal</sys:String>
-    <sys:String x:Key="Glb_Orders">Comandas</sys:String>
+    <sys:String x:Key="Glb_Orders">Órdenes</sys:String>
     <sys:String x:Key="Glb_Supplies">Insumos</sys:String>
     <sys:String x:Key="Glb_Products">Productos</sys:String>
     <sys:String x:Key="Glb_Recipes">Recetas</sys:String>
@@ -42,6 +42,7 @@
     <sys:String x:Key="Glb_Deleted">Eliminados</sys:String>
     <sys:String x:Key="Glb_NoStock">Sin inventario</sys:String>
     <sys:String x:Key="Glb_GeneralInfo">Datos Generales</sys:String>
+    <sys:String x:Key="Glb_TbCategory">Categoría:</sys:String>
     <sys:String x:Key="Glb_Transaction">Transacción</sys:String>
     <sys:String x:Key="Glb_NoSelected">Sin selección actual</sys:String>
     <sys:String x:Key="Glb_ValidImageFormat">Formato: PNG, JPG, JPEG | Máx: 5MB</sys:String>
@@ -65,6 +66,14 @@
     <sys:String x:Key="Setting_SignOut">Cerrar Sesión</sys:String>
     <sys:String x:Key="Setting_EditProfile">Modificar Perfil</sys:String>
     
+    <!--Product Categories-->
+    <sys:String x:Key="Product_Appetizers">Platillos de Entrada</sys:String>
+    <sys:String x:Key="Product_Salads">Ensaladas</sys:String>
+    <sys:String x:Key="Product_SavoryPizzas">Pizzas Saladas</sys:String>
+    <sys:String x:Key="Product_SweetPizzas">Pizzas Dulces</sys:String>
+    <sys:String x:Key="Product_Desserts">Postres</sys:String>
+    <sys:String x:Key="Product_BeveragesAndCocktails">Bebidas/Coctelería</sys:String>
+    
     <!--Supply Categories-->
     <sys:String x:Key="Supply_Dairy">Lácteos</sys:String>
     <sys:String x:Key="Supply_Meats">Carnes</sys:String>
@@ -85,7 +94,17 @@
     <sys:String x:Key="MeasureUA_Kilograms">kg</sys:String>
     <sys:String x:Key="MeasureUA_Liters">L</sys:String>
     <sys:String x:Key="MeasureUA_Pieces">pza</sys:String>
-
+    
+    <!-- Order Statuses -->
+    <sys:String x:Key="OrdStatus_Canceled">Cancelada</sys:String>
+    <sys:String x:Key="OrdStatus_Taken">Tomada</sys:String>
+    <sys:String x:Key="OrdStatus_Preparing">En preparación</sys:String>
+    <sys:String x:Key="OrdStatus_Prepared">Preparado</sys:String>
+    <sys:String x:Key="OrdStatus_Sent">Enviada</sys:String>
+    <sys:String x:Key="OrdStatus_Delivered">Entregada</sys:String>
+    <sys:String x:Key="OrdStatus_Paid">Pagada</sys:String>
+    <sys:String x:Key="OrdStatus_NotDelivered">No entregada</sys:String>
+    
     <!--EmployeeRoles-->
     <sys:String x:Key="EmployeeRole_Admin">Administrador</sys:String>
     <sys:String x:Key="EmployeeRole_Manager">Gerente</sys:String>
@@ -233,7 +252,6 @@
     <sys:String x:Key="Customers_DialogTReactivatedCustomer">Client reactivado</sys:String>
     <sys:String x:Key="Customers_DialogDReactivatedCustomer">El cliente fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de clientes activos.</sys:String>
 
-
     <!--Register Customer-->
     <sys:String x:Key="RegCustomer_Header">Registrar cliente </sys:String>
     <sys:String x:Key="RegCustomer_Desc">Ingresa los datos del cliente que se desea registrar.</sys:String>
@@ -255,21 +273,46 @@
     <sys:String x:Key="Products_Desc">Visualiza, registra, modifica y elimina productos utilizados por Italia Pizza.</sys:String>
     <sys:String x:Key="Products_BtnNewProduct">Nuevo Producto</sys:String>
     <sys:String x:Key="Products_TitleTable">Lista de Productos</sys:String>
+    <sys:String x:Key="Products_TableHCode">Código</sys:String>
+    <sys:String x:Key="Products_TableHProduct">Producto</sys:String>
+    <sys:String x:Key="Products_TableHCategory">Categoría</sys:String>
+    <sys:String x:Key="Products_TableHUnitPrice">Precio Unitario</sys:String>
     <sys:String x:Key="Products_BtnDeleteProduct">Eliminar producto</sys:String>
     <sys:String x:Key="Products_BtnEditProduct">Editar producto</sys:String>
+    <sys:String x:Key="Products_BtnReactivateProduct">Reactivar producto</sys:String>
+    <sys:String x:Key="Products_DialogTDeleteProduct">¿Eliminar producto?</sys:String>
+    <sys:String x:Key="Products_DialogDDeleteProduct">¿Estás seguro de que deseas eliminar el producto seleccionado? La eliminación es reversible y podrás restaurarlo más tarde si lo necesitas.</sys:String>
+    <sys:String x:Key="Products_DialogTDeletedProduct">Producto eliminado</sys:String>
+    <sys:String x:Key="Products_DialogDDeletedProduct">El producto fue marcado como eliminado correctamente. Puedes restaurarlo desde la vista de productos eliminados.</sys:String>
+    <sys:String x:Key="Products_DialogTReactivateProduct">¿Reactivar producto?</sys:String>
+    <sys:String x:Key="Products_DialogDReactivateProduct">¿Estás seguro de que deseas reactivar el producto seleccionado? Podrá ser asociado a insumos y pedidos de reabastecimiento nuevamente.</sys:String>
+    <sys:String x:Key="Products_DialogTReactivatedProduct">Producto reactivado</sys:String>
+    <sys:String x:Key="Products_DialogDReactivatedProduct">El producto fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de productos y órdenes.</sys:String>
+    <sys:String x:Key="Products_DialogTUnableToDelete">Producto no eliminable</sys:String>
+    <sys:String x:Key="Products_DialogDHasPendingOrders">Este producto tiene pedidos pendientes. Cancélalos antes de eliminarlo.</sys:String>
+    
 
     <!--Register Product-->
     <sys:String x:Key="RegProduct_Header">Registrar Producto</sys:String>
     <sys:String x:Key="RegProduct_Desc">Ingresa los datos del producto que se desea registrar.</sys:String>
+    <sys:String x:Key="EditProduct_Header">Editar Producto</sys:String>
+    <sys:String x:Key="EditProduct_Desc">Modifica los datos del producto que se desea actualizar.</sys:String>
     <sys:String x:Key="RegProduct_ProductInfo">Información del Producto</sys:String>
+    <sys:String x:Key="RegProduct_PreparationDetails">Detalles de Elaboración</sys:String>
     <sys:String x:Key="RegProduct_TbProductName">Nombre del producto</sys:String>
-    <sys:String x:Key="RegProduct_Price">Precio</sys:String>
-    <sys:String x:Key="RegProduct_Quantity">Cantidad</sys:String>
-    <sys:String x:Key="RegProduct_Description">Descripción</sys:String>
-    <sys:String x:Key="RegProduct_Code">Código</sys:String>
-    <sys:String x:Key="RegProduct_BtnRegisterProdcut">Registrar Producto</sys:String>
-    <sys:String x:Key="Glb_CbxCategories">Categorias</sys:String>
-
+    <sys:String x:Key="RegProduct_TbPrice">Precio Unitario:</sys:String>
+    <sys:String x:Key="RegProduct_TbRecipe">Receta:</sys:String>
+    <sys:String x:Key="RegProduct_TbProductSupply">Insumo asociado:</sys:String>
+    <sys:String x:Key="RegProduct_ProductDescription">Descripción del Producto:</sys:String>
+    <sys:String x:Key="RegProduct_CheckBIsNotPrepared">El producto no es preparado.</sys:String>
+    <sys:String x:Key="RegProduct_BtnSelectSupply">Seleccionar Insumo</sys:String>
+    <sys:String x:Key="RegProduct_BtnAddRecipe">Agregar Receta</sys:String>
+    <sys:String x:Key="RegProduct_BtnRegisterProduct">Registrar Producto</sys:String>
+    <sys:String x:Key="RegProduct_BtnEditProduct">Actualizar Producto</sys:String>
+    <sys:String x:Key="RegProduct_DialogTSuccess">Producto registrado</sys:String>
+    <sys:String x:Key="RegProduct_DialogDSuccess">La información del producto ha sido registrada correctamente y los datos han sido guardados con éxito.</sys:String>
+    <sys:String x:Key="RegProduct_DialogSelectProductPic">Seleccionar imagen del producto...</sys:String>
+  
     <!--Suppliers-->
     <sys:String x:Key="Suppliers_Header">Proveedores</sys:String>
     <sys:String x:Key="Suppliers_Desc">Visualiza, registra, modifica y elimina proveedores asociados con Italia Pizza.</sys:String>
@@ -292,7 +335,6 @@
     <sys:String x:Key="Suppliers_DialogDReactivatedSupplier">El proveedor fue reactivado correctamente. Ahora aparecerá nuevamente en la lista de proveedores y órdenes.</sys:String>
     <sys:String x:Key="Suppliers_DialogTUnableToDelete">Proveedor no eliminable</sys:String>
     <sys:String x:Key="Suppliers_DialogDHasPendingOrders">Este proveedor tiene pedidos pendientes. Cancélalos antes de eliminarlo.</sys:String>
-
 
     <!-- RegisterSupplier-->
     <sys:String x:Key="RegSupplier_Header">Registrar Proveedor</sys:String>
@@ -371,12 +413,19 @@
     <sys:String x:Key="CashRegister_BtnCloseRegister">Cerrar caja</sys:String>
     <sys:String x:Key="CashRegister_BtnRegisterOutflow">Registrar salida</sys:String>
     <sys:String x:Key="CashRegister_TitleTable">Historial de Transacciones</sys:String>
+    <sys:String x:Key="CashRegister_Balance">Balance</sys:String>
+    <sys:String x:Key="CashRegister_Inflow">Ingresos</sys:String>
+    <sys:String x:Key="CashRegister_Outflow">Salidas</sys:String>
     <sys:String x:Key="CashRegister_TableHConcept">Concepto</sys:String>
     <sys:String x:Key="CashRegister_TableHAmount">Monto</sys:String>
     <sys:String x:Key="CashRegister_TableHDate">Fecha/Hora</sys:String>
     <sys:String x:Key="CashRegister_TbOpeningDate">Fecha de apertura:</sys:String>
     <sys:String x:Key="CashRegister_TbInitialBalance">Balance inicial:</sys:String>
     <sys:String x:Key="CashRegister_CheckBConfirmOpening">Confirmar apertura de caja.</sys:String>
+    <sys:String x:Key="CashRegister_TbCashBalance">Balance de Caja:</sys:String>
+    <sys:String x:Key="CashRegister_TbCashierAmount">Monto Contado:</sys:String>
+    <sys:String x:Key="CashRegister_TbDiference">Diferencia:</sys:String>
+    <sys:String x:Key="CashRegister_CheckBConfirmClosing">Confirmar cierre de caja.</sys:String>
     <sys:String x:Key="CashRegister_BtnOpening">Abrir caja</sys:String>
     <sys:String x:Key="CashRegister_DialogTInvalidAmount">Monto inválido</sys:String>
     <sys:String x:Key="CashRegister_DialogDInvalidAmount">Por favor, ingrese un monto válido y mayor o igual a 0 para abrir la caja.</sys:String>
@@ -386,25 +435,62 @@
     <sys:String x:Key="CashRegister_DialogDAlreadyOpen">Ya existe una caja abierta. No se puede abrir otra hasta realizar el corte.</sys:String>
 
     <!--Order-->
-    <sys:String x:Key="OrderPage_BtnAddOrder">Añadir Orden</sys:String>
-    <sys:String x:Key="OrderPage_BtnPayOrder">Pagar Orden</sys:String>
-    <sys:String x:Key="OrderPage_BtnCancelOrder">Cancelar Orden</sys:String>
-    <sys:String x:Key="Order_TitleTable">Lista de Ordenes</sys:String>
-    <sys:String x:Key="Orders_Header">Ordenes de Comensales</sys:String>
-    <sys:String x:Key="Orders_Desc">Visualiza, paga y cancela Ordenes de Comensales de Italia Pizza.</sys:String>
+    <sys:String x:Key="Orders_Header">Órdenes</sys:String>
+    <sys:String x:Key="Orders_Desc">Visualiza, paga y modifica las órdenes de los clientes de Italia Pizza.</sys:String>
+    <sys:String x:Key="Orders_BtnNewOrder">Nueva Orden</sys:String>
+    <sys:String x:Key="Orders_BtnPayOrder">Pagar Orden</sys:String>
+    <sys:String x:Key="Orders_StartPreparation">Iniciar Preparación</sys:String>
+    <sys:String x:Key="Orders_BtnStart">Preparar</sys:String>
+    <sys:String x:Key="Orders_BtnPrepared">Preparado</sys:String>
+    <sys:String x:Key="Orders_BtnMarkShipped">Marcar como Enviado</sys:String>
+    <sys:String x:Key="Orders_BtnMarkDelivered">Marcar como Entregado</sys:String>
+    <sys:String x:Key="Orders_BtnNotDelivered">No entregado</sys:String>
+    <sys:String x:Key="Orders_BtnDelivered">Entregado</sys:String>
+    <sys:String x:Key="Orders_Order">Orden</sys:String>
+    <sys:String x:Key="Orders_PayOrder">Pagar orden</sys:String>
+    <sys:String x:Key="Orders_TitleTable">Lista de Órdenes</sys:String>
+    <sys:String x:Key="Orders_TableHOrderNum">Núm. de Orden</sys:String>
+    <sys:String x:Key="Orders_TableHCustomer">Cliente/Mesa</sys:String>
+    <sys:String x:Key="Orders_TableHStatus">Estado</sys:String>
+    <sys:String x:Key="Orders_TableHDateTime">Fecha/Hora</sys:String>
+    <sys:String x:Key="Ord_Error_Title">Error al registrar pago</sys:String>
+    <sys:String x:Key="Ord_Error_InvalidAmount">Monto ingresado no válido.</sys:String>
+    <sys:String x:Key="Ord_Error_InvalidOrderStatus">La orden no se encuentra en estado entregado.</sys:String>
+    <sys:String x:Key="Ord_Error_NoCashRegister">No hay una caja abierta actualmente.</sys:String>
+    <sys:String x:Key="Ord_Error_NotEnoughCashForChange">No hay suficiente dinero en caja para entregar el cambio.</sys:String>
+    <sys:String x:Key="Ord_Error_PaymentFailed">Ocurrió un error al registrar el pago.</sys:String>
+
+    <sys:String x:Key="Ord_Success_Title">Pago exitoso</sys:String>
+    <sys:String x:Key="Ord_Success_PaymentRegistered">El pago se registró correctamente.</sys:String>
+
 
     <!--RegisterOrder-->
     <sys:String x:Key="RegOrder_Header">Registrar Comanda</sys:String>
     <sys:String x:Key="RegOrder_Desc">Ingresa los datos del pedido en sucursal que se desea registrar.</sys:String>
+    <sys:String x:Key="RegDeliveryOrder_Header">Registrar Pedido a Domicilio</sys:String>
+    <sys:String x:Key="RegDeliveryOrder_Desc">Ingresa los datos del pedido a domicilio que se desea registrar.</sys:String>
     <sys:String x:Key="EditOrder_Header">Editar Comanda</sys:String>
     <sys:String x:Key="EditOrder_Desc">Modifica los datos del insumo que se desea actualizar.</sys:String>
     <sys:String x:Key="RegOrder_OrderInfo">Información de la Comanda</sys:String>
     <sys:String x:Key="RegOrder_TbTableNumber">Núm. de Mesa:</sys:String>
     <sys:String x:Key="RegOrder_CbCustomers">Cliente:</sys:String>
     <sys:String x:Key="RegOrder_CbDelivery">Repartidor(a):</sys:String>
+    <sys:String x:Key="RegOrder_Waiter">Mesero(a):</sys:String>
+    <sys:String x:Key="RegOrder_Cashier">Cajero(a):</sys:String>
+    <sys:String x:Key="RegOrder_Address">Entrega:</sys:String>
     <sys:String x:Key="RegOrder_OrderDetails">Detalles de la Orden:</sys:String>
     <sys:String x:Key="RegOrder_OrderSummary">Resumen de la Orden:</sys:String>
-    
+    <sys:String x:Key="RegOrder_Products">Productos Ofrecidos</sys:String>
+    <sys:String x:Key="RegOrder_CustomerInfo">Detalles del Servicio</sys:String>
+    <sys:String x:Key="RegOrder_BtnConfirmLocalOrder">Confirmar Comanda</sys:String>
+    <sys:String x:Key="RegOrder_BtnConfirmDeliveryOrder">Confirmar Pedido</sys:String>
+    <sys:String x:Key="RegLocalOrder_DialogTSuccess">Comanda registrada</sys:String>
+    <sys:String x:Key="RegLocalOrder_DialogDSuccess">La orden en sucursal se registró correctamente y aparecerá en cocina para marcarla como en preparación, con posibilidad de editarla antes.</sys:String>
+    <sys:String x:Key="RegDeliverOrder_DialogTSuccess">Pedido a domiclio registrado</sys:String>
+    <sys:String x:Key="RegDeliverOrder_DialogDSuccess">El pedido a domicilio se registró correctamente y aparecerá en cocina para marcarla como en preparación, con posibilidad de editarla antes.</sys:String>
+    <sys:String x:Key="EditDeliveryOrder_Header">Editar Pedido a Domicilio</sys:String>
+    <sys:String x:Key="EditDeliveryOrder_Desc">Modifica los datos del pedido a domicilio existente.</sys:String>
+
     <!--Recipes-->
     <sys:String x:Key="Recipes_Header">Recetas</sys:String>
     <sys:String x:Key="Recipes_Desc">Visualiza, registra, modifica y elimina recetas utilizadas por Italia Pizza.</sys:String>
@@ -413,15 +499,23 @@
     <sys:String x:Key="Recipes_BtnDeleteRecipe">Eliminar receta</sys:String>
     <sys:String x:Key="Recipes_BtnEditRecipe">Editar receta</sys:String>
     <sys:String x:Key="Recipes_BtnAddRecipe">Agregar receta</sys:String>
-    
+
     <!--Register Recipe-->
-    <sys:String x:Key="RegRecipe_Header">Registrar Receta</sys:String>
-    <sys:String x:Key="RegRecipe_Desc">Ingresa los datos de la receta que se desea registrar.</sys:String>
+    <sys:String x:Key="RegRecipe_Header">Agregar Receta</sys:String>
+    <sys:String x:Key="RegRecipe_Desc">Ingresa los datos de la receta que se desea agregar.</sys:String>
     <sys:String x:Key="RegRecipe_RecipeInfo">Información de la Receta</sys:String>
+    <sys:String x:Key="RegRecipe_PreparationInfo">Información de Preparación</sys:String>
+    <sys:String x:Key="RegRecipe_PreparationSteps">Instrucciones de Preparación</sys:String>
+    <sys:String x:Key="RegRecipe_Ingredients">Lista de Ingredientes</sys:String>
     <sys:String x:Key="RegRecipe_TbRecipeName">Nombre de la receta</sys:String>
-    <sys:String x:Key="RegRecipe_TbRecipeDescription">Descripción de la receta</sys:String>
+    <sys:String x:Key="RegRecipe_TbPreparationTime">Tiempo de Preparación:</sys:String>
     <sys:String x:Key="RegRecipe_TbSupplyList">Lista de insumos</sys:String>
-   
+    <sys:String x:Key="RegRecipe_BtnAddStep">Añadir Paso</sys:String>
+    <sys:String x:Key="RegRecipe_BtnAddIngredient">Añadir Ingrediente</sys:String>
+    <sys:String x:Key="RegRecipe_BtnAddRecipe">Agregar Receta</sys:String>
+    <sys:String x:Key="RegRecipe_BtnEditRecipe">Actualizar Receta</sys:String>
+    <sys:String x:Key="RegRecipe_DialogTSelectSupply">Seleccionar Insumo</sys:String>
+
     <!--Stock-->
     <sys:String x:Key="Stock_Header">Inventario</sys:String>
     <sys:String x:Key="Stock_Desc">Visualiza y modifica el número de unidades por insumo de Italia Pizza.</sys:String>

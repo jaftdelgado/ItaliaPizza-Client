@@ -7,8 +7,8 @@
              mc:Ignorable="d"
              d:DesignHeight="68" d:DesignWidth="200">
     <Border Background="{StaticResource BackgroundBrush}"
-            BorderThickness="0 0 0 0.5"
-            BorderBrush="{DynamicResource SecondaryBrush}"
+            BorderThickness="0 0 0 1"
+            BorderBrush="{DynamicResource BorderBrush}"
             Padding="0 4 0 8">
         <Grid VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
