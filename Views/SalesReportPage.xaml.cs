@@ -27,6 +27,7 @@ namespace ItaliaPizzaClient.Views
             InitializeComponent();
         }
 
+        /*
         private async void LoadSalesReportData()
         {
             if (!startDate.SelectedDate.HasValue || !endDate.SelectedDate.HasValue)
@@ -58,6 +59,7 @@ namespace ItaliaPizzaClient.Views
                 });
             });
         }
+        */
 
         private void startDate_CalendarOpened(object sender, RoutedEventArgs e)
         {
@@ -73,6 +75,7 @@ namespace ItaliaPizzaClient.Views
 
         private void startDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            /*
             if (startDate.SelectedDate > DateTime.Today)
             {
                 MessageDialog.Show("SalesReport_DialogTToday", "SalesReport_DialogDToday", AlertType.WARNING);
@@ -87,10 +90,12 @@ namespace ItaliaPizzaClient.Views
             }
 
             LoadSalesReportData();
+            */
         }
 
         private void endDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            /*
             if (endDate.SelectedDate > DateTime.Today)
             {
                 MessageDialog.Show("SalesReport_DialogTToday", "SalesReport_DialogDToday", AlertType.WARNING);
@@ -105,6 +110,7 @@ namespace ItaliaPizzaClient.Views
             }
 
             LoadSalesReportData();
+            */
         }
 
         private void BtnGenerateReport_Click(object sender, RoutedEventArgs e)
