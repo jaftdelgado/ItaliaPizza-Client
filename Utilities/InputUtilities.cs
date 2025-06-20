@@ -134,7 +134,6 @@ namespace ItaliaPizzaClient.Utilities
             return Regex.IsMatch(email, Constants.EMAIL_FORMAT_PATTERN);
         }
 
-
         public static void ValidateDecimalInput(TextBox textBox)
         {
             string pattern = Constants.MONETARY_DECIMAL_PATTERN;

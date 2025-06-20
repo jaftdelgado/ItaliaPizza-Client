@@ -3,6 +3,7 @@ using ItaliaPizzaClient.Model;
 using ItaliaPizzaClient.Utilities;
 using ItaliaPizzaClient.Views.Dialogs;
 using ItaliaPizzaClient.Views.RecipesModule;
+using ItaliaPizzaClient.Views.UserControls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,11 @@ namespace ItaliaPizzaClient.Views.ProductsModule
     {
         private Product _editingProduct;
 
+        private Supply _productSupply;
+
         private Recipe _recipe;
+
+        private List<Supply> _allSupplies = new List<Supply>();
 
         private byte[] _selectedImageBytes;
         
@@ -33,6 +38,7 @@ namespace ItaliaPizzaClient.Views.ProductsModule
             UpdateButtonState();
             _isEditMode = false;
             BtnAddRecipe.IsEnabled = false;
+            Loaded += RegisterProductPage_Loaded;
         }
 
         public RegisterProductPage(Product editingProduct)
@@ -50,6 +56,12 @@ namespace ItaliaPizzaClient.Views.ProductsModule
 
             BtnAddRecipe.IsEnabled = true;
             UpdateRecipeButtonsVisibility();
+            Loaded += RegisterProductPage_Loaded;
+        }
+
+        private async void RegisterProductPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadSuppliesData();
         }
 
         private void ConfigureInterfaceForMode()
@@ -70,6 +82,32 @@ namespace ItaliaPizzaClient.Views.ProductsModule
             }
         }
 
+        private async Task LoadSuppliesData()
+        {
+            await ServiceClientManager.ExecuteServerAction(async () =>
+            {
+                var client = ServiceClientManager.Instance.Client;
+                if (client == null) return;
+
+                var supplyDTOs = client.GetAllSupplies(true);
+                var supplies = supplyDTOs.Select(s => new Supply
+                {
+                    Id = s.Id,
+                    Brand = s.Brand,
+                    Name = s.Name,
+                    MeasureUnit = s.MeasureUnit,
+                    SupplyPic = s.SupplyPic,
+                    SupplyCategoryID = s.SupplyCategoryID,
+                    IsActive = s.IsActive
+                }).ToList();
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    _allSupplies = supplies;
+                });
+            });
+        }
+
         private void LoadProductData(Product editingProduct)
         {
             TbProductName.Text = editingProduct.Name;
@@ -78,7 +116,7 @@ namespace ItaliaPizzaClient.Views.ProductsModule
 
             CbCategories.SelectedIndex = (int)editingProduct.Category - 1;
 
-            ImageUtilities.SetImageSource(ProductImage, editingProduct.ProductPic, Constants.DEFAULT_PROFILE_PIC_PATH);
+            ImageUtilities.SetImageSource(ProductImage, editingProduct.ProductPic, Constants.DEFAULT_PRODUCT_PIC_PATH);
         }
 
         private void SetInputFields()
@@ -168,8 +206,13 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                 IsPrepared = !(NotIsPreparedCheckBox.IsChecked ?? false),
                 ProductPic = GetProductPicData(),
                 Description = TbDescription.Text.Trim(),
-                RecipeID = null
+                RecipeID = null,
             };
+
+            if (NotIsPreparedCheckBox.IsChecked == true && _productSupply != null)
+            {
+                productDTO.SupplyID = _productSupply.Id;
+            }
 
             await ServiceClientManager.ExecuteServerAction(async () =>
             {
@@ -233,6 +276,11 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                 RecipeID = _editingProduct.RecipeID
             };
 
+            if (NotIsPreparedCheckBox.IsChecked == true && _productSupply != null)
+            {
+                productDTO.SupplyID = _productSupply.Id;
+            }
+
             await ServiceClientManager.ExecuteServerAction(async () =>
             {
                 var client = ServiceClientManager.Instance.Client;
@@ -240,13 +288,11 @@ namespace ItaliaPizzaClient.Views.ProductsModule
 
                 if (_editingProduct.Recipe != null && _recipe == null)
                 {
-                    // Eliminar receta anterior
                     await client.DeleteRecipeAsync(_editingProduct.RecipeID.Value);
                     productDTO.RecipeID = null;
                 }
                 else if (_editingProduct.Recipe == null && _recipe != null)
                 {
-                    // Crear nueva receta
                     _recipe.ProductID = _editingProduct.ProductID;
                     var recipeDTO = new RecipeDTO
                     {
@@ -272,7 +318,6 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                 }
                 else if (_editingProduct.Recipe != null && _recipe != null)
                 {
-                    // Actualizar receta existente
                     _recipe.ProductID = _editingProduct.ProductID;
                     _recipe.Id = _editingProduct.RecipeID.Value;
 
@@ -297,7 +342,6 @@ namespace ItaliaPizzaClient.Views.ProductsModule
 
                     if (updated)
                     {
-                        // Importante: actualizar el RecipeID en productDTO
                         productDTO.RecipeID = _editingProduct.RecipeID;
                     }
                     else
@@ -307,7 +351,6 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                     }
                 }
 
-                // Actualizar el producto con el RecipeID correcto
                 await client.UpdateProductAsync(productDTO);
             });
 
@@ -421,7 +464,7 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                 };
             }
 
-            var recipePage = new RegisterRecipePage(productToSend);
+            var recipePage = new RegisterRecipePage(productToSend, _allSupplies);
             recipePage.RecipeAssociated += OnRecipeAssociated;
 
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
@@ -431,6 +474,28 @@ namespace ItaliaPizzaClient.Views.ProductsModule
             }
         }
 
+        private void Click_BtnEditRecipe(object sender, RoutedEventArgs e)
+        {
+            if (_recipe == null) return;
+
+            var product = _editingProduct ?? new Product
+            {
+                Name = TbProductName.Text.Trim(),
+                Category = CbCategories.SelectedIndex + 1,
+                ProductPic = GetProductPicData(),
+                Description = TbDescription.Text.Trim()
+            };
+
+            var recipePage = new RegisterRecipePage(product, _recipe, _allSupplies);
+            recipePage.RecipeAssociated += OnRecipeAssociated;
+
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.NavigateToPage("RegRecipe_Header", recipePage);
+            }
+        }
+
+
         private void OnRecipeAssociated(Recipe recipe)
         {
             _recipe = recipe;
@@ -439,11 +504,13 @@ namespace ItaliaPizzaClient.Views.ProductsModule
             {
                 BtnAddRecipe.Visibility = Visibility.Collapsed;
                 ManageRecipesButtons.Visibility = Visibility.Visible;
+                TbRecipe.Text = $"Receta asociada";
             }
             else
             {
                 BtnAddRecipe.Visibility = Visibility.Visible;
                 ManageRecipesButtons.Visibility = Visibility.Collapsed;
+                TbRecipe.Text = "No hay receta asociada.";
             }
         }
 
@@ -470,24 +537,41 @@ namespace ItaliaPizzaClient.Views.ProductsModule
 
         }
 
-        private void Click_BtnEditRecipe(object sender, RoutedEventArgs e)
+        private void Click_BtnSelectSupply(object sender, RoutedEventArgs e)
         {
-            if (_recipe == null) return;
-
-            var recipePage = new RegisterRecipePage(_editingProduct ?? new Product
+            var selectSupply = new SelectSupply
             {
-                Name = TbProductName.Text.Trim(),
-                Category = CbCategories.SelectedIndex + 1,
-                ProductPic = GetProductPicData(),
-                Description = TbDescription.Text.Trim()
-            }, _recipe);
+                IsSingleSelection = true
+            };
 
-            recipePage.RecipeAssociated += OnRecipeAssociated;
+            var currentSupply = _allSupplies.FirstOrDefault(s =>
+                s.Name.Trim().Equals(TbProductSupply.Text.Trim(), StringComparison.OrdinalIgnoreCase));
 
-            if (Application.Current.MainWindow is MainWindow mainWindow)
+            var selected = currentSupply != null ? new List<Supply> { currentSupply } : Enumerable.Empty<Supply>();
+
+            selectSupply.SetSupplies(_allSupplies, selected);
+
+            selectSupply.SelectionCompleted += (s, selectedSupplies) =>
             {
-                mainWindow.NavigateToPage("RegRecipe_Header", recipePage);
-            }
+                _productSupply = selectedSupplies.FirstOrDefault(); 
+
+                if (_productSupply != null)
+                {
+                    TbProductSupply.Text = _productSupply.Name;
+                    TbProductSupply.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    TbProductSupply.Clear();
+                    TbProductSupply.Visibility = Visibility.Collapsed;
+                }
+
+                UpdateButtonState();
+            };
+
+            selectSupply.Show(sender as FrameworkElement);
         }
+
+
     }
 }

@@ -3,6 +3,7 @@ using ItaliaPizzaClient.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,8 @@ namespace ItaliaPizzaClient.Views.UserControls
         private List<Supply> _allSupplies = new List<Supply>();
 
         public event Action<Supply, bool> SupplySelectionChanged;
+
+        public bool IsSingleSelection { get; set; } = false;
 
         public SelectSupply()
         {
@@ -72,6 +75,8 @@ namespace ItaliaPizzaClient.Views.UserControls
 
             if (popUpHost != null) popUpHost.Content = null;
             if (popUpOverlay != null) popUpOverlay.Visibility = Visibility.Collapsed;
+
+            SelectionCompleted?.Invoke(this, SelectedSupplies);
         }
 
         private void Click_BtnCancel(object sender, RoutedEventArgs e)
@@ -93,9 +98,16 @@ namespace ItaliaPizzaClient.Views.UserControls
 
             foreach (var supply in _allSupplies)
             {
-                var isSelected = SelectedSupplies.Any(s => s.Id == supply.Id);
-                SupplyCards.Add(CreateSupplyCard(supply, isSelected));
+                var card = CreateSupplyCard(supply);
+                if (SelectedSupplies.Any(s => s.Id == supply.Id))
+                {
+                    card.IsSelected = true;
+                    card.OnSelectionChanged(true);
+                }
+
+                SupplyCards.Add(card);
             }
+
         }
 
         private SupplyCard CreateSupplyCard(Supply supply, bool isSelected = false)
@@ -110,20 +122,40 @@ namespace ItaliaPizzaClient.Views.UserControls
 
             card.SelectionChanged += (isChecked) =>
             {
-                if (isChecked)
+                if (IsSingleSelection && isChecked)
+                {
+                    foreach (var otherCard in SupplyCards.Where(c => c != card && c.IsSelected))
+                    {
+                        otherCard.IsSelected = false;
+                        var deselectedSupply = _allSupplies.FirstOrDefault(s => s.Name == otherCard.SupplyName);
+                        if (deselectedSupply != null)
+                        {
+                            SelectedSupplies.RemoveAll(s => s.Id == deselectedSupply.Id);
+                            SupplySelectionChanged?.Invoke(deselectedSupply, false);
+                        }
+                    }
+
+                    SelectedSupplies.Clear();
+                    SelectedSupplies.Add(supply);
+                    SupplySelectionChanged?.Invoke(supply, true);
+
+                    ClosePopup();
+                }
+                else if (isChecked)
                 {
                     if (!SelectedSupplies.Any(s => s.Id == supply.Id))
                     {
                         SelectedSupplies.Add(supply);
-                        SupplySelectionChanged?.Invoke(supply, true); 
+                        SupplySelectionChanged?.Invoke(supply, true);
                     }
                 }
                 else
                 {
                     SelectedSupplies.RemoveAll(s => s.Id == supply.Id);
-                    SupplySelectionChanged?.Invoke(supply, false); 
+                    SupplySelectionChanged?.Invoke(supply, false);
                 }
             };
+
 
             return card;
         }
@@ -168,19 +200,68 @@ namespace ItaliaPizzaClient.Views.UserControls
         }
     }
 
-    public class SupplyCard
+    public class SupplyCard : INotifyPropertyChanged
     {
-        public string SupplyName { get; set; }
-        public string Category { get; set; }
-        public BitmapImage ImageSource { get; set; }
-        public bool IsSelected { get; set; }
+        private string _supplyName;
+        private string _category;
+        private BitmapImage _imageSource;
+        private bool _isSelected;
+
+        public string SupplyName
+        {
+            get => _supplyName;
+            set
+            {
+                _supplyName = value;
+                OnPropertyChanged(nameof(SupplyName));
+            }
+        }
+
+        public string Category
+        {
+            get => _category;
+            set
+            {
+                _category = value;
+                OnPropertyChanged(nameof(Category));
+            }
+        }
+
+        public BitmapImage ImageSource
+        {
+            get => _imageSource;
+            set
+            {
+                _imageSource = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
+        }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+        }
 
         public delegate void SelectionChangedHandler(bool isChecked);
         public event SelectionChangedHandler SelectionChanged;
 
         public void OnSelectionChanged(bool isChecked)
         {
+            IsSelected = isChecked;
             SelectionChanged?.Invoke(isChecked);
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

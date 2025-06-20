@@ -139,15 +139,11 @@ namespace ItaliaPizzaClient.Views.ProductsModule
                     break;
             }
 
-            //EmptyListMessage.Visibility = Visibility.Collapsed;
             NoMatchesMessage.Visibility = Visibility.Collapsed;
 
             if (!filteredList.Any())
             {
-                if (string.IsNullOrWhiteSpace(SearchBox.Text)) ;
-                //EmptyListMessage.Visibility = Visibility.Visible;
-                else
-                    NoMatchesMessage.Visibility = Visibility.Visible;
+                NoMatchesMessage.Visibility = Visibility.Visible;
             }
 
             ProductsDataGrid.ItemsSource = filteredList;

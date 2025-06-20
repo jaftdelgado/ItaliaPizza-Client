@@ -4,7 +4,6 @@ using ItaliaPizzaClient.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -32,29 +31,31 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             AddInitialStep();
             ConfigureDefaultView();
             Loaded += RegisterRecipePage_Loaded;
+            InputUtilities.ValidateInput(TbPreparationTime, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_TABLE);
         }
 
-        public RegisterRecipePage(Product product) : this()
+        public RegisterRecipePage(Product product, List<Supply> availableSupplies) : this()
         {
             _associatedProduct = product;
+            _allSupplies = availableSupplies;
             LoadProductData();
-            Loaded += RegisterRecipePage_Loaded;
+            InputUtilities.ValidateInput(TbPreparationTime, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_TABLE);
         }
 
-        public RegisterRecipePage(Product product, Recipe recipe) : this(product)
+        public RegisterRecipePage(Product product, Recipe recipe, List<Supply> availableSupplies) : this(product, availableSupplies)
         {
             _loadedRecipe = recipe;
+            InputUtilities.ValidateInput(TbPreparationTime, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_TABLE);
         }
 
-        private async void RegisterRecipePage_Loaded(object sender, RoutedEventArgs e)
+        private void RegisterRecipePage_Loaded(object sender, RoutedEventArgs e)
         {
-            await LoadSuppliesData();
-
             if (_loadedRecipe != null)
             {
                 LoadRecipeData(_loadedRecipe);
             }
         }
+
         private void LoadRecipeData(Recipe recipe)
         {
             if (recipe == null) return;
@@ -95,32 +96,6 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             }
 
             DisplayIngredients(); 
-        }
-
-        private async Task LoadSuppliesData()
-        {
-            await ServiceClientManager.ExecuteServerAction(async () =>
-            {
-                var client = ServiceClientManager.Instance.Client;
-                if (client == null) return;
-
-                var supplyDTOs = client.GetAllSupplies(true);
-                var supplies = supplyDTOs.Select(s => new Supply
-                {
-                    Id = s.Id,
-                    Brand = s.Brand,
-                    Name = s.Name,
-                    MeasureUnit = s.MeasureUnit,
-                    SupplyPic = s.SupplyPic,
-                    SupplyCategoryID = s.SupplyCategoryID,
-                    IsActive = s.IsActive
-                }).ToList();
-
-                await Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    _allSupplies = supplies;
-                });
-            });
         }
 
         private void LoadProductData()
@@ -212,7 +187,7 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         private void DisplayIngredients()
         {
-            IngredientsContainer.Items.Clear(); // Cambiado de Children a Items
+            IngredientsContainer.Items.Clear();
 
             foreach (var item in _ingredients)
             {
@@ -232,7 +207,7 @@ namespace ItaliaPizzaClient.Views.RecipesModule
                     UpdateButtonState();
                 };
 
-                IngredientsContainer.Items.Add(ingredientDetail); // Cambiado de Children a Items
+                IngredientsContainer.Items.Add(ingredientDetail);
             }
         }
 
@@ -243,7 +218,11 @@ namespace ItaliaPizzaClient.Views.RecipesModule
 
         private void Click_BtnAddIngredient(object sender, RoutedEventArgs e)
         {
-            var selectSupply = new SelectSupply();
+            var selectSupply = new SelectSupply
+            {
+                IsSingleSelection = false
+            };
+
             selectSupply.SetSupplies(_allSupplies, _ingredients.Select(i => i.Supply));
 
             selectSupply.SupplySelectionChanged += (supply, isChecked) =>
@@ -281,6 +260,7 @@ namespace ItaliaPizzaClient.Views.RecipesModule
             {
                 Product = _associatedProduct,
                 ProductID = _associatedProduct.ProductID,
+                PreparationTime = int.TryParse(TbPreparationTime.Text, out int prepTime) ? prepTime : 0,
                 Steps = _steps,
                 Supplies = _ingredients
             };

@@ -13,6 +13,7 @@
         public static readonly int MAX_LENGTH_EMAIL = 32;
         public static readonly int MAX_LENGTH_ADDRESSNAME = 64;
         public static readonly int MAX_LENGTH_CITY = 16;
+        public static readonly int MAX_LENGTH_TABLE = 3;
         public static readonly int MAX_LENGTH_ZIPCODE = 5;
         public static readonly int MAX_LENGTH_USERNAME = 16;
         public static readonly int MAX_LENGTH_PASSWORD = 24;

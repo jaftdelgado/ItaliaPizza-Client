@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>italiapizza-icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
@@ -233,9 +236,6 @@
     <Compile Include="Views\RecipesModule\RecipesPage.xaml.cs">
       <DependentUpon>RecipesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RecipesModule\SuppliesList.xaml.cs">
-      <DependentUpon>SuppliesList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SupplierOrdersModule\SupplierOrdersPage.xaml.cs">
       <DependentUpon>SupplierOrdersPage.xaml</DependentUpon>
     </Compile>
@@ -405,10 +405,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RecipesModule\RecipesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RecipesModule\SuppliesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -703,6 +699,8 @@
     <Resource Include="Resources\Images\default-product-pic.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Icons\italiapizza-icon.ico" />
+    <Resource Include="italiapizza-icon.ico" />
     <Content Include="Resources\Icons\italiapizza-icon2Build.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
