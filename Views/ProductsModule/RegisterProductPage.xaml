@@ -208,7 +208,8 @@
                                 <Button x:Name="BtnSelectSupply" 
                                         Style="{DynamicResource PrimaryButtonStyle}"
                                         Content="{DynamicResource RegProduct_BtnSelectSupply}"
-                                        Visibility="Collapsed">
+                                        Visibility="Collapsed"
+                                        Click="Click_BtnSelectSupply">
                                     <Button.Tag>/Resources/Icons/redirect-icon.png</Button.Tag>
                                 </Button>
                             </StackPanel>

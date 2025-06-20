@@ -200,10 +200,10 @@ namespace ItaliaPizzaClient.Views.UserControls
             }
         }
 
-        private void Click_BtnAccept(object sender, RoutedEventArgs e)
+        private async void Click_BtnAccept(object sender, RoutedEventArgs e)
         {
             var selected = CbSupply.SelectedItem as Supply;
-            RegisterSupplyLoss(selected);
+            await RegisterSupplyLoss(selected);
         }
 
         private void Click_BtnCancel(object sender, RoutedEventArgs e)

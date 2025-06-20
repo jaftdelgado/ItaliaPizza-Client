@@ -38,7 +38,9 @@ namespace ItaliaPizzaClient.Views.OrdersModule
 
             TbTableNumber.TextChanged += (_, __) => UpdateConfirmButtonState();
             UpdateConfirmButtonState();
+            InputUtilities.ValidateInput(TbTableNumber, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_TABLE);
         }
+
         public RegisterOrderPage(Order editingOrder)
         {
             InitializeComponent();
@@ -49,7 +51,9 @@ namespace ItaliaPizzaClient.Views.OrdersModule
 
             ConfigureInterfaceForMode(CurrentSession.LoggedInUser.RoleID);
             UpdateConfirmButtonState();
+            InputUtilities.ValidateInput(TbTableNumber, Constants.NUMERIC_PATTERN, Constants.MAX_LENGTH_TABLE);
         }
+
         private async void LoadInitialData()
         {
             await LoadProducts();

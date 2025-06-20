@@ -133,10 +133,7 @@ namespace ItaliaPizzaClient.Views.SuppliersModule
 
             if (!filteredList.Any())
             {
-                if (string.IsNullOrWhiteSpace(SearchBox.Text));
-                //EmptyListMessage.Visibility = Visibility.Visible;
-                else
-                    NoMatchesMessage.Visibility = Visibility.Visible;
+                NoMatchesMessage.Visibility = Visibility.Visible;
             }
 
             SuppliersDataGrid.ItemsSource = filteredList;

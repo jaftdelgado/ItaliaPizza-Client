@@ -5,7 +5,6 @@ using ItaliaPizzaClient.Views.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -360,15 +359,20 @@ namespace ItaliaPizzaClient.Views
         #region EventHandlers
         private async void Click_BtnRegisterEmployee(object sender, RoutedEventArgs e)
         {
+            string email = TbEmailAddress.Text.Trim();
+
+            if (!InputUtilities.IsValidEmailFormat(email))
+            {
+                MessageDialog.Show("GlbDialogT_EmailFormat", "GlbDialogD_EmailFormat", AlertType.WARNING);
+                return;
+            }
+
             if (_selectedRoleId == 6 || PasswordUtilities.IsPasswordSecure(PbPassword.Password))
-            {
                 await RegisterEmployee();
-            }
             else
-            {
                 MessageDialog.Show("RegEmployee_DialogTInvalidPassword", "RegEmployee_DialogDInvalidPassword", AlertType.WARNING);
-            }
         }
+
 
         private async void Click_BtnEditEmployee(object sender, RoutedEventArgs e)
         {

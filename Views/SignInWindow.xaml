@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ItaliaPizzaClient.Views"
         mc:Ignorable="d"
-        Title="SignInWindow" Height="500" Width="850"
+        Title="ItaliaPizza v1.0 (Client)" Height="500" Width="850"
         WindowStartupLocation="CenterScreen">
     <Border Background="{StaticResource BackgroundBrush}">
         <Grid>
@@ -71,18 +71,18 @@
                                                         Orientation="Vertical" HorizontalAlignment="Center"
                                                         Width="190">
                                                 <TextBox x:Name="TbUsername"
-                                                         Style="{DynamicResource UsernameStyle}"
+                                                         Style="{DynamicResource TextBoxStyle}"
                                                          Tag="{DynamicResource SignIn_TbUsername}"/>
-                                                <StackPanel>
+                                                <StackPanel Margin="0 10">
                                                     <PasswordBox x:Name="PbPassword"
                                                                  Tag="{DynamicResource SignIn_TbPassword}"
-                                                                 Style="{DynamicResource PasswordStyle}" 
+                                                                 Style="{DynamicResource PasswordBoxStyle}" 
                                                                  Visibility="Visible"
                                                                  PasswordChanged="Password_TextChanged"/>
                                                     <TextBox x:Name="TbPassword"
                                                              Visibility="Collapsed"
                                                              Tag="{DynamicResource SignIn_TbPassword}"
-                                                             Style="{DynamicResource ShowPasswordStyle}"
+                                                             Style="{DynamicResource TextBoxStyle}"
                                                              TextChanged="Password_TextChanged"/>
                                                     <CheckBox x:Name="ShowPasswordCheckBox"
                                                               Style="{DynamicResource CheckBoxStyle}"
@@ -97,7 +97,7 @@
                                                 <Button x:Name="BtnSignIn"
                                                         Style="{DynamicResource PrimaryButtonStyle}"
                                                         Content="{DynamicResource SignIn_BtnSignIn}"
-                                                        Margin="0 20 0 0"
+                                                        Margin="0 10 0 0"
                                                         Click="Click_BtnSignIn">
                                                     <Button.Tag>/Resources/Icons/signin-icon.png</Button.Tag>
                                                 </Button>

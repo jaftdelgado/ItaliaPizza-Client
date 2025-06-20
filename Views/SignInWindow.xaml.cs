@@ -16,6 +16,11 @@ namespace ItaliaPizzaClient.Views
             UpdateButtonState();
             TbUsername.TextChanged += (s, e) => UpdateButtonState();
             TbPassword.TextChanged += (s, e) => UpdateButtonState();
+
+            InputUtilities.ValidateInput(TbUsername, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_USERNAME);
+            InputUtilities.ValidateInput(TbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD);
+            InputUtilities.ValidatePasswordInput(PbPassword, Constants.ALPHANUMERIC_PATTERN, Constants.MAX_LENGTH_PASSWORD);
+            InputUtilities.ConvertToLowerCase(TbUsername);
         }
 
         private void UpdateButtonState()
